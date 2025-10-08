@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Emina Huremovic Photography</title>
+  <meta name="description" content="Emina Huremovic Photography – Fine portraits, weddings, lifestyle & editorial work. Multilingual site (DE/EN/BS).">
+  <meta name="author" content="Emina Huremovic">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://example.com/">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Emina Huremovic Photography">
+  <meta property="og:description" content="Fine portraits, weddings, lifestyle & editorial work.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1520975922284-8b456906c813?q=80&w=1600&auto=format&fit=crop">
+  <!-- Favicon (optional placeholder) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23000'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-size='28' fill='%23fff' font-family='Arial'%3EEH%3C/text%3E%3C/svg%3E">
+  <style>
+    /* ---------- Base Reset ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    :root{
+      --bg:#0f1013;
+      --card:#15171b;
+      --ink:#e8e9ee;
+      --muted:#a5a7af;
+      --brand:#bda27e;
+      --brand-2:#9d8260;
+      --accent:#89b0ff;
+      --ok:#5bc17a;
+      --warn:#ffd166;
+      --err:#ef476f;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --radius-lg: 28px;
+      --maxw: 1200px;
+    }
+    body{
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(189,162,126,.25), transparent 60%),
+                  radial-gradient(1000px 500px at -10% 20%, rgba(137,176,255,.15), transparent 60%),
+                  var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.6;
+    }
+
+    /* ---------- Layout ---------- */
+    .container{ width: min(100% - 2rem, var(--maxw)); margin-inline: auto; }
+    header.site{
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(15,16,19,.6);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav{
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      gap: 1rem; padding: .75rem 0;
+    }
+    .brand{ display: flex; align-items: center; gap: .75rem; font-weight: 700; letter-spacing: .5px; }
+    .brand .logo{
+      width: 38px; height: 38px; display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      border-radius: 50%; box-shadow: var(--shadow);
+      font-weight: 800; color: #111;
+    }
+    nav.primary{ justify-self: center; }
+    nav.primary a{
+      color: var(--muted); text-decoration: none; font-weight: 600; margin: 0 .75rem;
+      padding: .25rem .25rem; border-radius: 8px;
+    }
+    nav.primary a:hover, nav.primary a.active{ color: var(--ink); background: rgba(255,255,255,.06); }
+    .lang-switch{
+      justify-self: end; display: flex; align-items: center; gap: .5rem;
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
+      padding: .25rem .5rem; border-radius: 999px;
+    }
+    .lang-switch select{
+      background: transparent; color: var(--ink); border: none; outline: none; font-weight: 700;
+    }
+    .btn{
+      --pad:.85rem 1.1rem;
+      display: inline-flex; gap: .5rem; align-items: center; justify-content: center;
+      padding: var(--pad); border-radius: 999px; border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color: var(--ink); text-decoration: none; font-weight: 700; letter-spacing: .2px; cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn.brand{ background: linear-gradient(135deg, var(--brand), var(--brand-2)); color:#111; border-color: rgba(0,0,0,.2); }
+    .btn.ghost{ background: transparent; border-color: rgba(255,255,255,.18); }
+    .chip{
+      display: inline-flex; gap:.5rem; align-items:center; padding:.4rem .7rem; border-radius:999px;
+      background: rgba(255,255,255,.06); color: var(--muted); font-weight:700; border:1px solid rgba(255,255,255,.08);
+    }
+
+    /* ---------- Hero ---------- */
+    .hero{
+      position: relative; isolation: isolate; overflow: hidden;
+      min-height: 78vh; display: grid; align-items: center; padding: 2.5rem 0 4rem;
+    }
+    .hero .bg{
+      position: absolute; inset: 0; z-index: -1;
+      background:
+        radial-gradient(600px 300px at 20% 10%, rgba(137,176,255,.25), transparent 60%),
+        radial-gradient(700px 380px at 80% 60%, rgba(189,162,126,.25), transparent 60%);
+      opacity: .9;
+    }
+    .hero-grid{ display: grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; align-items: center; }
+    .hero h1{
+      font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.1; margin: 0 0 .8rem; letter-spacing:.2px;
+    }
+    .hero p.lead{ color: var(--muted); font-size: clamp(1.05rem, 1.8vw, 1.2rem); margin: 0 0 1.4rem; }
+    .hero .cta{ display: flex; gap: .8rem; flex-wrap: wrap; }
+    .hero .art{
+      position: relative; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .hero .art img{ width: 100%; height: 100%; object-fit: cover; display:block; aspect-ratio: 4/3; filter: saturate(1.05) contrast(1.05); }
+    .trust{
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 1.5rem;
+    }
+    .trust .badge{
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: .9rem;
+      display: grid; place-items: center; color: var(--muted); font-weight: 700; min-height: 64px;
+    }
+
+    /* ---------- Sections ---------- */
+    section{ padding: 4rem 0; }
+    section .hd{
+      display: flex; align-items: end; justify-content: space-between; margin-bottom: 1.5rem; gap: 1rem; flex-wrap: wrap;
+    }
+    section .hd h2{ margin: 0; font-size: clamp(1.6rem, 2.5vw, 2.2rem); }
+    section .hd p{ margin: 0; color: var(--muted); }
+    .card{
+      background: var(--card); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius);
+      box-shadow: var(--shadow); overflow: hidden;
+    }
+
+    /* ---------- About ---------- */
+    .about{ display: grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; }
+    .about .portrait{ border-radius: var(--radius); overflow: hidden; border:1px solid rgba(255,255,255,.1); }
+    .about .portrait img{ width: 100%; height: 100%; object-fit: cover; display:block; aspect-ratio: 4/5; }
+    .about .bio{ padding: 1rem; }
+
+    /* ---------- Gallery Grid ---------- */
+    .masonry{
+      column-count: 3; column-gap: 1rem;
+    }
+    .masonry .item{
+      break-inside: avoid; margin-bottom: 1rem; position: relative; overflow: hidden; border-radius: var(--radius-sm);
+      border:1px solid rgba(255,255,255,.08); box-shadow: var(--shadow);
+    }
+    .masonry .item img{ width: 100%; display:block; transition: transform .4s ease; }
+    .masonry .item:hover img{ transform: scale(1.03); }
+    .masonry .cap{ position: absolute; inset: auto 0 0; padding: .7rem .85rem; background: linear-gradient(180deg, transparent, rgba(0,0,0,.7)); color: #fff; font-weight: 700; }
+
+    /* ---------- Projects ---------- */
+    .grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .proj .cover{ aspect-ratio: 16/10; object-fit: cover; width: 100%; display:block; }
+    .proj .body{ padding: 1rem; }
+    .proj .tags{ display:flex; gap:.5rem; flex-wrap: wrap; }
+
+    /* ---------- Pricing ---------- */
+    .pricing{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .price.card{ padding: 1.2rem; }
+    .price h3{ margin:.2rem 0 .2rem; font-size: 1.35rem; }
+    .price .num{ font-size: 2rem; font-weight:800; margin:.4rem 0 1rem; }
+    .price ul{ padding-left:1.2rem; margin:0 0 1rem; color: var(--muted); }
+    .price .btn{ width: 100%; }
+
+    /* ---------- Contact ---------- */
+    .contact-wrap{ display:grid; grid-template-columns: 1.1fr .9fr; gap: 1rem; }
+    form.contact{
+      display:grid; gap:.8rem; background: var(--card); border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius); padding: 1.2rem; box-shadow: var(--shadow);
+    }
+    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:.8rem; }
+    label{ font-weight:700; color: var(--muted); font-size:.9rem; }
+    input, textarea, select{
+      width: 100%; padding:.85rem 1rem; border-radius: 12px; border:1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.04); color: var(--ink); outline: none;
+    }
+    textarea{ min-height: 140px; resize: vertical; }
+    .aside{
+      background: linear-gradient(135deg, rgba(137,176,255,.15), rgba(189,162,126,.1));
+      border:1px solid rgba(255,255,255,.15); border-radius: var(--radius); padding: 1.2rem;
+    }
+    .aside .list{ display:grid; gap:.6rem; margin-top:.6rem; }
+    .aside .list div{ display:flex; gap:.6rem; align-items:start; }
+
+    /* ---------- Footer ---------- */
+    footer{
+      padding: 2rem 0; border-top:1px solid rgba(255,255,255,.08); color: var(--muted);
+    }
+    .footgrid{ display:grid; grid-template-columns: 1.2fr .8fr; gap: 1rem; }
+    .footgrid .social{ display:flex; gap:.6rem; flex-wrap: wrap; }
+
+    /* ---------- Lightbox ---------- */
+    .lightbox{
+      position: fixed; inset:0; background: rgba(0,0,0,.85); display:none; align-items:center; justify-content:center;
+      z-index: 1000; padding: 2rem;
+    }
+    .lightbox.open{ display:flex; }
+    .lightbox img{ max-width: 95vw; max-height: 85vh; border-radius: 16px; border:1px solid rgba(255,255,255,.2); }
+    .lightbox .close, .lightbox .prev, .lightbox .next{
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18);
+      padding:.6rem .8rem; border-radius: 12px; cursor: pointer; font-weight:800; color:#fff;
+    }
+    .lightbox .close{ top: 2rem; right: 2rem; transform:none; }
+    .lightbox .prev{ left: 1rem; }
+    .lightbox .next{ right: 1rem; }
+
+    /* ---------- Utilities ---------- */
+    .muted{ color: var(--muted); }
+    .center{ text-align:center; }
+    .mt1{ margin-top: 1rem; }
+    .mt2{ margin-top: 2rem; }
+    .mt3{ margin-top: 3rem; }
+    .mb1{ margin-bottom: 1rem; }
+    .mb2{ margin-bottom: 2rem; }
+    .pill{ display:inline-block; padding:.25rem .6rem; border-radius:999px; background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); }
+    .hidden{ display:none !important; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1000px){
+      .hero-grid, .about, .contact-wrap{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: repeat(2,1fr); }
+      .pricing{ grid-template-columns: repeat(2,1fr); }
+      .trust{ grid-template-columns: repeat(2,1fr); }
+      .masonry{ column-count: 2; }
+    }
+    @media (max-width: 640px){
+      nav.primary{ display:none; }
+      .grid{ grid-template-columns: 1fr; }
+      .pricing{ grid-template-columns: 1fr; }
+      .masonry{ column-count: 1; }
+      .footgrid{ grid-template-columns: 1fr; }
+      .trust{ grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">EH</div>
+        <div>
+          <div>Emina Huremovic</div>
+          <small class="muted">Photography</small>
+        </div>
+      </div>
+      <nav class="primary">
+        <a href="#about" data-i18n="nav_about" class="active">Über mich</a>
+        <a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a>
+        <a href="#projects" data-i18n="nav_projects">Projekte</a>
+        <a href="#pricing" data-i18n="nav_pricing">Preise</a>
+        <a href="#contact" data-i18n="nav_contact">Kontakt</a>
+      </nav>
+      <div class="lang-switch">
+        <span class="pill" data-i18n="lang_label">Sprache</span>
+        <select id="lang">
+          <option value="de">DE</option>
+          <option value="en">EN</option>
+          <option value="bs">BS</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero container" id="home">
+      <div class="bg"></div>
+      <div class="hero-grid">
+        <div>
+          <span class="chip" data-i18n="hero_chip">Award-winning • Portraits • Weddings • Editorial</span>
+          <h1 data-i18n="hero_title">Emina Huremovic Photography</h1>
+          <p class="lead" data-i18n="hero_sub">Zeitlose, natürliche und elegante Fotografie – in Wien, Europa & weltweit.</p>
+          <div class="cta">
+            <a class="btn brand" href="#portfolio" data-i18n="hero_cta_1">Portfolio ansehen</a>
+            <a class="btn ghost" href="#contact" data-i18n="hero_cta_2">Anfrage senden</a>
+          </div>
+
+          <div class="trust">
+            <div class="badge" data-i18n="hero_badge_1">Vertrauenswürdig von 100+ Kund:innen</div>
+            <div class="badge" data-i18n="hero_badge_2">Schnelle Lieferung & Online-Galerie</div>
+            <div class="badge" data-i18n="hero_badge_3">Retusche inklusive</div>
+            <div class="badge" data-i18n="hero_badge_4">Reise europaweit</div>
+          </div>
+        </div>
+        <div class="art card">
+          <img src="https://images.unsplash.com/photo-1516826957135-700dedea698c?q=80&w=1400&auto=format&fit=crop" alt="Hero image: elegant portrait light" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="hd">
+          <h2 data-i18n="about_title">Über mich</h2>
+          <p data-i18n="about_sub">Authentische Bilder, die Geschichten erzählen.</p>
+        </div>
+        <div class="about">
+          <div class="card portrait">
+            <img src="https://images.unsplash.com/photo-1520975922284-8b456906c813?q=80&w=1200&auto=format&fit=crop" alt="Portrait of photographer holding a camera">
+          </div>
+          <div class="bio">
+            <p data-i18n="about_p1">
+              Hallo! Ich bin Emina – Fotografin mit Herz für echte Momente. Ob Hochzeit, Business-Portrait oder Lifestyle-Story: Ich kombiniere natürliches Licht mit feinem Editorial-Look.
+            </p>
+            <p data-i18n="about_p2">
+              Mein Ansatz: ruhig, freundlich, unaufdringlich. Ich begleite euch, ohne zu stören – und liefere Bilder, die Jahre überdauern.
+            </p>
+            <div class="mt1">
+              <span class="pill">Wien • Europa • Worldwide</span>
+              <span class="pill" data-i18n="about_badge_2">Deutsch • Englisch • Bosanski</span>
+            </div>
+            <div class="mt2">
+              <a class="btn" href="#pricing" data-i18n="about_cta">Pakete & Preise</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+      <div class="container">
+        <div class="hd">
+          <h2 data-i18n="portfolio_title">Portfolio</h2>
+          <p data-i18n="portfolio_sub">Eine kuratierte Auswahl aus Portrait, Hochzeit & Lifestyle.</p>
+        </div>
+        <div class="masonry" id="gallery">
+          <!-- Sample gallery items -->
+          <figure class="item"><img data-groups="wedding" src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop" alt="Wedding couple in golden light"><figcaption class="cap" data-i18n="cap_wedding_1">Hochzeit – Golden Hour</figcaption></figure>
+          <figure class="item"><img data-groups="portrait" src="https://images.unsplash.com/photo-1503349839236-613fbdc8e1b2?q=80&w=1200&auto=format&fit=crop" alt="Editorial portrait"><figcaption class="cap" data-i18n="cap_portrait_1">Editorial Portrait</figcaption></figure>
+          <figure class="item"><img data-groups="lifestyle" src="https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=1200&auto=format&fit=crop" alt="Lifestyle coffee scene"><figcaption class="cap" data-i18n="cap_life_1">Lifestyle – Coffee</figcaption></figure>
+          <figure class="item"><img data-groups="wedding" src="https://images.unsplash.com/photo-1521753796490-8fdf1f7b7f5b?q=80&w=1200&auto=format&fit=crop" alt="Wedding details"><figcaption class="cap" data-i18n="cap_wedding_2">Hochzeit – Details</figcaption></figure>
+          <figure class="item"><img data-groups="portrait" src="https://images.unsplash.com/photo-1516570161787-2fd917215a3d?q=80&w=1200&auto=format&fit=crop" alt="Soft portrait"><figcaption class="cap" data-i18n="cap_portrait_2">Portrait – Soft Light</figcaption></figure>
+          <figure class="item"><img data-groups="editorial" src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1200&auto=format&fit=crop" alt="Editorial fashion"><figcaption class="cap" data-i18n="cap_editorial_1">Editorial – Fashion</figcaption></figure>
+          <figure class="item"><img data-groups="lifestyle" src="https://images.unsplash.com/photo-1519608425089-7f3bfa6f6bb8?q=80&w=1200&auto=format&fit=crop" alt="Lifestyle street"><figcaption class="cap" data-i18n="cap_life_2">Lifestyle – Street</figcaption></figure>
+          <figure class="item"><img data-groups="newborn" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop" alt="Newborn close-up"><figcaption class="cap" data-i18n="cap_newborn_1">Newborn – Close</figcaption></figure>
+          <figure class="item"><img data-groups="family" src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=1200&auto=format&fit=crop" alt="Family session"><figcaption class="cap" data-i18n="cap_family_1">Familie – Warm</figcaption></figure>
+          <figure class="item"><img data-groups="business" src="https://images.unsplash.com/photo-1520974735194-17e269db9b49?q=80&w=1200&auto=format&fit=crop" alt="Business headshot"><figcaption class="cap" data-i18n="cap_business_1">Business Headshot</figcaption></figure>
+          <figure class="item"><img data-groups="wedding" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop" alt="Wedding rings macro"><figcaption class="cap" data-i18n="cap_wedding_3">Hochzeit – Ringe</figcaption></figure>
+          <figure class="item"><img data-groups="portrait" src="https://images.unsplash.com/photo-1555617981-2e4b3f4d2d5e?q=80&w=1200&auto=format&fit=crop" alt="Monochrome portrait"><figcaption class="cap" data-i18n="cap_portrait_3">Portrait – Monochrom</figcaption></figure>
+        </div>
+        <div class="center mt2">
+          <a class="btn" href="#projects" data-i18n="portfolio_cta">Mehr Projekte ansehen</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <div class="hd">
+          <h2 data-i18n="projects_title">Ausgewählte Projekte</h2>
+          <p data-i18n="projects_sub">Ein Blick in realisierte Aufträge – mit Ziel, Konzept & Ergebnis.</p>
+        </div>
+        <div class="grid">
+          <article class="proj card">
+            <img class="cover" src="https://images.unsplash.com/photo-1487413279057-9d361ad32764?q=80&w=1200&auto=format&fit=crop" alt="Bridal editorial in Vienna">
+            <div class="body">
+              <h3 data-i18n="proj1_title">Bridal Editorial, Wien</h3>
+              <p class="muted" data-i18n="proj1_desc">Klares Storytelling & sanftes Licht für ein modernes Brautkleid-Label. Umsetzung in zwei Sets, Lieferung als Editorial & Social-Cut.</p>
+              <div class="tags">
+                <span class="pill">Editorial</span>
+                <span class="pill" data-i18n="tag_wedding">Hochzeit</span>
+                <span class="pill">Vienna</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="proj card">
+            <img class="cover" src="https://images.unsplash.com/photo-1515165562835-c3b8c71f1d94?q=80&w=1200&auto=format&fit=crop" alt="Lifestyle café branding">
+            <div class="body">
+              <h3 data-i18n="proj2_title">Lifestyle Cafe Branding</h3>
+              <p class="muted" data-i18n="proj2_desc">Moodige Story mit echten Gästen, Fokus auf Wärme & Gemütlichkeit. Einsatz im Web, Print & Ads.</p>
+              <div class="tags">
+                <span class="pill">Lifestyle</span>
+                <span class="pill">Branding</span>
+                <span class="pill">Social</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="proj card">
+            <img class="cover" src="https://images.unsplash.com/photo-1526045612212-70caf35c14df?q=80&w=1200&auto=format&fit=crop" alt="Business portraits on location">
+            <div class="body">
+              <h3 data-i18n="proj3_title">On-Location Business</h3>
+              <p class="muted" data-i18n="proj3_desc">Mobile Setups für natürliche Business-Portraits im Firmenkontext. Einheitliches Look&Feel, schneller Ablauf.</p>
+              <div class="tags">
+                <span class="pill" data-i18n="tag_business">Business</span>
+                <span class="pill">Corporate</span>
+                <span class="pill">Headshots</span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="center mt2">
+          <a class="btn ghost" href="#contact" data-i18n="projects_cta">Projekt anfragen</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+      <div class="container">
+        <div class="hd">
+          <h2 data-i18n="pricing_title">Pakete & Preise</h2>
+          <p data-i18n="pricing_sub">Transparente Angebote – flexibel anpassbar an eure Bedürfnisse.</p>
+        </div>
+        <div class="pricing">
+          <div class="price card">
+            <div class="chip" data-i18n="price1_chip">Portrait</div>
+            <h3 data-i18n="price1_title">Mini Session</h3>
+            <div class="num">€ 180</div>
+            <ul>
+              <li data-i18n="price1_li1">30 Minuten, 1 Location</li>
+              <li data-i18n="price1_li2">10 bearbeitete Fotos (Web & Print)</li>
+              <li data-i18n="price1_li3">Online-Galerie & Download</li>
+            </ul>
+            <a class="btn brand" href="#contact" data-i18n="price_cta">Anfrage senden</a>
+          </div>
+
+          <div class="price card">
+            <div class="chip" data-i18n="price2_chip">Wedding</div>
+            <h3 data-i18n="price2_title">Standesamt</h3>
+            <div class="num">€ 690</div>
+            <ul>
+              <li data-i18n="price2_li1">2 Stunden Begleitung</li>
+              <li data-i18n="price2_li2">Auswahl & Retusche von 120+ Bildern</li>
+              <li data-i18n="price2_li3">Private Online-Galerie</li>
+            </ul>
+            <a class="btn brand" href="#contact" data-i18n="price_cta">Anfrage senden</a>
+          </div>
+
+          <div class="price card">
+            <div class="chip">Business</div>
+            <h3 data-i18n="price3_title">Team Portraits</h3>
+            <div class="num">ab € 450</div>
+            <ul>
+              <li data-i18n="price3_li1">On-Location Setup</li>
+              <li data-i18n="price3_li2">Individuelle Retusche</li>
+              <li data-i18n="price3_li3">Lizenz für Web & Print</li>
+            </ul>
+            <a class="btn brand" href="#contact" data-i18n="price_cta">Anfrage senden</a>
+          </div>
+        </div>
+        <p class="muted mt1" data-i18n="pricing_note">Alle Preise inkl. MwSt. – Reisekosten außerhalb Wien zzgl.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="hd">
+          <h2 data-i18n="contact_title">Kontakt</h2>
+          <p data-i18n="contact_sub">Schreib mir kurz, worum es geht – ich melde mich in 24h zurück.</p>
+        </div>
+        <div class="contact-wrap">
+          <form class="contact" method="post" action="https://formspree.io/f/your-form-id" id="contactForm">
+            <div class="row">
+              <div>
+                <label for="name" data-i18n="form_name_label">Dein Name</label>
+                <input id="name" name="name" type="text" placeholder="Max Mustermann" required autocomplete="name" />
+              </div>
+              <div>
+                <label for="email" data-i18n="form_email_label">E-Mail</label>
+                <input id="email" name="email" type="email" placeholder="dein@email.at" required autocomplete="email" />
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <label for="service" data-i18n="form_service_label">Art des Shootings</label>
+                <select id="service" name="service">
+                  <option data-i18n="opt_portrait">Portrait</option>
+                  <option data-i18n="opt_wedding">Hochzeit</option>
+                  <option data-i18n="opt_family">Familie</option>
+                  <option data-i18n="opt_business">Business</option>
+                  <option data-i18n="opt_other">Sonstiges</option>
+                </select>
+              </div>
+              <div>
+                <label for="date" data-i18n="form_date_label">Wunschtermin</label>
+                <input id="date" name="date" type="date" />
+              </div>
+            </div>
+            <div>
+              <label for="msg" data-i18n="form_msg_label">Nachricht</label>
+              <textarea id="msg" name="message" placeholder="Was stellst du dir vor? Location, Anzahl Personen, Stil ..." required></textarea>
+            </div>
+            <input type="hidden" name="website" value="Emina Huremovic Photography">
+            <button class="btn brand" type="submit" data-i18n="form_submit">Senden</button>
+            <div id="formStatus" class="muted"></div>
+          </form>
+
+          <aside class="aside">
+            <div class="chip" data-i18n="aside_title">Direkt buchen?</div>
+            <p class="mt1" data-i18n="aside_text">
+              Gerne erstelle ich ein individuelles Angebot. Für kurzfristige Termine schreib mir am besten via WhatsApp oder Instagram.
+            </p>
+            <div class="list">
+              <div><strong>Email</strong> • <a href="mailto:hello@eminaphoto.at">hello@eminaphoto.at</a></div>
+              <div><strong>Instagram</strong> • <a href="https://instagram.com" target="_blank" rel="noopener">/eminahuremovic</a></div>
+              <div><strong>Telefon</strong> • <a href="tel:+43123456789">+43 123 456 789</a></div>
+              <div><strong>Studio</strong> • Vienna, AT</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footgrid">
+      <div>
+        <div class="brand">
+          <div class="logo">EH</div>
+          <div>
+            <div>Emina Huremovic</div>
+            <small class="muted">Photography</small>
+          </div>
+        </div>
+        <p class="mt1 muted" data-i18n="footer_copy">
+          © <span id="year"></span> Emina Huremovic. Alle Rechte vorbehalten. Bildnachweise: Unsplash Platzhalter – bitte durch eigene Werke ersetzen.
+        </p>
+      </div>
+      <div>
+        <div class="social">
+          <a class="btn ghost" href="#home" data-i18n="footer_top">Nach oben</a>
+          <a class="btn ghost" href="#portfolio">Portfolio</a>
+          <a class="btn ghost" href="#contact">Kontakt</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="close" aria-label="Close">✕</button>
+    <button class="prev" aria-label="Previous">‹</button>
+    <img alt="Lightbox image preview" />
+    <button class="next" aria-label="Next">›</button>
+  </div>
+
+  <script>
+    // ---------- Utilities ----------
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+    // ---------- Year in footer ----------
+    $('#year').textContent = new Date().getFullYear();
+
+    // ---------- Smooth scroll for internal links ----------
+    $$('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const href = a.getAttribute('href');
+        if(href.length > 1){
+          e.preventDefault();
+          document.querySelector(href)?.scrollIntoView({ behavior:'smooth', block:'start' });
+          $$('nav.primary a').forEach(x => x.classList.remove('active'));
+          const navLink = $$('nav.primary a').find(n => n.getAttribute('href') === href);
+          if(navLink) navLink.classList.add('active');
+        }
+      });
+    });
+
+    // ---------- Lightbox ----------
+    const lightbox = $('#lightbox');
+    const lbImg = $('#lightbox img');
+    const prev = $('#lightbox .prev');
+    const next = $('#lightbox .next');
+    const close = $('#lightbox .close');
+    const galleryItems = $$('#gallery img');
+    let currentIndex = -1;
+
+    function openLightbox(index){
+      currentIndex = index;
+      const src = galleryItems[index].getAttribute('src');
+      const alt = galleryItems[index].getAttribute('alt') || '';
+      lbImg.setAttribute('src', src);
+      lbImg.setAttribute('alt', alt);
+      lightbox.classList.add('open');
+    }
+    function closeLightbox(){ lightbox.classList.remove('open'); }
+    function prevImg(){ if(currentIndex <= 0) currentIndex = galleryItems.length; openLightbox((currentIndex-1) % galleryItems.length); }
+    function nextImg(){ openLightbox((currentIndex+1) % galleryItems.length); }
+
+    galleryItems.forEach((img, i) => {
+      img.addEventListener('click', () => openLightbox(i));
+      img.style.cursor = 'zoom-in';
+    });
+    close.addEventListener('click', closeLightbox);
+    prev.addEventListener('click', prevImg);
+    next.addEventListener('click', nextImg);
+    lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+    window.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') prevImg();
+      if(e.key === 'ArrowRight') nextImg();
+    });
+
+    // ---------- Simple i18n ----------
+    const i18n = {
+      de: {
+        nav_about:"Über mich", nav_portfolio:"Portfolio", nav_projects:"Projekte", nav_pricing:"Preise", nav_contact:"Kontakt",
+        lang_label:"Sprache",
+        hero_chip:"Award-winning • Portraits • Weddings • Editorial",
+        hero_title:"Emina Huremovic Photography",
+        hero_sub:"Zeitlose, natürliche und elegante Fotografie – in Wien, Europa & weltweit.",
+        hero_cta_1:"Portfolio ansehen", hero_cta_2:"Anfrage senden",
+        hero_badge_1:"Vertrauenswürdig von 100+ Kund:innen", hero_badge_2:"Schnelle Lieferung & Online-Galerie", hero_badge_3:"Retusche inklusive", hero_badge_4:"Reise europaweit",
+        about_title:"Über mich", about_sub:"Authentische Bilder, die Geschichten erzählen.",
+        about_p1:"Hallo! Ich bin Emina – Fotografin mit Herz für echte Momente. Ob Hochzeit, Business-Portrait oder Lifestyle-Story: Ich kombiniere natürliches Licht mit feinem Editorial-Look.",
+        about_p2:"Mein Ansatz: ruhig, freundlich, unaufdringlich. Ich begleite euch, ohne zu stören – und liefere Bilder, die Jahre überdauern.",
+        about_badge_2:"Deutsch • Englisch • Bosanski", about_cta:"Pakete & Preise",
+        portfolio_title:"Portfolio", portfolio_sub:"Eine kuratierte Auswahl aus Portrait, Hochzeit & Lifestyle.",
+        cap_wedding_1:"Hochzeit – Golden Hour", cap_portrait_1:"Editorial Portrait", cap_life_1:"Lifestyle – Coffee", cap_wedding_2:"Hochzeit – Details",
+        cap_portrait_2:"Portrait – Soft Light", cap_editorial_1:"Editorial – Fashion", cap_life_2:"Lifestyle – Street", cap_newborn_1:"Newborn – Close", cap_family_1:"Familie – Warm", cap_business_1:"Business Headshot", cap_wedding_3:"Hochzeit – Ringe", cap_portrait_3:"Portrait – Monochrom",
+        portfolio_cta:"Mehr Projekte ansehen",
+        projects_title:"Ausgewählte Projekte", projects_sub:"Ein Blick in realisierte Aufträge – mit Ziel, Konzept & Ergebnis.",
+        proj1_title:"Bridal Editorial, Wien", proj1_desc:"Klares Storytelling & sanftes Licht für ein modernes Brautkleid-Label. Umsetzung in zwei Sets, Lieferung als Editorial & Social-Cut.",
+        proj2_title:"Lifestyle Cafe Branding", proj2_desc:"Moodige Story mit echten Gästen, Fokus auf Wärme & Gemütlichkeit. Einsatz im Web, Print & Ads.",
+        proj3_title:"On-Location Business", proj3_desc:"Mobile Setups für natürliche Business-Portraits im Firmenkontext. Einheitliches Look&Feel, schneller Ablauf.",
+        tag_wedding:"Hochzeit", tag_business:"Business",
+        projects_cta:"Projekt anfragen",
+        pricing_title:"Pakete & Preise", pricing_sub:"Transparente Angebote – flexibel anpassbar an eure Bedürfnisse.",
+        price1_chip:"Portrait", price1_title:"Mini Session", price1_li1:"30 Minuten, 1 Location", price1_li2:"10 bearbeitete Fotos (Web & Print)", price1_li3:"Online-Galerie & Download",
+        price2_chip:"Wedding", price2_title:"Standesamt", price2_li1:"2 Stunden Begleitung", price2_li2:"Auswahl & Retusche von 120+ Bildern", price2_li3:"Private Online-Galerie",
+        price3_title:"Team Portraits", price3_li1:"On-Location Setup", price3_li2:"Individuelle Retusche", price3_li3:"Lizenz für Web & Print",
+        price_cta:"Anfrage senden", pricing_note:"Alle Preise inkl. MwSt. – Reisekosten außerhalb Wien zzgl.",
+        contact_title:"Kontakt", contact_sub:"Schreib mir kurz, worum es geht – ich melde mich in 24h zurück.",
+        form_name_label:"Dein Name", form_email_label:"E-Mail", form_service_label:"Art des Shootings", form_date_label:"Wunschtermin", form_msg_label:"Nachricht", form_submit:"Senden",
+        opt_portrait:"Portrait", opt_wedding:"Hochzeit", opt_family:"Familie", opt_business:"Business", opt_other:"Sonstiges",
+        aside_title:"Direkt buchen?", aside_text:"Gerne erstelle ich ein individuelles Angebot. Für kurzfristige Termine schreib mir am besten via WhatsApp oder Instagram.",
+        footer_copy:"© {year} Emina Huremovic. Alle Rechte vorbehalten. Bildnachweise: Unsplash Platzhalter – bitte durch eigene Werke ersetzen.",
+        footer_top:"Nach oben"
+      },
+      en: {
+        nav_about:"About", nav_portfolio:"Portfolio", nav_projects:"Projects", nav_pricing:"Pricing", nav_contact:"Contact",
+        lang_label:"Language",
+        hero_chip:"Award-winning • Portraits • Weddings • Editorial",
+        hero_title:"Emina Huremovic Photography",
+        hero_sub:"Timeless, natural and elegant photography – in Vienna, across Europe & worldwide.",
+        hero_cta_1:"View portfolio", hero_cta_2:"Send inquiry",
+        hero_badge_1:"Trusted by 100+ clients", hero_badge_2:"Fast delivery & online gallery", hero_badge_3:"Retouching included", hero_badge_4:"Travel worldwide",
+        about_title:"About", about_sub:"Authentic images that tell stories.",
+        about_p1:"Hi! I'm Emina – a photographer with a heart for real moments. Weddings, business headshots or lifestyle stories: I blend natural light with a refined editorial look.",
+        about_p2:"My approach is calm, friendly and unobtrusive. I capture your story without interrupting – and deliver images that last for years.",
+        about_badge_2:"German • English • Bosnian", about_cta:"Packages & pricing",
+        portfolio_title:"Portfolio", portfolio_sub:"A curated selection across portrait, wedding & lifestyle.",
+        cap_wedding_1:"Wedding – Golden hour", cap_portrait_1:"Editorial portrait", cap_life_1:"Lifestyle – Coffee", cap_wedding_2:"Wedding – Details",
+        cap_portrait_2:"Portrait – Soft light", cap_editorial_1:"Editorial – Fashion", cap_life_2:"Lifestyle – Street", cap_newborn_1:"Newborn – Close", cap_family_1:"Family – Warm", cap_business_1:"Business headshot", cap_wedding_3:"Wedding – Rings", cap_portrait_3:"Portrait – Monochrome",
+        portfolio_cta:"See more projects",
+        projects_title:"Selected projects", projects_sub:"A look into real client work – goals, concept and results.",
+        proj1_title:"Bridal Editorial, Vienna", proj1_desc:"Clean storytelling and soft light for a modern bridal brand. Two sets delivered for editorial and social.",
+        proj2_title:"Lifestyle Cafe Branding", proj2_desc:"Moody story with real guests, focused on warmth & coziness. Deployed on web, print and ads.",
+        proj3_title:"On-location Business", proj3_desc:"Mobile setups for natural business portraits at the office. Unified look & feel and a quick process.",
+        tag_wedding:"Wedding", tag_business:"Business",
+        projects_cta:"Request a project",
+        pricing_title:"Packages & pricing", pricing_sub:"Transparent offers – easily tailored to your needs.",
+        price1_chip:"Portrait", price1_title:"Mini session", price1_li1:"30 minutes, 1 location", price1_li2:"10 edited photos (web & print)", price1_li3:"Online gallery & download",
+        price2_chip:"Wedding", price2_title:"Civil ceremony", price2_li1:"2 hours coverage", price2_li2:"Curation & retouch of 120+ photos", price2_li3:"Private online gallery",
+        price3_title:"Team portraits", price3_li1:"On-location setup", price3_li2:"Individual retouch", price3_li3:"License for web & print",
+        price_cta:"Send inquiry", pricing_note:"All prices incl. VAT – travel costs outside Vienna extra.",
+        contact_title:"Contact", contact_sub:"Tell me a bit about your project – I usually reply within 24h.",
+        form_name_label:"Your name", form_email_label:"Email", form_service_label:"Type of shoot", form_date_label:"Preferred date", form_msg_label:"Message", form_submit:"Send",
+        opt_portrait:"Portrait", opt_wedding:"Wedding", opt_family:"Family", opt_business:"Business", opt_other:"Other",
+        aside_title:"Book directly?", aside_text:"Happy to craft a custom offer. For short-notice dates reach me on WhatsApp or Instagram.",
+        footer_copy:"© {year} Emina Huremovic. All rights reserved. Image credits: Unsplash placeholders – please replace with your own work.",
+        footer_top:"Back to top"
+      },
+      bs: {
+        nav_about:"O meni", nav_portfolio:"Portfolio", nav_projects:"Projekti", nav_pricing:"Cijene", nav_contact:"Kontakt",
+        lang_label:"Jezik",
+        hero_chip:"Nagrađivano • Portreti • Vjenčanja • Editorial",
+        hero_title:"Emina Huremovic Photography",
+        hero_sub:"Bezvremenska, prirodna i elegantna fotografija – u Beču, širom Evrope i svijeta.",
+        hero_cta_1:"Pogledaj portfolio", hero_cta_2:"Pošalji upit",
+        hero_badge_1:"Povjerenje 100+ klijenata", hero_badge_2:"Brza isporuka & online galerija", hero_badge_3:"Retuširanje uključeno", hero_badge_4:"Putujem širom svijeta",
+        about_title:"O meni", about_sub:"Autentične fotografije koje pričaju priče.",
+        about_p1:"Zdravo! Ja sam Emina – fotografkinja sa srcem za prave trenutke. Vjenčanja, poslovni portreti ili lifestyle priče: spajam prirodno svjetlo sa profinjenim editorial izgledom.",
+        about_p2:"Moj pristup je miran, prijateljski i nenametljiv. Bilježim vašu priču bez prekidanja – i isporučujem fotografije koje traju godinama.",
+        about_badge_2:"Njemački • Engleski • Bosanski", about_cta:"Paketi i cijene",
+        portfolio_title:"Portfolio", portfolio_sub:"Kuratirana selekcija – portret, vjenčanja i lifestyle.",
+        cap_wedding_1:"Vjenčanje – Zlatni sat", cap_portrait_1:"Editorial portret", cap_life_1:"Lifestyle – Kafa", cap_wedding_2:"Vjenčanje – Detalji",
+        cap_portrait_2:"Portret – Mekano svjetlo", cap_editorial_1:"Editorial – Moda", cap_life_2:"Lifestyle – Ulica", cap_newborn_1:"Beba – Close", cap_family_1:"Porodica – Toplo", cap_business_1:"Poslovni portret", cap_wedding_3:"Vjenčanje – Prstenje", cap_portrait_3:"Portret – Monohrom",
+        portfolio_cta:"Još projekata",
+        projects_title:"Izabrani projekti", projects_sub:"Uvid u stvarne poslove – ciljevi, koncept i rezultat.",
+        proj1_title:"Bridal Editorial, Beč", proj1_desc:"Čisto pripovijedanje i mekano svjetlo za moderan bridal brend. Dva seta za editorial i društvene mreže.",
+        proj2_title:"Lifestyle Cafe Branding", proj2_desc:"Zadimljena, topla priča sa pravim gostima. Korišteno na webu, u printu i oglasima.",
+        proj3_title:"Poslovni portreti na lokaciji", proj3_desc:"Mobilna postavka za prirodne poslovne portrete u firmi. Ujednačen izgled i brz proces.",
+        tag_wedding:"Vjenčanje", tag_business:"Biznis",
+        projects_cta:"Pošalji upit",
+        pricing_title:"Paketi i cijene", pricing_sub:"Transparentne ponude – lako prilagodljive vašim potrebama.",
+        price1_chip:"Portret", price1_title:"Mini sesija", price1_li1:"30 minuta, 1 lokacija", price1_li2:"10 obrađenih fotografija (web & print)", price1_li3:"Online galerija i download",
+        price2_chip:"Vjenčanje", price2_title:"Matičar", price2_li1:"2 sata pratnje", price2_li2:"Selekcija i retuš 120+ fotografija", price2_li3:"Privatna online galerija",
+        price3_title:"Tim portreti", price3_li1:"Set na lokaciji", price3_li2:"Individualni retuš", price3_li3:"Licenca za web i print",
+        price_cta:"Pošalji upit", pricing_note:"Sve cijene sa PDV-om – putni troškovi van Beča dodatno.",
+        contact_title:"Kontakt", contact_sub:"Napišite mi ukratko – obično odgovaram u roku od 24h.",
+        form_name_label:"Vaše ime", form_email_label:"E-mail", form_service_label:"Vrsta fotografisanja", form_date_label:"Željeni datum", form_msg_label:"Poruka", form_submit:"Pošalji",
+        opt_portrait:"Portret", opt_wedding:"Vjenčanje", opt_family:"Porodica", opt_business:"Biznis", opt_other:"Ostalo",
+        aside_title:"Direktna rezervacija?", aside_text:"Rado ću pripremiti ponudu. Za hitne termine pišite na WhatsApp ili Instagram.",
+        footer_copy:"© {year} Emina Huremovic. Sva prava zadržana. Slike: Unsplash privremeno – zamijenite vlastitim radovima.",
+        footer_top:"Nazad na vrh"
+      }
+    };
+
+    function setLang(lang){
+      document.documentElement.lang = lang;
+      const strings = i18n[lang] || i18n.de;
+      $$('[data-i18n]').forEach(node => {
+        const key = node.getAttribute('data-i18n');
+        if(strings[key]) node.textContent = strings[key].replace('{year}', new Date().getFullYear());
+      });
+    }
+
+    const langSel = $('#lang');
+    langSel.addEventListener('change', () => setLang(langSel.value));
+    // Init language from browser or default 'de'
+    const initLang = (navigator.language || 'de').slice(0,2);
+    if(['de','en','bs'].includes(initLang)) langSel.value = initLang; else langSel.value = 'de';
+    setLang(langSel.value);
+
+    // ---------- Contact form (client-side helper) ----------
+    $('#contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      const status = $('#formStatus');
+      status.textContent = langSel.value === 'en' ? 'Sending…' : (langSel.value === 'bs' ? 'Šaljem…' : 'Sende…');
+      try{
+        const res = await fetch(form.action, { method:'POST', body: data, headers: { 'Accept':'application/json' } });
+        if(res.ok){
+          status.textContent = langSel.value === 'en' ? 'Thank you! I will get back to you soon.' :
+                               (langSel.value === 'bs' ? 'Hvala! Javiću se uskoro.' : 'Danke! Ich melde mich bald.');
+          form.reset();
+        }else{
+          status.textContent = langSel.value === 'en' ? 'Something went wrong. Please write to hello@eminaphoto.at.' :
+                               (langSel.value === 'bs' ? 'Nešto je pošlo po zlu. Pišite na hello@eminaphoto.at.' : 'Etwas ist schiefgelaufen. Bitte schreib an hello@eminaphoto.at.');
+        }
+      }catch(err){
+        status.textContent = langSel.value === 'en' ? 'Network error. Please try again later.' :
+                             (langSel.value === 'bs' ? 'Greška u mreži. Pokušajte kasnije.' : 'Netzwerkfehler. Bitte später erneut versuchen.');
+      }
+    });
+  </script>
+</body>
+</html>
