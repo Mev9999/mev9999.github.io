@@ -761,13 +761,15 @@ about_p2:"U svaki shooting ulažem maksimum – bez kompromisa. Uz puno strpljen
     };
 
     function setLang(lang){
-      document.documentElement.lang = lang;
-      const strings = i18n[lang] || i18n.de;
-      $$('[data-i18n]').forEach(node => {
-        const key = node.getAttribute('data-i18n');
-        if(strings[key]) node.textContent = strings[key].replace('{year}', new Date().getFullYear());
-      });
+  document.documentElement.lang = lang;
+  const strings = i18n[lang] || i18n.de;
+  $$('[data-i18n]').forEach(node => {
+    const key = node.getAttribute('data-i18n');
+    if(strings[key]) {
+      node.innerHTML = strings[key].replace('{year}', new Date().getFullYear());
     }
+  });
+}
 
     const langSel = $('#lang');
     langSel.addEventListener('change', () => setLang(langSel.value));
