@@ -238,12 +238,71 @@
     .aside .list{ display:grid; gap:.6rem; margin-top:.6rem; }
     .aside .list div{ display:flex; gap:.6rem; align-items:start; }
 
-    /* ---------- Footer ---------- */
-    footer{
-      padding: 2rem 0; border-top:1px solid rgba(255,255,255,.08); color: var(--muted);
-    }
-    .footgrid{ display:grid; grid-template-columns: 1.2fr .8fr; gap: 1rem; }
-    .footgrid .social{ display:flex; gap:.6rem; flex-wrap: wrap; }
+   /* ---------- Footer ---------- */
+footer{
+  padding: 2.5rem 0;
+  border-top: 1px solid rgba(217,152,130,.18);
+  color: var(--muted);
+  background: rgba(255,255,255,.35);
+}
+
+.footgrid{
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.footer-copy{
+  margin-top: 1rem;
+  max-width: 680px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.footer-right{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.footer-links{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: .75rem;
+}
+
+.footer-links a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .8rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--ink);
+  background: rgba(255,255,255,.65);
+  border: 1px solid rgba(217,152,130,.18);
+  box-shadow: var(--shadow);
+}
+
+.footer-links a:hover{
+  transform: translateY(-1px);
+}
+
+.footer-top{
+  font-weight: 700;
+  color: var(--muted);
+  text-decoration: none;
+  padding: .2rem 0;
+}
+
+.footer-top:hover{
+  color: var(--ink);
+}
 
     /* ---------- Lightbox ---------- */
     .lightbox{
@@ -294,6 +353,14 @@
   .masonry{ grid-template-columns: 1fr; }
   .footgrid{ grid-template-columns: 1fr; }
   .trust{ grid-template-columns: 1fr 1fr; }
+
+  .footer-right{
+    align-items: flex-start;
+  }
+
+  .footer-links{
+    justify-content: flex-start;
+  }
 }
 
 
@@ -394,13 +461,7 @@ footer .brand{
             <p data-i18n="about_p2">
               Mein Ansatz: ruhig, freundlich, unaufdringlich. Ich begleite euch, ohne zu stören – und liefere Bilder, die Jahre überdauern.
             </p>
-            <div class="mt1">
-              <span class="pill">Graz • München • Bihać</span>
-              <span class="pill" data-i18n="about_badge_2">Deutsch • Englisch • Bosanski</span>
-            </div>
-            <div class="mt2">
-              <a class="btn" href="#pricing" data-i18n="about_cta">Pakete & Preise</a>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -593,27 +654,28 @@ footer .brand{
   </main>
 
   <footer>
-    <div class="container footgrid">
-      <div>
-        <div class="brand">
-  <img src="logo-liza.png" alt="LiZa Memories Photography Logo" class="brand-logo">
-</div>
-        <p class="mt1 muted" data-i18n="footer_copy">
-          © <span id="year"></span> LiZa Memories. Alle Rechte vorbehalten. Bildnachweise: Unsplash Platzhalter – bitte durch eigene Werke ersetzen.
-        </p>
+  <div class="container footgrid">
+    <div>
+      <div class="brand">
+        <img src="logo-liza.png" alt="LiZa Memories Photography Logo" class="brand-logo">
       </div>
-      <div>
-      <div class="social">
-  <a class="btn ghost" href="#home" data-i18n="footer_top">Nach oben</a>
-  <a class="btn ghost" href="#portfolio">Portfolio</a>
-  <a class="btn ghost" href="#contact">Kontakt</a>
+      <p class="footer-copy" data-i18n="footer_copy">
+        © <span id="year"></span> LiZa Memories Photography. Alle Rechte vorbehalten.
+      </p>
+    </div>
 
-  <a class="btn ghost" href="impressum.html">Impressum</a>
-  <a class="btn ghost" href="datenschutz.html">Datenschutz</a>
-</div>
+    <div class="footer-right">
+      
+
+      <div class="footer-links">
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Kontakt</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
@@ -718,7 +780,7 @@ hero_badge_4:"Natürliche und emotionale Erinnerungen",
         form_name_label:"Dein Name", form_email_label:"E-Mail", form_service_label:"Art des Shootings", form_date_label:"Wunschtermin", form_msg_label:"Nachricht", form_submit:"Senden",
         opt_portrait:"Portrait", opt_wedding:"Hochzeit", opt_family:"Familie", opt_business:"Business", opt_other:"Sonstiges",
         aside_title:"Direkt buchen?", aside_text:"Gerne erstelle ich ein individuelles Angebot. Für kurzfristige Termine schreib mir am besten via WhatsApp oder Instagram.",
-        footer_copy:"© {year} LiZa Memories. Alle Rechte vorbehalten. Bildnachweise: Unsplash Platzhalter – bitte durch eigene Werke ersetzen.",
+        footer_copy:"© {year} LiZa Memories Photography. Alle Rechte vorbehalten.",
         footer_top:"Nach oben"
       },
       en: {
@@ -756,7 +818,7 @@ about_p2:"I give my absolute best in every session – without compromise. With 
         form_name_label:"Your name", form_email_label:"Email", form_service_label:"Type of shoot", form_date_label:"Preferred date", form_msg_label:"Message", form_submit:"Send",
         opt_portrait:"Portrait", opt_wedding:"Wedding", opt_family:"Family", opt_business:"Business", opt_other:"Other",
         aside_title:"Book directly?", aside_text:"Happy to craft a custom offer. For short-notice dates reach me on WhatsApp or Instagram.",
-        footer_copy:"© {year} LiZa Memories. All rights reserved. Image credits: Unsplash placeholders – please replace with your own work.",
+        footer_copy:"© {year} LiZa Memories Photography. All rights reserved.",
         footer_top:"Back to top"
       },
       bs: {
@@ -794,7 +856,7 @@ about_p2:"U svaki shooting ulažem maksimum – bez kompromisa. Uz puno strpljen
         form_name_label:"Vaše ime", form_email_label:"E-mail", form_service_label:"Vrsta fotografisanja", form_date_label:"Željeni datum", form_msg_label:"Poruka", form_submit:"Pošalji",
         opt_portrait:"Portret", opt_wedding:"Vjenčanje", opt_family:"Porodica", opt_business:"Biznis", opt_other:"Ostalo",
         aside_title:"Direktna rezervacija?", aside_text:"Rado ću pripremiti ponudu. Za hitne termine pišite na WhatsApp ili Instagram.",
-        footer_copy:"© {year} LiZa Memories. Sva prava zadržana. Slike: Unsplash privremeno – zamijenite vlastitim radovima.",
+        footer_copy:"© {year} LiZa Memories Photography. Sva prava zadržana.",
         footer_top:"Nazad na vrh"
       }
     };
