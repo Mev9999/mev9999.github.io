@@ -270,7 +270,7 @@ footer{
 
 .footer-links{
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* verhindert Umbruch */
   justify-content: flex-end;
   gap: .75rem;
 }
@@ -353,7 +353,9 @@ footer{
   .masonry{ grid-template-columns: 1fr; }
   .footgrid{ grid-template-columns: 1fr; }
   .trust{ grid-template-columns: 1fr 1fr; }
-
+.footer-links{
+  flex-wrap: wrap;
+}
   .footer-right{
     align-items: flex-start;
   }
