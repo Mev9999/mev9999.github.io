@@ -269,10 +269,29 @@
 
 
    .brand-logo{
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
+  height: 80px;
+  width: auto;
   display: block;
+  object-fit: contain;
+}
+
+header .brand{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+footer .brand{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+header .brand .brand-text,
+footer .brand .brand-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
   </style>
@@ -282,7 +301,7 @@
     <div class="container nav">
       <div class="brand">
   <img src="logo-liza.png" alt="LiZa Memories Photography Logo" class="brand-logo">
-  <div>
+  <div class="brand-text">
     <div>LiZa Memories</div>
     <small class="muted">Photography</small>
   </div>
@@ -557,7 +576,7 @@
       <div>
         <div class="brand">
   <img src="logo-liza.png" alt="LiZa Memories Photography Logo" class="brand-logo">
-  <div>
+  <div class="brand-text">
     <div>LiZa Memories</div>
     <small class="muted">Photography</small>
   </div>
