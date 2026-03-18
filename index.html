@@ -590,8 +590,7 @@ footer{
     max-width: 100%;
     width: 100%;
   }
-
- /* CONTACT */
+/* CONTACT */
 .aside{
   padding: 1.25rem;
 }
@@ -606,8 +605,8 @@ footer{
 
 .contact-list div{
   display: grid;
-  grid-template-columns: 74px 10px;
-  gap: .2rem .35rem;
+  grid-template-columns: 1fr;
+  gap: .2rem;
   align-items: start;
 }
 
@@ -616,24 +615,23 @@ footer{
 }
 
 .contact-list strong{
+  display: inline-block;
   font-size: .9rem;
   line-height: 1.35;
 }
 
-.contact-list span{
-  font-size: .9rem;
-  line-height: 1.35;
+.contact-list div > span:first-of-type{
+  display: none;
 }
 
 .contact-list a,
 .contact-list div > span:last-child{
-  grid-column: 1 / -1;
   display: block;
+  width: 100%;
   font-size: .9rem;
   line-height: 1.45;
   overflow-wrap: anywhere;
   word-break: break-word;
-  margin-top: .1rem;
 }
 
 form.contact{
