@@ -428,12 +428,7 @@ footer{
   gap: 1rem;
 }
 
-.footer-links{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: .6rem;
-}
+
 
 .footer-links a{
   display: inline-flex;
@@ -517,6 +512,10 @@ footer{
   .footgrid{ grid-template-columns: 1fr; }
   .trust{ grid-template-columns: 1fr 1fr; }
 
+  .footgrid > div:last-child{
+    justify-self: start;
+  }
+  
   .footer-links{
     flex-wrap: wrap;
     justify-content: flex-start;
