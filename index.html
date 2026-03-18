@@ -517,24 +517,30 @@ footer{
   nav.primary{ display:none; }
 
   .nav{
-    grid-template-columns: 1fr auto;
-    gap: .75rem;
+    grid-template-columns: minmax(0,1fr) auto;
+    gap: .6rem;
     align-items: center;
   }
 
-  .brand-logo{
-    height: 56px;
-    max-width: 100%;
+  header .brand-logo{
+    height: 46px;
   }
 
   .lang-switch{
     justify-self: end;
     min-width: 0;
+    padding: .2rem .4rem;
+    gap: .35rem;
+  }
+
+  .lang-switch .pill{
+    font-size: .78rem;
     padding: .2rem .45rem;
   }
 
   .lang-switch select{
-    max-width: 72px;
+    max-width: 58px;
+    font-size: .9rem;
   }
 
   .grid{ grid-template-columns: 1fr; }
@@ -543,80 +549,75 @@ footer{
   .footgrid{ grid-template-columns: 1fr; }
   .trust{ grid-template-columns: 1fr 1fr; }
 
+  .footgrid > div{
+    width: 100%;
+    min-width: 0;
+  }
+
   .footgrid > div:last-child{
-    justify-self: start;
+    justify-self: stretch;
   }
 
-  /* ---------- FOOTER FIX ---------- */
-  .footer-copy{
-    max-width: 100%;
-    font-size: .92rem;
-    line-height: 1.5;
-    overflow-wrap: anywhere;
-  }
-
-  .footer-links{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: .45rem;
-    width: 100%;
-  }
-
-  .footer-links a{
-    width: 100%;
-    padding: .6rem .75rem;
-    font-size: .85rem;
-    text-align: center;
-  }
-
-  .footer-right{
-    align-items: flex-start;
-  }
-
-  /* ---------- ABOUT FIX ---------- */
+  /* ABOUT */
   #about .hd{
     display: block;
   }
 
   #about .hd h2{
-    margin-bottom: .45rem;
+    display: block;
+    margin-bottom: .35rem;
   }
 
   #about .hd p{
     display: block;
     max-width: 100%;
+    width: 100%;
   }
 
-  /* ---------- CONTACT FIX ---------- */
+  /* CONTACT */
+  .aside{
+    padding: 1.25rem;
+  }
+
+  .aside-heading{
+    font-size: 1.3rem;
+  }
+
+  .contact-list{
+    gap: .8rem;
+  }
+
   .contact-list div{
     display: grid;
-    grid-template-columns: 78px 12px 1fr;
-    gap: .35rem;
+    grid-template-columns: 74px 10px minmax(0,1fr);
+    gap: .3rem;
     align-items: start;
   }
 
+  .contact-list div > *{
+    min-width: 0;
+  }
+
   .contact-list strong{
-    font-size: .95rem;
+    min-width: 0;
+    font-size: .9rem;
+    line-height: 1.4;
   }
 
   .contact-list a,
   .contact-list span{
-    font-size: .95rem;
+    font-size: .9rem;
+    line-height: 1.45;
     overflow-wrap: anywhere;
     word-break: break-word;
   }
 
-  /* ---------- GENERAL ---------- */
-  .aside{
-    padding: 1.4rem;
-  }
-
-  .aside-heading{
-    font-size: 1.45rem;
-  }
-
   form.contact{
-    padding: 1.4rem;
+    padding: 1.25rem;
+  }
+
+  .row{
+    grid-template-columns: 1fr;
   }
 
   .hero .art{
@@ -624,14 +625,58 @@ footer{
     max-width: 100%;
     justify-self: stretch;
   }
+
+  /* FOOTER */
+  footer{
+    padding: 2rem 0;
+  }
+
+  footer .brand-logo{
+    height: 46px;
+  }
+
+  .footer-copy{
+    max-width: 100%;
+    width: 100%;
+    font-size: .88rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .footer-links{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .45rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .footer-links a{
+    width: 100%;
+    min-width: 0;
+    padding: .55rem .65rem;
+    font-size: .8rem;
+    line-height: 1.2;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
+  }
 }
   
 .brand-logo{
-  height: 80px;
   width: auto;
   max-width: 100%;
   display: block;
   object-fit: contain;
+}
+
+header .brand-logo{
+  height: 58px;
+}
+
+footer .brand-logo{
+  height: 58px;
 }
   
 
