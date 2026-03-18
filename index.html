@@ -240,14 +240,76 @@
     }
     textarea{ min-height: 140px; resize: vertical; }
     .aside{
-  background: linear-gradient(135deg, rgba(246,215,195,.55), rgba(232,183,167,.35));
-  border:1px solid rgba(217,152,130,.18);
+  background: linear-gradient(180deg, #f8e9e1 0%, #f6e3da 100%);
+  border: 1px solid rgba(217,152,130,.22);
   border-radius: var(--radius);
-  padding: 1.2rem;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
-    .aside .list{ display:grid; gap:.6rem; margin-top:.6rem; }
-    .aside .list div{ display:flex; gap:.6rem; align-items:start; }
+.aside .list{
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
 
+.aside .list div{
+  display: flex;
+  gap: .6rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  line-height: 1.6;
+}
+.aside-badge{
+  display: inline-flex;
+  align-self: flex-start;
+  padding: .45rem .85rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,.6);
+  border: 1px solid rgba(217,152,130,.22);
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.aside-heading{
+  margin: 0;
+  font-size: 1.8rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.contact-list strong{
+  color: var(--ink);
+  min-width: 90px;
+}
+
+.aside a{
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(217,152,130,.35);
+  transition: all .2s ease;
+}
+
+.aside a:hover{
+  color: var(--brand-2);
+  border-bottom-color: var(--brand-2);
+}
+
+.aside-notes{
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(217,152,130,.2);
+  display: grid;
+  gap: .6rem;
+}
+
+.aside-notes p{
+  margin: 0;
+  color: var(--muted);
+}
    /* ---------- Footer ---------- */
 footer{
   padding: 2.5rem 0;
@@ -376,8 +438,19 @@ footer{
   .footer-links{
     justify-content: flex-start;
   }
-}
+  .aside{
+    padding: 1.4rem;
+  }
 
+  .aside-heading{
+    font-size: 1.45rem;
+  }
+
+  .contact-list strong{
+    min-width: auto;
+  }
+}
+  
 
    .brand-logo{
   height: 80px;
@@ -704,17 +777,44 @@ footer .brand{
           </form>
 
           <aside class="aside">
-            <div class="chip" data-i18n="aside_title">Direkt buchen?</div>
-            <p class="mt1" data-i18n="aside_text">
-              Gerne erstelle ich ein individuelles Angebot. Für kurzfristige Termine schreib mir am besten via WhatsApp oder Instagram.
-            </p>
-            <div class="list">
-              <div><strong>Email</strong> • <a href="mailto:info@liza-memories-photography.com">info@liza-memories-photography.com</a></div>
-              <div><strong>Instagram</strong> • <a href="https://instagram.com/liza.memories.photography" target="_blank" rel="noopener">@liza.memories.photography</a></div>
-              <div><strong>Telefon</strong> • <a href="tel:+4368181942780">+43 681 819 427 80</a></div>
-              <div><strong>Studio</strong> • Graz, AT</div>
-            </div>
-          </aside>
+  <div class="aside-badge" data-i18n="aside_title_new">Direkt anfragen</div>
+  <h3 class="aside-heading" data-i18n="aside_heading_new">Ich freue mich auf eure Nachricht</h3>
+
+  <p class="mt1" data-i18n="aside_text_new">
+    Gerne erstelle ich euch ein individuelles Angebot. Für kurzfristige Termine schreibt mir am besten direkt per E-Mail oder Instagram.
+  </p>
+
+  <div class="list contact-list">
+    <div>
+      <strong data-i18n="aside_email_label">E-Mail</strong>
+      <span>•</span>
+      <a href="mailto:info@liza-memories-photography.com">info@liza-memories-photography.com</a>
+    </div>
+
+    <div>
+      <strong data-i18n="aside_instagram_label">Instagram</strong>
+      <span>•</span>
+      <a href="https://instagram.com/liza.memories.photography" target="_blank" rel="noopener">@liza.memories.photography</a>
+    </div>
+
+    <div>
+      <strong data-i18n="aside_phone_label">Telefon</strong>
+      <span>•</span>
+      <a href="tel:+4368181942780">+43 681 819 427 80</a>
+    </div>
+
+    <div>
+      <strong data-i18n="aside_location_label">Standort</strong>
+      <span>•</span>
+      <span data-i18n="aside_location_value">Mela-Spira-Str. 32b, 8054 Graz</span>
+    </div>
+  </div>
+
+  <div class="aside-notes">
+    <p data-i18n="aside_note_1">Shootings nach Vereinbarung in Graz und Umgebung.</p>
+    <p data-i18n="aside_note_2">Homestory-, Outdoor- und individuelle Wunschlocations sind möglich.</p>
+  </div>
+</aside>
         </div>
       </div>
     </section>
@@ -926,6 +1026,17 @@ opt_civil:"Standesamt / kleine Feier",
     aside_title:"Direkt buchen?",
     aside_text:"Gerne erstelle ich ein individuelles Angebot. Für kurzfristige Termine schreib mir am besten via WhatsApp oder Instagram.",
 
+    aside_title_new:"Direkt anfragen",
+aside_heading_new:"Ich freue mich auf eure Nachricht",
+aside_text_new:"Gerne erstelle ich euch ein individuelles Angebot. Für kurzfristige Termine schreibt mir am besten direkt per E-Mail oder Instagram.",
+aside_email_label:"E-Mail",
+aside_instagram_label:"Instagram",
+aside_phone_label:"Telefon",
+aside_location_label:"Standort",
+aside_location_value:"Mela-Spira-Str. 32b, 8054 Graz",
+aside_note_1:"Shootings nach Vereinbarung in Graz und Umgebung.",
+aside_note_2:"Homestory-, Outdoor- und individuelle Wunschlocations sind möglich.",
+    
     footer_copy:"© {year} LiZa Memories Photography. Alle Rechte vorbehalten.",
     footer_portfolio:"Portfolio",
     footer_contact:"Kontakt",
@@ -1049,6 +1160,17 @@ opt_civil:"Civil Ceremony / Small Event",
     aside_title:"Book directly?",
     aside_text:"Happy to craft a custom offer. For short-notice dates reach me on WhatsApp or Instagram.",
 
+    aside_title_new:"Get in touch",
+aside_heading_new:"I’m looking forward to your message",
+aside_text_new:"I’d be happy to create an individual offer for you. For short-notice appointments, feel free to contact me directly by email or Instagram.",
+aside_email_label:"Email",
+aside_instagram_label:"Instagram",
+aside_phone_label:"Phone",
+aside_location_label:"Location",
+aside_location_value:"Mela-Spira-Str. 32b, 8054 Graz",
+aside_note_1:"Photo sessions by appointment in Graz and surrounding areas.",
+aside_note_2:"Homestory, outdoor and custom locations are possible.",
+    
     footer_copy:"© {year} LiZa Memories Photography. All rights reserved.",
     footer_portfolio:"Portfolio",
     footer_contact:"Contact",
@@ -1172,6 +1294,17 @@ opt_civil:"Matičar / mala proslava",
     aside_title:"Direktna rezervacija?",
     aside_text:"Rado ću pripremiti ponudu. Za hitne termine pišite na WhatsApp ili Instagram.",
 
+    aside_title_new:"Pošaljite upit",
+aside_heading_new:"Radujem se vašoj poruci",
+aside_text_new:"Rado ću vam pripremiti individualnu ponudu. Za kratkoročne termine najbolje je da mi pišete direktno putem e-maila ili Instagrama.",
+aside_email_label:"E-mail",
+aside_instagram_label:"Instagram",
+aside_phone_label:"Telefon",
+aside_location_label:"Lokacija",
+aside_location_value:"Mela-Spira-Str. 32b, 8054 Graz",
+aside_note_1:"Fotografisanja po dogovoru u Grazu i okolini.",
+aside_note_2:"Homestory, outdoor i individualne lokacije su moguće.",
+    
     footer_copy:"© {year} LiZa Memories Photography. Sva prava zadržana.",
     footer_portfolio:"Portfolio",
     footer_contact:"Kontakt",
