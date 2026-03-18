@@ -314,6 +314,61 @@ nav.primary a.active{
 }
     .price .btn{ width: 100%; }
 
+    .price{
+  position: relative;
+}
+
+.price.featured{
+  border: 2px solid rgba(201,146,131,.55);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(180,140,120,.22);
+}
+
+.price.saver{
+  border: 2px solid rgba(217,167,154,.35);
+  background: linear-gradient(180deg, rgba(255,250,247,1), rgba(243,228,220,.55));
+}
+
+.price-badge{
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .4rem .75rem;
+  border-radius: 999px;
+  font-size: .82rem;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: var(--shadow);
+}
+
+.price-badge.top{
+  background: var(--button);
+  color: #fff;
+}
+
+.price-badge.save{
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid rgba(217,152,130,.25);
+}
+
+.price.featured .num{
+  color: var(--button-hover);
+}
+
+.price.featured .btn{
+  box-shadow: 0 14px 34px rgba(180,140,120,.26);
+}
+
+@media (max-width: 1000px){
+  .price.featured{
+    transform: none;
+  }
+}
+
     /* ---------- Contact ---------- */
     .contact-wrap{ display:grid; grid-template-columns: 1.1fr .9fr; gap: 1rem; }
    form.contact{
@@ -1009,31 +1064,33 @@ footer .brand{
         <a class="btn brand" href="#contact" data-i18n="price_cta">Anfrage senden</a>
       </div>
 
-      <div class="price card">
-        <div class="chip" data-i18n="price4_chip_new">Newborn</div>
-        <h3 data-i18n="price4_title_new">Willkommen, kleines Wunder</h3>
-        <div class="num">€ 349</div>
-        <ul>
-          <li data-i18n="price4_li1_new">bis zu 2 Stunden Shooting ohne Zeitdruck</li>
-          <li data-i18n="price4_li2_new">18 bearbeitete Bilder inklusive</li>
-          <li data-i18n="price4_li3_new">Familien- & Geschwisterbilder inklusive</li>
-          <li data-i18n="price4_li4_new">Online-Galerie & Download</li>
-        </ul>
-        <a class="btn brand" href="#contact" data-i18n="price_cta">Anfrage senden</a>
-      </div>
+      <div class="price card featured">
+  <div class="price-badge top" data-i18n="price_badge_top">Am beliebtesten</div>
+  <div class="chip" data-i18n="price4_chip_new">Newborn</div>
+  <h3 data-i18n="price4_title_new">Willkommen, kleines Wunder</h3>
+  <div class="num">€ 349</div>
+  <ul>
+    <li data-i18n="price4_li1_new">bis zu 2 Stunden Shooting ohne Zeitdruck</li>
+    <li data-i18n="price4_li2_new">18 bearbeitete Bilder inklusive</li>
+    <li data-i18n="price4_li3_new">Familien- & Geschwisterbilder inklusive</li>
+    <li data-i18n="price4_li4_new">Online-Galerie & Download</li>
+  </ul>
+  <a class="btn brand" href="#contact" data-i18n="price_cta">Anfrage senden</a>
+</div>
 
-      <div class="price card">
-        <div class="chip" data-i18n="price5_chip_new">Kombi</div>
-        <h3 data-i18n="price5_title_new">Babybauch + Newborn</h3>
-        <div class="num">€ 549</div>
-        <ul>
-          <li data-i18n="price5_li1_new">2 Shootings: Babybauch & Newborn</li>
-          <li data-i18n="price5_li2_new">je Shooting 15 bearbeitete Bilder inklusive</li>
-          <li data-i18n="price5_li3_new">Preisvorteil gegenüber Einzelbuchung</li>
-          <li data-i18n="price5_li4_new">Online-Galerie & Download</li>
-        </ul>
-        <a class="btn brand" href="#contact" data-i18n="price_cta">Anfrage senden</a>
-      </div>
+      <div class="price card saver">
+  <div class="price-badge save" data-i18n="price_badge_save">Bestes Angebot</div>
+  <div class="chip" data-i18n="price5_chip_new">Kombi</div>
+  <h3 data-i18n="price5_title_new">Babybauch + Newborn</h3>
+  <div class="num">€ 549</div>
+  <ul>
+    <li data-i18n="price5_li1_new">2 Shootings: Babybauch & Newborn</li>
+    <li data-i18n="price5_li2_new">je Shooting 15 bearbeitete Bilder inklusive</li>
+    <li data-i18n="price5_li3_new">Preisvorteil gegenüber Einzelbuchung</li>
+    <li data-i18n="price5_li4_new">Online-Galerie & Download</li>
+  </ul>
+  <a class="btn brand" href="#contact" data-i18n="price_cta">Anfrage senden</a>
+</div>
 
       <div class="price card">
         <div class="chip" data-i18n="price6_chip_new">Hochzeit & Feiern</div>
@@ -1305,7 +1362,8 @@ gallery_21:"Newborn – Innige Nähe",
     price3_li3:"Lizenz für Web & Print",
     price_cta:"Anfrage senden",
     pricing_note:"Alle Preise inkl. MwSt. – Reisekosten außerhalb Graz auf Anfrage.",
-
+    price_badge_top:"Am beliebtesten",
+price_badge_save:"Bestes Angebot",
     pricing_title_new:"Pakete & Preise",
 
 pricing_fast_new:"Mit viel Liebe zum Detail bearbeite ich eure Bilder so schnell wie möglich – in der Regel erhaltet ihr eure fertige Galerie bereits innerhalb weniger Tage, spätestens jedoch innerhalb von 7 Tagen.",
@@ -1462,7 +1520,8 @@ gallery_21:"Newborn – Intimate Bond",
     price3_li3:"License for web & print",
     price_cta:"Send inquiry",
     pricing_note:"All prices incl. VAT – travel costs outside Graz on request.",
-
+    price_badge_top:"Most popular",
+price_badge_save:"Best value",
     pricing_title_new:"Packages & pricing",
 
 pricing_fast_new:"I edit your images with great care and as quickly as possible – you will usually receive your finished gallery within a few days, and no later than within 7 days.",
@@ -1619,7 +1678,8 @@ gallery_21:"Newborn – Bliska povezanost",
     price3_li3:"Licenca za web i print",
     price_cta:"Pošalji upit",
     pricing_note:"Sve cijene sa PDV-om – putni troškovi van Graza na upit.",
-
+    price_badge_top:"Najpopularnije",
+price_badge_save:"Najbolja ponuda",
     pricing_title_new:"Paketi i cijene",
 
 pricing_fast_new:"Vaše fotografije obrađujem s puno pažnje i što je brže moguće – gotovu galeriju ćete u pravilu dobiti već unutar nekoliko dana, a najkasnije u roku od 7 dana.",
