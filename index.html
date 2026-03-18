@@ -228,17 +228,61 @@
 
     /* ---------- Contact ---------- */
     .contact-wrap{ display:grid; grid-template-columns: 1.1fr .9fr; gap: 1rem; }
-    form.contact{
-      display:grid; gap:.8rem; background: var(--card); border:1px solid rgba(255,255,255,.08);
-      border-radius: var(--radius); padding: 1.2rem; box-shadow: var(--shadow);
-    }
+   form.contact{
+  display: grid;
+  gap: 1rem;
+  background: linear-gradient(180deg, #f8e9e1 0%, #f6e3da 100%);
+  border: 1px solid rgba(217,152,130,.22);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
     .row{ display:grid; grid-template-columns: 1fr 1fr; gap:.8rem; }
-    label{ font-weight:700; color: var(--muted); font-size:.9rem; }
+   label{
+  font-weight: 700;
+  color: var(--muted);
+  font-size: 1rem;
+  margin-bottom: .35rem;
+  display: inline-block;
+}
     input, textarea, select{
-      width: 100%; padding:.85rem 1rem; border-radius: 12px; border:1px solid rgba(255,255,255,.15);
-      background: rgba(255,255,255,.04); color: var(--ink); outline: none;
-    }
-    textarea{ min-height: 140px; resize: vertical; }
+  width: 100%;
+  padding: 1rem 1.05rem;
+  border-radius: 14px;
+  border: 1px solid rgba(217,152,130,.22);
+  background: rgba(255,255,255,.72);
+  color: var(--ink);
+  outline: none;
+  font: inherit;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+    input:focus, textarea:focus, select:focus{
+  border-color: rgba(217,152,130,.55);
+  box-shadow: 0 0 0 4px rgba(232,183,167,.18);
+  background: rgba(255,255,255,.9);
+}
+    textarea{
+  min-height: 170px;
+  resize: vertical;
+  line-height: 1.6;
+}
+    form.contact .row{
+  gap: 1rem;
+}
+
+form.contact input::placeholder,
+form.contact textarea::placeholder{
+  color: #9a8881;
+}
+
+form.contact .btn{
+  margin-top: .5rem;
+}
+    form.contact .btn.brand{
+  background: linear-gradient(135deg, #e2a994, #d99882);
+  border-color: rgba(160,100,80,.22);
+  color: #1f1714;
+}
     .aside{
   background: linear-gradient(180deg, #f8e9e1 0%, #f6e3da 100%);
   border: 1px solid rgba(217,152,130,.22);
@@ -431,6 +475,7 @@ footer{
 .footer-links{
   flex-wrap: wrap;
 }
+  
   .footer-right{
     align-items: flex-start;
   }
@@ -448,6 +493,9 @@ footer{
 
   .contact-list strong{
     min-width: auto;
+  }
+    form.contact{
+    padding: 1.4rem;
   }
 }
   
