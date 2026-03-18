@@ -210,10 +210,20 @@
 
     /* ---------- Pricing ---------- */
     .pricing{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-    .price.card{ padding: 1.2rem; }
+    .price.card{
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
     .price h3{ margin:.2rem 0 .2rem; font-size: 1.35rem; }
     .price .num{ font-size: 2rem; font-weight:800; margin:.4rem 0 1rem; }
-    .price ul{ padding-left:1.2rem; margin:0 0 1rem; color: var(--muted); }
+  .price ul{
+  padding-left: 1.2rem;
+  margin: 0 0 1rem;
+  color: var(--muted);
+  flex: 1;
+}
     .price .btn{ width: 100%; }
 
     /* ---------- Contact ---------- */
@@ -548,54 +558,99 @@ footer .brand{
         
 
     
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="hd">
+      <h2>Pakete & Preise</h2>
+      <p>Transparent, fair und mit viel Herz – so könnt ihr direkt sehen, was zu euch passt.</p>
+    </div>
 
-    <!-- PRICING -->
-    <section id="pricing">
-      <div class="container">
-        <div class="hd">
-          <h2 data-i18n="pricing_title">Pakete & Preise</h2>
-          <p data-i18n="pricing_sub">Transparente Angebote – flexibel anpassbar an eure Bedürfnisse.</p>
-        </div>
-        <div class="pricing">
-          <div class="price card">
-            <div class="chip" data-i18n="price1_chip">Portrait</div>
-            <h3 data-i18n="price1_title">Mini Session</h3>
-            <div class="num">€ 180</div>
-            <ul>
-              <li data-i18n="price1_li1">30 Minuten, 1 Location</li>
-              <li data-i18n="price1_li2">10 bearbeitete Fotos (Web & Print)</li>
-              <li data-i18n="price1_li3">Online-Galerie & Download</li>
-            </ul>
-            <a class="btn brand" href="#contact" data-i18n="price_cta">Anfrage senden</a>
-          </div>
-
-          <div class="price card">
-            <div class="chip" data-i18n="price2_chip">Wedding</div>
-            <h3 data-i18n="price2_title">Standesamt</h3>
-            <div class="num">€ 690</div>
-            <ul>
-              <li data-i18n="price2_li1">2 Stunden Begleitung</li>
-              <li data-i18n="price2_li2">Auswahl & Retusche von 120+ Bildern</li>
-              <li data-i18n="price2_li3">Private Online-Galerie</li>
-            </ul>
-            <a class="btn brand" href="#contact" data-i18n="price_cta">Anfrage senden</a>
-          </div>
-
-          <div class="price card">
-            <div class="chip">Business</div>
-            <h3 data-i18n="price3_title">Team Portraits</h3>
-            <div class="num">ab € 450</div>
-            <ul>
-              <li data-i18n="price3_li1">On-Location Setup</li>
-              <li data-i18n="price3_li2">Individuelle Retusche</li>
-              <li data-i18n="price3_li3">Lizenz für Web & Print</li>
-            </ul>
-            <a class="btn brand" href="#contact" data-i18n="price_cta">Anfrage senden</a>
-          </div>
-        </div>
-        <p class="muted mt1" data-i18n="pricing_note">Alle Preise inkl. MwSt. – Reisekosten außerhalb Graz auf Anfrage.</p>
+    <div class="pricing">
+      <div class="price card">
+        <div class="chip">Portrait</div>
+        <h3>Mini Portrait</h3>
+        <div class="num">€ 149</div>
+        <ul>
+          <li>ca. 30 Minuten Shooting</li>
+          <li>12 bearbeitete Bilder inklusive</li>
+          <li>1 Location in Graz</li>
+          <li>Online-Galerie & Download</li>
+        </ul>
+        <a class="btn brand" href="#contact">Anfrage senden</a>
       </div>
-    </section>
+
+      <div class="price card">
+        <div class="chip">Babybauch</div>
+        <h3>Liebe im Bauch</h3>
+        <div class="num">€ 279</div>
+        <ul>
+          <li>ca. 60 Minuten Shooting</li>
+          <li>16 bearbeitete Bilder inklusive</li>
+          <li>Partner & Geschwister ohne Aufpreis dabei</li>
+          <li>Online-Galerie & Download</li>
+        </ul>
+        <a class="btn brand" href="#contact">Anfrage senden</a>
+      </div>
+
+      <div class="price card">
+        <div class="chip">Familie</div>
+        <h3>Familienzeit</h3>
+        <div class="num">€ 289</div>
+        <ul>
+          <li>ca. 60 Minuten Shooting</li>
+          <li>18 bearbeitete Bilder inklusive</li>
+          <li>Für Eltern, Kinder & gemeinsame Momente</li>
+          <li>Online-Galerie & Download</li>
+        </ul>
+        <a class="btn brand" href="#contact">Anfrage senden</a>
+      </div>
+
+      <div class="price card">
+        <div class="chip">Newborn</div>
+        <h3>Willkommen, kleines Wunder</h3>
+        <div class="num">€ 329</div>
+        <ul>
+          <li>bis zu 2 Stunden Shooting ohne Zeitdruck</li>
+          <li>18 bearbeitete Bilder inklusive</li>
+          <li>Familien- & Geschwisterbilder inklusive</li>
+          <li>Online-Galerie & Download</li>
+        </ul>
+        <a class="btn brand" href="#contact">Anfrage senden</a>
+      </div>
+
+      <div class="price card">
+        <div class="chip">Kombi</div>
+        <h3>Babybauch + Newborn</h3>
+        <div class="num">€ 549</div>
+        <ul>
+          <li>2 Shootings: Babybauch & Newborn</li>
+          <li>je Shooting 15 bearbeitete Bilder inklusive</li>
+          <li>Preisvorteil gegenüber Einzelbuchung</li>
+          <li>Online-Galerie & Download</li>
+        </ul>
+        <a class="btn brand" href="#contact">Anfrage senden</a>
+      </div>
+
+      <div class="price card">
+        <div class="chip">Hochzeit & Feiern</div>
+        <h3>Standesamt / kleine Feier</h3>
+        <div class="num">ab € 639</div>
+        <ul>
+          <li>bis zu 3 Stunden Begleitung</li>
+          <li>ca. 130 bearbeitete Bilder</li>
+          <li>Zeremonie, Paarfotos & Gruppenbilder</li>
+          <li>Private Online-Galerie</li>
+        </ul>
+        <a class="btn brand" href="#contact">Anfrage senden</a>
+      </div>
+    </div>
+
+    <p class="muted mt1">
+      Alle Preise inkl. MwSt. Reisekosten außerhalb von Graz auf Anfrage. Weitere Bilder und individuelle Pakete gerne möglich.
+    </p>
+  </div>
+</section>
 
     <!-- CONTACT -->
     <section id="contact">
@@ -620,12 +675,14 @@ footer .brand{
               <div>
                 <label for="service" data-i18n="form_service_label">Art des Shootings</label>
                 <select id="service" name="service">
-                  <option data-i18n="opt_portrait">Portrait</option>
-                  <option data-i18n="opt_wedding">Hochzeit</option>
-                  <option data-i18n="opt_family">Familie</option>
-                  <option data-i18n="opt_business">Business</option>
-                  <option data-i18n="opt_other">Sonstiges</option>
-                </select>
+  <option>Portrait</option>
+  <option>Babybauch</option>
+  <option>Newborn</option>
+  <option>Familie</option>
+  <option>Babybauch + Newborn Kombi</option>
+  <option>Standesamt / kleine Feier</option>
+  <option>Sonstiges</option>
+</select>
               </div>
               <div>
                 <label for="date" data-i18n="form_date_label">Wunschtermin</label>
