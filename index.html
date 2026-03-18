@@ -31,6 +31,7 @@
 }
     :root{
   --bg:#FCE3E3;
+  --soft-bg:#f8ece7;
   --card:#ffffff;
   --ink:#3a2e2a;
   --muted:#8c7b75;
@@ -60,7 +61,7 @@
     header.site{
   position: sticky; top: 0; z-index: 50;
   backdrop-filter: blur(12px);
-  background: rgba(255,250,247,.85);
+  background: var(--soft-bg);
   border-bottom: 1px solid rgba(180,140,120,.15);
 }
     .nav{
@@ -166,7 +167,7 @@
   margin-top: 1rem;
 }
    .trust .badge{
-  background: rgba(255,255,255,.85);
+   background: var(--soft-bg);
   border: 1px solid rgba(217,152,130,.18);
   border-radius: var(--radius);
   padding: 1.4rem; /* 🔥 größer */
@@ -289,7 +290,7 @@
    form.contact{
   display: grid;
   gap: 1rem;
-  background: linear-gradient(180deg, #f8e9e1 0%, #f6e3da 100%);
+  background: var(--soft-bg);
   border: 1px solid rgba(217,152,130,.22);
   border-radius: var(--radius);
   padding: 2rem;
@@ -342,7 +343,7 @@ form.contact .btn{
   color: #1f1714;
 }
     .aside{
-  background: linear-gradient(180deg, #f8e9e1 0%, #f6e3da 100%);
+   background: var(--soft-bg);
   border: 1px solid rgba(217,152,130,.22);
   border-radius: var(--radius);
   padding: 2rem;
@@ -430,7 +431,7 @@ footer{
   padding: 2.5rem 0;
   border-top: 1px solid rgba(217,152,130,.18);
   color: var(--muted);
-  background: rgba(255,255,255,.35);
+   background: var(--soft-bg);
 }
 
 .footgrid{
