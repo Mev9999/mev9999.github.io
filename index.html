@@ -1426,6 +1426,20 @@ $$('[data-i18n-placeholder]').forEach(node => {
     node.placeholder = strings[key];
   }
 });
+// Footer Links dynamisch setzen
+  const imprintLink = document.querySelector('[data-i18n="footer_imprint"]');
+  const privacyLink = document.querySelector('[data-i18n="footer_privacy"]');
+
+  if(lang === 'en'){
+    imprintLink.href = 'impressum-en.html';
+    privacyLink.href = 'datenschutz-en.html';
+  } else if(lang === 'bs'){
+    imprintLink.href = 'impressum-bs.html';
+    privacyLink.href = 'datenschutz-bs.html';
+  } else {
+    imprintLink.href = 'impressum.html';
+    privacyLink.href = 'datenschutz.html';
+  }
 }
 
     const langSel = $('#lang');
