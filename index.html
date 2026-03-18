@@ -29,18 +29,15 @@
   padding: 0;
   overflow-x: hidden;
 }
-    :root{
-  --bg:#FCE3E3;
-  --soft-bg:#f8ece7;
-  --card:#ffffff;
-  --ink:#3a2e2a;
-  --muted:#8c7b75;
-  --brand:#e8b7a7;
-  --brand-2:#d99882;
-  --accent:#f6d7c3;
-  --ok:#7bbf9a;
-  --warn:#f3c97a;
-  --err:#d97b7b;
+   :root{
+  --bg: #f9f3ef;
+  --surface: #f3e4dc;
+  --card: #fffaf7;
+  --button: #d9a79a;
+  --button-hover: #c99283;
+
+  --ink: #3a2e2a;
+  --muted: #8c7b75;
   --shadow: 0 10px 30px rgba(180,140,120,.15);
   --radius: 18px;
   --radius-sm: 12px;
@@ -48,9 +45,7 @@
   --maxw: 1200px;
 }
    body{
-  background: radial-gradient(1200px 600px at 80% -10%, rgba(232,183,167,.30), transparent 60%),
-              radial-gradient(1000px 500px at -10% 20%, rgba(246,215,195,.35), transparent 60%),
-              var(--bg);
+  background: var(--bg);
   color: var(--ink);
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   line-height: 1.6;
@@ -61,7 +56,7 @@
     header.site{
   position: sticky; top: 0; z-index: 50;
   backdrop-filter: blur(12px);
-  background: var(--soft-bg);
+  background: var(--surface);
   border-bottom: 1px solid rgba(180,140,120,.15);
 }
     .nav{
@@ -71,11 +66,23 @@
     .brand{ display: flex; align-items: center; gap: .75rem; font-weight: 700; letter-spacing: .5px; }
     
     nav.primary{ justify-self: center; }
+    
     nav.primary a{
-      color: var(--muted); text-decoration: none; font-weight: 600; margin: 0 .75rem;
-      padding: .25rem .25rem; border-radius: 8px;
-    }
-    nav.primary a:hover, nav.primary a.active{ color: var(--ink); background: rgba(255,255,255,.06); }
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 .75rem;
+  padding: .4rem .7rem;
+  border-radius: 999px;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+nav.primary a:hover,
+nav.primary a.active{
+  color: var(--ink);
+  background: var(--card);
+  transform: translateY(-1px);
+}
     .lang-switch{
       justify-self: end; display: flex; align-items: center; gap: .5rem;
       background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
@@ -92,22 +99,42 @@
   justify-content: center;
   padding: var(--pad);
   border-radius: 999px;
-  border: 1px solid rgba(217,152,130,.18);
-  background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(246,215,195,.55));
-  color: var(--ink);
+  border: 1px solid transparent;
+  background: var(--button);
+  color: #ffffff;
   text-decoration: none;
   font-weight: 700;
   letter-spacing: .2px;
   cursor: pointer;
   box-shadow: var(--shadow);
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
 }
-    .btn:hover{ transform: translateY(-1px); }
-    .btn.brand{ background: linear-gradient(135deg, var(--brand), var(--brand-2)); color:#111; border-color: rgba(0,0,0,.2); }
-    .btn.ghost{ background: transparent; border-color: rgba(255,255,255,.18); }
+    .btn:hover{
+  background: var(--button-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(180,140,120,.22);
+}
+.btn.brand{
+  background: var(--button);
+  color: #ffffff;
+  border-color: transparent;
+}
+   .btn.ghost{
+  background: var(--button);
+  color: #ffffff;
+  border-color: transparent;
+}
     .chip{
-      display: inline-flex; gap:.5rem; align-items:center; padding:.4rem .7rem; border-radius:999px;
-      background: rgba(255,255,255,.06); color: var(--muted); font-weight:700; border:1px solid rgba(255,255,255,.08);
-    }
+  display: inline-flex;
+  gap: .5rem;
+  align-items: center;
+  padding: .4rem .7rem;
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--muted);
+  font-weight: 700;
+  border: 1px solid rgba(217,152,130,.18);
+}
 
     /* ---------- Hero ---------- */
     .hero{
@@ -167,7 +194,7 @@
   margin-top: 1rem;
 }
    .trust .badge{
-   background: var(--soft-bg);
+   background: var(--card);
   border: 1px solid rgba(217,152,130,.18);
   border-radius: var(--radius);
   padding: 1.4rem; /* 🔥 größer */
@@ -290,7 +317,7 @@
    form.contact{
   display: grid;
   gap: 1rem;
-  background: var(--soft-bg);
+  background: var(--card);
   border: 1px solid rgba(217,152,130,.22);
   border-radius: var(--radius);
   padding: 2rem;
@@ -337,13 +364,9 @@ form.contact textarea::placeholder{
 form.contact .btn{
   margin-top: .5rem;
 }
-    form.contact .btn.brand{
-  background: linear-gradient(135deg, #e2a994, #d99882);
-  border-color: rgba(160,100,80,.22);
-  color: #1f1714;
-}
+    
     .aside{
-   background: var(--soft-bg);
+   background: var(--card);
   border: 1px solid rgba(217,152,130,.22);
   border-radius: var(--radius);
   padding: 2rem;
@@ -393,12 +416,12 @@ form.contact .btn{
   color: var(--ink);
   text-decoration: none;
   border-bottom: 1px solid rgba(217,152,130,.35);
-  transition: all .2s ease;
+  transition: color .2s ease, border-color .2s ease, opacity .2s ease;
 }
 
 .aside a:hover{
-  color: var(--brand-2);
-  border-bottom-color: var(--brand-2);
+  color: var(--button-hover);
+  border-bottom-color: var(--button-hover);
 }
 
 .aside-notes{
@@ -431,7 +454,7 @@ footer{
   padding: 2.5rem 0;
   border-top: 1px solid rgba(217,152,130,.18);
   color: var(--muted);
-   background: var(--soft-bg);
+  background: var(--surface);
 }
 
 .footgrid{
@@ -481,13 +504,15 @@ footer{
   line-height: 1.2;
   white-space: nowrap;
   color: var(--ink);
-  background: rgba(255,255,255,.65);
+  background: var(--card);
   border: 1px solid rgba(217,152,130,.18);
   box-shadow: var(--shadow);
+  transition: transform .2s ease, background .2s ease, color .2s ease;
 }
 
 .footer-links a:hover{
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  background: #f6ece7;
 }
 
 .footer-top{
