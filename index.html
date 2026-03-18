@@ -397,11 +397,22 @@ footer{
 
 .footgrid{
   display: grid;
-  grid-template-columns: 1.2fr .8fr;
+  grid-template-columns: 1fr auto;
   gap: 2rem;
   align-items: start;
 }
+.footgrid > div:last-child{
+  justify-self: end;
+}
 
+.footer-links{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: .6rem;
+  width: max-content;
+  max-width: 100%;
+}
 .footer-copy{
   margin-top: 1rem;
   max-width: 680px;
