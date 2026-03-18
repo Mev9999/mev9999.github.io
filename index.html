@@ -589,11 +589,18 @@ footer{
   }
 
   .contact-list div{
-    display: grid;
-    grid-template-columns: 64px 10px minmax(0,1fr);
-    gap: .3rem;
-    align-items: start;
-  }
+  display: grid;
+  grid-template-columns: 64px 10px minmax(0,1fr);
+  gap: .3rem;
+  align-items: start;
+}
+
+  .contact-list a{
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 
   .contact-list div > *{
     min-width: 0;
