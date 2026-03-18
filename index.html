@@ -135,6 +135,18 @@
   transform: translateY(30px); /* 🔥 DAS MACHT DEN LOOK */
 
     }
+    .hero-side{
+  display: flex;
+  flex-direction: column;
+  gap: .9rem;
+}
+
+.hero-side-text{
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
     .hero .art img{ width: 100%; height: 100%; object-fit: cover; display:block; aspect-ratio: 4/3; filter: saturate(1.05) contrast(1.05); }
     .trust{
       display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 1rem;
@@ -576,63 +588,63 @@ footer{
   }
 
   /* CONTACT */
-  .aside{
-    padding: 1.25rem;
-  }
+.aside{
+  padding: 1.25rem;
+}
 
-  .aside-heading{
-    font-size: 1.3rem;
-  }
+.aside-heading{
+  font-size: 1.3rem;
+}
 
-  .contact-list{
-    gap: .8rem;
-  }
+.contact-list{
+  gap: .9rem;
+}
 
-  .contact-list div{
+.contact-list div{
   display: grid;
-  grid-template-columns: 64px 10px minmax(0,1fr);
-  gap: .3rem;
+  grid-template-columns: 74px 10px;
+  gap: .2rem .35rem;
   align-items: start;
 }
 
-  .contact-list a{
-  display: inline-block;
-  max-width: 100%;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+.contact-list div > *{
+  min-width: 0;
 }
 
-  .contact-list div > *{
-    min-width: 0;
-  }
+.contact-list strong{
+  font-size: .9rem;
+  line-height: 1.35;
+}
 
-  .contact-list strong{
-    min-width: 0;
-    font-size: .9rem;
-    line-height: 1.4;
-  }
+.contact-list span{
+  font-size: .9rem;
+  line-height: 1.35;
+}
 
-  .contact-list a,
-  .contact-list span{
-    font-size: .9rem;
-    line-height: 1.45;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
+.contact-list a,
+.contact-list div > span:last-child{
+  grid-column: 1 / -1;
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  margin-top: .1rem;
+}
 
-  form.contact{
-    padding: 1.25rem;
-  }
+form.contact{
+  padding: 1.25rem;
+}
 
-  .row{
-    grid-template-columns: 1fr;
-  }
+.row{
+  grid-template-columns: 1fr;
+}
 
-  .hero .art{
-    transform: none;
-    max-width: 100%;
-    justify-self: stretch;
-  }
+.hero .art{
+  transform: none;
+  max-width: 100%;
+  justify-self: stretch;
+}
 
   /* FOOTER */
   footer{
@@ -752,9 +764,12 @@ footer .brand{
       </div>
     </div>
 
-    <div class="art card">
-      <img src="hero-bild.webp" alt="Babybauch Shooting in Graz von LiZa Memories Photography" />
-    </div>
+    <div class="hero-side">
+  <p class="hero-side-text" data-i18n="about_sub">Authentische Bilder, die Geschichten erzählen.</p>
+  <div class="art card">
+    <img src="hero-bild.webp" alt="Babybauch Shooting in Graz von LiZa Memories Photography" />
+  </div>
+</div>
   </div>
 </section>
 
