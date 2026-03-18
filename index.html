@@ -322,17 +322,11 @@ nav.primary a.active{
 /* normale Karten */
 .price.card{
   border: 1px solid rgba(217,152,130,.18);
-  padding-top: 2.6rem;
+  padding-top: 3rem;
 }
 
-/* Newborn hervorheben */
-.price.featured{
-  transform: translateY(-4px);
-  box-shadow: 0 18px 40px rgba(180,140,120,.20);
-  border: 2px solid rgba(201,146,131,.55);
-}
-
-/* Kombi hervorheben */
+/* Newborn und Kombi hervorheben */
+.price.featured,
 .price.saver{
   border: 2px solid rgba(201,146,131,.55);
   box-shadow: 0 18px 40px rgba(180,140,120,.20);
@@ -341,10 +335,9 @@ nav.primary a.active{
 /* einheitlicher, sichtbarer Badge */
 .price-badge{
   position: absolute;
-  top: 0;
-transform: translate(-50%, -50%);
+  top: 12px;
   left: 50%;
-  
+  transform: translateX(-50%);
   z-index: 3;
 
   min-width: 150px;
