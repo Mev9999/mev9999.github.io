@@ -161,7 +161,33 @@
     .about{ display: grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; }
     .about .portrait{ border-radius: var(--radius); overflow: hidden; border:1px solid rgba(255,255,255,.1); }
     .about .portrait img{ width: 100%; height: 100%; object-fit: cover; display:block; aspect-ratio: 4/5; }
-    .about .bio{ padding: 1rem; }
+   .about .bio{
+  padding: 1rem;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 2px solid rgba(217,152,130,.25);
+}
+
+.about .bio p{
+  font-size: 1.08rem;
+  line-height: 1.85;
+  color: var(--ink);
+  margin-bottom: 1.4rem;
+  max-width: 580px;
+}
+
+.about .bio p:first-child{
+  font-size: 1.2rem;
+  line-height: 1.9;
+  color: var(--ink);
+}
+
+.about .bio p:last-child{
+  margin-bottom: 0;
+  font-weight: 500;
+}
 
    /* ---------- Gallery Grid ---------- */
 .masonry{
@@ -803,11 +829,11 @@ footer .brand{
             <div class="row">
               <div>
                 <label for="name" data-i18n="form_name_label">Dein Name</label>
-                <input id="name" name="name" type="text" placeholder="Max Mustermann" required autocomplete="name" />
+                <input id="name" name="name" type="text" data-i18n-placeholder="form_name_placeholder" required autocomplete="name" />
               </div>
               <div>
                 <label for="email" data-i18n="form_email_label">E-Mail</label>
-                <input id="email" name="email" type="email" placeholder="dein@email.at" required autocomplete="email" />
+                <input id="email" name="email" type="email" data-i18n-placeholder="form_email_placeholder" required autocomplete="email" />
               </div>
             </div>
             <div class="row">
@@ -830,7 +856,7 @@ footer .brand{
             </div>
             <div>
               <label for="msg" data-i18n="form_msg_label">Nachricht</label>
-              <textarea id="msg" name="message" placeholder="Was stellst du dir vor? Location, Anzahl Personen, Stil ..." required></textarea>
+              <textarea id="msg" name="message" data-i18n-placeholder="form_msg_placeholder" required></textarea>
             </div>
             <input type="hidden" name="website" value="LiZa Memories Photography">
             <button class="btn brand" type="submit" data-i18n="form_submit">Senden</button>
@@ -1097,7 +1123,9 @@ aside_location_label:"Standort",
 aside_location_value:"Mela-Spira-Str. 32b, 8054 Graz",
 aside_note_1:"Shootings nach Vereinbarung in Graz und Umgebung.",
 aside_note_2:"Homestory-, Outdoor- und individuelle Wunschlocations sind möglich.",
-    
+    form_name_placeholder:"Dein Name",
+form_email_placeholder:"dein@email.at",
+form_msg_placeholder:"Was stellst du dir vor? Location, Anzahl Personen, Stil ...",
     footer_copy:"© {year} LiZa Memories Photography. Alle Rechte vorbehalten.",
     footer_portfolio:"Portfolio",
     footer_contact:"Kontakt",
@@ -1231,7 +1259,9 @@ aside_location_label:"Location",
 aside_location_value:"Mela-Spira-Str. 32b, 8054 Graz",
 aside_note_1:"Photo sessions by appointment in Graz and surrounding areas.",
 aside_note_2:"Homestory, outdoor and custom locations are possible.",
-    
+    form_name_placeholder:"Your name",
+form_email_placeholder:"your@email.com",
+form_msg_placeholder:"What do you have in mind? Location, number of people, style...",
     footer_copy:"© {year} LiZa Memories Photography. All rights reserved.",
     footer_portfolio:"Portfolio",
     footer_contact:"Contact",
@@ -1365,7 +1395,9 @@ aside_location_label:"Lokacija",
 aside_location_value:"Mela-Spira-Str. 32b, 8054 Graz",
 aside_note_1:"Fotografisanja po dogovoru u Grazu i okolini.",
 aside_note_2:"Homestory, outdoor i individualne lokacije su moguće.",
-    
+    form_name_placeholder:"Vaše ime",
+form_email_placeholder:"vas@email.com",
+form_msg_placeholder:"Šta imate na umu? Lokacija, broj osoba, stil...",
     footer_copy:"© {year} LiZa Memories Photography. Sva prava zadržana.",
     footer_portfolio:"Portfolio",
     footer_contact:"Kontakt",
@@ -1378,11 +1410,18 @@ aside_note_2:"Homestory, outdoor i individualne lokacije su moguće.",
   document.documentElement.lang = lang;
   const strings = i18n[lang] || i18n.de;
   $$('[data-i18n]').forEach(node => {
-    const key = node.getAttribute('data-i18n');
-    if(strings[key]) {
-      node.innerHTML = strings[key].replace('{year}', new Date().getFullYear());
-    }
-  });
+  const key = node.getAttribute('data-i18n');
+  if(strings[key]) {
+    node.innerHTML = strings[key].replace('{year}', new Date().getFullYear());
+  }
+});
+
+$$('[data-i18n-placeholder]').forEach(node => {
+  const key = node.getAttribute('data-i18n-placeholder');
+  if(strings[key]) {
+    node.placeholder = strings[key];
+  }
+});
 }
 
     const langSel = $('#lang');
