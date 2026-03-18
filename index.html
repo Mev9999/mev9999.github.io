@@ -24,7 +24,11 @@
   <style>
     /* ---------- Base Reset ---------- */
     *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
+    html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
     :root{
   --bg:#fffaf7;
   --card:#ffffff;
@@ -511,6 +515,28 @@ footer{
 
 @media (max-width: 640px){
   nav.primary{ display:none; }
+
+  .nav{
+    grid-template-columns: 1fr auto;
+    gap: .75rem;
+    align-items: center;
+  }
+
+  .brand-logo{
+    height: 56px;
+    max-width: 100%;
+  }
+
+  .lang-switch{
+    justify-self: end;
+    min-width: 0;
+    padding: .2rem .45rem;
+  }
+
+  .lang-switch select{
+    max-width: 72px;
+  }
+
   .grid{ grid-template-columns: 1fr; }
   .pricing{ grid-template-columns: 1fr; }
   .masonry{ grid-template-columns: 1fr; }
@@ -545,15 +571,16 @@ footer{
   form.contact{
     padding: 1.4rem;
   }
+
+  .hero .art{
+    transform: none;
+    max-width: 100%;
+    justify-self: stretch;
+  }
 }
   
 
-   .brand-logo{
-  height: 80px;
-  width: auto;
-  display: block;
-  object-fit: contain;
-}
+  
 
 header .brand{
   display: flex;
