@@ -354,6 +354,19 @@ form.contact .btn{
   margin: 0;
   color: var(--muted);
 }
+
+    #pricing .hd{
+  display: block;
+}
+
+#pricing .hd h2{
+  margin-bottom: .6rem;
+}
+
+#pricing .hd p{
+  max-width: 900px;
+}
+
    /* ---------- Footer ---------- */
 footer{
   padding: 2.5rem 0;
@@ -472,17 +485,16 @@ footer{
   .masonry{ grid-template-columns: 1fr; }
   .footgrid{ grid-template-columns: 1fr; }
   .trust{ grid-template-columns: 1fr 1fr; }
-.footer-links{
-  flex-wrap: wrap;
-}
-  
+
+  .footer-links{
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
   .footer-right{
     align-items: flex-start;
   }
 
-  .footer-links{
-    justify-content: flex-start;
-  }
   .aside{
     padding: 1.4rem;
   }
@@ -494,7 +506,8 @@ footer{
   .contact-list strong{
     min-width: auto;
   }
-    form.contact{
+
+  form.contact{
     padding: 1.4rem;
   }
 }
