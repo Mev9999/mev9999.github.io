@@ -160,8 +160,11 @@
   filter: saturate(1.05) contrast(1.05);
 }
     .trust{
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 1rem;
-    }
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 🔥 nur noch 2 pro Zeile */
+  gap: 1rem;
+  margin-top: 1rem;
+}
     .trust .badge{
   background: rgba(255,255,255,.85);
   border: 1px solid rgba(217,152,130,.18);
