@@ -527,21 +527,22 @@ footer{
   }
 
   .lang-switch{
-    justify-self: end;
-    min-width: 0;
-    padding: .2rem .4rem;
-    gap: .35rem;
-  }
+  justify-self: end;
+  min-width: 0;
+  padding: .15rem .35rem;
+  gap: .25rem;
+}
 
-  .lang-switch .pill{
-    font-size: .78rem;
-    padding: .2rem .45rem;
-  }
+.lang-switch .pill{
+  display: none;
+}
 
-  .lang-switch select{
-    max-width: 58px;
-    font-size: .9rem;
-  }
+.lang-switch select{
+  max-width: 52px;
+  width: 52px;
+  font-size: .85rem;
+  padding: 0;
+}
 
   .grid{ grid-template-columns: 1fr; }
   .pricing{ grid-template-columns: 1fr; }
@@ -589,7 +590,7 @@ footer{
 
   .contact-list div{
     display: grid;
-    grid-template-columns: 74px 10px minmax(0,1fr);
+    grid-template-columns: 64px 10px minmax(0,1fr);
     gap: .3rem;
     align-items: start;
   }
