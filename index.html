@@ -450,6 +450,96 @@ nav.primary a.active{
     padding: 1.2rem;
   }
 }
+
+    /* ---------- FAQ ---------- */
+.faq-section{
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0));
+}
+
+.faq-list{
+  display: grid;
+  gap: 1rem;
+  max-width: 900px;
+}
+
+.faq-item{
+  background: var(--card);
+  border: 1px solid rgba(217,152,130,.18);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.faq-item:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(180,140,120,.16);
+  border-color: rgba(201,146,131,.28);
+}
+
+.faq-question{
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.faq-question:hover{
+  background: rgba(217,152,130,.06);
+}
+
+.faq-icon{
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(217,152,130,.14);
+  color: var(--ink);
+  font-weight: 800;
+  transition: transform .25s ease, background .25s ease;
+}
+
+.faq-item.open .faq-icon{
+  transform: rotate(45deg);
+  background: rgba(217,152,130,.24);
+}
+
+.faq-answer{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s ease;
+}
+
+.faq-answer p{
+  margin: 0;
+  padding: 0 1.25rem 1.2rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+@media (max-width: 640px){
+  .faq-question{
+    padding: 1rem 1rem;
+    font-size: .98rem;
+  }
+
+  .faq-answer p{
+    padding: 0 1rem 1rem;
+  }
+}
+    
     /* ---------- Contact ---------- */
     .contact-wrap{ display:grid; grid-template-columns: 1.1fr .9fr; gap: 1rem; }
    form.contact{
@@ -1244,6 +1334,98 @@ footer .brand{
   </div>
 </section>
 
+    <!-- FAQ -->
+<section id="faq" class="faq-section">
+  <div class="container">
+    <div class="hd">
+      <h2 data-i18n="faq_title">Häufige Fragen</h2>
+      <p data-i18n="faq_sub">Hier findest du Antworten auf die häufigsten Fragen rund um dein Shooting.</p>
+    </div>
+
+    <div class="faq-list">
+      <article class="faq-item">
+        <button class="faq-question" type="button">
+          <span data-i18n="faq_q1">Wann ist der beste Zeitpunkt für ein Newborn Shooting?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a1">Antwort folgt.</p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button">
+          <span data-i18n="faq_q2">Wann sollte ich mein Babybauch Shooting buchen?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a2">Antwort folgt.</p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button">
+          <span data-i18n="faq_q3">Wo findet das Shooting statt?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a3">Antwort folgt.</p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button">
+          <span data-i18n="faq_q4">Was sollen wir zum Shooting anziehen?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a4">Antwort folgt.</p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button">
+          <span data-i18n="faq_q5">Wie viele Bilder sind im Paket enthalten?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a5">Antwort folgt.</p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button">
+          <span data-i18n="faq_q6">Wie schnell bekommen wir unsere Bilder?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a6">Antwort folgt.</p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button">
+          <span data-i18n="faq_q7">Können Geschwister oder der Partner auch dabei sein?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a7">Antwort folgt.</p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button">
+          <span data-i18n="faq_q8">Wie läuft die Buchung ab?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a8">Antwort folgt.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+    
     <!-- CONTACT -->
     <section id="contact">
       <div class="container">
@@ -1563,6 +1745,33 @@ opt_maternity:"Babybauch",
 opt_newborn:"Newborn",
 opt_combo:"Babybauch + Newborn Kombi",
 opt_civil:"Standesamt / kleine Feier",
+
+    faq_title:"Häufige Fragen",
+faq_sub:"Hier findest du Antworten auf die häufigsten Fragen rund um dein Shooting.",
+
+faq_q1:"Wann ist der beste Zeitpunkt für ein Newborn Shooting?",
+faq_a1:"Der beste Zeitpunkt für ein Newborn Shooting ist in den ersten 5–14 Tagen nach der Geburt. In dieser Zeit schlafen Babys noch viel, lassen sich leichter positionieren und wirken besonders entspannt auf den Bildern.",
+
+faq_q2:"Wann sollte ich mein Babybauch Shooting buchen?",
+faq_a2:"Der ideale Zeitpunkt für ein Babybauch Shooting liegt meist zwischen der 28. und 34. Schwangerschaftswoche. In dieser Phase ist der Bauch schön sichtbar und du fühlst dich in der Regel noch wohl genug für das Shooting.",
+
+faq_q3:"Wo findet das Shooting statt?",
+faq_a3:"Das Shooting findet in meinem Studio in Graz statt (Mela-Spira-Str. 32b, 8054 Graz). Auf Wunsch sind auch Outdoor- oder Homestory-Shootings möglich.",
+
+faq_q4:"Was sollen wir zum Shooting anziehen?",
+faq_a4:"Am besten bringt ihr mehrere Outfits mit, damit wir verschiedene Looks und Stimmungen umsetzen können. Gemeinsam wählen wir vor Ort, was am besten passt – Farben und Details können später auch harmonisch auf die Bilder abgestimmt werden.",
+
+faq_q5:"Wie viele Bilder sind im Paket enthalten?",
+faq_a5:"Die Anzahl der enthaltenen Bilder hängt vom gewählten Paket ab und ist transparent in den Preisen aufgeführt. Zusätzliche Bilder können jederzeit flexibel dazugebucht werden.",
+
+faq_q6:"Wie schnell bekommen wir unsere Bilder?",
+faq_a6:"Ihr erhaltet eure fertige Galerie in der Regel bereits innerhalb weniger Tage, spätestens jedoch innerhalb von 7 Tagen nach dem Shooting.",
+
+faq_q7:"Können Geschwister oder der Partner auch dabei sein?",
+faq_a7:"Ja, natürlich. Je nach gebuchtem Paket sind Partner und Kinder bereits inkludiert – und auch beim Newborn Shooting sind Familienbilder jederzeit möglich.",
+
+faq_q8:"Wie läuft die Buchung ab?",
+faq_a8:"Du kannst ganz einfach über das Kontaktformular, per E-Mail, Instagram oder Telefon anfragen. Ich melde mich schnell mit verfügbaren Terminen zurück – nach deiner Bestätigung ist dein Shooting fix gebucht."
     
     contact_title:"Kontakt",
     contact_sub:"Schreib mir kurz, worum es geht – ich melde mich in 24h zurück.",
@@ -1739,6 +1948,33 @@ opt_maternity:"Maternity",
 opt_newborn:"Newborn",
 opt_combo:"Maternity + Newborn Bundle",
 opt_civil:"Civil Ceremony / Small Event",
+
+    faq_title:"Frequently asked questions",
+faq_sub:"Here you’ll find answers to the most common questions about your session.",
+
+faq_q1:"When is the best time for a newborn session?",
+faq_a1:"The best time for a newborn session is within the first 5–14 days after birth. During this time, babies sleep a lot, are easier to position, and appear especially calm in photos.",
+
+faq_q2:"When should I book my maternity session?",
+faq_a2:"The ideal time for a maternity session is usually between weeks 28 and 34 of pregnancy. At this stage, the belly is nicely visible and you’ll still feel comfortable during the session.",
+
+faq_q3:"Where does the session take place?",
+faq_a3:"The session takes place in my studio in Graz (Mela-Spira-Str. 32b, 8054 Graz). Outdoor and in-home sessions are also possible on request.",
+
+faq_q4:"What should we wear for the session?",
+faq_a4:"It’s best to bring multiple outfits so we can create different looks and moods. Together we’ll choose what fits best, and colors can later be harmonized during editing.",
+
+faq_q5:"How many images are included?",
+faq_a5:"The number of images depends on the package you choose and is clearly listed in the pricing section. Additional images can always be added.",
+
+faq_q6:"How quickly will we receive our photos?",
+faq_a6:"You will usually receive your finished gallery within a few days, and at the latest within 7 days after the session.",
+
+faq_q7:"Can siblings or my partner join the session?",
+faq_a7:"Yes, of course. Depending on the package, partners and children are already included – and family photos are always possible during newborn sessions.",
+
+faq_q8:"How does the booking process work?",
+faq_a8:"You can easily reach out via the contact form, email, Instagram or phone. I’ll get back to you with available dates – once you confirm, your session is booked."
     
     contact_title:"Contact",
     contact_sub:"Tell me a bit about your project – I usually reply within 24h.",
@@ -1915,6 +2151,33 @@ opt_maternity:"Trudničko",
 opt_newborn:"Newborn",
 opt_combo:"Trudničko + Newborn paket",
 opt_civil:"Matičar / mala proslava",
+
+    faq_title:"Česta pitanja",
+faq_sub:"Ovdje možeš pronaći odgovore na najčešća pitanja o svom fotografisanju.",
+
+faq_q1:"Kada je najbolje vrijeme za newborn fotografisanje?",
+faq_a1:"Najbolje vrijeme za newborn fotografisanje je u prvih 5–14 dana nakon rođenja. U tom periodu bebe puno spavaju i lakše se pozicioniraju, što daje najljepše i najmirnije fotografije.",
+
+faq_q2:"Kada trebam rezervisati trudničko fotografisanje?",
+faq_a2:"Idealno vrijeme za trudničko fotografisanje je između 28. i 34. sedmice trudnoće. Tada je stomak lijepo izražen, a još se osjećate dovoljno ugodno za fotografisanje.",
+
+faq_q3:"Gdje se održava fotografisanje?",
+faq_a3:"Fotografisanje se održava u mom studiju u Grazu (Mela-Spira-Str. 32b, 8054 Graz). Po želji moguće su i outdoor ili kućne (homestory) varijante.",
+
+faq_q4:"Šta trebamo obući za fotografisanje?",
+faq_a4:"Najbolje je ponijeti više kombinacija odjeće kako bismo mogli napraviti različite stilove i fotografije. Zajedno ćemo odabrati šta najbolje izgleda, a boje se kasnije mogu dodatno uskladiti obradom.",
+
+faq_q5:"Koliko fotografija je uključeno u paket?",
+faq_a5:"Broj fotografija zavisi od paketa koji odaberete i jasno je naveden u cijenama. Dodatne fotografije uvijek možete naknadno uzeti.",
+
+faq_q6:"Koliko brzo dobijamo fotografije?",
+faq_a6:"Gotovu galeriju najčešće dobijete već u roku od nekoliko dana, a najkasnije unutar 7 dana nakon fotografisanja.",
+
+faq_q7:"Mogu li braća i sestre ili partner biti uključeni?",
+faq_a7:"Naravno. Ovisno o paketu, partner i djeca su već uključeni – a i kod newborn fotografisanja porodične fotografije su uvijek moguće.",
+
+faq_q8:"Kako izgleda proces rezervacije?",
+faq_a8:"Možete me kontaktirati putem formulara, e-maila, Instagrama ili telefona. Javljam vam slobodne termine – nakon potvrde vaš termin je rezervisan."
     
     contact_title:"Kontakt",
     contact_sub:"Napišite mi ukratko – obično odgovaram u roku od 24h.",
@@ -1992,6 +2255,28 @@ $$('[data-i18n-placeholder]').forEach(node => {
     if(['de','en','bs'].includes(initLang)) langSel.value = initLang; else langSel.value = 'de';
     setLang(langSel.value);
 
+
+    // ---------- FAQ Accordion ----------
+const faqItems = $$('.faq-item');
+
+faqItems.forEach(item => {
+  const btn = $('.faq-question', item);
+  const answer = $('.faq-answer', item);
+
+  btn.addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+
+    faqItems.forEach(other => {
+      other.classList.remove('open');
+      $('.faq-answer', other).style.maxHeight = null;
+    });
+
+    if(!isOpen){
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
     // ---------- Contact form (client-side helper) ----------
     $('#contactForm').addEventListener('submit', async (e) => {
       e.preventDefault();
