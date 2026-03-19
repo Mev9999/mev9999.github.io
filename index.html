@@ -152,10 +152,24 @@ nav.primary a.active{
 }
     .hero-grid{ display: grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; align-items: start; }
     .hero h1{
-      font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.1; margin: 0 0 .8rem; letter-spacing:.2px;
-    }
-    .hero p.lead{ color: var(--muted); font-size: clamp(1.05rem, 1.8vw, 1.2rem); margin: 0 0 6.6rem; }
-    .hero .cta{ display: flex; gap: .8rem; flex-wrap: wrap; }
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.1;
+  margin: 1.1rem 0 1rem;
+  letter-spacing: .2px;
+}
+
+.hero p.lead{
+  color: var(--muted);
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  margin: 0 0 2.2rem;
+  max-width: 640px;
+}
+
+.hero .cta{
+  display: flex;
+  gap: .8rem;
+  flex-wrap: wrap;
+}
    .hero .art{
   position: relative;
   border-radius: var(--radius-lg);
@@ -1125,6 +1139,11 @@ footer .brand{
 <body>
   <header class="site">
     <div class="container nav">
+      <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" type="button">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
       <div class="brand">
   <img src="logo-liza.png" alt="LiZa Memories Photography Logo" class="brand-logo">
 </div>
@@ -1134,11 +1153,7 @@ footer .brand{
         <a href="#pricing" data-i18n="nav_pricing">Preise</a>
         <a href="#contact" data-i18n="nav_contact">Kontakt</a>
       </nav>
-      <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" type="button">
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
+      
       <div class="lang-switch">
         <span class="pill" data-i18n="lang_label">Sprache</span>
         <select id="lang">
