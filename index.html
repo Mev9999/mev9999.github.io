@@ -677,6 +677,47 @@ form.contact .btn{
   max-width: 900px;
 }
 
+    /* ---------- Instagram ---------- */
+.instagram-section{
+  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0));
+  padding: 4rem 0;
+}
+
+.insta-grid{
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: .6rem;
+}
+
+.insta-grid img{
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  transition: transform .35s ease, box-shadow .35s ease;
+  cursor: pointer;
+}
+
+.insta-grid img:hover{
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,.12);
+}
+
+/* Tablet */
+@media (max-width: 1000px){
+  .insta-grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px){
+  .insta-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+    
    /* ---------- Footer ---------- */
 footer{
   padding: 2.5rem 0;
@@ -1516,6 +1557,37 @@ footer .brand{
     </section>
   </main>
 
+  <!-- INSTAGRAM -->
+<section id="instagram" class="instagram-section">
+  <div class="container center">
+    
+    <h2 data-i18n="insta_title">Folge mir auf Instagram</h2>
+    <p class="muted" data-i18n="insta_sub">
+      Noch mehr Einblicke, echte Shootings und aktuelle Arbeiten findest du auf Instagram.
+    </p>
+
+    <div class="insta-grid">
+      <img src="1.webp" alt="Instagram Vorschau 1">
+      <img src="5.webp" alt="Instagram Vorschau 2">
+      <img src="9.webp" alt="Instagram Vorschau 3">
+      <img src="14.webp" alt="Instagram Vorschau 4">
+      <img src="17.webp" alt="Instagram Vorschau 5">
+      <img src="20.webp" alt="Instagram Vorschau 6">
+    </div>
+
+    <a 
+      href="https://instagram.com/liza.memories.photography" 
+      target="_blank" 
+      rel="noopener"
+      class="btn brand mt2"
+      data-i18n="insta_button"
+    >
+      @liza.memories.photography folgen
+    </a>
+
+  </div>
+</section>
+  
   <footer>
   <div class="container footgrid">
     <div>
@@ -1802,6 +1874,11 @@ aside_note_2:"Homestory-, Outdoor- und individuelle Wunschlocations sind möglic
     form_name_placeholder:"Dein Name",
 form_email_placeholder:"dein@email.at",
 form_msg_placeholder:"Was stellst du dir vor? Location, Anzahl Personen, Stil ...",
+
+    insta_title:"Folge mir auf Instagram",
+insta_sub:"Noch mehr Einblicke, echte Shootings und aktuelle Arbeiten findest du auf Instagram.",
+insta_button:"@liza.memories.photography folgen",
+    
     footer_copy:"© {year} LiZa Memories Photography. Alle Rechte vorbehalten.",
     footer_portfolio:"Portfolio",
     footer_contact:"Kontakt",
@@ -2005,6 +2082,11 @@ aside_note_2:"Homestory, outdoor and custom locations are possible.",
     form_name_placeholder:"Your name",
 form_email_placeholder:"your@email.com",
 form_msg_placeholder:"What do you have in mind? Location, number of people, style...",
+
+    insta_title:"Follow me on Instagram",
+insta_sub:"See more behind the scenes, real sessions and my latest work on Instagram.",
+insta_button:"Follow @liza.memories.photography",
+    
     footer_copy:"© {year} LiZa Memories Photography. All rights reserved.",
     footer_portfolio:"Portfolio",
     footer_contact:"Contact",
@@ -2208,6 +2290,11 @@ aside_note_2:"Homestory, outdoor i individualne lokacije su moguće.",
     form_name_placeholder:"Vaše ime",
 form_email_placeholder:"vas@email.com",
 form_msg_placeholder:"Šta imate na umu? Lokacija, broj osoba, stil...",
+
+    insta_title:"Zapratite me na Instagramu",
+insta_sub:"Još više uvida, stvarnih fotografisanja i novih radova možete vidjeti na Instagramu.",
+insta_button:"Zapratite @liza.memories.photography",
+    
     footer_copy:"© {year} LiZa Memories Photography. Sva prava zadržana.",
     footer_portfolio:"Portfolio",
     footer_contact:"Kontakt",
