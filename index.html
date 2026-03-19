@@ -1771,7 +1771,7 @@ faq_q7:"Können Geschwister oder der Partner auch dabei sein?",
 faq_a7:"Ja, natürlich. Je nach gebuchtem Paket sind Partner und Kinder bereits inkludiert – und auch beim Newborn Shooting sind Familienbilder jederzeit möglich.",
 
 faq_q8:"Wie läuft die Buchung ab?",
-faq_a8:"Du kannst ganz einfach über das Kontaktformular, per E-Mail, Instagram oder Telefon anfragen. Ich melde mich schnell mit verfügbaren Terminen zurück – nach deiner Bestätigung ist dein Shooting fix gebucht."
+faq_a8:"Du kannst ganz einfach über das Kontaktformular, per E-Mail, Instagram oder Telefon anfragen. Ich melde mich schnell mit verfügbaren Terminen zurück – nach deiner Bestätigung ist dein Shooting fix gebucht.",
     
     contact_title:"Kontakt",
     contact_sub:"Schreib mir kurz, worum es geht – ich melde mich in 24h zurück.",
@@ -1974,7 +1974,7 @@ faq_q7:"Can siblings or my partner join the session?",
 faq_a7:"Yes, of course. Depending on the package, partners and children are already included – and family photos are always possible during newborn sessions.",
 
 faq_q8:"How does the booking process work?",
-faq_a8:"You can easily reach out via the contact form, email, Instagram or phone. I’ll get back to you with available dates – once you confirm, your session is booked."
+faq_a8:"You can easily reach out via the contact form, email, Instagram or phone. I’ll get back to you with available dates – once you confirm, your session is booked.",
     
     contact_title:"Contact",
     contact_sub:"Tell me a bit about your project – I usually reply within 24h.",
@@ -2177,7 +2177,7 @@ faq_q7:"Mogu li braća i sestre ili partner biti uključeni?",
 faq_a7:"Naravno. Ovisno o paketu, partner i djeca su već uključeni – a i kod newborn fotografisanja porodične fotografije su uvijek moguće.",
 
 faq_q8:"Kako izgleda proces rezervacije?",
-faq_a8:"Možete me kontaktirati putem formulara, e-maila, Instagrama ili telefona. Javljam vam slobodne termine – nakon potvrde vaš termin je rezervisan."
+faq_a8:"Možete me kontaktirati putem formulara, e-maila, Instagrama ili telefona. Javljam vam slobodne termine – nakon potvrde vaš termin je rezervisan.",
     
     contact_title:"Kontakt",
     contact_sub:"Napišite mi ukratko – obično odgovaram u roku od 24h.",
@@ -2246,6 +2246,13 @@ $$('[data-i18n-placeholder]').forEach(node => {
     imprintLink.href = 'impressum.html';
     privacyLink.href = 'datenschutz.html';
   }
+  // offene FAQ nach Sprachwechsel neu berechnen
+  $$('.faq-item.open').forEach(item => {
+    const answer = $('.faq-answer', item);
+    if(answer){
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
 }
 
     const langSel = $('#lang');
