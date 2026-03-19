@@ -137,11 +137,17 @@ nav.primary a.active{
 }
 
     /* ---------- Hero ---------- */
-    .hero{
-      position: relative; isolation: isolate; overflow: hidden;
-      min-height: auto; display: grid; align-items: center; padding: 2.5rem 0 4rem;
-    }
-    .hero .bg{
+.hero{
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: auto;
+  display: grid;
+  align-items: center;
+  padding: 2.5rem 0 4rem;
+}
+
+.hero .bg{
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -150,18 +156,44 @@ nav.primary a.active{
     radial-gradient(700px 380px at 80% 60%, rgba(243,228,220,.45), transparent 60%);
   opacity: .8;
 }
-    .hero-grid{ display: grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; align-items: start; }
-    .hero h1{
+
+.hero-grid{
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.hero-left{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.hero-copy{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.hero .chip{
+  margin-bottom: .3rem;
+  align-self: flex-start;
+}
+
+.hero h1{
   font-size: clamp(2rem, 4vw, 3.4rem);
   line-height: 1.1;
-  margin: 1.1rem 0 1rem;
+  margin: 1rem 0 1rem;
   letter-spacing: .2px;
 }
 
 .hero p.lead{
   color: var(--muted);
   font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-  margin: 0 0 2.2rem;
+  margin: 0 0 2rem;
   max-width: 640px;
 }
 
@@ -170,16 +202,17 @@ nav.primary a.active{
   gap: .8rem;
   flex-wrap: wrap;
 }
-   .hero .art{
+
+.hero .art{
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow);
   border: 1px solid rgba(255,255,255,.12);
-  transform: translateY(30px); /* 🔥 DAS MACHT DEN LOOK */
+  transform: translateY(30px);
+}
 
-    }
-    .hero-side{
+.hero-side{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -194,7 +227,8 @@ nav.primary a.active{
   text-align: center;
   width: 100%;
 }
-    .hero .art img{
+
+.hero .art img{
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -203,24 +237,26 @@ nav.primary a.active{
   aspect-ratio: 4/4.8;
   filter: saturate(1.05) contrast(1.05);
 }
-    .trust{
+
+.trust{
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 🔥 nur noch 2 pro Zeile */
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 1.25rem;
 }
-   .trust .badge{
-   background: var(--card);
+
+.trust .badge{
+  background: var(--card);
   border: 1px solid rgba(217,152,130,.18);
   border-radius: var(--radius);
-  padding: 1.4rem; /* 🔥 größer */
+  padding: 1.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: var(--muted);
   font-weight: 700;
-  min-height: 100px; /* 🔥 höher */
+  min-height: 100px;
 }
     
 
@@ -1046,91 +1082,77 @@ footer .brand{
 /* ---------- Burger Menu ---------- */
 .burger{
   display: none;
-  width: 46px;
-  height: 46px;
-  padding: 0;
   background: var(--card);
   border: 1px solid rgba(217,152,130,.18);
-  border-radius: 12px;
+  border-radius: 10px;
+  padding: .45rem .65rem;
+  font-size: 1.2rem;
   cursor: pointer;
   box-shadow: var(--shadow);
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 5px;
-  transition: transform .2s ease, background .2s ease;
-}
-
-.burger:hover{
-  background: #f6ece7;
-}
-
-.burger span{
-  display: block;
-  width: 20px;
-  height: 2px;
-  background: var(--ink);
-  border-radius: 999px;
-  transition: transform .25s ease, opacity .25s ease, width .25s ease;
-}
-
-/* Animation zu X */
-.burger.active span:nth-child(1){
-  transform: translateY(7px) rotate(45deg);
-}
-
-.burger.active span:nth-child(2){
-  opacity: 0;
-}
-
-.burger.active span:nth-child(3){
-  transform: translateY(-7px) rotate(-45deg);
+  color: var(--ink);
 }
 
 /* Mobile Menü */
 @media (max-width: 640px){
 
   .burger{
-    display: inline-flex;
+    display: block;
+    justify-self: start;
+    order: 1;
+  }
+
+  .brand{
+    order: 2;
+    justify-self: start;
+  }
+
+  .lang-switch{
+    order: 3;
     justify-self: end;
   }
 
   .nav{
-    grid-template-columns: minmax(0,1fr) auto auto;
-    gap: .5rem;
-  }
-
-  .lang-switch{
-    padding: .15rem .35rem;
-    gap: .25rem;
+    grid-template-columns: auto 1fr auto;
+    gap: .6rem;
+    align-items: center;
+    position: relative;
   }
 
   nav.primary{
     position: absolute;
-    top: 72px;
-    left: 1rem;
-    right: 1rem;
-    background: var(--card);
-    border: 1px solid rgba(217,152,130,.18);
+    top: calc(100% + .5rem);
+    left: 0;
+    right: auto;
+    width: 220px;
+    background: var(--surface);
+    border: 1px solid rgba(217,152,130,.2);
     border-radius: 16px;
-    box-shadow: 0 18px 40px rgba(180,140,120,.18);
-    display: none;
+    opacity: 0;
+visibility: hidden;
+transform: translateY(-8px);
+pointer-events: none;
+transition: opacity .22s ease, transform .22s ease, visibility .22s ease;
+display: flex;
     flex-direction: column;
     padding: .75rem;
     gap: .35rem;
     z-index: 100;
+    box-shadow: var(--shadow);
   }
 
   nav.primary.open{
-    display: flex;
-  }
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 
   nav.primary a{
     display: block;
     width: 100%;
+    padding: .85rem 1rem;
+    text-align: left;
     margin: 0;
-    padding: .9rem 1rem;
-    text-align: center;
   }
 }
 
@@ -1170,25 +1192,27 @@ footer .brand{
 <section class="hero container" id="home">
   <div class="bg"></div>
   <div class="hero-grid">
-    <div>
-      <span class="chip" data-i18n="hero_chip">Babybauch • Newborn • Familie • Paare • Hochzeiten</span>
-      <h1 data-i18n="hero_title">LiZa Memories Photography</h1>
-      <p class="lead" data-i18n="hero_lead">
-        Liebevolle Babybauch-, Neugeborenen- und Familienfotografie in Graz und Umgebung. Authentisch, emotional und zeitlos.
-      </p>
+    <div class="hero-left">
+  <div class="hero-copy">
+    <span class="chip" data-i18n="hero_chip">Babybauch • Newborn • Familie • Paare • Hochzeiten</span>
+    <h1 data-i18n="hero_title">LiZa Memories Photography</h1>
+    <p class="lead" data-i18n="hero_lead">
+      Liebevolle Babybauch-, Neugeborenen- und Familienfotografie in Graz und Umgebung. Authentisch, emotional und zeitlos.
+    </p>
 
-      <div class="cta">
-        <a class="btn brand" href="#portfolio" data-i18n="hero_cta_1">Portfolio ansehen</a>
-        <a class="btn ghost" href="#contact" data-i18n="hero_cta_2">Anfrage senden</a>
-      </div>
-
-      <div class="trust">
-        <div class="badge" data-i18n="hero_badge_1">Einfühlsame Shootings ohne Druck</div>
-        <div class="badge" data-i18n="hero_badge_2">Schnelle Bearbeitung & Lieferung</div>
-        <div class="badge" data-i18n="hero_badge_3">Online-Galerie inklusive</div>
-        <div class="badge" data-i18n="hero_badge_4">Natürliche und emotionale Erinnerungen</div>
-      </div>
+    <div class="cta">
+      <a class="btn brand" href="#portfolio" data-i18n="hero_cta_1">Portfolio ansehen</a>
+      <a class="btn ghost" href="#contact" data-i18n="hero_cta_2">Anfrage senden</a>
     </div>
+  </div>
+
+  <div class="trust">
+    <div class="badge" data-i18n="hero_badge_1">Einfühlsame Shootings ohne Druck</div>
+    <div class="badge" data-i18n="hero_badge_2">Schnelle Bearbeitung & Lieferung</div>
+    <div class="badge" data-i18n="hero_badge_3">Online-Galerie inklusive</div>
+    <div class="badge" data-i18n="hero_badge_4">Natürliche und emotionale Erinnerungen</div>
+  </div>
+</div>
 
    <div class="hero-side">
   <p class="hero-side-text" data-i18n="about_sub">Authentische Bilder, die Geschichten erzählen.</p>
