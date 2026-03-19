@@ -93,12 +93,12 @@ nav.primary a.active{
 }
 
 .lang-btn{
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: .25rem;
+  gap: .18rem;
   padding: 0;
   background: var(--card);
   border: 1px solid rgba(217,152,130,.18);
@@ -106,7 +106,7 @@ nav.primary a.active{
   box-shadow: var(--shadow);
   color: var(--ink);
   font-weight: 700;
-  font-size: .95rem;
+  font-size: .92rem;
   cursor: pointer;
 }
 
@@ -994,11 +994,11 @@ footer{
     min-width: 0;
   }
 
-  .lang-btn{
-    width: 44px;
-    height: 44px;
+    .lang-btn{
+    width: 46px;
+    height: 46px;
     font-size: .9rem;
-    gap: .2rem;
+    gap: .18rem;
   }
 
   .lang-menu{
@@ -1168,14 +1168,18 @@ footer .brand{
 /* ---------- Burger Menu ---------- */
 .burger{
   display: none;
+  width: 46px;
+  height: 46px;
+  padding: 0;
   background: var(--card);
   border: 1px solid rgba(217,152,130,.18);
   border-radius: 10px;
-  padding: .45rem .65rem;
   font-size: 1.2rem;
   cursor: pointer;
   box-shadow: var(--shadow);
   color: var(--ink);
+  align-items: center;
+  justify-content: center;
 }
 .burger span{
   display: block;
@@ -1204,8 +1208,8 @@ footer .brand{
 /* Mobile Menü */
 @media (max-width: 640px){
 
-  .burger{
-    display: block;
+    .burger{
+    display: inline-flex;
     justify-self: start;
     order: 1;
   }
@@ -2609,12 +2613,7 @@ $$('[data-i18n-placeholder]').forEach(node => {
   });
 }
 
-    const langSel = $('#lang');
-    langSel.addEventListener('change', () => setLang(langSel.value));
-    // Init language from browser or default 'de'
-    const initLang = (navigator.language || 'de').slice(0,2);
-    if(['de','en','bs'].includes(initLang)) langSel.value = initLang; else langSel.value = 'de';
-    setLang(langSel.value);    const langBtn = $('#langBtn');
+        const langBtn = $('#langBtn');
     const langMenu = $('#langMenu');
     const langCurrent = $('#langCurrent');
     const langOptions = $$('.lang-option');
@@ -2624,22 +2623,12 @@ $$('[data-i18n-placeholder]').forEach(node => {
     const currentLang = ['de','en','bs'].includes(initLang) ? initLang : 'de';
 
     setLang(currentLang);
-    langCurrent.textContent = currentLang.toUpperCase();
 
     langOptions.forEach(option => {
-      if(option.dataset.lang === currentLang){
-        option.classList.add('active');
-      }
-
       option.addEventListener('click', () => {
         const selectedLang = option.dataset.lang;
 
         setLang(selectedLang);
-        langCurrent.textContent = selectedLang.toUpperCase();
-
-        langOptions.forEach(opt => opt.classList.remove('active'));
-        option.classList.add('active');
-
         langMenu.classList.remove('open');
         langBtn.setAttribute('aria-expanded', 'false');
       });
@@ -2657,7 +2646,6 @@ $$('[data-i18n-placeholder]').forEach(node => {
         langBtn.setAttribute('aria-expanded', 'false');
       }
     });
-
 
     // ---------- FAQ Accordion ----------
 const faqItems = $$('.faq-item');
