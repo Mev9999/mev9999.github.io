@@ -385,6 +385,71 @@ nav.primary a.active{
   }
 }
 
+    /* ---------- Testimonials ---------- */
+.testimonials{
+  background: linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,.12));
+}
+
+.testimonial-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.testimonial{
+  padding: 1.4rem;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid rgba(217,152,130,.18);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.testimonial-stars{
+  font-size: 1.1rem;
+  line-height: 1;
+  margin-bottom: .8rem;
+  letter-spacing: .08rem;
+  color: #d9a79a;
+}
+
+.testimonial-text{
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.75;
+  flex: 1;
+}
+
+.testimonial-name{
+  font-weight: 800;
+  color: var(--ink);
+  font-size: .98rem;
+}
+
+.testimonial-role{
+  margin-top: .15rem;
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+@media (max-width: 1000px){
+  .testimonial-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px){
+  .testimonial-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .testimonial{
+    padding: 1.2rem;
+  }
+}
     /* ---------- Contact ---------- */
     .contact-wrap{ display:grid; grid-template-columns: 1.1fr .9fr; gap: 1rem; }
    form.contact{
@@ -1031,7 +1096,44 @@ footer .brand{
   </div>
 </section>
         
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonials">
+  <div class="container">
+    <div class="hd">
+      <h2 data-i18n="testimonials_title">Das sagen Familien über ihr Shooting</h2>
+      <p data-i18n="testimonials_sub">Echte Worte von Familien, die ich begleiten durfte.</p>
+    </div>
 
+    <div class="testimonial-grid">
+      <article class="testimonial">
+        <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+        <p class="testimonial-text" data-i18n="testimonial_1_text">
+          Unser Shooting war so entspannt und liebevoll. Wir haben uns von Anfang an wohlgefühlt und die Bilder sind einfach wunderschön geworden.
+        </p>
+        <div class="testimonial-name" data-i18n="testimonial_1_name">Familie M.</div>
+        <div class="testimonial-role" data-i18n="testimonial_1_role">Newborn Shooting</div>
+      </article>
+
+      <article class="testimonial">
+        <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+        <p class="testimonial-text" data-i18n="testimonial_2_text">
+          So natürliche, emotionale Bilder hätten wir uns nicht schöner vorstellen können. Besonders die ruhige Art beim Shooting war für uns perfekt.
+        </p>
+        <div class="testimonial-name" data-i18n="testimonial_2_name">Sarah & Emir</div>
+        <div class="testimonial-role" data-i18n="testimonial_2_role">Babybauch Shooting</div>
+      </article>
+
+      <article class="testimonial">
+        <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+        <p class="testimonial-text" data-i18n="testimonial_3_text">
+          Wunderschöne Erinnerungen, ganz ohne Stress. Auch mit Kind war alles locker und angenehm. Wir würden jederzeit wieder ein Shooting buchen.
+        </p>
+        <div class="testimonial-name" data-i18n="testimonial_3_name">Familie A.</div>
+        <div class="testimonial-role" data-i18n="testimonial_3_role">Familien Shooting</div>
+      </article>
+    </div>
+  </div>
+</section>
     
 <!-- PRICING -->
 <section id="pricing">
@@ -1359,6 +1461,18 @@ gallery_18:"Newborn – Vaterliebe",
 gallery_19:"Newborn – Ganz behütet",
 gallery_20:"Newborn – Süße Träume",
 gallery_21:"Newborn – Innige Nähe",
+
+    testimonials_title:"Das sagen Familien über ihr Shooting",
+testimonials_sub:"Echte Worte von Familien, die ich begleiten durfte.",
+testimonial_1_text:"Unser Shooting war so entspannt und liebevoll. Wir haben uns von Anfang an wohlgefühlt und die Bilder sind einfach wunderschön geworden.",
+testimonial_1_name:"Familie M.",
+testimonial_1_role:"Newborn Shooting",
+testimonial_2_text:"So natürliche, emotionale Bilder hätten wir uns nicht schöner vorstellen können. Besonders die ruhige Art beim Shooting war für uns perfekt.",
+testimonial_2_name:"Sarah & Emir",
+testimonial_2_role:"Babybauch Shooting",
+testimonial_3_text:"Wunderschöne Erinnerungen, ganz ohne Stress. Auch mit Kind war alles locker und angenehm. Wir würden jederzeit wieder ein Shooting buchen.",
+testimonial_3_name:"Familie A.",
+testimonial_3_role:"Familien Shooting",
     
     pricing_title:"Pakete & Preise",
     pricing_sub:"Transparente Angebote – flexibel anpassbar an eure Bedürfnisse.",
@@ -1517,6 +1631,18 @@ gallery_18:"Newborn – Father’s Love",
 gallery_19:"Newborn – Safe in Loving Arms",
 gallery_20:"Newborn – Sweet Dreams",
 gallery_21:"Newborn – Intimate Bond",
+
+    testimonials_title:"What families say about their session",
+testimonials_sub:"Real words from families I had the pleasure of photographing.",
+testimonial_1_text:"Our session was so relaxed and full of warmth. We felt comfortable from the very beginning and the photos turned out absolutely beautiful.",
+testimonial_1_name:"Family M.",
+testimonial_1_role:"Newborn Session",
+testimonial_2_text:"We couldn’t have imagined more natural and emotional images. The calm atmosphere during the session was perfect for us.",
+testimonial_2_name:"Sarah & Emir",
+testimonial_2_role:"Maternity Session",
+testimonial_3_text:"Beautiful memories without any stress. Even with a child, everything felt easy and relaxed. We would book another session anytime.",
+testimonial_3_name:"Family A.",
+testimonial_3_role:"Family Session",
     
     pricing_title:"Packages & pricing",
     pricing_sub:"Transparent offers – easily tailored to your needs.",
@@ -1675,6 +1801,18 @@ gallery_18:"Newborn – Očeva ljubav",
 gallery_19:"Newborn – U sigurnim rukama",
 gallery_20:"Newborn – Slatki snovi",
 gallery_21:"Newborn – Bliska povezanost",
+
+    testimonials_title:"Šta porodice kažu o svom fotografisanju",
+testimonials_sub:"Iskrene riječi porodica koje sam imala zadovoljstvo fotografisati.",
+testimonial_1_text:"Naše fotografisanje je bilo opušteno i puno topline. Od samog početka smo se osjećali prijatno, a fotografije su ispale predivno.",
+testimonial_1_name:"Porodica M.",
+testimonial_1_role:"Newborn fotografisanje",
+testimonial_2_text:"Nismo mogli zamisliti ljepše, prirodnije i emotivnije fotografije. Posebno nam je odgovarala mirna atmosfera tokom fotografisanja.",
+testimonial_2_name:"Sarah & Emir",
+testimonial_2_role:"Trudničko fotografisanje",
+testimonial_3_text:"Predivne uspomene bez ikakvog stresa. Čak i sa djetetom sve je bilo lagano i prijatno. Rado bismo ponovo rezervisali fotografisanje.",
+testimonial_3_name:"Porodica A.",
+testimonial_3_role:"Porodično fotografisanje",
     
     pricing_title:"Paketi i cijene",
     pricing_sub:"Transparentne ponude – lako prilagodljive vašim potrebama.",
