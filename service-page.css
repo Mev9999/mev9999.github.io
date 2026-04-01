@@ -1206,6 +1206,12 @@ section{padding:3.4rem 0}
     justify-content:center;
   }
 
+  .footer-brand img{
+    height:46px;
+    width:auto;
+    max-width:100%;
+  }
+
   .footer-primary-links{
     width:min(100%, 320px);
     margin-inline:auto;
@@ -1248,14 +1254,14 @@ section{padding:3.4rem 0}
     position:relative;
   }
 
-  .brand{
+  .site-header .brand{
     grid-area:brand;
     width:118px;
     min-width:0;
     justify-self:start;
   }
 
-  .brand img{
+  .site-header .brand img{
     width:118px;
     height:auto;
     max-width:none;
@@ -1310,32 +1316,27 @@ section{padding:3.4rem 0}
   }
 
   .nav-links.primary .nav-dropdown-menu{
-    position:static;
-    top:auto;
-    left:auto;
-    min-width:0;
-    padding:0 0 .35rem .55rem;
-    border:0;
-    box-shadow:none;
-    background:transparent;
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-    transform:none;
-    display:block;
+    display:none !important;
   }
 
-  .nav-links.primary .nav-dropdown-menu::before{
-    display:none;
-  }
-
-  .nav-links.primary .nav-dropdown-menu a{
-    display:block;
+  .nav-links.primary .service-page-link,
+  .nav-links.primary .portfolio-page-link{
+    display:block !important;
     width:100%;
     margin:0;
-    padding:.45rem .75rem;
+    padding:.48rem 1rem .48rem 1.35rem;
     text-align:left;
     font-size:.92rem;
+    color:var(--muted);
+  }
+
+  .nav-links.primary .service-page-link:hover,
+  .nav-links.primary .service-page-link.active,
+  .nav-links.primary .portfolio-page-link:hover,
+  .nav-links.primary .portfolio-page-link.active{
+    color:var(--ink);
+    background:transparent;
+    transform:none;
   }
 
   .nav-actions{

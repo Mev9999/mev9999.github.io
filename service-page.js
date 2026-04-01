@@ -57,6 +57,28 @@
     mobileNav.id = mobileNav.id || 'mobile-nav';
     mobileNav.classList.add('primary');
 
+    const servicesDropdown = mobileNav.querySelector('.services-dropdown');
+    if(servicesDropdown && !mobileNav.querySelector('.service-page-link')){
+      const servicesFragment = document.createDocumentFragment();
+      servicesDropdown.querySelectorAll('.nav-dropdown-menu a').forEach((link) => {
+        const clone = link.cloneNode(true);
+        clone.classList.add('service-page-link');
+        servicesFragment.appendChild(clone);
+      });
+      servicesDropdown.after(servicesFragment);
+    }
+
+    const portfolioDropdown = mobileNav.querySelector('.portfolio-dropdown');
+    if(portfolioDropdown && !mobileNav.querySelector('.portfolio-page-link')){
+      const portfolioFragment = document.createDocumentFragment();
+      portfolioDropdown.querySelectorAll('.nav-dropdown-menu a').forEach((link) => {
+        const clone = link.cloneNode(true);
+        clone.classList.add('portfolio-page-link');
+        portfolioFragment.appendChild(clone);
+      });
+      portfolioDropdown.after(portfolioFragment);
+    }
+
     if(!document.getElementById('burger')){
       const burger = document.createElement('button');
       burger.className = 'burger';
@@ -137,9 +159,11 @@
     siteHeaderNav,
     burger: document.getElementById('burger'),
     mobileNav,
-    navLinks: document.querySelectorAll('.nav-links > a:not(.nav-icon-link), .nav-links > .nav-dropdown > a'),
+    navLinks: document.querySelectorAll('.nav-links > a:not(.nav-icon-link):not(.service-page-link):not(.portfolio-page-link), .nav-links > .nav-dropdown > a'),
     servicesMenuLinks: document.querySelectorAll('.services-dropdown .nav-dropdown-menu a'),
     portfolioMenuLinks: document.querySelectorAll('.portfolio-dropdown .nav-dropdown-menu a'),
+    mobileServiceLinks: document.querySelectorAll('.service-page-link'),
+    mobilePortfolioLinks: document.querySelectorAll('.portfolio-page-link'),
     breadcrumbs: document.querySelector('.breadcrumbs'),
     breadcrumbLinks: document.querySelectorAll('.breadcrumbs a'),
     breadcrumbCurrent: document.querySelector('.breadcrumbs li[aria-current="page"]'),
@@ -421,11 +445,25 @@
       setText(refs.servicesMenuLinks[3], commonStrings.footer.service4);
     }
 
+    if(refs.mobileServiceLinks.length >= 4){
+      setText(refs.mobileServiceLinks[0], commonStrings.footer.service1);
+      setText(refs.mobileServiceLinks[1], commonStrings.footer.service2);
+      setText(refs.mobileServiceLinks[2], commonStrings.footer.service3);
+      setText(refs.mobileServiceLinks[3], commonStrings.footer.service4);
+    }
+
     if(refs.portfolioMenuLinks.length >= 4){
       setText(refs.portfolioMenuLinks[0], commonStrings.nav.gallery1);
       setText(refs.portfolioMenuLinks[1], commonStrings.nav.gallery2);
       setText(refs.portfolioMenuLinks[2], commonStrings.nav.gallery3);
       setText(refs.portfolioMenuLinks[3], commonStrings.nav.gallery4);
+    }
+
+    if(refs.mobilePortfolioLinks.length >= 4){
+      setText(refs.mobilePortfolioLinks[0], commonStrings.nav.gallery1);
+      setText(refs.mobilePortfolioLinks[1], commonStrings.nav.gallery2);
+      setText(refs.mobilePortfolioLinks[2], commonStrings.nav.gallery3);
+      setText(refs.mobilePortfolioLinks[3], commonStrings.nav.gallery4);
     }
 
     setText(refs.breadcrumbLinks[0], commonStrings.breadcrumbs.home);
