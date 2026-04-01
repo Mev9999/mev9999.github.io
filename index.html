@@ -1968,6 +1968,7 @@ footer{
 }
 
 .contact-wrap{
+  grid-template-columns: 1fr;
   gap: 2.9rem;
 }
 
@@ -2020,10 +2021,18 @@ footer{
 
 form.contact{
   padding: 1.08rem;
+  width: 100%;
 }
 
+form.contact .row,
 .row{
+  display: grid;
   grid-template-columns: 1fr;
+  gap: .75rem;
+}
+
+form.contact .row > *{
+  min-width: 0;
 }
 
 .hero .art{
