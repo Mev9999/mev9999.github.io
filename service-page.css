@@ -147,6 +147,11 @@ a{color:inherit}
   transform:translateY(-1px);
 }
 
+.service-page-link,
+.portfolio-page-link{
+  display:none !important;
+}
+
 .nav-dropdown{
   position:relative;
   display:inline-flex;
