@@ -1334,9 +1334,11 @@ section{padding:3.4rem 0}
     grid-area:cta;
     justify-self:end;
     align-self:center;
-    padding:.58rem .72rem;
-    font-size:.76rem;
+    padding:.56rem .68rem;
+    font-size:.75rem;
     line-height:1;
+    font-weight:700;
+    letter-spacing:.2px;
     min-width:0;
     white-space:nowrap;
     height:40px;
@@ -1352,7 +1354,9 @@ section{padding:3.4rem 0}
   .lang-btn{
     width:38px;
     height:38px;
+    min-width:38px;
     padding:0 .25rem;
+    gap:.18rem;
     font-size:.78rem;
   }
 
