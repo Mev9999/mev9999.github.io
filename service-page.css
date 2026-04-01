@@ -1197,6 +1197,38 @@ section{padding:3.4rem 0}
 }
 
 @media (max-width: 640px){
+  .footer-shell{
+    row-gap:.9rem;
+  }
+
+  .footer-brand{
+    width:100%;
+    justify-content:center;
+  }
+
+  .footer-primary-links{
+    width:min(100%, 320px);
+    margin-inline:auto;
+  }
+
+  .footer-primary-links a{
+    font-size:.84rem;
+    padding:.6rem .7rem;
+  }
+
+  .footer-primary-links a:last-child{
+    grid-column:1 / -1;
+    justify-self:center;
+    width:min(48%, 168px);
+  }
+
+  .footer-secondary-links{
+    justify-content:center;
+    row-gap:.35rem;
+  }
+}
+
+@media (max-width: 640px){
   .burger{
     display:flex;
     grid-area:burger;
