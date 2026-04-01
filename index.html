@@ -2287,6 +2287,116 @@ display: flex;
   }
 }
 
+@media (max-width: 640px){
+  .nav{
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: .45rem;
+  }
+
+  header .brand-logo{
+    height: 40px;
+  }
+
+  .brand{
+    min-width: 0;
+  }
+
+  .nav-actions{
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    min-width: 0;
+  }
+
+  .header-social-links{
+    display: none;
+  }
+
+  .header-cta{
+    display: inline-flex !important;
+    padding: .7rem .9rem;
+    font-size: .84rem;
+    line-height: 1.1;
+    min-width: 0;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  .lang-switch{
+    min-width: auto;
+  }
+
+  .lang-btn{
+    width: 42px;
+    height: 42px;
+    padding: 0 .3rem;
+    font-size: .82rem;
+  }
+
+  .lang-menu{
+    right: 0;
+    left: auto;
+  }
+
+  .contact-list{
+    grid-template-columns: 1fr;
+    gap: .65rem;
+  }
+
+  .contact-list div{
+    padding: .82rem .9rem;
+  }
+
+  .contact-list strong{
+    font-size: .82rem;
+    letter-spacing: .12em;
+  }
+
+  .contact-list a,
+  .contact-list div > span:last-child{
+    font-size: .95rem;
+    line-height: 1.35;
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+
+  .contact-list a[href^="tel:"]{
+    white-space: nowrap;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .footer-shell{
+    row-gap: .9rem;
+  }
+
+  .footer-brand{
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer-primary-links{
+    width: min(100%, 320px);
+    margin-inline: auto;
+  }
+
+  .footer-primary-links a{
+    font-size: .84rem;
+    padding: .6rem .7rem;
+  }
+
+  .footer-primary-links a:last-child{
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: min(48%, 168px);
+  }
+
+  .footer-secondary-links{
+    justify-content: center;
+    row-gap: .35rem;
+  }
+}
+
   </style><script defer="" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;89acfe7badc942e9896745b36e2c595a&quot;}"></script><link rel="canonical" href="https://liza-memories-photography.com/"><link rel="alternate" hreflang="de" href="https://liza-memories-photography.com/"><link rel="alternate" hreflang="en" href="https://liza-memories-photography.com/index-en.html"><link rel="alternate" hreflang="bs" href="https://liza-memories-photography.com/index-bs.html"><link rel="alternate" hreflang="x-default" href="https://liza-memories-photography.com/"></head><body><header class="site">
     <div class="nav site-shell">
       <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav" type="button">
