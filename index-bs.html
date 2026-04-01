@@ -2515,9 +2515,9 @@ display: flex;
     </a>
   </div>
   <div class="lang-switch" id="langSwitch">
-  <button class="lang-btn" id="langBtn" type="button" aria-label="Sprache w�hlen" aria-expanded="false">
+  <button class="lang-btn" id="langBtn" type="button" aria-label="Odaberi jezik" aria-expanded="false">
     <span id="langCurrent">BS</span>
-    <span class="lang-caret">?</span>
+    <span class="lang-caret">▾</span>
   </button>
 
   <div class="lang-menu" id="langMenu">
@@ -2910,7 +2910,7 @@ display: flex;
       <div class="price card reveal">
         <div class="chip" data-i18n="price1_chip_new">Portret</div>
         <h3 data-i18n="price1_title_new">Mini portret</h3>
-        <div class="num">� 169</div>
+        <div class="num">€ 169</div>
         <ul>
           <li data-i18n="price1_li1_new">oko 30 minuta fotografisanja</li>
           <li data-i18n="price1_li2_new">8 obrađenih fotografija uključeno</li>
@@ -2925,7 +2925,7 @@ display: flex;
       <div class="price card reveal">
         <div class="chip" data-i18n="price2_chip_new">Trudničko</div>
         <h3 data-i18n="price2_title_new">Ljubav u iščekivanju</h3>
-        <div class="num">� 299</div>
+        <div class="num">€ 299</div>
         <ul>
           <li data-i18n="price2_li1_new">oko 60 minuta fotografisanja</li>
           <li data-i18n="price2_li2_new">14 obrađenih fotografija uključeno</li>
@@ -2941,7 +2941,7 @@ display: flex;
       <div class="price card reveal">
         <div class="chip" data-i18n="price3_chip_new">Porodica</div>
         <h3 data-i18n="price3_title_new">Porodično vrijeme</h3>
-        <div class="num">� 329</div>
+        <div class="num">€ 329</div>
         <ul>
           <li data-i18n="price3_li1_new">oko 60 minuta fotografisanja</li>
           <li data-i18n="price3_li2_new">16 obrađenih fotografija uključeno</li>
@@ -2958,7 +2958,7 @@ display: flex;
   <div class="price-badge top" data-i18n="price_badge_top">Najpopularnije</div>
   <div class="chip" data-i18n="price4_chip_new">Novorođenčad</div>
   <h3 data-i18n="price4_title_new">Dobrodošlo, malo čudo</h3>
-  <div class="num">� 349</div>
+  <div class="num">€ 349</div>
   <ul>
     <li data-i18n="price4_li1_new">do 2 sata fotografisanja bez pritiska</li>
     <li data-i18n="price4_li2_new">18 obrađenih fotografija uključeno</li>
@@ -2975,7 +2975,7 @@ display: flex;
   <div class="price-badge save" data-i18n="price_badge_save">Najbolja ponuda</div>
   <div class="chip" data-i18n="price5_chip_new">Kombi</div>
   <h3 data-i18n="price5_title_new">Trudničko + Novorođenčad</h3>
-  <div class="num">� 549</div>
+  <div class="num">€ 549</div>
   <ul>
     <li data-i18n="price5_li1_new">2 fotografisanja: trudničko i fotografisanje novorođenčadi</li>
     <li data-i18n="price5_li2_new">15 obrađenih fotografija uključeno po fotografisanju</li>
@@ -2991,7 +2991,7 @@ display: flex;
       <div class="price card reveal">
         <div class="chip" data-i18n="price6_chip_new">Vjenčanja i proslave</div>
         <h3 data-i18n="price6_title_new">Vjenčanje / mala proslava</h3>
-        <div class="num">ab � 639</div>
+        <div class="num">ab € 639</div>
         <ul>
           <li data-i18n="price6_li1_new">do 3 sata prisustva</li>
           <li data-i18n="price6_li2_new">oko 35 obrađenih fotografija</li>
@@ -3165,7 +3165,7 @@ display: flex;
             <div class="row">
               <div>
                 <label for="name" data-i18n="form_name_label">Vaše ime</label>
-                <input id="name" name="name" type="text" data-i18n-placeholder="form_name_placeholder" required="" autocomplete="name" placeholder="Va�e ime">
+                <input id="name" name="name" type="text" data-i18n-placeholder="form_name_placeholder" required="" autocomplete="name" placeholder="Vaše ime">
               </div>
               <div>
                 <label for="email" data-i18n="form_email_label">E-mail</label>
@@ -3202,7 +3202,7 @@ display: flex;
             </div>
             <div>
               <label for="msg" data-i18n="form_msg_label">Poruka</label>
-              <textarea id="msg" name="message" data-i18n-placeholder="form_msg_placeholder" required="" placeholder="�ta imate na umu? Lokacija, broj osoba, stil..."></textarea>
+              <textarea id="msg" name="message" data-i18n-placeholder="form_msg_placeholder" required="" placeholder="Šta imate na umu? Lokacija, broj osoba, stil..."></textarea>
             </div>
             <input type="hidden" name="website" value="LiZa Memories Photography">
             <input type="hidden" name="_subject" value="Neue Anfrage �ber liza-memories-photography.com">
@@ -4701,21 +4701,21 @@ faqItems.forEach((item, index) => {
       const status = $('#formStatus');
       const activeLang = document.documentElement.lang || 'de';
 
-      status.textContent = activeLang === 'en' ? 'Sending�' : (activeLang === 'bs' ? '�aljem�' : 'Sende�');
+      status.textContent = activeLang === 'en' ? 'Sending…' : (activeLang === 'bs' ? 'Šaljem…' : 'Sende…');
 
       try{
         const res = await fetch(form.action, { method:'POST', body: data, headers: { 'Accept':'application/json' } });
         if(res.ok){
           status.textContent = activeLang === 'en' ? 'Thank you! I will get back to you soon.' :
-                               (activeLang === 'bs' ? 'Hvala! Javicu se uskoro.' : 'Danke! Ich melde mich bald.');
+                               (activeLang === 'bs' ? 'Hvala! Javit ću se uskoro.' : 'Danke! Ich melde mich bald.');
           form.reset();
         }else{
           status.textContent = activeLang === 'en' ? 'Something went wrong. Please write to info@liza-memories-photography.com.' :
-                               (activeLang === 'bs' ? 'Ne�to je po�lo po zlu. Pi�ite na info@liza-memories-photography.com.' : 'Etwas ist schiefgelaufen. Bitte schreib an info@liza-memories-photography.com.');
+                               (activeLang === 'bs' ? 'Nešto je pošlo po zlu. Pišite na info@liza-memories-photography.com.' : 'Etwas ist schiefgelaufen. Bitte schreib an info@liza-memories-photography.com.');
         }
       }catch(err){
         status.textContent = activeLang === 'en' ? 'Network error. Please try again later.' :
-                             (activeLang === 'bs' ? 'Gre�ka u mre�i. Poku�ajte kasnije.' : 'Netzwerkfehler. Bitte sp�ter erneut versuchen.');
+                             (activeLang === 'bs' ? 'Greška u mreži. Pokušajte kasnije.' : 'Netzwerkfehler. Bitte sp�ter erneut versuchen.');
       }
     });
 
