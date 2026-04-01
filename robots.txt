@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://liza-memories-photography.com/sitemap.xml
+Sitemap: https://liza-memories-photography.com/image-sitemap.xml
