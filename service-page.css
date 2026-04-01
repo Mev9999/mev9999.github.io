@@ -83,9 +83,9 @@ a{color:inherit}
   width:46px;
   height:46px;
   padding:0;
-  background:rgba(255,255,255,.82);
+  background:#fffaf7;
   border:1px solid rgba(217,152,130,.18);
-  border-radius:12px;
+  border-radius:10px;
   cursor:pointer;
   box-shadow:var(--shadow);
   flex-direction:column;
@@ -1238,7 +1238,7 @@ section{padding:3.4rem 0}
   }
 
   .nav{
-    grid-template-columns:42px auto 1fr max-content max-content;
+    grid-template-columns:42px 118px 1fr max-content max-content;
     grid-template-areas:
       "burger brand . cta lang"
       "social social social social social";
@@ -1250,6 +1250,7 @@ section{padding:3.4rem 0}
 
   .brand{
     grid-area:brand;
+    width:118px;
     min-width:0;
     justify-self:start;
   }
@@ -1276,6 +1277,10 @@ section{padding:3.4rem 0}
     align-items:stretch;
     gap:.35rem;
     flex-wrap:nowrap;
+    max-height:min(calc(100vh - 110px), 440px);
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
     opacity:0;
     visibility:hidden;
     transform:translateY(-8px);
