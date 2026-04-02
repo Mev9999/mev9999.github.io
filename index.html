@@ -2243,9 +2243,9 @@ footer .brand{
     top: calc(100% + .5rem);
     left: 0;
     right: auto;
-    width: 220px;
-    background: var(--surface);
-    border: 1px solid rgba(217,152,130,.2);
+    width: min(236px, calc(100vw - 2rem));
+    background: linear-gradient(180deg, rgba(244,229,220,.98), rgba(239,220,209,.96));
+    border: 1px solid rgba(217,152,130,.22);
     border-radius: 16px;
     opacity: 0;
 visibility: hidden;
@@ -2254,8 +2254,8 @@ pointer-events: none;
 transition: opacity .22s ease, transform .22s ease, visibility .22s ease;
 display: flex;
     flex-direction: column;
-    padding: .75rem;
-    gap: .35rem;
+    padding: .62rem;
+    gap: .18rem;
     z-index: 100;
     box-shadow: var(--shadow);
   }
@@ -2270,9 +2270,10 @@ display: flex;
   nav.primary a{
     display: block;
     width: 100%;
-    padding: .85rem 1rem;
+    padding: .72rem .9rem;
     text-align: left;
     margin: 0;
+    border-radius: 12px;
   }
 
   nav.primary .nav-dropdown{
@@ -2282,9 +2283,10 @@ display: flex;
   nav.primary .nav-dropdown > a{
     display: block;
     width: 100%;
-    padding: .85rem 1rem;
+    padding: .72rem .9rem;
     text-align: left;
     margin: 0;
+    border-radius: 12px;
   }
 
   nav.primary .nav-dropdown-menu{
@@ -2293,14 +2295,26 @@ display: flex;
 
   nav.primary .service-page-link{
     display: block !important;
-    padding-left: 1.35rem;
-    font-size: .92rem;
+    width: auto;
+    margin-left: .45rem;
+    padding: .34rem .8rem .34rem 1.05rem;
+    border-left: 1px solid rgba(217,152,130,.26);
+    border-radius: 0 10px 10px 0;
+    font-size: .84rem;
+    line-height: 1.2;
+    color: var(--muted);
   }
 
   nav.primary .portfolio-page-link{
     display: block !important;
-    padding-left: 1.35rem;
-    font-size: .92rem;
+    width: auto;
+    margin-left: .45rem;
+    padding: .34rem .8rem .34rem 1.05rem;
+    border-left: 1px solid rgba(217,152,130,.26);
+    border-radius: 0 10px 10px 0;
+    font-size: .84rem;
+    line-height: 1.2;
+    color: var(--muted);
   }
 
   nav.primary .nav-icon-link{
