@@ -1316,12 +1316,12 @@ section{padding:3.4rem 0}
   }
 
   .nav{
-    grid-template-columns:42px 118px 1fr max-content max-content;
+    grid-template-columns:42px minmax(0, 1fr) auto minmax(0, 1fr) 38px;
     grid-template-areas:
-      "burger brand . cta lang"
-      "social social social social social";
+      "burger . cta . lang"
+      ". brand social . .";
     column-gap:.38rem;
-    row-gap:.32rem;
+    row-gap:.48rem;
     align-items:center;
     position:relative;
   }
@@ -1330,7 +1330,8 @@ section{padding:3.4rem 0}
     grid-area:brand;
     width:118px;
     min-width:0;
-    justify-self:start;
+    justify-self:end;
+    align-self:center;
   }
 
   .site-header .brand img{
@@ -1418,10 +1419,12 @@ section{padding:3.4rem 0}
   .header-social-links{
     display:flex;
     grid-area:social;
-    width:100%;
-    justify-content:center;
+    width:auto;
+    justify-content:flex-start;
+    justify-self:start;
+    align-self:center;
     gap:.42rem;
-    margin-top:0;
+    margin:0 0 0 .55rem;
   }
 
   .nav-icon-link{
@@ -1442,7 +1445,7 @@ section{padding:3.4rem 0}
   .header-cta{
     display:inline-flex !important;
     grid-area:cta;
-    justify-self:end;
+    justify-self:center;
     align-self:center;
     padding:.56rem .68rem;
     font-size:.75rem;
