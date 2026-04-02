@@ -120,7 +120,7 @@
       return banner;
     }
 
-    const header = document.querySelector('header.site');
+    const header = document.querySelector('header.site, header.site-header');
     if (!header) {
       return null;
     }
