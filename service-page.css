@@ -1316,11 +1316,11 @@ section{padding:3.4rem 0}
   }
 
   .nav{
-    grid-template-columns:42px minmax(0, 1fr) auto minmax(0, 1fr) 38px;
+    grid-template-columns:42px minmax(0, 1fr) auto auto minmax(0, 1fr) 42px;
     grid-template-areas:
-      "burger . cta . lang"
-      ". brand social . .";
-    column-gap:.38rem;
+      "burger . cta cta . lang"
+      ". . brand social . .";
+    column-gap:.44rem;
     row-gap:.48rem;
     align-items:center;
     position:relative;
