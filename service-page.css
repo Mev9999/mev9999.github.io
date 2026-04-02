@@ -409,6 +409,12 @@ a{color:inherit}
   border-color:var(--line);
 }
 
+.btn.secondary[href*="#portfolio"]{
+  background:var(--accent);
+  color:#fff;
+  border-color:transparent;
+}
+
 .hero{
   padding:4.8rem 0 3.4rem;
 }
