@@ -96,7 +96,7 @@
   const common = {
     de: {
       languageLabel: 'Sprache wählen',
-      nav: { home: 'Home', about: 'Über mich', services: 'Leistungen', portfolio: 'Portfolio', gallery1: 'Babybauch Galerie', gallery2: 'Neugeborenen Galerie', gallery3: 'Familien Galerie', gallery4: 'Hochzeits Galerie', pricing: 'Preise', contact: 'Kontakt' },
+      nav: { home: 'Home', about: 'Über mich', services: 'Leistungen', portfolio: 'Portfolio', gallery1: 'Babybauch Galerie', gallery2: 'Neugeborenen Galerie', gallery3: 'Familien Galerie', gallery4: 'Hochzeits Galerie', pricing: 'Preise', faq: 'Chesterpedia', contact: 'Kontakt' },
       breadcrumbs: { aria: 'Breadcrumb', home: 'Startseite', services: 'Leistungen' },
       contact: { email: 'E-Mail', phone: 'Telefon', location: 'Standort', more: 'Weitere Leistungen', locationValue: '8054 Graz' },
       footer: {
@@ -115,7 +115,7 @@
     },
     en: {
       languageLabel: 'Choose language',
-      nav: { home: 'Home', about: 'About', services: 'Services', portfolio: 'Portfolio', gallery1: 'Maternity Gallery', gallery2: 'Newborn Gallery', gallery3: 'Family Gallery', gallery4: 'Wedding Gallery', pricing: 'Pricing', contact: 'Contact' },
+      nav: { home: 'Home', about: 'About', services: 'Services', portfolio: 'Portfolio', gallery1: 'Maternity Gallery', gallery2: 'Newborn Gallery', gallery3: 'Family Gallery', gallery4: 'Wedding Gallery', pricing: 'Pricing', faq: 'Chesterpedia', contact: 'Contact' },
       breadcrumbs: { aria: 'Breadcrumb', home: 'Home', services: 'Services' },
       contact: { email: 'Email', phone: 'Phone', location: 'Location', more: 'More services', locationValue: '8054 Graz' },
       footer: {
@@ -134,7 +134,7 @@
     },
     bs: {
       languageLabel: 'Odaberi jezik',
-      nav: { home: 'Početna', about: 'O meni', services: 'Usluge', portfolio: 'Portfolio', gallery1: 'Trudnička galerija', gallery2: 'Galerija novorođenčadi', gallery3: 'Porodična galerija', gallery4: 'Galerija vjenčanja', pricing: 'Cijene', contact: 'Kontakt' },
+      nav: { home: 'Početna', about: 'O meni', services: 'Usluge', portfolio: 'Portfolio', gallery1: 'Trudnička galerija', gallery2: 'Galerija novorođenčadi', gallery3: 'Porodična galerija', gallery4: 'Galerija vjenčanja', pricing: 'Cijene', faq: 'Chesterpedia', contact: 'Kontakt' },
       breadcrumbs: { aria: 'Breadcrumb', home: 'Početna', services: 'Usluge' },
       contact: { email: 'E-mail', phone: 'Telefon', location: 'Lokacija', more: 'Ostale usluge', locationValue: '8054 Graz' },
       footer: {
@@ -436,7 +436,8 @@
     setText(refs.navLinks[2], commonStrings.nav.services);
     setText(refs.navLinks[3], commonStrings.nav.portfolio);
     setText(refs.navLinks[4], commonStrings.nav.pricing);
-    setText(refs.navLinks[5], commonStrings.nav.contact);
+    setText(refs.navLinks[5], commonStrings.nav.faq);
+    setText(refs.navLinks[6], commonStrings.nav.contact);
 
     if(refs.servicesMenuLinks.length >= 4){
       setText(refs.servicesMenuLinks[0], commonStrings.footer.service1);
