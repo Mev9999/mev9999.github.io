@@ -4,7 +4,6 @@
   const supportedLangs = ['de', 'en', 'bs'];
   const SITE_ORIGIN = 'https://liza-memories-photography.com/';
   const LANGUAGE_SUFFIX_PATTERN = /-(en|bs)\.html$/i;
-  const HOME_PROMO_SCRIPT_ID = 'homePromoScript';
 
   const pageByFile = {
     'ueber-mich.html': 'about',
@@ -40,20 +39,6 @@
   const urlLanguage = getLanguageFromFile(currentFileName);
   const staticLang = (document.documentElement.getAttribute('data-static-lang') || '').toLowerCase();
   const pageKey = pageByFile[baseFileName];
-
-  function ensureHomePromoScript(){
-    if(document.getElementById(HOME_PROMO_SCRIPT_ID)){
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.id = HOME_PROMO_SCRIPT_ID;
-    script.src = 'scripts/home-promo.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  }
-
-  ensureHomePromoScript();
 
   if(!pageKey){
     return;
