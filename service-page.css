@@ -1275,9 +1275,24 @@ section{padding:3.4rem 0}
     white-space:nowrap;
   }
 
-  .contact-detail:last-child span,
+  .contact-detail:last-child span{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.18rem .48rem;
+    width:100%;
+    font-size:0;
+    line-height:1.34;
+    white-space:normal;
+  }
+
   .contact-detail:last-child span a{
+    display:inline-block;
+    width:auto;
     font-size:clamp(.74rem, 3vw, .85rem);
+    line-height:1.34;
+    text-decoration:underline;
+    text-underline-offset:.08em;
+    white-space:nowrap;
   }
 
   .contact-detail a[href^="tel:"]{
