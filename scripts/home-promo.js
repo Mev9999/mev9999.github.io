@@ -13,7 +13,7 @@
         text: '\u{1F337} April 2 to April 6: 15% off all packages. Secure your spring memories at a special price \u2728'
       },
       bs: {
-        badge: 'Uskr\u0161nja akcija',
+        badge: 'Uskrsna akcija',
         text: '\u{1F337} Od 2. do 6. aprila: 15% popusta na sve pakete. Sa\u010duvajte nje\u017ene proljetne uspomene po posebnoj cijeni \u2728'
       }
     }
