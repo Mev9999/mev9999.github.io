@@ -1,20 +1,20 @@
 (() => {
   // Update future homepage promotions here.
   const HOME_PROMO_CONFIG = {
-    startsAt: '2026-04-03T00:00:00+02:00',
+    startsAt: '2026-04-02T12:00:00+02:00',
     endsAt: '2026-04-06T23:59:59+02:00',
     messages: {
       de: {
         badge: 'Osteraktion',
-        text: '\u{1F337} 3. bis 6. April: 15 % auf alle Pakete. Sichert euch liebevolle Fr\u00fchlings-Erinnerungen zum Aktionspreis \u2728'
+        text: '\u{1F337} 2. bis 6. April: 15 % auf alle Pakete. Sichert euch liebevolle Fr\u00fchlings-Erinnerungen zum Aktionspreis \u2728'
       },
       en: {
         badge: 'Easter Special',
-        text: '\u{1F337} April 3 to April 6: 15% off all packages. Secure your spring memories at a special price \u2728'
+        text: '\u{1F337} April 2 to April 6: 15% off all packages. Secure your spring memories at a special price \u2728'
       },
       bs: {
-        badge: 'Uskr\u0161nja akcija',
-        text: '\u{1F337} Od 3. do 6. aprila: 15% popusta na sve pakete. Sa\u010duvajte nje\u017ene proljetne uspomene po posebnoj cijeni \u2728'
+        badge: 'Uskrsna akcija',
+        text: '\u{1F337} Od 2. do 6. aprila: 15% popusta na sve pakete. Sa\u010duvajte nje\u017ene proljetne uspomene po posebnoj cijeni \u2728'
       }
     }
   };
