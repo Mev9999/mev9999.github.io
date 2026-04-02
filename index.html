@@ -2321,10 +2321,10 @@ display: flex;
 
 @media (max-width: 640px){
   .nav{
-    grid-template-columns: max-content minmax(0, 1fr) auto auto minmax(0, 1fr) max-content;
+    grid-template-columns: max-content minmax(0, 1fr) max-content;
     grid-template-areas:
-      "burger . cta cta . lang"
-      ". . brand social . .";
+      "burger cta lang"
+      ". brand .";
     column-gap: .32rem;
     row-gap: .48rem;
     align-items: center;
@@ -2337,7 +2337,7 @@ display: flex;
   }
 
   header .brand-logo{
-    width: 118px;
+    width: 108px;
     height: auto;
     max-width: none;
   }
@@ -2345,7 +2345,7 @@ display: flex;
   .brand{
     grid-area: brand;
     min-width: 0;
-    width: 118px;
+    width: 108px;
     justify-self: end;
     align-self: center;
   }
@@ -2366,23 +2366,25 @@ display: flex;
 
   .header-social-links{
     display: flex;
-    grid-area: social;
+    grid-area: auto;
+    grid-column: 2;
+    grid-row: 2;
     width: auto;
     justify-content: flex-start;
     justify-self: start;
     align-self: center;
-    gap: .42rem;
-    margin: 0 0 0 .55rem;
+    gap: .36rem;
+    margin: 0 0 0 .45rem;
   }
 
   .nav-icon-link{
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
   }
 
   .header-social-badge{
-    width: 22px;
-    height: 22px;
+    width: 21px;
+    height: 21px;
   }
 
   .header-social-badge svg{
