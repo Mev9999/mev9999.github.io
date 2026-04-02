@@ -1316,11 +1316,11 @@ section{padding:3.4rem 0}
   }
 
   .nav{
-    grid-template-columns:42px minmax(0, 1fr) auto auto minmax(0, 1fr) 42px;
+    grid-template-columns:max-content minmax(0, 1fr) auto auto minmax(0, 1fr) max-content;
     grid-template-areas:
       "burger . cta cta . lang"
       ". . brand social . .";
-    column-gap:.44rem;
+    column-gap:.32rem;
     row-gap:.48rem;
     align-items:center;
     position:relative;
@@ -1465,10 +1465,10 @@ section{padding:3.4rem 0}
   }
 
   .lang-btn{
-    width:38px;
+    width:auto;
+    min-width:44px;
     height:38px;
-    min-width:38px;
-    padding:0 .25rem;
+    padding:0 .38rem;
     gap:.18rem;
     font-size:.78rem;
   }
