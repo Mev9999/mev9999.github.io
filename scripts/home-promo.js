@@ -5,16 +5,16 @@
     endsAt: '2026-06-08T23:59:59+02:00',
     messages: {
       de: {
-        badge: 'Neukundenrabatt',
-        text: '\u{1F337} Exklusives Willkommensangebot: 20 % Rabatt auf dein erstes Shooting. Nur begrenzte Plätze verfügbar. \u2728'
+        badge: 'Neukundenrabat',
+        text: '\u{1F337} Exklusives Willkommensangebot: 50 % Rabatt auf dein erstes Shooting. Nur begrenzte Plätze verfügbar. \u2728'
       },
       en: {
         badge: 'New customer discount',
-        text: '\u{1F337} Exclusive welcome offer: 20% off your first shoot. Limited spots available. \u2728'
+        text: '\u{1F337} Exclusive welcome offer: 50% off your first shoot. Limited spots available. \u2728'
       },
       bs: {
         badge: 'Popust za nove klijente',
-        text: '\u{1F337} Ekskluzivna ponuda dobrodošlice: 20% popusta na tvoje prvo fotografisanje. Ograničen broj termina dostupno \u2728'
+        text: '\u{1F337} Ekskluzivna ponuda dobrodošlice: 50% popusta na tvoje prvo fotografisanje. Ograničen broj termina dostupno \u2728'
       }
     }
   };
