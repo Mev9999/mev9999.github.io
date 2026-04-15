@@ -3,10 +3,11 @@
   const HOME_PROMO_CONFIG = {
     startsAt: '2026-04-08T12:00:00+02:00',
     endsAt: '2026-06-08T23:59:59+02:00',
+    priceDiscountRate: 0.5,
     messages: {
       de: {
-        badge: 'Neukundenrabat',
-        text: '\u{1F337} Exklusives Willkommensangebot: 50 % Rabatt auf dein erstes Shooting. Nur begrenzte Plätze verfügbar. \u2728'
+        badge: 'Neukundenrabatt',
+        text: '\u{1F337} Exklusives Willkommensangebot: 50 % Rabatt auf dein erstes Shooting. Nur begrenzte Pl\u00e4tze verf\u00fcgbar. \u2728'
       },
       en: {
         badge: 'New customer discount',
@@ -14,13 +15,19 @@
       },
       bs: {
         badge: 'Popust za nove klijente',
-        text: '\u{1F337} Ekskluzivna ponuda dobrodošlice: 50% popusta na tvoje prvo fotografisanje. Ograničen broj termina dostupno \u2728'
+        text: '\u{1F337} Ekskluzivna ponuda dobrodoslice: 50% popusta na tvoje prvo fotografisanje. Ogranicen broj termina dostupan. \u2728'
       }
     }
   };
 
   const PROMO_STYLE_ID = 'homePromoStyles';
   const PROMO_BANNER_ID = 'homePromoBanner';
+  const PROMO_PRICE_SELECTOR = '#pricing .price .num';
+  const PRICE_PREFIX_BY_LANG = {
+    de: 'ab',
+    en: 'from',
+    bs: 'od'
+  };
   let promoTimerId = null;
 
   function getCurrentLang() {
@@ -34,6 +41,127 @@
       return htmlLang;
     }
     return 'de';
+  }
+
+  function getPromoWindow() {
+    const now = new Date();
+    const startsAt = HOME_PROMO_CONFIG.startsAt ? new Date(HOME_PROMO_CONFIG.startsAt) : null;
+    const endsAt = HOME_PROMO_CONFIG.endsAt ? new Date(HOME_PROMO_CONFIG.endsAt) : null;
+    const isVisible = (!startsAt || now >= startsAt) && (!endsAt || now <= endsAt);
+
+    return { now, startsAt, endsAt, isVisible };
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#39;');
+  }
+
+  function parsePriceAmount(value) {
+    const normalized = String(value || '')
+      .replace(/\u00a0/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    if (!normalized) {
+      return null;
+    }
+
+    const knownPrefixes = Array.from(new Set(Object.values(PRICE_PREFIX_BY_LANG)));
+    const lowered = normalized.toLowerCase();
+    let hasPrefix = false;
+    let remainder = normalized;
+
+    for (const candidate of knownPrefixes) {
+      const token = `${candidate.toLowerCase()} `;
+      if (lowered.startsWith(token)) {
+        hasPrefix = true;
+        remainder = normalized.slice(candidate.length).trim();
+        break;
+      }
+    }
+
+    const numericValue = remainder.replace(/[^\d.,-]/g, '').replace(',', '.');
+    const amount = Number.parseFloat(numericValue);
+    if (!Number.isFinite(amount)) {
+      return null;
+    }
+
+    return { amount, hasPrefix };
+  }
+
+  function formatPrice(amount, lang, hasPrefix) {
+    const locale =
+      lang === 'en' ? 'en-US' :
+      lang === 'bs' ? 'bs-BA' :
+      'de-AT';
+
+    const fractionDigits = Number.isInteger(amount) ? 0 : 2;
+    const formattedAmount = new Intl.NumberFormat(locale, {
+      minimumFractionDigits: fractionDigits,
+      maximumFractionDigits: fractionDigits
+    }).format(amount);
+
+    const prefix = hasPrefix ? (PRICE_PREFIX_BY_LANG[lang] || PRICE_PREFIX_BY_LANG.de) : '';
+    return prefix ? `${prefix} \u20ac ${formattedAmount}` : `\u20ac ${formattedAmount}`;
+  }
+
+  function ensurePriceData(node) {
+    if (node.dataset.promoPriceAmount) {
+      return true;
+    }
+
+    const parsed = parsePriceAmount(node.textContent);
+    if (!parsed) {
+      return false;
+    }
+
+    node.dataset.promoPriceAmount = String(parsed.amount);
+    node.dataset.promoPriceHasPrefix = parsed.hasPrefix ? '1' : '0';
+    return true;
+  }
+
+  function syncPricingPromo() {
+    const { isVisible } = getPromoWindow();
+    const lang = getCurrentLang();
+    const discountLabel = `-${Math.round(HOME_PROMO_CONFIG.priceDiscountRate * 100)}%`;
+    const discountFactor = 1 - HOME_PROMO_CONFIG.priceDiscountRate;
+
+    document.querySelectorAll(PROMO_PRICE_SELECTOR).forEach((node) => {
+      if (!ensurePriceData(node)) {
+        return;
+      }
+
+      const baseAmount = Number.parseFloat(node.dataset.promoPriceAmount || '');
+      const hasPrefix = node.dataset.promoPriceHasPrefix === '1';
+
+      if (!Number.isFinite(baseAmount)) {
+        return;
+      }
+
+      if (!isVisible) {
+        node.classList.remove('promo-price');
+        node.textContent = formatPrice(baseAmount, lang, hasPrefix);
+        return;
+      }
+
+      const reducedAmount = Math.round(baseAmount * discountFactor * 100) / 100;
+      const originalPriceText = formatPrice(baseAmount, lang, hasPrefix);
+      const reducedPriceText = formatPrice(reducedAmount, lang, hasPrefix);
+
+      node.classList.add('promo-price');
+      node.innerHTML = [
+        `<span class="promo-price-original">${escapeHtml(originalPriceText)}</span>`,
+        '<span class="promo-price-sale">',
+        `  <span class="promo-price-current">${escapeHtml(reducedPriceText)}</span>`,
+        `  <span class="promo-price-chip">${escapeHtml(discountLabel)}</span>`,
+        '</span>'
+      ].join('');
+    });
   }
 
   function injectStyles() {
@@ -91,6 +219,50 @@
         max-width: 980px;
       }
 
+      .price .num.promo-price {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.52rem;
+        line-height: 1.18;
+      }
+
+      .promo-price-original {
+        color: #c85f69;
+        text-decoration: line-through;
+        text-decoration-color: #d96570;
+        text-decoration-thickness: 3px;
+        text-decoration-skip-ink: none;
+      }
+
+      .promo-price-sale {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.48rem;
+        flex-wrap: wrap;
+      }
+
+      .promo-price-current {
+        color: #342725;
+        font-weight: 900;
+      }
+
+      .promo-price-chip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.22rem 0.56rem;
+        border-radius: 999px;
+        background: linear-gradient(180deg, #d97a85 0%, #c86472 100%);
+        box-shadow: 0 10px 24px rgba(201, 100, 114, 0.16);
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 900;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
       @media (max-width: 640px) {
         .promo-banner {
           gap: 0.5rem;
@@ -107,6 +279,11 @@
           font-size: 0.84rem;
           line-height: 1.5;
           max-width: 34ch;
+        }
+
+        .promo-price-chip {
+          font-size: 0.68rem;
+          padding: 0.2rem 0.5rem;
         }
       }
     `;
@@ -171,12 +348,10 @@
       promoTimerId = null;
     }
 
-    const now = new Date();
-    const startsAt = HOME_PROMO_CONFIG.startsAt ? new Date(HOME_PROMO_CONFIG.startsAt) : null;
-    const endsAt = HOME_PROMO_CONFIG.endsAt ? new Date(HOME_PROMO_CONFIG.endsAt) : null;
-    const isVisible = (!startsAt || now >= startsAt) && (!endsAt || now <= endsAt);
+    const { now, startsAt, endsAt, isVisible } = getPromoWindow();
 
     banner.hidden = !isVisible;
+    syncPricingPromo();
 
     const nextChanges = [startsAt, endsAt]
       .filter(date => date instanceof Date && !Number.isNaN(date.getTime()) && date.getTime() > now.getTime())
@@ -191,6 +366,7 @@
   function observeLanguageChanges() {
     const observer = new MutationObserver(() => {
       renderBanner();
+      syncPricingPromo();
     });
 
     observer.observe(document.documentElement, {
