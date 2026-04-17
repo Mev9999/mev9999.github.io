@@ -2560,9 +2560,9 @@ display: flex;
   </button>
 
   <div class="lang-menu" id="langMenu">
-    <button type="button" class="lang-option" data-lang="de">DE</button>
-    <button type="button" class="lang-option" data-lang="en">EN</button>
-    <button type="button" class="lang-option active" data-lang="bs">BS</button>
+    <a class="lang-option" data-lang="de" href="index.html">DE</a>
+    <a class="lang-option" data-lang="en" href="index-en.html">EN</a>
+    <a class="lang-option active" data-lang="bs" href="index-bs.html">BS</a>
   </div>
 </div>
      </div>
@@ -4492,6 +4492,9 @@ insta_button:"Zapratite @liza.memories.photography",
 
     function updateInternalLinks(lang){
       document.querySelectorAll('a[href]').forEach(link => {
+        if(link.classList.contains('lang-option')){
+          return;
+        }
         const href = link.getAttribute('href');
         const localizedHref = localizeHref(href, lang);
         if(localizedHref !== href){
@@ -4671,19 +4674,23 @@ insta_button:"Zapratite @liza.memories.photography",
     }
 
     langOptions.forEach(option => {
-      option.addEventListener('click', () => {
+      option.addEventListener('click', (event) => {
         const selectedLang = option.dataset.lang;
         if(!SUPPORTED_LANGS.includes(selectedLang)){
           return;
         }
 
+        const targetHref = option.getAttribute('href') || buildLocalizedFileName(baseFileName, selectedLang);
+        const targetPath = targetHref.split('#', 2)[0];
+        const targetHash = window.location.hash || '';
+
+        event.preventDefault();
+
         try{
           localStorage.setItem(LANG_STORAGE_KEY, selectedLang);
         }catch(_error){}
 
-        const targetFile = buildLocalizedFileName(baseFileName, selectedLang);
-        const targetHash = window.location.hash || '';
-        window.location.href = `${targetFile}${targetHash}`;
+        window.location.href = `${targetPath}${targetHash}`;
       });
     });
 

@@ -282,6 +282,9 @@
 
   function updateInternalLinks(lang){
     document.querySelectorAll('a[href]').forEach((link) => {
+      if(link.classList.contains('lang-option')){
+        return;
+      }
       const href = link.getAttribute('href');
       const localizedHref = localizeHref(href, lang);
       if(localizedHref !== href){
@@ -1876,15 +1879,18 @@
   }
 
   refs.langOptions.forEach((option) => {
-    option.addEventListener('click', () => {
+    option.addEventListener('click', (event) => {
       const selectedLang = option.dataset.lang;
       if(!supportedLangs.includes(selectedLang)){
         return;
       }
-      persistLanguage(selectedLang);
-      const targetFile = buildLocalizedFileName(baseFileName, selectedLang);
+      const targetHref = option.getAttribute('href') || buildLocalizedFileName(baseFileName, selectedLang);
+      const targetPath = targetHref.split('#', 2)[0];
       const targetHash = window.location.hash || '';
-      window.location.href = `${targetFile}${targetHash}`;
+
+      event.preventDefault();
+      persistLanguage(selectedLang);
+      window.location.href = `${targetPath}${targetHash}`;
     });
   });
 
