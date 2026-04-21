@@ -18,21 +18,43 @@
     return fileName.replace(LANGUAGE_SUFFIX_PATTERN, '.html');
   }
 
+  function normalizeHtmlPath(fileName){
+    return (fileName || '').replace(/^\/+/, '') || 'index.html';
+  }
+
   function getLanguageFromFile(fileName){
-    const match = fileName.match(LANGUAGE_SUFFIX_PATTERN);
+    const match = normalizeHtmlPath(fileName).match(LANGUAGE_SUFFIX_PATTERN);
     return match ? match[1].toLowerCase() : DEFAULT_LANG;
   }
 
+  function isHomeFile(fileName){
+    return stripLanguageSuffix(normalizeHtmlPath(fileName)).toLowerCase() === 'index.html';
+  }
+
   function buildLocalizedFileName(fileName, lang){
-    const normalizedFile = stripLanguageSuffix(fileName);
+    const normalizedFile = stripLanguageSuffix(normalizeHtmlPath(fileName));
+    if(isHomeFile(normalizedFile)){
+      return lang === DEFAULT_LANG ? 'index.html' : `index-${lang}.html`;
+    }
     if(lang === DEFAULT_LANG){
       return normalizedFile;
     }
     return normalizedFile.replace(/\.html$/i, `-${lang}.html`);
   }
 
+  function buildLocalizedHref(fileName, lang){
+    if(isHomeFile(fileName)){
+      return lang === DEFAULT_LANG ? '/' : `index-${lang}.html`;
+    }
+    return buildLocalizedFileName(fileName, lang);
+  }
+
+  function buildAbsoluteUrlForLanguage(fileName, lang){
+    return new URL(buildLocalizedHref(fileName, lang), SITE_ORIGIN).toString();
+  }
+
   function buildAbsoluteUrl(fileName){
-    return new URL(buildLocalizedFileName(fileName, getLanguageFromFile(fileName)), SITE_ORIGIN).toString();
+    return buildAbsoluteUrlForLanguage(fileName, getLanguageFromFile(fileName));
   }
 
   const currentFileName = window.location.pathname.split('/').pop() || 'babybauch-shooting-graz.html';
@@ -269,12 +291,20 @@
 
     const [pathAndQuery, hashFragment] = href.split('#', 2);
     const [pathName, queryString] = pathAndQuery.split('?', 2);
+    const normalizedPath = normalizeHtmlPath(pathName);
+
+    if(pathName === '/' || isHomeFile(normalizedPath)){
+      const localizedPath = buildLocalizedHref('index.html', lang);
+      const queryPart = queryString ? `?${queryString}` : '';
+      const hashPart = hashFragment ? `#${hashFragment}` : '';
+      return `${localizedPath}${queryPart}${hashPart}`;
+    }
 
     if(!/\.html$/i.test(pathName)){
       return href;
     }
 
-    const localizedPath = buildLocalizedFileName(pathName, lang);
+    const localizedPath = buildLocalizedHref(pathName, lang);
     const queryPart = queryString ? `?${queryString}` : '';
     const hashPart = hashFragment ? `#${hashFragment}` : '';
     return `${localizedPath}${queryPart}${hashPart}`;
@@ -305,17 +335,17 @@
   }
 
   function updateCanonicalAndAlternates(lang){
-    const currentUrl = new URL(buildLocalizedFileName(baseFileName, lang), SITE_ORIGIN).toString();
+    const currentUrl = buildAbsoluteUrlForLanguage(baseFileName, lang);
 
     if(refs.canonicalLink){
       refs.canonicalLink.setAttribute('href', currentUrl);
     }
     setMeta(refs.ogUrl, currentUrl);
 
-    ensureAlternateLink('de', new URL(buildLocalizedFileName(baseFileName, 'de'), SITE_ORIGIN).toString());
-    ensureAlternateLink('en', new URL(buildLocalizedFileName(baseFileName, 'en'), SITE_ORIGIN).toString());
-    ensureAlternateLink('bs', new URL(buildLocalizedFileName(baseFileName, 'bs'), SITE_ORIGIN).toString());
-    ensureAlternateLink('x-default', new URL(buildLocalizedFileName(baseFileName, 'de'), SITE_ORIGIN).toString());
+    ensureAlternateLink('de', buildAbsoluteUrlForLanguage(baseFileName, 'de'));
+    ensureAlternateLink('en', buildAbsoluteUrlForLanguage(baseFileName, 'en'));
+    ensureAlternateLink('bs', buildAbsoluteUrlForLanguage(baseFileName, 'bs'));
+    ensureAlternateLink('x-default', buildAbsoluteUrlForLanguage(baseFileName, 'de'));
   }
 
   function setJsonLdScript(key, payload){
@@ -330,7 +360,7 @@
   }
 
   function updateStructuredData(lang, pageStrings, commonStrings){
-    const currentUrl = new URL(buildLocalizedFileName(baseFileName, lang), SITE_ORIGIN).toString();
+    const currentUrl = buildAbsoluteUrlForLanguage(baseFileName, lang);
     const businessSchema = {
       '@context': 'https://schema.org',
       '@type': pageKey === 'about' ? 'Person' : 'Service',
@@ -371,7 +401,7 @@
         '@type': 'ListItem',
         position: 1,
         name: commonStrings.breadcrumbs.home,
-        item: new URL(buildLocalizedFileName('index.html', lang), SITE_ORIGIN).toString()
+        item: buildAbsoluteUrlForLanguage('index.html', lang)
       }
     ];
 
@@ -380,7 +410,7 @@
         '@type': 'ListItem',
         position: 2,
         name: commonStrings.breadcrumbs.services,
-        item: `${new URL(buildLocalizedFileName('index.html', lang), SITE_ORIGIN).toString()}#services`
+        item: `${buildAbsoluteUrlForLanguage('index.html', lang)}#services`
       });
     }
 
@@ -1884,7 +1914,7 @@
       if(!supportedLangs.includes(selectedLang)){
         return;
       }
-      const targetHref = option.getAttribute('href') || buildLocalizedFileName(baseFileName, selectedLang);
+      const targetHref = option.getAttribute('href') || buildLocalizedHref(baseFileName, selectedLang);
       const targetPath = targetHref.split('#', 2)[0];
       const targetHash = window.location.hash || '';
 
