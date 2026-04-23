@@ -9,6 +9,7 @@
   const pageByFile = {
     'ueber-mich.html': 'about',
     'babybauch-shooting-graz.html': 'babybauch',
+    'babybauch-und-neugeborenen-shooting-graz.html': 'combo',
     'newborn-fotografie-graz.html': 'newborn',
     'familienfotografie-graz.html': 'familie',
     'hochzeitsfotograf-graz.html': 'hochzeit'
