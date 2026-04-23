@@ -3,6 +3,30 @@
   const DEFAULT_LANG = 'de';
   const supportedLangs = ['de', 'en', 'bs'];
   const SITE_ORIGIN = 'https://liza-memories-photography.com/';
+  const BUSINESS_MAP_URL = 'https://maps.app.goo.gl/Absk5FRMgyCuUwxe9';
+  const BUSINESS_OPENING_HOURS = [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'https://schema.org/Monday',
+        'https://schema.org/Tuesday',
+        'https://schema.org/Wednesday',
+        'https://schema.org/Thursday',
+        'https://schema.org/Friday'
+      ],
+      opens: '16:00',
+      closes: '18:00'
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'https://schema.org/Saturday',
+        'https://schema.org/Sunday'
+      ],
+      opens: '08:00',
+      closes: '18:00'
+    }
+  ];
   const LANGUAGE_SUFFIX_PATTERN = /-(en|bs)\.html$/i;
   const HOME_PROMO_SCRIPT_ID = 'homePromoScript';
 
@@ -371,20 +395,24 @@
             jobTitle: lang === 'en' ? 'Photographer' : lang === 'bs' ? 'Fotografkinja' : 'Fotografin',
             image: 'https://liza-memories-photography.com/about.webp',
             url: currentUrl,
-            worksFor: {
-              '@type': 'ProfessionalService',
-              name: 'LiZa Memories Photography',
-              url: SITE_ORIGIN
-            },
-            description: pageStrings.metaDescription
-          }
+              worksFor: {
+                '@type': 'ProfessionalService',
+                name: 'LiZa Memories Photography',
+                url: SITE_ORIGIN,
+                hasMap: BUSINESS_MAP_URL,
+                openingHoursSpecification: BUSINESS_OPENING_HOURS
+              },
+              description: pageStrings.metaDescription
+            }
         : {
             name: pageStrings.metaTitle.split('|')[0].trim(),
-            provider: {
-              '@type': 'ProfessionalService',
-              name: 'LiZa Memories Photography',
-              url: SITE_ORIGIN
-            },
+              provider: {
+                '@type': 'ProfessionalService',
+                name: 'LiZa Memories Photography',
+                url: SITE_ORIGIN,
+                hasMap: BUSINESS_MAP_URL,
+                openingHoursSpecification: BUSINESS_OPENING_HOURS
+              },
             areaServed: 'Graz',
             serviceType: pageStrings.breadcrumbCurrent,
             url: currentUrl,
