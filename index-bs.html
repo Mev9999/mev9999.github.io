@@ -1006,6 +1006,10 @@ nav.primary a.active{
 .story-card-cta{
   margin-top: auto;
   align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
     
 
@@ -2048,6 +2052,14 @@ form.contact .row,
 form.contact .btn{
   width: 100%;
   min-height: 54px;
+}
+
+.instagram-section--contact > .btn{
+  width: 100%;
+  min-height: 54px;
+  white-space: nowrap;
+  font-size: clamp(.84rem, 3.6vw, 1rem);
+  padding-inline: .8rem;
 }
 
 form.contact .row > *{
