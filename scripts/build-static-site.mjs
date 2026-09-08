@@ -323,10 +323,8 @@ function updateJsonLd(document, fileName) {
           business.geo = BUSINESS_DETAILS.geo;
           business.hasMap = BUSINESS_DETAILS.hasMap;
           business.image = Array.from(new Set([
-            ...(Array.isArray(business.image) ? business.image : business.image ? [business.image] : []),
-            absoluteUrl('hero-bild.webp'),
-            absoluteUrl('13.webp'),
-            absoluteUrl('33.webp')
+            heroImageUrl,
+            ...(Array.isArray(business.image) ? business.image : business.image ? [business.image] : [])
           ]));
         }
         script.textContent = JSON.stringify(payload);
@@ -358,15 +356,14 @@ function updateJsonLd(document, fileName) {
 }
 
 function updateSocialMeta(document, fileName) {
-  const isHome = /^index(?:-(en|bs))?\.html$/i.test(fileName);
   const heroImage = document.querySelector('.hero-visual img, .hero .art img');
   const heroImageSrc = heroImage && isLocalImage(heroImage.getAttribute('src'))
     ? absoluteUrl(heroImage.getAttribute('src'))
     : absoluteUrl('hero-bild.webp');
   const heroAlt = heroImage?.getAttribute('alt') || 'LiZa Memories Photography';
-  const imageHref = isHome ? absoluteUrl(OG_IMAGE_REL) : heroImageSrc;
-  const imageWidth = isHome ? '1200' : (heroImage?.getAttribute('width') || '1000');
-  const imageHeight = isHome ? '630' : (heroImage?.getAttribute('height') || '667');
+  const imageHref = heroImageSrc;
+  const imageWidth = heroImage?.getAttribute('width') || '1000';
+  const imageHeight = heroImage?.getAttribute('height') || '667';
 
   setMeta(document, 'meta[property="og:image"]', imageHref);
   setMeta(document, 'meta[property="og:image:width"]', imageWidth);

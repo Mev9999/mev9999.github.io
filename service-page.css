@@ -149,6 +149,7 @@ a{color:inherit}
 
 .service-page-link,
 .portfolio-page-link,
+.price-page-link,
 .faq-page-link{
   display:none !important;
 }
@@ -1492,6 +1493,7 @@ section{padding:3.4rem 0}
 
   .nav-links.primary .service-page-link,
   .nav-links.primary .portfolio-page-link,
+  .nav-links.primary .price-page-link,
   .nav-links.primary .faq-page-link{
     display:block !important;
     width:auto;
@@ -1509,6 +1511,8 @@ section{padding:3.4rem 0}
   .nav-links.primary .service-page-link.active,
   .nav-links.primary .portfolio-page-link:hover,
   .nav-links.primary .portfolio-page-link.active,
+  .nav-links.primary .price-page-link:hover,
+  .nav-links.primary .price-page-link.active,
   .nav-links.primary .faq-page-link:hover,
   .nav-links.primary .faq-page-link.active{
     color:var(--ink);

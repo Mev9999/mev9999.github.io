@@ -615,65 +615,41 @@ async function createHomeTemplates() {
 }
 
 async function createPortraitTemplates() {
-  const template = await fs.readFile(path.join(ROOT, 'familienfotografie-graz.html'), 'utf8');
-  const dom = new JSDOM(template);
-  const { document } = dom.window;
+  await Promise.all(LANGUAGES.map(async (lang) => {
+    const currentFile = localizedFile('portraitfotografie-graz.html', lang);
+    const template = await fs.readFile(path.join(ROOT, currentFile), 'utf8');
+    const dom = new JSDOM(template);
+    const { document } = dom.window;
 
-  document.body.className = 'portrait-page';
-  document.querySelector('#gallery-showcase')?.remove();
+    document.body.className = 'portrait-page';
+    document.querySelector('#gallery-showcase')?.remove();
+    document.querySelectorAll('.lang-option').forEach((link) => {
+      link.setAttribute('href', localizedFile('portraitfotografie-graz.html', link.dataset.lang || 'de'));
+    });
 
-  const heroImage = document.querySelector('.hero-visual img');
-  if (heroImage) {
-    heroImage.setAttribute('src', 'about.webp');
-    heroImage.setAttribute('width', '1000');
-    heroImage.setAttribute('height', '799');
-    heroImage.removeAttribute('srcset');
-    heroImage.removeAttribute('sizes');
-    heroImage.style.objectPosition = 'center center';
-  }
-
-  const preload = document.querySelector('link[rel="preload"][as="image"]');
-  if (preload) {
-    preload.setAttribute('href', 'about.webp');
-    preload.removeAttribute('imagesrcset');
-    preload.removeAttribute('imagesizes');
-  }
-
-  document.querySelectorAll('.lang-option').forEach((link) => {
-    link.setAttribute('href', localizedFile('portraitfotografie-graz.html', link.dataset.lang || 'de'));
-  });
-
-  const html = `<!DOCTYPE html>\n${document.documentElement.outerHTML}\n`
-    .replace(/^[ \t]+$/gm, '');
-  await Promise.all(LANGUAGES.map((lang) => (
-    fs.writeFile(path.join(ROOT, localizedFile('portraitfotografie-graz.html', lang)), html, 'utf8')
-  )));
-  dom.window.close();
+    const html = `<!DOCTYPE html>\n${document.documentElement.outerHTML}\n`
+      .replace(/^[ \t]+$/gm, '');
+    await fs.writeFile(path.join(ROOT, currentFile), html, 'utf8');
+    dom.window.close();
+  }));
 }
 
 async function createComboTemplates() {
-  const sourcePath = path.join(ROOT, 'babybauch-und-neugeborenen-shooting-graz.html');
-  const template = await fs.readFile(sourcePath, 'utf8');
-  const dom = new JSDOM(template);
-  const { document } = dom.window;
+  await Promise.all(LANGUAGES.map(async (lang) => {
+    const currentFile = localizedFile('babybauch-und-neugeborenen-shooting-graz.html', lang);
+    const template = await fs.readFile(path.join(ROOT, currentFile), 'utf8');
+    const dom = new JSDOM(template);
+    const { document } = dom.window;
 
-  document.querySelectorAll('main > section').forEach((section) => {
-    const heading = section.querySelector('h2')?.textContent || '';
-    if (/Für wen diese Kombi/i.test(heading)) {
-      section.remove();
-    }
-  });
+    document.querySelectorAll('.lang-option').forEach((link) => {
+      link.setAttribute('href', localizedFile('babybauch-und-neugeborenen-shooting-graz.html', link.dataset.lang || 'de'));
+    });
 
-  document.querySelectorAll('.lang-option').forEach((link) => {
-    link.setAttribute('href', localizedFile('babybauch-und-neugeborenen-shooting-graz.html', link.dataset.lang || 'de'));
-  });
-
-  const html = `<!DOCTYPE html>\n${document.documentElement.outerHTML}\n`
-    .replace(/^[ \t]+$/gm, '');
-  await Promise.all(LANGUAGES.map((lang) => (
-    fs.writeFile(path.join(ROOT, localizedFile('babybauch-und-neugeborenen-shooting-graz.html', lang)), html, 'utf8')
-  )));
-  dom.window.close();
+    const html = `<!DOCTYPE html>\n${document.documentElement.outerHTML}\n`
+      .replace(/^[ \t]+$/gm, '');
+    await fs.writeFile(path.join(ROOT, currentFile), html, 'utf8');
+    dom.window.close();
+  }));
 }
 
 async function createPricingPage(lang) {
@@ -739,18 +715,18 @@ async function createPricingPage(lang) {
 
   ensureServiceNavigation(document, lang);
 
-  const navLinks = document.querySelectorAll('.nav-links > a, .nav-links > .nav-dropdown > a');
-  navLinks.forEach((link) => link.classList.remove('active'));
-  if (navLinks[0]) navLinks[0].setAttribute('href', localizedFile('index.html', lang));
-  if (navLinks[1]) navLinks[1].setAttribute('href', localizedFile('ueber-mich.html', lang));
-  if (navLinks[2]) navLinks[2].setAttribute('href', `${localizedFile('index.html', lang)}#services`);
-  if (navLinks[3]) navLinks[3].setAttribute('href', `${localizedFile('index.html', lang)}#portfolio`);
-  if (navLinks[4]) {
-    navLinks[4].setAttribute('href', currentFile);
-    navLinks[4].classList.add('active');
-  }
-  if (navLinks[5]) navLinks[5].setAttribute('href', `${localizedFile('index.html', lang)}#faq`);
-  if (navLinks[6]) navLinks[6].setAttribute('href', `${localizedFile('index.html', lang)}#direct-contact-card`);
+  const primaryLinks = Array.from(document.querySelectorAll('.nav-links > a'))
+    .filter((link) => !link.matches('.service-page-link, .portfolio-page-link, .price-page-link, .faq-page-link, .nav-icon-link'));
+  document.querySelectorAll('.nav-links > a, .nav-links > .nav-dropdown > a').forEach((link) => link.classList.remove('active'));
+  if (primaryLinks[0]) primaryLinks[0].setAttribute('href', localizedFile('index.html', lang));
+  if (primaryLinks[1]) primaryLinks[1].setAttribute('href', localizedFile('ueber-mich.html', lang));
+  if (primaryLinks[2]) primaryLinks[2].setAttribute('href', `${localizedFile('index.html', lang)}#direct-contact-card`);
+  document.querySelector('.services-dropdown > a')?.setAttribute('href', `${localizedFile('index.html', lang)}#services`);
+  document.querySelector('.portfolio-dropdown > a')?.setAttribute('href', `${localizedFile('index.html', lang)}#portfolio`);
+  const pricingLink = document.querySelector('.price-dropdown > a');
+  pricingLink?.setAttribute('href', `${currentFile}#overview`);
+  pricingLink?.classList.add('active');
+  document.querySelector('.faq-dropdown > a')?.setAttribute('href', `${localizedFile('index.html', lang)}#faq`);
 
   document.querySelectorAll('.portfolio-dropdown .nav-dropdown-menu a').forEach((link) => {
     const href = link.getAttribute('href') || '';
