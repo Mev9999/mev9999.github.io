@@ -40,12 +40,12 @@
     'hochzeitsfotograf-graz.html': 'hochzeit'
   };
   const serviceLinks = [
-    { key: 'portrait', href: 'portraitfotografie-graz.html' },
     { key: 'maternity', href: 'babybauch-shooting-graz.html' },
     { key: 'newborn', href: 'newborn-fotografie-graz.html' },
-    { key: 'family', href: 'familienfotografie-graz.html' },
     { key: 'combo', href: 'babybauch-und-neugeborenen-shooting-graz.html' },
-    { key: 'wedding', href: 'hochzeitsfotograf-graz.html' }
+    { key: 'family', href: 'familienfotografie-graz.html' },
+    { key: 'wedding', href: 'hochzeitsfotograf-graz.html' },
+    { key: 'portrait', href: 'portraitfotografie-graz.html' }
   ];
   const priceAnchorByPage = {
     portrait: 'portrait',
@@ -205,7 +205,7 @@
     de: {
       languageLabel: 'Sprache wählen',
       nav: { home: 'Home', about: 'Über mich', services: 'Leistungen', portfolio: 'Portfolio', gallery1: 'Babybauch Galerie', gallery2: 'Neugeborenen Galerie', gallery3: 'Familien Galerie', gallery4: 'Hochzeits Galerie', pricing: 'Preise', faq: 'Häufige Fragen', contact: 'Kontakt' },
-      services: { portrait: 'Portrait', maternity: 'Babybauch', newborn: 'Neugeborene', family: 'Familie', combo: 'Babybauch & Neugeborene', wedding: 'Hochzeit' },
+      services: { portrait: 'Porträt', maternity: 'Babybauch', newborn: 'Neugeborene', family: 'Familie', combo: 'Babybauch & Neugeborene', wedding: 'Hochzeit' },
       breadcrumbs: { aria: 'Breadcrumb', home: 'Startseite', services: 'Leistungen' },
       contact: { email: 'E-Mail', phone: 'Telefon', location: 'Standort', more: 'Weitere Leistungen', locationValue: '8054 Graz' },
       footer: {

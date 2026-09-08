@@ -7,20 +7,20 @@ const LANGUAGES = ['de', 'en', 'bs'];
 const SITE_ORIGIN = 'https://liza-memories-photography.com/';
 
 const serviceLinks = [
-  { key: 'portrait', file: 'portraitfotografie-graz.html' },
   { key: 'maternity', file: 'babybauch-shooting-graz.html' },
   { key: 'newborn', file: 'newborn-fotografie-graz.html' },
-  { key: 'family', file: 'familienfotografie-graz.html' },
   { key: 'combo', file: 'babybauch-und-neugeborenen-shooting-graz.html' },
-  { key: 'wedding', file: 'hochzeitsfotograf-graz.html' }
+  { key: 'family', file: 'familienfotografie-graz.html' },
+  { key: 'wedding', file: 'hochzeitsfotograf-graz.html' },
+  { key: 'portrait', file: 'portraitfotografie-graz.html' }
 ];
 
 const copy = {
   de: {
     pageTitle: 'Pakete & Preise | LiZa Memories Photography',
-    metaDescription: 'Alle Pakete und Preise für Portrait-, Babybauch-, Neugeborenen-, Familien- und Hochzeitsfotografie in Graz transparent im Überblick.',
+    metaDescription: 'Alle Pakete und Preise für Porträt-, Babybauch-, Neugeborenen-, Familien- und Hochzeitsfotografie in Graz transparent im Überblick.',
     navServices: {
-      portrait: 'Portrait',
+      portrait: 'Porträt',
       maternity: 'Babybauch',
       newborn: 'Neugeborene',
       family: 'Familie',
@@ -128,9 +128,9 @@ const categories = [
     id: 'portrait',
     serviceKey: 'portrait',
     start: 99,
-    title: { de: 'Portraitshooting', en: 'Portrait Session', bs: 'Portretno fotografisanje' },
+    title: { de: 'Porträtshooting', en: 'Portrait Session', bs: 'Portretno fotografisanje' },
     intro: {
-      de: 'Persönliche Portraits mit ruhiger Anleitung und unterschiedlichen Bildlooks.',
+      de: 'Persönliche Porträts mit ruhiger Anleitung und unterschiedlichen Bildlooks.',
       en: 'Personal portraits with calm guidance and a choice of image looks.',
       bs: 'Lični portreti uz mirno vođenje i različite izglede fotografija.'
     },
@@ -163,7 +163,7 @@ const categories = [
       {
         tier: 'gold',
         price: 154,
-        name: { de: 'Portrait Vielfalt', en: 'Portrait Variety', bs: 'Raznolikost portreta' },
+        name: { de: 'Porträt Vielfalt', en: 'Portrait Variety', bs: 'Raznolikost portreta' },
         details: {
           de: ['30 Minuten', '8 bearbeitete Bilder', 'Bis zu 2 Outfits', 'Verschiedene Bildvarianten'],
           en: ['30 minutes', '8 edited images', 'Up to 2 outfits', 'Different image variations'],
@@ -590,7 +590,7 @@ function ensureServiceNavigation(document, lang) {
   const menu = document.querySelector('.services-dropdown .nav-dropdown-menu');
   if (menu) {
     menu.innerHTML = serviceLinks
-      .map((service) => `<a href="${localizedFile(service.file, lang)}">${escapeHtml(labels[service.key])}</a>`)
+      .map((service) => `<a href="${localizedFile(service.file, lang)}" data-service-key="${service.key}">${escapeHtml(labels[service.key])}</a>`)
       .join('');
   }
 
@@ -601,7 +601,7 @@ function ensureServiceNavigation(document, lang) {
       ? `<a href="${localizedFile('index.html', lang)}#portfolio">${escapeHtml(portfolioLink.textContent)}</a>`
       : '';
     footer.innerHTML = portfolio + serviceLinks
-      .map((service) => `<a href="${localizedFile(service.file, lang)}">${escapeHtml(labels[service.key])}</a>`)
+      .map((service) => `<a href="${localizedFile(service.file, lang)}" data-service-key="${service.key}">${escapeHtml(labels[service.key])}</a>`)
       .join('');
   }
 }

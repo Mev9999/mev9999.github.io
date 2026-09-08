@@ -1605,3 +1605,11 @@ section{padding:3.4rem 0}
     white-space:nowrap;
   }
 }
+
+
+/* Mobile header content order: social links and logo above the inquiry button. */
+@media (max-width:640px){
+  .site-header .nav{grid-template-areas:"burger brand lang" ". cta ."}
+  .site-header .header-social-links{grid-column:2;grid-row:1}
+  .site-header .header-cta{grid-area:cta;grid-column:2;grid-row:2}
+}

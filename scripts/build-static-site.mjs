@@ -305,12 +305,33 @@ function setCanonical(document, fileName) {
   return canonicalHref;
 }
 
+function collectVisibleFaqEntities(document) {
+  return Array.from(document.querySelectorAll('#faq .faq-item'))
+    .map((item) => {
+      const question = item.querySelector('.faq-question > span:first-child, summary, h3')?.textContent.trim();
+      const answer = item.querySelector('.faq-answer p, p')?.textContent.trim();
+      if (!question || !answer) {
+        return null;
+      }
+      return {
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: answer
+        }
+      };
+    })
+    .filter(Boolean);
+}
+
 function updateJsonLd(document, fileName) {
   const heroImage = document.querySelector('.hero-visual img, .hero .art img');
   const heroImageUrl = heroImage && isLocalImage(heroImage.getAttribute('src'))
     ? absoluteUrl(heroImage.getAttribute('src'))
     : absoluteUrl('hero-bild.webp');
   const pageUrl = absoluteUrl(publicPathFor(fileName));
+  const visibleFaqEntities = collectVisibleFaqEntities(document);
 
   document.querySelectorAll('script[type="application/ld+json"]').forEach((script) => {
     try {
@@ -326,6 +347,18 @@ function updateJsonLd(document, fileName) {
             heroImageUrl,
             ...(Array.isArray(business.image) ? business.image : business.image ? [business.image] : [])
           ]));
+        }
+        const faqPage = payload['@graph'].find((entry) => entry['@type'] === 'FAQPage');
+        if (faqPage && visibleFaqEntities.length) {
+          faqPage.mainEntity = visibleFaqEntities;
+        }
+        script.textContent = JSON.stringify(payload);
+        return;
+      }
+
+      if (payload['@type'] === 'FAQPage') {
+        if (visibleFaqEntities.length) {
+          payload.mainEntity = visibleFaqEntities;
         }
         script.textContent = JSON.stringify(payload);
         return;
