@@ -272,7 +272,7 @@
     siteHeaderNav,
     burger: document.getElementById('burger'),
     mobileNav,
-    navLinks: document.querySelectorAll('.nav-links > a:not(.nav-icon-link):not(.service-page-link):not(.portfolio-page-link), .nav-links > .nav-dropdown > a'),
+    navLinks: document.querySelectorAll('.nav-links > a:not(.nav-icon-link):not(.service-page-link):not(.portfolio-page-link):not(.faq-page-link), .nav-links > .nav-dropdown > a'),
     servicesMenuLinks: document.querySelectorAll('.services-dropdown .nav-dropdown-menu a'),
     portfolioMenuLinks: document.querySelectorAll('.portfolio-dropdown .nav-dropdown-menu a'),
     mobileServiceLinks: document.querySelectorAll('.service-page-link'),
@@ -691,8 +691,8 @@
       if(!faq){
         return;
       }
-      setText(item.querySelector('h3'), faq.q);
-      setText(item.querySelector('p'), faq.a);
+      setText(item.querySelector('.faq-question > span:first-child, h3'), faq.q);
+      setText(item.querySelector('.faq-answer p, p'), faq.a);
     });
 
     setText(refs.ctaTitle, pageStrings.cta.title);
@@ -2292,6 +2292,43 @@
     applyLanguage(currentLang);
   }
 
+  function setupFaqAccordion(){
+    const faqItems = Array.from(document.querySelectorAll('.faq-list .faq-item'));
+
+    faqItems.forEach((item, index) => {
+      const button = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+      if(!button || !answer){
+        return;
+      }
+
+      const answerId = answer.id || `service-faq-answer-${index + 1}`;
+      answer.id = answerId;
+      button.setAttribute('aria-controls', answerId);
+      button.setAttribute('aria-expanded', 'false');
+
+      button.addEventListener('click', () => {
+        const wasOpen = item.classList.contains('open');
+
+        faqItems.forEach((other) => {
+          other.classList.remove('open');
+          const otherButton = other.querySelector('.faq-question');
+          const otherAnswer = other.querySelector('.faq-answer');
+          otherButton?.setAttribute('aria-expanded', 'false');
+          if(otherAnswer){
+            otherAnswer.style.maxHeight = '';
+          }
+        });
+
+        if(!wasOpen){
+          item.classList.add('open');
+          button.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = `${answer.scrollHeight}px`;
+        }
+      });
+    });
+  }
+
   function setupGalleryLightbox(){
     const items = [];
     const triggerEntries = [];
@@ -2422,6 +2459,7 @@
     });
   }
 
+  setupFaqAccordion();
   setupGalleryLightbox();
 
   if(refs.burger && refs.mobileNav){
