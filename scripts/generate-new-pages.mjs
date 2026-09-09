@@ -677,8 +677,8 @@ async function createPricingPage(lang) {
     <link rel="alternate" hreflang="bs" href="${new URL('preise-bs.html', SITE_ORIGIN)}">
     <link rel="alternate" hreflang="x-default" href="${new URL('preise.html', SITE_ORIGIN)}">`);
 
-  if (!document.querySelector('link[href="pricing-page.css"]')) {
-    document.head.insertAdjacentHTML('beforeend', '<link rel="stylesheet" href="pricing-page.css">');
+  if (!document.querySelector('link[href^="pricing-page.css"]')) {
+    document.head.insertAdjacentHTML('beforeend', '<link rel="stylesheet" href="pricing-page.css?v=20260909-desktop3">');
   }
   document.querySelector('link[rel="preload"][as="image"]')?.remove();
 
