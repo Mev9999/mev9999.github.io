@@ -771,13 +771,16 @@ section{padding:3.4rem 0}
 }
 
 .faq-list .faq-item{
-  background:var(--card);
+  padding:0;
+  background:#fffaf7;
   border:1px solid rgba(217,152,130,.18);
-  border-radius:var(--radius);
+  border-radius:18px;
   box-shadow:var(--shadow);
   overflow:hidden;
   transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
+
+.faq-list .faq-question{line-height:1.6}
 
 .faq-list .faq-item:hover{
   transform:translateY(-2px);
@@ -997,7 +1000,7 @@ section{padding:3.4rem 0}
   display:none !important;
 }
 
-.faq-item{
+.faq-grid .faq-item{
   padding:1.25rem;
   border-radius:var(--radius);
   background:rgba(255,255,255,.78);
