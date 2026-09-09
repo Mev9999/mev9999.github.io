@@ -1624,3 +1624,23 @@ section{padding:3.4rem 0}
  .about-page .hero-points {grid-template-columns:1fr;align-items:start}
  .about-page .hero-points div {height:auto;min-height:0;padding:.8rem 1rem}
 }
+
+/* Keep the header attached to the document's scrolling viewport. */
+html, body {overflow-x:clip}
+/* Match the homepage video button, including its hover state. */
+.btn.video-cta {
+ background:linear-gradient(135deg,rgba(255,255,255,.92),rgba(242,218,208,.82));
+ border:1px solid rgba(176,111,87,.3);
+ color:var(--ink);
+ box-shadow:0 12px 26px rgba(109,77,65,.1);
+ font-weight:700;
+ letter-spacing:.2px;
+}
+.btn.video-cta:hover {
+ background:linear-gradient(135deg,#fff,rgba(238,205,192,.92));
+ box-shadow:0 12px 26px rgba(109,77,65,.1);
+}
+
+/* Leave anchored content visible below the sticky header. */
+main [id] {scroll-margin-top:120px}
+@media(max-width:900px){main [id] {scroll-margin-top:145px}}
