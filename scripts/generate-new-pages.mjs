@@ -724,7 +724,7 @@ async function createPricingPage(lang) {
   document.querySelector('.services-dropdown > a')?.setAttribute('href', `${localizedFile('index.html', lang)}#services`);
   document.querySelector('.portfolio-dropdown > a')?.setAttribute('href', `${localizedFile('index.html', lang)}#portfolio`);
   const pricingLink = document.querySelector('.price-dropdown > a');
-  pricingLink?.setAttribute('href', `${currentFile}#overview`);
+  pricingLink?.setAttribute('href', currentFile);
   pricingLink?.classList.add('active');
   document.querySelector('.faq-dropdown > a')?.setAttribute('href', `${localizedFile('index.html', lang)}#faq`);
 
