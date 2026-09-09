@@ -2851,10 +2851,6 @@ main .signature-card h3, main .process-card h3, main .story-card h3, main .price
 /* Google review invitation: visual identity without a fabricated rating or review count. */
 .google-review-panel {width:100%;max-width:none;display:grid;grid-template-columns:230px minmax(0,1fr);gap:2.5rem;align-items:center;margin:2rem auto 0;padding:2.5rem;border:1px solid rgba(176,111,87,.22);border-radius:28px;background:radial-gradient(ellipse at 0 0,rgba(230,189,161,.25),transparent 65%),linear-gradient(125deg,#fffdfb,#f7ebe5);box-shadow:0 16px 45px rgba(109,77,65,.07);text-align:left}
 .google-review-identity {display:flex;flex-direction:column;align-items:center;text-align:center;gap:.8rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(176,111,87,.18)}
-.google-review-wordmark {font-family:Arial,sans-serif;font-size:2rem;font-weight:600;letter-spacing:-1.5px;line-height:1.2}
-.google-review-wordmark span:nth-child(1),.google-review-wordmark span:nth-child(4){color:#4285f4}
-.google-review-wordmark span:nth-child(2),.google-review-wordmark span:nth-child(6){color:#ea4335}
-.google-review-wordmark span:nth-child(3){color:#c58a00}.google-review-wordmark span:nth-child(5){color:#34a853}
 .google-review-stars {display:flex;gap:.3rem;color:#c99632;filter:drop-shadow(0 2px 2px rgba(155,105,29,.12))}
 .google-review-stars svg {width:27px;height:27px;fill:currentColor}
 .google-review-identity .google-review-label {font-size:.72rem;letter-spacing:.08em;line-height:1.6;text-transform:uppercase}
@@ -2867,6 +2863,9 @@ main .signature-card h3, main .process-card h3, main .story-card h3, main .price
  .google-review-identity {padding:0 0 1.3rem;border-right:0;border-bottom:1px solid rgba(176,111,87,.18)}
  .google-review-copy .btn {max-width:100%;white-space:normal}
 }
+
+.review-conversation-icon {display:grid;place-items:center;width:72px;height:72px;border-radius:50%;background:#f1dfd4;border:1px solid rgba(176,111,87,.18);color:#a7725c}
+.review-conversation-icon svg {width:42px;height:42px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 </style></head><body><header class="site">
     <div class="nav site-shell">
       <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav" type="button">
@@ -3065,7 +3064,7 @@ main .signature-card h3, main .process-card h3, main .story-card h3, main .price
 </section>
 
 <!-- TESTIMONIALS -->
-<section id="shooting-video" class="shooting-video-section"><div class="container"><div class="shooting-video-layout"><div class="shooting-video-copy"><span class="chip" data-i18n="video_eyebrow">Behind the scenes</span><h2 data-i18n="video_title">See what a session at LiZa Memories is like</h2><p data-i18n="video_text">Take a glimpse into the calm, personal atmosphere of a photography session.</p></div><div class="shooting-video-frame"><video controls="" playsinline="" preload="none" poster="shooting-einblick-poster.webp" width="1200" height="675" aria-label="Video: Ein Blick hinter die Kulissen eines Shootings bei LiZa Memories Photography"><source src="shooting-einblick-liza-memories.mp4" type="video/mp4">Dein Browser kann dieses Video leider nicht abspielen.</video></div></div></div></section><section id="testimonials" class="testimonials"><div class="container"><div class="hd"><h2 data-i18n="testimonials_title">Your experiences on Google</h2><p data-i18n="testimonials_sub">Genuine reviews from the people who have been in front of my camera.</p></div><div class="google-review-panel"><div class="google-review-identity"><div class="google-review-wordmark" aria-label="Google"><span aria-hidden="true">G</span><span aria-hidden="true">o</span><span aria-hidden="true">o</span><span aria-hidden="true">g</span><span aria-hidden="true">l</span><span aria-hidden="true">e</span></div><div class="google-review-stars" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01Z"></path></svg><svg viewBox="0 0 24 24" focusable="false"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01Z"></path></svg><svg viewBox="0 0 24 24" focusable="false"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01Z"></path></svg><svg viewBox="0 0 24 24" focusable="false"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01Z"></path></svg><svg viewBox="0 0 24 24" focusable="false"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01Z"></path></svg></div><span class="google-review-label" data-i18n="google_review_label">Google reviews</span><span class="google-review-name">LiZa Memories Photography</span></div><div class="google-review-copy"><h3 data-i18n="google_review_title">Your words mean so much to me.</h3><p data-i18n="google_review_text">What was the session like? How did families feel? Read their personal experiences directly on my Google profile.</p><a class="btn brand" href="https://maps.app.goo.gl/Absk5FRMgyCuUwxe9" target="_blank" rel="noopener noreferrer" data-i18n="google_review_link">Read reviews on Google</a><p class="google-review-note" data-i18n="google_review_note">Thank you to everyone who shares their memories with me and takes the time to leave a review.</p></div></div></div></section>
+<section id="shooting-video" class="shooting-video-section"><div class="container"><div class="shooting-video-layout"><div class="shooting-video-copy"><span class="chip" data-i18n="video_eyebrow">Behind the scenes</span><h2 data-i18n="video_title">See what a session at LiZa Memories is like</h2><p data-i18n="video_text">Take a glimpse into the calm, personal atmosphere of a photography session.</p></div><div class="shooting-video-frame"><video controls="" playsinline="" preload="none" poster="shooting-einblick-poster.webp" width="1200" height="675" aria-label="Video: Ein Blick hinter die Kulissen eines Shootings bei LiZa Memories Photography"><source src="shooting-einblick-liza-memories.mp4" type="video/mp4">Dein Browser kann dieses Video leider nicht abspielen.</video></div></div></div></section><section id="testimonials" class="testimonials"><div class="container"><div class="hd"><h2 data-i18n="testimonials_title">Your experiences on Google</h2><p data-i18n="testimonials_sub">Genuine reviews from the people who have been in front of my camera.</p></div><div class="google-review-panel"><div class="google-review-identity"><div class="review-conversation-icon" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M29 27h6l7 6v-8a9 9 0 0 0-6-16"></path><path d="M6 8h23a5 5 0 0 1 5 5v13a5 5 0 0 1-5 5H15L6 39v-8a5 5 0 0 1-4-5V13a5 5 0 0 1 4-5Z"></path><path d="M10 17h16M10 23h10"></path></svg></div><div class="google-review-stars" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01Z"></path></svg><svg viewBox="0 0 24 24" focusable="false"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01Z"></path></svg><svg viewBox="0 0 24 24" focusable="false"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01Z"></path></svg><svg viewBox="0 0 24 24" focusable="false"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01Z"></path></svg><svg viewBox="0 0 24 24" focusable="false"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01Z"></path></svg></div><span class="google-review-label" data-i18n="google_review_label">Your experiences</span><span class="google-review-name">LiZa Memories Photography</span></div><div class="google-review-copy"><h3 data-i18n="google_review_title">Your words mean so much to me.</h3><p data-i18n="google_review_text">What was the session like? How did families feel? Read their personal experiences directly on my Google profile.</p><a class="btn brand" href="https://maps.app.goo.gl/Absk5FRMgyCuUwxe9" target="_blank" rel="noopener noreferrer" data-i18n="google_review_link">Read reviews on Google</a><p class="google-review-note" data-i18n="google_review_note">Thank you to everyone who shares their memories with me and takes the time to leave a review.</p></div></div></div></section>
 
 <section id="session-stories" class="session-stories">
   <div class="container">
@@ -3942,7 +3941,7 @@ portfolio_photo_dsc03285_2:"Familie \u2013 Unser kleines Gl\u00fcck",
 portfolio_photo_dsc03416_2:"Familie \u2013 Gemeinsam angekommen",
 google_review_text:"Wie war das Shooting? Wie haben sich die Familien bei mir gef\u00fchlt? Lest ihre pers\u00f6nlichen Erfahrungen direkt auf meinem Google-Profil.",
 google_review_link:"Bewertungen auf Google lesen",
-google_review_label:"Google-Rezensionen",
+google_review_label:"Eure Erfahrungen",
 google_review_title:"Eure Worte bedeuten mir viel.",
 google_review_note:"Danke an alle, die ihre Erinnerungen mit mir teilen und sich Zeit für eine Bewertung nehmen.",
 gallery_1:"Familie – Gemeinsamkeit",
@@ -4309,7 +4308,7 @@ portfolio_photo_dsc03285_2:"Family \u2013 Our Little Joy",
 portfolio_photo_dsc03416_2:"Family \u2013 Together at Last",
 google_review_text:"What was the session like? How did families feel? Read their personal experiences directly on my Google profile.",
 google_review_link:"Read reviews on Google",
-google_review_label:"Google reviews",
+google_review_label:"Your experiences",
 google_review_title:"Your words mean so much to me.",
 google_review_note:"Thank you to everyone who shares their memories with me and takes the time to leave a review.",
 gallery_1:"Family – Togetherness",
@@ -4676,7 +4675,7 @@ portfolio_photo_dsc03285_2:"Porodica \u2013 Na\u0161a mala sre\u0107a",
 portfolio_photo_dsc03416_2:"Porodica \u2013 Napokon zajedno",
 google_review_text:"Kako je proteklo fotografisanje? Kako su se porodice osje\u0107ale? Pro\u010ditajte njihova iskustva direktno na mom Google profilu.",
 google_review_link:"Pro\u010ditajte recenzije na Googleu",
-google_review_label:"Google recenzije",
+google_review_label:"Vaša iskustva",
 google_review_title:"Vaše riječi mi mnogo znače.",
 google_review_note:"Hvala svima koji sa mnom dijele svoje uspomene i odvoje vrijeme da napišu recenziju.",
 gallery_1:"Porodica – Zajedništvo",
@@ -5267,4 +5266,5 @@ $$('nav.primary a').forEach(link => {
 });
 
   </script>
+
 </body></html>
