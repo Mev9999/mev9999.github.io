@@ -906,7 +906,7 @@
       }
       const targetHref = option.getAttribute('href') || buildLocalizedHref(baseFileName, selectedLang);
       const targetPath = targetHref.split('#', 2)[0];
-      const targetHash = window.location.hash || '';
+      const targetHash = ''; // A language change opens the page at its beginning.
 
       event.preventDefault();
       persistLanguage(selectedLang);

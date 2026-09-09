@@ -1613,3 +1613,14 @@ section{padding:3.4rem 0}
   .site-header .header-social-links{grid-column:2;grid-row:1}
   .site-header .header-cta{grid-area:cta;grid-column:2;grid-row:2}
 }
+
+/* Compact about cards and consistent session links. */
+.about-page .hero-points div {min-height:0;padding:.85rem 1rem}
+.straight-hyphen {font-family:Arial,sans-serif;font-style:normal;font-weight:400}
+.video-cta {background:rgba(255,250,247,.82);border:1px solid rgba(176,111,87,.3);color:#704b40}
+@media(max-width:900px){
+ .hero-actions {flex-direction:column;align-items:flex-start}
+ .hero-actions .btn {max-width:100%;white-space:normal}
+ .about-page .hero-points {grid-template-columns:1fr;align-items:start}
+ .about-page .hero-points div {height:auto;min-height:0;padding:.8rem 1rem}
+}
