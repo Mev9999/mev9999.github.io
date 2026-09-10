@@ -1503,8 +1503,6 @@ insta_button:"Zapratite @liza.memories.photography",
 
       syncLangUi(lang);
     }
-
-    const LANG_STORAGE_KEY = 'lizaLanguage';
     const langBtn = $('#langBtn');
     const langMenu = $('#langMenu');
     const langCurrent = $('#langCurrent');
@@ -1533,9 +1531,7 @@ insta_button:"Zapratite @liza.memories.photography",
 
         event.preventDefault();
 
-        try{
-          localStorage.setItem(LANG_STORAGE_KEY, selectedLang);
-        }catch(_error){}
+        // Language is carried by the page URL.
 
         window.location.href = `${targetPath}${targetHash}`;
       });

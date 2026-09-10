@@ -1,5 +1,4 @@
 (() => {
-  const LANGUAGE_KEY = 'lizaLanguage';
   const nav = document.querySelector('.site-header .nav');
   const mobileNav = nav?.querySelector('.nav-links');
   const langSwitch = document.getElementById('langSwitch');
@@ -88,15 +87,7 @@
     });
   }
 
-  document.querySelectorAll('.lang-option').forEach((option) => {
-    option.addEventListener('click', () => {
-      try {
-        localStorage.setItem(LANGUAGE_KEY, option.dataset.lang || 'de');
-      } catch (_error) {
-        // Language navigation still works when storage is unavailable.
-      }
-    });
-  });
+
 
   document.addEventListener('click', (event) => {
     if (nav && !nav.contains(event.target)) {

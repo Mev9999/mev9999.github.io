@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 import { JSDOM, ResourceLoader, VirtualConsole } from 'jsdom';
 import sharp from 'sharp';
 import { improveSite } from './improve-site.mjs';
+import { applyPrivacy } from './privacy-build.mjs';
+import { updatePrivacyPages } from './update-privacy-pages.mjs';
 
 const ROOT = process.cwd();
 const SITE_ORIGIN = 'https://liza-memories-photography.com/';
@@ -613,6 +615,7 @@ async function renderPage(fileName) {
     pretendToBeVisual: true,
     virtualConsole,
     beforeParse(window) {
+      window.__LIZA_STATIC_BUILD = true;
       window.IntersectionObserver = class {
         observe() {}
         unobserve() {}
@@ -653,6 +656,7 @@ function applyStaticPagePostProcessing(dom, fileName, variantMap) {
   updateSocialMeta(document, fileName);
   updateJsonLd(document, fileName);
   improveSite(document, fileName);
+  applyPrivacy(document, fileName);
   applyResponsiveImages(document, variantMap, fileName);
 }
 
@@ -728,6 +732,7 @@ async function updateRobots() {
 }
 
 async function main() {
+  await updatePrivacyPages();
   await fs.writeFile(path.join(ROOT, '.nojekyll'), '', 'utf8');
   if (!(await isOutputCurrent(path.join(ROOT, 'logo-liza.webp'), [path.join(ROOT, 'logo-liza.png')]))) {
     await sharp(path.join(ROOT, 'logo-liza.png')).resize({width:640,withoutEnlargement:true}).webp({quality:90}).toFile(path.join(ROOT, 'logo-liza.webp'));
@@ -744,6 +749,13 @@ async function main() {
     dom.window.close();
   }
 
+  // Legal pages are not rendered by the content-page generator.
+  for (const fileName of (await fs.readdir(ROOT)).filter(name => name.endsWith('.html') && !RENDER_PAGES.includes(name))) {
+    const dom = new JSDOM(await fs.readFile(path.join(ROOT, fileName), 'utf8'));
+    applyPrivacy(dom.window.document, fileName);
+    await fs.writeFile(path.join(ROOT, fileName), serializeDocument(dom), 'utf8');
+    dom.window.close();
+  }
   const imageSitemap = buildImageSitemap(imageEntriesByPage);
   await fs.writeFile(path.join(ROOT, 'image-sitemap.xml'), imageSitemap, 'utf8');
   await fs.writeFile(path.join(ROOT, 'sitemap.xml'), buildPageSitemap(), 'utf8');

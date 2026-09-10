@@ -55,3 +55,7 @@ Es ist noch kein Empfänger angeschlossen. Diese Ereignisse werden deshalb noch 
 - Gesprochene Inhalte im Video sind noch nicht bestätigt; deshalb wurden keine Untertitel erfunden.
 
 Hochzeit und Porträt bekommen weitere Arbeitsproben, sobald entsprechende Bilder vorliegen. Bestehende Angebote, Titles und Sprach-URLs bleiben getrennt erhalten.
+
+## Datenschutz (10. September 2026)
+
+Details und Testbericht: `PRIVACY-AUDIT.md`. Die Datenschutztexte werden aus `scripts/privacy-policy-content.mjs` erzeugt. `scripts/privacy-build.mjs` integriert lokale Fonts, die inerte Cloudflare-Konfiguration und Footer-Einstellungen. `scripts/privacy-consent.js` aktiviert den Beacon nur nach Zustimmung; `scripts/validate-privacy.mjs` ist Bestandteil von `npm run site:check`. Neue externe Inhalte erfordern eine erneute Prüfung.

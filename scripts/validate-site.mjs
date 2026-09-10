@@ -1,3 +1,4 @@
+import { validatePrivacy } from './validate-privacy.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { JSDOM } from 'jsdom';
@@ -147,6 +148,7 @@ for (const fileName of PRICE_PAGES) {
 }
 
 await validateImprovements(htmlCache, report);
+await validatePrivacy(htmlCache, report);
 
 for (const { dom } of htmlCache.values()) {
   dom.window.close();

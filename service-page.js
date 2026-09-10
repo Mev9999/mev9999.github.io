@@ -1,5 +1,4 @@
 (() => {
-  const LANGUAGE_KEY = 'lizaLanguage';
   const DEFAULT_LANG = 'de';
   const supportedLangs = ['de', 'en', 'bs'];
   const SITE_ORIGIN = 'https://liza-memories-photography.com/';
@@ -695,11 +694,6 @@
 
   }
 
-  function persistLanguage(lang){
-    try{
-      localStorage.setItem(LANGUAGE_KEY, lang);
-    }catch(_error){}
-  }
 
   function setupFaqAccordion(){
     const faqItems = Array.from(document.querySelectorAll('.faq-list .faq-item'));
@@ -934,7 +928,7 @@
       const targetHash = ''; // A language change opens the page at its beginning.
 
       event.preventDefault();
-      persistLanguage(selectedLang);
+
       window.location.href = `${targetPath}${targetHash}`;
     });
   });
