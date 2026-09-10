@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { JSDOM } from 'jsdom';
+import { validateImprovements } from './validate-improvements.mjs';
 
 const ROOT = process.cwd();
 const EXPECTED_STARTING_PRICES = ['99', '179', '199', '189', '299', '299'];
@@ -64,7 +65,7 @@ const htmlCache = new Map();
 const rootTextFiles = (await fs.readdir(ROOT))
   .filter((fileName) => /\.(?:css|html|js|mjs|xml)$/i.test(fileName));
 const scriptTextFiles = (await fs.readdir(path.join(ROOT, 'scripts')))
-  .filter((fileName) => /\.(?:js|mjs)$/i.test(fileName))
+  .filter((fileName) => /\.(?:css|js|mjs)$/i.test(fileName))
   .map((fileName) => `scripts/${fileName}`);
 
 for (const fileName of [...rootTextFiles, ...scriptTextFiles]) {
@@ -144,6 +145,8 @@ for (const fileName of PRICE_PAGES) {
     report(fileName, `expected 6 sections, 18 packages and 6 overview cards; found ${sectionCount}, ${packageCount}, ${overviewCount}`);
   }
 }
+
+await validateImprovements(htmlCache, report);
 
 for (const { dom } of htmlCache.values()) {
   dom.window.close();

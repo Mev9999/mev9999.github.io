@@ -106,7 +106,7 @@
   const pageKey = pageByFile[baseFileName];
 
   function ensureHomePromoScript(){
-    if(document.getElementById(HOME_PROMO_SCRIPT_ID)){
+    if(document.getElementById(HOME_PROMO_SCRIPT_ID) || document.querySelector('script[src*="home-promo.js"]')){
       return;
     }
 
@@ -609,7 +609,7 @@
       refs.heroButtons[0].setAttribute('href', 'index.html#contact-form-card');
     }
     if(refs.heroButtons[1]){
-      refs.heroButtons[1].setAttribute('href', 'index.html#portfolio');
+      refs.heroButtons[1].setAttribute('href', document.querySelector('#gallery-showcase') ? '#gallery-showcase' : 'index.html#portfolio');
     }
     if(refs.heroImage){
       refs.heroImage.alt = pageStrings.hero.imageAlt;

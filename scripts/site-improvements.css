@@ -1,0 +1,31 @@
+.skip-link{position:fixed;left:1rem;top:1rem;z-index:10000;transform:translateY(-180%);padding:.8rem 1rem;background:#fff;color:#3a2e2a;border:2px solid #704331;border-radius:10px}
+.skip-link:focus{transform:none}
+.service-paths{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;margin:1rem 0;line-height:1.6}
+.service-paths a{color:#704331;text-underline-offset:.2em}
+.hero-emotion{color:var(--muted);font-size:1.1rem;line-height:1.6}
+.service-gallery-more{margin-top:1.25rem}
+.service-gallery-more summary{cursor:pointer;padding:1rem;border:1px solid #b88b79;border-radius:14px;color:#3a2e2a;background:#f4e2d8;font-weight:600}
+.service-gallery-more[open] summary{margin-bottom:1rem}
+.inquiry-selection{padding:.8rem 1rem;background:#f4e2d8;border-radius:12px;color:#3a2e2a}
+button[aria-busy="true"]{cursor:wait;opacity:.8}
+.hero-grid.early-photo{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:1rem 2rem}
+.early-photo>.hero-intro{grid-column:1;grid-row:1;align-self:end}
+.early-photo>.hero-details{grid-column:1;grid-row:2;align-self:start}
+.early-photo>.hero-visual,.early-photo>.hero-side{grid-column:2;grid-row:1 / 3}
+.early-photo>.hero-proof{grid-column:1 / -1;grid-row:3}
+.early-photo>.hero-side{padding-top:0}
+.hero .early-photo>.hero-side .hero-side-text{position:static;margin:.65rem 0 0}
+@media(max-width:900px){
+ .hero-grid.early-photo{display:flex;flex-direction:column;gap:1rem}
+ .hero-grid.early-photo>*{width:100%;margin:0;order:0}
+ .early-photo .hero-intro h1{font-size:clamp(1.85rem,6.5vw,2.6rem);margin:.6rem 0;line-height:1.12}
+ .early-photo>.hero-visual{min-height:0;max-height:460px;aspect-ratio:4/3}
+ .early-photo>.hero-visual img{height:100%;min-height:0;object-fit:cover}
+ .early-photo>.hero-side{height:auto;padding:0}
+ .early-photo>.hero-side .art{aspect-ratio:4/3;min-height:0;transform:none}
+ .early-photo>.hero-side .art img{height:100%;min-height:0}
+ .early-photo .hero-details .lead{margin-bottom:1rem}
+ .early-photo .hero-proof{gap:.7rem;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .early-photo .hero-proof .proof{padding:.8rem}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1!important;transform:none!important}}

@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { JSDOM, ResourceLoader, VirtualConsole } from 'jsdom';
 import sharp from 'sharp';
+import { improveSite } from './improve-site.mjs';
 
 const ROOT = process.cwd();
 const SITE_ORIGIN = 'https://liza-memories-photography.com/';
@@ -78,7 +79,12 @@ const BUSINESS_DETAILS = {
 };
 
 class LocalResourceLoader extends ResourceLoader {
-  async fetch(url) {
+  fetch(url) {
+    const request = this.readLocalResource(url);
+    request.abort = () => {};
+    return request;
+  }
+  async readLocalResource(url) {
     if (!url) {
       return null;
     }
@@ -141,7 +147,7 @@ function isLocalImage(src) {
 }
 
 function isContentImage(src) {
-  return isLocalImage(src) && !/logo-liza\.png$/i.test(src) && !src.startsWith(`${SOCIAL_DIR}/`);
+  return isLocalImage(src) && !/logo-liza\.(png|webp)$/i.test(src) && !src.startsWith(`${SOCIAL_DIR}/`);
 }
 
 function getSizesForImage(img) {
@@ -159,16 +165,16 @@ function getSizesForImage(img) {
     return '(max-width: 900px) calc(100vw - 2rem), 38vw';
   }
   if (img.closest('.story-band-main')) {
-    return '(max-width: 900px) calc(100vw - 2rem), 760px';
+    return '(max-width: 1000px) calc(100vw - 2rem), 760px';
   }
   if (img.closest('.story-band-stack')) {
     return '(max-width: 900px) calc(100vw - 2rem), 400px';
   }
   if (img.closest('.gallery-grid')) {
-    return '(max-width: 900px) calc(100vw - 2rem), 320px';
+    return '(max-width: 487px) calc(100vw - 2rem), (max-width: 723px) calc((100vw - 3rem) / 2), (max-width: 959px) calc((100vw - 4rem) / 3), (max-width: 1195px) calc((100vw - 5rem) / 4), 224px';
   }
   if (img.closest('.masonry') || img.closest('#gallery')) {
-    return '(max-width: 700px) calc(100vw - 2rem), (max-width: 980px) calc((100vw - 3rem) / 2), 390px';
+    return '(max-width: 640px) calc(100vw - 2rem), (max-width: 1000px) calc((100vw - 3rem) / 2), 390px';
   }
   if (img.closest('.about .portrait')) {
     return '(max-width: 900px) calc(100vw - 2rem), 32vw';
@@ -270,7 +276,7 @@ function dedupeSchemaBlocks(document) {
 }
 
 function serializeDocument(dom) {
-  const html = dom.window.document.documentElement.outerHTML;
+  const html = dom.window.document.documentElement.outerHTML.replace(/^[ \t]+$/gm, '');
   return `<!DOCTYPE html>\n${html}\n`;
 }
 
@@ -408,19 +414,12 @@ function updateSocialMeta(document, fileName) {
 }
 
 function applyResponsiveImages(document, variantMap, fileName) {
-  const isHomePage = /^index(?:-(en|bs))?\.html$/i.test(fileName);
-
   document.querySelectorAll('img[src]').forEach((img) => {
     const src = img.getAttribute('src');
     if (!isContentImage(src)) {
       return;
     }
 
-    if (isHomePage && (img.closest('.masonry') || img.closest('.story-band-grid'))) {
-      img.removeAttribute('srcset');
-      img.removeAttribute('sizes');
-      return;
-    }
 
     const variants = variantMap.get(src);
     if (!variants || !variants.length) {
@@ -653,6 +652,7 @@ function applyStaticPagePostProcessing(dom, fileName, variantMap) {
   upsertAlternateLinks(document, fileName);
   updateSocialMeta(document, fileName);
   updateJsonLd(document, fileName);
+  improveSite(document, fileName);
   applyResponsiveImages(document, variantMap, fileName);
 }
 
@@ -678,7 +678,7 @@ ${items}
 }
 
 function buildPageSitemap() {
-  const lastModified = new Date().toISOString().slice(0, 10);
+  // Omit lastmod until reliable per-page content dates are maintained.
   const groupedPages = new Map();
 
   for (const fileName of RENDER_PAGES) {
@@ -706,7 +706,6 @@ function buildPageSitemap() {
 
     return `  <url>
     <loc>${escapeXml(absoluteUrl(publicPathFor(fileName)))}</loc>
-    <lastmod>${lastModified}</lastmod>
 ${alternates}${defaultLink}
   </url>`;
   }).join('\n');
@@ -730,6 +729,9 @@ async function updateRobots() {
 
 async function main() {
   await fs.writeFile(path.join(ROOT, '.nojekyll'), '', 'utf8');
+  if (!(await isOutputCurrent(path.join(ROOT, 'logo-liza.webp'), [path.join(ROOT, 'logo-liza.png')]))) {
+    await sharp(path.join(ROOT, 'logo-liza.png')).resize({width:640,withoutEnlargement:true}).webp({quality:90}).toFile(path.join(ROOT, 'logo-liza.webp'));
+  }
   await createOgShareImage();
   const variantMap = await buildResponsiveImages();
   const imageEntriesByPage = new Map();

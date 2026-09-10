@@ -486,7 +486,7 @@ function renderPackageCard(category, packageInfo, lang) {
   const saving = packageInfo.saving?.[lang]
     ? `<p class="package-saving"><strong>${escapeHtml(strings.savings)}:</strong> ${escapeHtml(packageInfo.saving[lang])}</p>`
     : '';
-  const inquiryHref = `${localizedFile('index.html', lang)}#contact-form-card`;
+  const inquiryHref = `${localizedFile('index.html', lang)}?service=${category.serviceKey}&package=${packageInfo.tier}&source=${pricingFile(lang)}#contact-form-card`;
 
   return `<article class="package-card package-card--${packageInfo.tier}">
     <span class="package-tier">${escapeHtml(strings.tiers[packageInfo.tier])}</span>

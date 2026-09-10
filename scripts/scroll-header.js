@@ -1,7 +1,8 @@
 (() => {
   const header = document.querySelector('header.site, header.site-header');
   if (!header) return;
-  const style = document.createElement('style');
+  const style = document.getElementById('scroll-header-style') || document.createElement('style');
+  style.id = 'scroll-header-style';
   style.textContent = `
     header.scroll-aware-header {transition:transform .22s ease,opacity .22s ease}
     header.scroll-aware-header.header-idle-hidden {transform:translateY(-110%);opacity:0;pointer-events:none}
