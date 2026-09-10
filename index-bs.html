@@ -2884,7 +2884,7 @@ main .signature-card h3, main .process-card h3, main .story-card h3, main .price
  #instagram .instagram-title h2 {width:100%;max-width:100%;margin:0;text-align:center;text-wrap:balance}
  #instagram .instagram-title-link {flex:none;align-self:center}
 }
-</style><script src="scripts/scroll-header.js?v=20260909" defer></script></head><body><header class="site">
+</style><script src="scripts/scroll-header.js?v=20260909" defer=""></script><link rel="stylesheet" href="scripts/accessibility-fixes.css?v=20260910"><script src="scripts/accessibility-menu.js?v=20260910" defer=""></script></head><body><header class="site">
     <div class="nav site-shell">
       <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav" type="button">
   <span></span>
@@ -3667,12 +3667,12 @@ main .signature-card h3, main .process-card h3, main .story-card h3, main .price
       </div>
       <p class="footer-copy" data-i18n="footer_copy">© 2026 LiZa Memories Photography. Sva prava zadržana.</p>
     </div>
-  </footer><!-- LIGHTBOX --><div class="lightbox" id="lightbox">
+  </footer><!-- LIGHTBOX --><dialog class="lightbox" id="lightbox">
     <button class="close" aria-label="Close">✕</button>
     <button class="prev" aria-label="Previous">‹</button>
     <img alt="Lightbox image preview" decoding="async" loading="lazy">
     <button class="next" aria-label="Next">›</button>
-  </div><script>
+  </dialog><script>
     // ---------- Utilities ----------
     const $ = (sel, root=document) => root.querySelector(sel);
     const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
@@ -3736,17 +3736,45 @@ main .signature-card h3, main .process-card h3, main .story-card h3, main .price
     const next = $('#lightbox .next');
     const close = $('#lightbox .close');
     const galleryItems = Array.from($$('#gallery img, .story-band-lightbox img, .hero-lightbox img'));
+
+    let lightboxOpener = null;
+    const lightboxLabels = ({de:['Bildvergrößerung','Bild schließen','Vorheriges Bild','Nächstes Bild'],en:['Photo viewer','Close photo','Previous photo','Next photo'],bs:['Uvećana fotografija','Zatvori fotografiju','Prethodna fotografija','Sljedeća fotografija']})[document.documentElement.lang] || ['Photo viewer','Close photo','Previous photo','Next photo'];
+    lightbox.setAttribute('aria-label', lightboxLabels[0]);
+    close.setAttribute('aria-label', lightboxLabels[1]);
+    prev.setAttribute('aria-label', lightboxLabels[2]);
+    next.setAttribute('aria-label', lightboxLabels[3]);
+    close.setAttribute('autofocus', '');
+    lightbox.addEventListener('cancel', event => {event.preventDefault();closeLightbox();});
+    lightbox.addEventListener('close', () => {
+      lightbox.classList.remove('open');lightbox.setAttribute('aria-hidden','true');
+      if (lightboxOpener?.isConnected) lightboxOpener.focus({preventScroll:true});
+      lightboxOpener = null;
+    });
+    lightbox.addEventListener('keydown', event => {
+      if (event.key !== 'Tab') return;
+      const controls = [...lightbox.querySelectorAll('button')].filter(button => !button.hidden && !button.disabled);
+      const first = controls[0], last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {event.preventDefault();last.focus();}
+      else if (!event.shiftKey && document.activeElement === last) {event.preventDefault();first.focus();}
+    });
+
     let currentIndex = -1;
 
-    function openLightbox(index){
+    function openLightbox(index, trigger){
       currentIndex = index;
       const src = galleryItems[index].getAttribute('src');
       const alt = galleryItems[index].getAttribute('alt') || '';
       lbImg.setAttribute('src', src);
       lbImg.setAttribute('alt', alt);
       lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      if (!lightbox.open) {
+        lightboxOpener = trigger || document.activeElement;
+        lightbox.showModal();
+        close.focus({preventScroll:true});
+      }
     }
-    function closeLightbox(){ lightbox.classList.remove('open'); }
+    function closeLightbox(){ if(lightbox.open) lightbox.close(); }
     function prevImg(){ if(currentIndex <= 0) currentIndex = galleryItems.length; openLightbox((currentIndex-1) % galleryItems.length); }
     function nextImg(){ openLightbox((currentIndex+1) % galleryItems.length); }
 
@@ -3754,7 +3782,7 @@ main .signature-card h3, main .process-card h3, main .story-card h3, main .price
       const img = item.querySelector('img');
       const index = galleryItems.indexOf(img);
       if(index === -1) return;
-      item.addEventListener('click', () => openLightbox(index));
+      item.addEventListener('click', event => openLightbox(index, event.currentTarget));
       item.addEventListener('keydown', event => {
         if(event.key === 'Enter' || event.key === ' '){ event.preventDefault(); openLightbox(index); }
       });
@@ -3765,7 +3793,7 @@ main .signature-card h3, main .process-card h3, main .story-card h3, main .price
       const img = card.querySelector('img');
       const index = galleryItems.indexOf(img);
       if(index === -1) return;
-      card.addEventListener('click', () => openLightbox(index));
+      card.addEventListener('click', event => openLightbox(index, event.currentTarget));
       card.addEventListener('keydown', e => {
         if(e.key === 'Enter' || e.key === ' '){
           e.preventDefault();
@@ -3780,7 +3808,7 @@ main .signature-card h3, main .process-card h3, main .story-card h3, main .price
       const index = galleryItems.indexOf(img);
       if(index === -1) return;
       card.setAttribute('aria-label', `${img.getAttribute('alt') || 'Bild'} öffnen`);
-      card.addEventListener('click', () => openLightbox(index));
+      card.addEventListener('click', event => openLightbox(index, event.currentTarget));
       card.addEventListener('keydown', e => {
         if(e.key === 'Enter' || e.key === ' '){
           e.preventDefault();
@@ -5284,6 +5312,7 @@ $$('nav.primary a').forEach(link => {
 });
 
   </script>
+
 
 
 

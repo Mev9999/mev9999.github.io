@@ -760,6 +760,9 @@ async function createPricingPage(lang) {
     currentLanguage.textContent = lang.toUpperCase();
   }
 
+  const accessibilityStyles = document.querySelector('link[href*="accessibility-fixes.css"]');
+  if (accessibilityStyles) document.head.append(accessibilityStyles);
+
   const output = `<!DOCTYPE html>\n${document.documentElement.outerHTML}\n`
     .replace(/^[ \t]+$/gm, '');
   await fs.writeFile(path.join(ROOT, currentFile), output, 'utf8');

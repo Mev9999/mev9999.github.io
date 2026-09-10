@@ -1,0 +1,39 @@
+/* Shared reading contrast; retain the site's warm backgrounds. */
+html:root {--muted:#6f5c55}
+html .btn, html .btn.brand, html .btn.ghost, html .btn.primary,
+html .btn.secondary[href*="#portfolio"], html .btn:hover {color:#3a2e2a}
+html .timeline .num, html .process-step {color:#3a2e2a}
+html .price-overview-card .label, html .price-overview-card .num, html .package-card .num {color:#84503d}
+html .package-section-head .starting-price {color:#704331}
+html .package-card--gold .package-tier {background:#80523e;color:#fff}
+html input::placeholder, html textarea::placeholder {color:#6f5c55;opacity:1}
+html a:focus-visible, html button:focus-visible, html [role="button"]:focus-visible,
+html input:focus-visible, html select:focus-visible, html textarea:focus-visible {
+  outline:3px solid #704331;outline-offset:3px;
+}
+.mobile-submenu-toggle {display:none}
+@media(max-width:640px) {
+  header nav.primary, header .nav-links.primary {
+    max-height:calc(100vh - var(--actual-header-height, 120px) - 1rem - 8px);
+    max-height:calc(100dvh - var(--actual-header-height, 120px) - 1rem - 8px);
+    overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;
+    -webkit-overflow-scrolling:touch;
+  }
+  header nav.primary > * {flex-shrink:0}
+  header nav.primary .nav-dropdown {position:relative}
+  header nav.primary .nav-dropdown > a {width:calc(100% - 44px)}
+  header .mobile-submenu-toggle {
+    display:grid;place-items:center;position:absolute;right:0;top:2px;
+    width:40px;min-height:40px;padding:0;border:1px solid #b88b79;border-radius:10px;
+    font:inherit;font-size:1.3rem;color:#3a2e2a;background:#fffaf7;cursor:pointer;
+  }
+  header nav.primary .mobile-group-link[hidden] {display:none!important}
+}
+/* Native modal dialog occupies the viewport without default dialog limits. */
+dialog.lightbox {width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;border:0;box-sizing:border-box}
+dialog.lightbox::backdrop {background:transparent}
+dialog.lightbox:not([open]) {display:none}
+html:has(dialog.lightbox[open]) {overflow:hidden}
+
+html .price-badge, html .price-badge.top, html .price-badge.save {background:linear-gradient(180deg,#805f53,#6f5148);color:#fff}
+html #portfolio .masonry .cap {background:linear-gradient(180deg,rgba(25,18,16,.72),rgba(25,18,16,.88))}

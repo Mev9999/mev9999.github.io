@@ -780,12 +780,12 @@
     let lightbox = document.getElementById('lightbox');
     if(!lightbox){
       document.body.insertAdjacentHTML('beforeend', `
-        <div class="lightbox" id="lightbox" aria-hidden="true">
+        <dialog class="lightbox" id="lightbox" aria-hidden="true">
           <button type="button" class="close" aria-label="Bild schließen">×</button>
           <button type="button" class="prev" aria-label="Vorheriges Bild">‹</button>
           <img src="" alt="">
           <button type="button" class="next" aria-label="Nächstes Bild">›</button>
-        </div>
+        </dialog>
       `);
       lightbox = document.getElementById('lightbox');
     }
@@ -794,9 +794,31 @@
     const prev = lightbox.querySelector('.prev');
     const next = lightbox.querySelector('.next');
     const close = lightbox.querySelector('.close');
+
+    let lightboxOpener = null;
+    const lightboxLabels = ({de:['Bildvergrößerung','Bild schließen','Vorheriges Bild','Nächstes Bild'],en:['Photo viewer','Close photo','Previous photo','Next photo'],bs:['Uvećana fotografija','Zatvori fotografiju','Prethodna fotografija','Sljedeća fotografija']})[document.documentElement.lang] || ['Photo viewer','Close photo','Previous photo','Next photo'];
+    lightbox.setAttribute('aria-label', lightboxLabels[0]);
+    close.setAttribute('aria-label', lightboxLabels[1]);
+    prev.setAttribute('aria-label', lightboxLabels[2]);
+    next.setAttribute('aria-label', lightboxLabels[3]);
+    close.setAttribute('autofocus', '');
+    lightbox.addEventListener('cancel', event => {event.preventDefault();closeLightbox();});
+    lightbox.addEventListener('close', () => {
+      lightbox.classList.remove('open');lightbox.setAttribute('aria-hidden','true');
+      if (lightboxOpener?.isConnected) lightboxOpener.focus({preventScroll:true});
+      lightboxOpener = null;
+    });
+    lightbox.addEventListener('keydown', event => {
+      if (event.key !== 'Tab') return;
+      const controls = [...lightbox.querySelectorAll('button')].filter(button => !button.hidden && !button.disabled);
+      const first = controls[0], last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {event.preventDefault();last.focus();}
+      else if (!event.shiftKey && document.activeElement === last) {event.preventDefault();first.focus();}
+    });
+
     let currentIndex = -1;
 
-    function openLightbox(index){
+    function openLightbox(index, trigger){
       currentIndex = index;
       const activeImage = items[index];
       if(!activeImage){
@@ -806,12 +828,15 @@
       lbImg.setAttribute('alt', activeImage.getAttribute('alt') || '');
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden', 'false');
+      if (!lightbox.open) {
+        lightboxOpener = trigger || document.activeElement;
+        lightbox.showModal();
+        close.focus({preventScroll:true});
+      }
+      lightbox.setAttribute('aria-hidden', 'false');
     }
 
-    function closeLightbox(){
-      lightbox.classList.remove('open');
-      lightbox.setAttribute('aria-hidden', 'true');
-    }
+    function closeLightbox(){ if(lightbox.open) lightbox.close(); }
 
     function prevImg(){
       if(currentIndex <= 0){
@@ -829,7 +854,7 @@
       trigger.setAttribute('role', 'button');
       const openLabel = { de: 'Bild vergr\u00f6\u00dfern', en: 'Enlarge photo', bs: 'Uve\u0107aj fotografiju' }[document.documentElement.lang] || 'Enlarge photo';
       trigger.setAttribute('aria-label', openLabel + ': ' + (image.getAttribute('alt') || ''));
-      trigger.addEventListener('click', () => openLightbox(index));
+      trigger.addEventListener('click', event => openLightbox(index, event.currentTarget));
       trigger.addEventListener('keydown', (event) => {
         if(event.key === 'Enter' || event.key === ' '){
           event.preventDefault();
