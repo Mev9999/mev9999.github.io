@@ -27,6 +27,7 @@ export async function validateInterface(cache){
  }
  for(const [file,{document:d}] of cache){
   assert(d.querySelector('link[href^="scripts/site-refresh.css"]'),file+' refresh styles');
+  if(d.querySelector('header'))assert(d.querySelector('header.compact-site-header'),file+' shared header');
   assert(!d.documentElement.textContent.includes('\uFFFD'),file+' encoding');
   const contact=d.querySelector('.contact-grid');
   if(contact){const cards=contact.querySelectorAll('.contact-detail');assert(cards[2].textContent.includes('Mela-Spira-Straße 32b'),file+' address');assert.equal(cards[3].querySelectorAll('a').length,file.startsWith('ueber-mich')?6:5,file+' service links');assert(!cards[3].querySelector('a[href="'+file+'"]'),file+' self link');}
@@ -35,6 +36,8 @@ export async function validateInterface(cache){
    assert(d.querySelector('.mobile-hero-logo'),file+' mobile logo');
    assert(d.querySelector('.mobile-services-toggle>summary'),file+' services disclosure');
    assert(d.querySelector('.home-price-notes p'),file+' price notes');
+   assert.equal(d.querySelectorAll('.home-price-notes>section').length,2,file+' separated price information');
+   assert(d.querySelectorAll('.faq-topic-links a')[2].href.includes('babybauch-und-neugeborenen'),file+' FAQ order');
    assert(d.querySelector('[data-refresh-key="google_review_text"]').textContent.includes('\n'),file+' review line break');
    assert.equal(d.querySelector('.media-action-pair').children.length,2);
    for(const image of d.querySelectorAll('.masonry img,.story-band-grid img'))assert(image.srcset&&image.sizes,file+' responsive preview');
