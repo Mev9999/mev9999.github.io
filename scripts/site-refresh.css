@@ -203,3 +203,10 @@ html body a.btn.media-cta:hover{background:linear-gradient(135deg,#fff,rgba(238,
 @media(min-width:901px){.home-price-notes{grid-template-columns:minmax(0,2.4fr) minmax(0,1fr)}}
 
 .home-price-notes .price-extras>h3{font:700 .95rem var(--font-body,Arial,sans-serif);color:var(--ink,#3a2e2a)}
+/* Compact two-column links and a clearer pause after the media buttons. */
+@media(max-width:900px){
+ .home-refreshed .hero>.shooting-service-links.service-paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem .5rem;font-size:clamp(.55rem,2.85vw,.9rem);line-height:1.6}
+ .home-refreshed .hero>.shooting-service-links.service-paths a{min-width:0;white-space:nowrap}
+ html[lang="bs"] .home-refreshed .hero>.shooting-service-links.service-paths{font-size:clamp(.45rem,2.3vw,.78rem)}
+ .home-refreshed .hero-grid.early-photo>.hero-proof{margin-top:1.25rem}
+}
