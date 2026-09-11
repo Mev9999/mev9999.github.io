@@ -383,3 +383,9 @@
  .package-section-head > * { min-width: 0; }
  .package-section-head h2 { font-size: clamp(1.6rem, 6.6vw, 2.45rem); overflow-wrap: anywhere; hyphens: auto; line-height: 1.12; }
 }
+
+/* Short, factual package upgrades; existing colors and cards stay unchanged. */
+.package-benefits{list-style:none;padding:0;margin:.4rem 0 0;display:grid;gap:.3rem}
+.package-benefits li{position:relative;padding-left:1.15em;overflow-wrap:break-word}
+.package-benefits li::before{content:"✓";position:absolute;left:0}
+.package-details li:first-child{font-weight:700}

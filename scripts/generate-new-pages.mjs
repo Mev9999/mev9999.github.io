@@ -154,11 +154,20 @@ const categories = [
           en: ['20 minutes', '5 edited images', '1 outfit', '1 image look'],
           bs: ['20 minuta', '5 obrađenih fotografija', '1 outfit', '1 izgled fotografije']
         },
-        saving: {
-          de: '10 € günstiger als Bronze plus 2 zusätzliche Bilder.',
-          en: '€10 less than Bronze plus 2 additional images.',
-          bs: '10 € povoljnije od bronzanog paketa uz 2 dodatne fotografije.'
-        }
+        benefits: {
+  "de": [
+    "2 Bilder mehr",
+    "Günstiger als Bronze + Zusatzbilder"
+  ],
+  "en": [
+    "2 more images",
+    "Less than Bronze + extra images"
+  ],
+  "bs": [
+    "2 fotografije više",
+    "Povoljnije od bronze uz dodatne fotografije"
+  ]
+}
       },
       {
         tier: 'gold',
@@ -169,11 +178,23 @@ const categories = [
           en: ['30 minutes', '8 edited images', 'Up to 2 outfits', 'Different image variations'],
           bs: ['30 minuta', '8 obrađenih fotografija', 'Do 2 outfita', 'Različite varijante fotografija']
         },
-        saving: {
-          de: '10 € günstiger als Silber plus 3 zusätzliche Bilder.',
-          en: '€10 less than Silver plus 3 additional images.',
-          bs: '10 € povoljnije od srebrnog paketa uz 3 dodatne fotografije.'
-        }
+        benefits: {
+  "de": [
+    "3 Bilder mehr",
+    "10 Minuten mehr",
+    "Bis zu 2 Outfits"
+  ],
+  "en": [
+    "3 more images",
+    "10 more minutes",
+    "Up to 2 outfits"
+  ],
+  "bs": [
+    "3 fotografije više",
+    "10 minuta više",
+    "Do 2 outfita"
+  ]
+}
       }
     ]
   },
@@ -207,11 +228,23 @@ const categories = [
           en: ['45 minutes', '8 edited images', 'Up to 2 outfits or image sets', 'Partner included'],
           bs: ['45 minuta', '8 obrađenih fotografija', 'Do 2 outfita ili seta', 'Partner uključen']
         },
-        saving: {
-          de: '10 € günstiger als Bronze plus 3 zusätzliche Bilder.',
-          en: '€10 less than Bronze plus 3 additional images.',
-          bs: '10 € povoljnije od bronzanog paketa uz 3 dodatne fotografije.'
-        }
+        benefits: {
+  "de": [
+    "3 Bilder mehr",
+    "15 Minuten mehr",
+    "Partner inklusive"
+  ],
+  "en": [
+    "3 more images",
+    "15 more minutes",
+    "Partner included"
+  ],
+  "bs": [
+    "3 fotografije više",
+    "15 minuta više",
+    "Partner uključen"
+  ]
+}
       },
       {
         tier: 'gold',
@@ -222,11 +255,23 @@ const categories = [
           en: ['60 minutes', '14 edited images', 'Up to 3 outfits or image sets', 'Partner and siblings included'],
           bs: ['60 minuta', '14 obrađenih fotografija', 'Do 3 outfita ili seta', 'Partner i djeca uključeni']
         },
-        saving: {
-          de: '20 € günstiger als Silber plus 6 zusätzliche Bilder.',
-          en: '€20 less than Silver plus 6 additional images.',
-          bs: '20 € povoljnije od srebrnog paketa uz 6 dodatnih fotografija.'
-        }
+        benefits: {
+  "de": [
+    "6 Bilder mehr",
+    "Bis zu 3 Outfits oder Sets",
+    "Partner und Geschwister inklusive"
+  ],
+  "en": [
+    "6 more images",
+    "Up to 3 outfits or sets",
+    "Partner and siblings included"
+  ],
+  "bs": [
+    "6 fotografija više",
+    "Do 3 outfita ili seta",
+    "Partner i djeca uključeni"
+  ]
+}
       }
     ]
   },
@@ -260,11 +305,23 @@ const categories = [
           en: ['Up to 90 minutes', '11 edited images', '2 prepared image sets', 'Parent portraits included'],
           bs: ['Do 90 minuta', '11 obrađenih fotografija', '2 pripremljena seta', 'Fotografije s roditeljima uključene']
         },
-        saving: {
-          de: '25 € günstiger als Bronze plus 5 zusätzliche Bilder.',
-          en: '€25 less than Bronze plus 5 additional images.',
-          bs: '25 € povoljnije od bronzanog paketa uz 5 dodatnih fotografija.'
-        }
+        benefits: {
+  "de": [
+    "5 Bilder mehr",
+    "2 vorbereitete Sets",
+    "Elternbilder inklusive"
+  ],
+  "en": [
+    "5 more images",
+    "2 prepared sets",
+    "Parent portraits included"
+  ],
+  "bs": [
+    "5 fotografija više",
+    "2 pripremljena seta",
+    "Fotografije s roditeljima uključene"
+  ]
+}
       },
       {
         tier: 'gold',
@@ -275,11 +332,23 @@ const categories = [
           en: ['Up to 2 hours', '18 edited images', '3 prepared image sets', 'Family and sibling portraits included'],
           bs: ['Do 2 sata', '18 obrađenih fotografija', '3 pripremljena seta', 'Porodične fotografije i fotografije s djecom uključene']
         },
-        saving: {
-          de: '25 € günstiger als Silber plus 7 zusätzliche Bilder.',
-          en: '€25 less than Silver plus 7 additional images.',
-          bs: '25 € povoljnije od srebrnog paketa uz 7 dodatnih fotografija.'
-        }
+        benefits: {
+  "de": [
+    "7 Bilder mehr",
+    "3 vorbereitete Sets",
+    "Familien- und Geschwisterbilder"
+  ],
+  "en": [
+    "7 more images",
+    "3 prepared sets",
+    "Family and sibling portraits"
+  ],
+  "bs": [
+    "7 fotografija više",
+    "3 pripremljena seta",
+    "Porodične fotografije i fotografije s djecom"
+  ]
+}
       }
     ]
   },
@@ -313,11 +382,23 @@ const categories = [
           en: ['45 minutes', '9 edited images', 'Different family combinations'],
           bs: ['45 minuta', '9 obrađenih fotografija', 'Različite porodične kombinacije']
         },
-        saving: {
-          de: '10 € günstiger als Bronze plus 4 zusätzliche Bilder.',
-          en: '€10 less than Bronze plus 4 additional images.',
-          bs: '10 € povoljnije od bronzanog paketa uz 4 dodatne fotografije.'
-        }
+        benefits: {
+  "de": [
+    "4 Bilder mehr",
+    "15 Minuten mehr",
+    "Verschiedene Familienkonstellationen"
+  ],
+  "en": [
+    "4 more images",
+    "15 more minutes",
+    "Different family combinations"
+  ],
+  "bs": [
+    "4 fotografije više",
+    "15 minuta više",
+    "Različite porodične kombinacije"
+  ]
+}
       },
       {
         tier: 'gold',
@@ -328,11 +409,23 @@ const categories = [
           en: ['60 minutes', '16 edited images', 'Family, sibling and individual portraits'],
           bs: ['60 minuta', '16 obrađenih fotografija', 'Porodični, dječiji i pojedinačni portreti']
         },
-        saving: {
-          de: '25 € günstiger als Silber plus 7 zusätzliche Bilder.',
-          en: '€25 less than Silver plus 7 additional images.',
-          bs: '25 € povoljnije od srebrnog paketa uz 7 dodatnih fotografija.'
-        }
+        benefits: {
+  "de": [
+    "7 Bilder mehr",
+    "15 Minuten mehr",
+    "Auch Geschwister- und Einzelbilder"
+  ],
+  "en": [
+    "7 more images",
+    "15 more minutes",
+    "Sibling and individual portraits too"
+  ],
+  "bs": [
+    "7 fotografija više",
+    "15 minuta više",
+    "I dječiji i pojedinačni portreti"
+  ]
+}
       }
     ]
   },
@@ -356,11 +449,17 @@ const categories = [
           en: ['2 sessions', '5 edited images per session', '1 image set per session', '10 images in total'],
           bs: ['2 fotografisanja', 'Po 5 obrađenih fotografija', 'Po 1 set', 'Ukupno 10 fotografija']
         },
-        saving: {
-          de: '79 € günstiger als zwei vergleichbare Einzelbuchungen.',
-          en: '€79 less than two comparable individual bookings.',
-          bs: '79 € povoljnije od dvije uporedive pojedinačne rezervacije.'
-        }
+        benefits: {
+  "de": [
+    "Beide Shootings in einem Paket"
+  ],
+  "en": [
+    "Both sessions in one package"
+  ],
+  "bs": [
+    "Oba fotografisanja u jednom paketu"
+  ]
+}
       },
       {
         tier: 'silver',
@@ -371,11 +470,20 @@ const categories = [
           en: ['2 sessions', '9 edited images per session', 'Up to 2 image sets per session', '18 images in total'],
           bs: ['2 fotografisanja', 'Po 9 obrađenih fotografija', 'Do 2 seta po fotografisanju', 'Ukupno 18 fotografija']
         },
-        saving: {
-          de: '30 € günstiger als Bronze plus 8 Bilder; 74 € günstiger als Einzelbuchungen.',
-          en: '€30 less than Bronze plus 8 images; €74 less than individual bookings.',
-          bs: '30 € povoljnije od bronze uz 8 fotografija više; 74 € povoljnije od pojedinačnih rezervacija.'
-        }
+        benefits: {
+  "de": [
+    "Je Shooting 4 Bilder mehr",
+    "Je bis zu 2 Sets"
+  ],
+  "en": [
+    "4 more images per session",
+    "Up to 2 sets per session"
+  ],
+  "bs": [
+    "Po 4 fotografije više",
+    "Do 2 seta po fotografisanju"
+  ]
+}
       },
       {
         tier: 'gold',
@@ -386,11 +494,23 @@ const categories = [
           en: ['2 sessions', '15 edited images per session', 'Up to 3 image sets per session', 'Partner and siblings included', '30 images in total'],
           bs: ['2 fotografisanja', 'Po 15 obrađenih fotografija', 'Do 3 seta po fotografisanju', 'Partner i djeca uključeni', 'Ukupno 30 fotografija']
         },
-        saving: {
-          de: '70 € günstiger als Silber plus 12 Bilder; 114 € günstiger als Einzelbuchungen.',
-          en: '€70 less than Silver plus 12 images; €114 less than individual bookings.',
-          bs: '70 € povoljnije od srebra uz 12 fotografija više; 114 € povoljnije od pojedinačnih rezervacija.'
-        }
+        benefits: {
+  "de": [
+    "Je Shooting 6 Bilder mehr",
+    "Je bis zu 3 Sets",
+    "Partner und Geschwister inklusive"
+  ],
+  "en": [
+    "6 more images per session",
+    "Up to 3 sets per session",
+    "Partner and siblings included"
+  ],
+  "bs": [
+    "Po 6 fotografija više",
+    "Do 3 seta po fotografisanju",
+    "Partner i djeca uključeni"
+  ]
+}
       }
     ]
   },
@@ -424,11 +544,23 @@ const categories = [
           en: ['Up to 2 hours', 'Ceremony, couple and group portraits', 'Around 30 highlight images', 'Additional basic-optimized reportage images'],
           bs: ['Do 2 sata', 'Ceremonija, fotografije para i grupne fotografije', 'Oko 30 istaknutih fotografija', 'Dodatne osnovno optimizirane reportažne fotografije']
         },
-        saving: {
-          de: '1 Stunde mehr, Paarshooting und eine umfangreichere Reportage.',
-          en: '1 additional hour, a couple session and more extensive coverage.',
-          bs: '1 sat više, fotografisanje para i opširnija reportaža.'
-        }
+        benefits: {
+  "de": [
+    "Bis zu 2 Stunden",
+    "Paarfotos inklusive",
+    "Zusätzliche Reportagebilder"
+  ],
+  "en": [
+    "Up to 2 hours",
+    "Couple portraits included",
+    "Additional reportage images"
+  ],
+  "bs": [
+    "Do 2 sata",
+    "Fotografije para uključene",
+    "Dodatne reportažne fotografije"
+  ]
+}
       },
       {
         tier: 'gold',
@@ -439,11 +571,23 @@ const categories = [
           en: ['Up to 3 hours', 'Ceremony, couple portraits, group photos and intimate celebration', 'Around 35 highlight images', 'Around 65 additional basic-optimized reportage images'],
           bs: ['Do 3 sata', 'Ceremonija, fotografije para, grupne fotografije i mala proslava', 'Oko 35 istaknutih fotografija', 'Oko 65 dodatnih osnovno optimiziranih reportažnih fotografija']
         },
-        saving: {
-          de: '1 Stunde mehr, Begleitung der Feier und deutlich mehr Reportagebilder.',
-          en: '1 additional hour, coverage of the celebration and significantly more reportage images.',
-          bs: '1 sat više, pratnja proslave i znatno više reportažnih fotografija.'
-        }
+        benefits: {
+  "de": [
+    "Bis zu 3 Stunden",
+    "Kleine Feier inklusive",
+    "Ca. 65 Reportagebilder zusätzlich"
+  ],
+  "en": [
+    "Up to 3 hours",
+    "Intimate celebration included",
+    "Around 65 additional reportage images"
+  ],
+  "bs": [
+    "Do 3 sata",
+    "Mala proslava uključena",
+    "Oko 65 dodatnih reportažnih fotografija"
+  ]
+}
       }
     ]
   }
@@ -480,11 +624,16 @@ function priceText(amount, lang, withPrefix = false) {
 
 function renderPackageCard(category, packageInfo, lang) {
   const strings = copy[lang];
-  const details = packageInfo.details[lang]
+  const imageIndex = category.id === 'kombi' ? packageInfo.details[lang].length - 1 : category.id === 'hochzeit' ? 2 : 1;
+  const orderedDetails = [...packageInfo.details[lang]];
+  orderedDetails.unshift(...orderedDetails.splice(imageIndex, 1));
+  const details = orderedDetails
     .map((detail) => `<li>${escapeHtml(detail)}</li>`)
     .join('');
-  const saving = packageInfo.saving?.[lang]
-    ? `<p class="package-saving"><strong>${escapeHtml(strings.savings)}:</strong> ${escapeHtml(packageInfo.saving[lang])}</p>`
+  const comparison = category.id === 'hochzeit' ? null : packageInfo.tier === 'silver' ? strings.tiers.bronze : packageInfo.tier === 'gold' ? strings.tiers.silver : null;
+  const advantageLabel = comparison ? ({de:'Mehr als ',en:'More than ',bs:'Više od paketa '}[lang] + comparison) : strings.savings;
+  const saving = packageInfo.benefits?.[lang]
+    ? `<div class="package-saving"><strong>${escapeHtml(advantageLabel)}</strong><ul class="package-benefits">${packageInfo.benefits[lang].map(benefit => `<li>${escapeHtml(benefit)}</li>`).join('')}</ul></div>`
     : '';
   const inquiryHref = `${localizedFile('index.html', lang)}?service=${category.serviceKey}&package=${packageInfo.tier}&source=${pricingFile(lang)}#contact-form-card`;
 
@@ -678,8 +827,9 @@ async function createPricingPage(lang) {
     <link rel="alternate" hreflang="x-default" href="${new URL('preise.html', SITE_ORIGIN)}">`);
 
   if (!document.querySelector('link[href^="pricing-page.css"]')) {
-    document.head.insertAdjacentHTML('beforeend', '<link rel="stylesheet" href="pricing-page.css?v=20260909-desktop3">');
+    document.head.insertAdjacentHTML('beforeend', '<link rel="stylesheet" href="pricing-page.css?v=20260911-benefits">');
   }
+  document.querySelector('link[href^="pricing-page.css"]').setAttribute('href', 'pricing-page.css?v=20260911-benefits');
   document.querySelector('link[rel="preload"][as="image"]')?.remove();
 
   document.querySelectorAll('script[src*="service-page.js"], script[src*="home-promo.js"]').forEach((script) => script.remove());
