@@ -123,6 +123,8 @@ export function refreshSite(d,file){
   ['babybauch-shooting-graz.html','newborn-fotografie-graz.html','familienfotografie-graz.html','hochzeitsfotograf-graz.html'].forEach((file,n)=>{const a=el('a','',names[n]);a.href=local(file);links.append(a);});
  }
 
+ if(base==='ueber-mich.html'){const button=d.querySelector('.hero .hero-actions>a.btn[href*="#contact-form-card"]');if(button)button.textContent=['Shooting buchen','Book your session','Rezerviši termin'][i];}
+ if(base==='babybauch-shooting-graz.html')d.querySelectorAll('.hero-points>div>span').forEach(e=>{e.textContent=e.textContent.replace(/28\.?\s+(?:und|and|i)\s+34\.?/g,range=>range.replace(/\s+/g,'\u00a0'));});
  const actionNames={
  'babybauch-shooting-graz.html':['Babybauch-Shooting anfragen','Enquire about a maternity session','Upit za trudničko fotografisanje'],
  'newborn-fotografie-graz.html':['Neugeborenen-Shooting anfragen','Enquire about a newborn session','Upit za fotografisanje novorođenčeta'],
