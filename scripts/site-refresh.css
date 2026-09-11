@@ -173,3 +173,10 @@ html body a.btn.media-cta:hover{background:linear-gradient(135deg,#fff,rgba(238,
  header.compact-site-header .nav-icon-link,header.compact-site-header .header-social-badge{width:26px!important;height:26px!important;padding:0!important;min-width:0}
  header.compact-site-header nav.primary{grid-column:1/-1!important;grid-row:2!important}
 }
+
+/* Full service names, grouped consistently below the media actions. */
+.hero .shooting-service-links.service-paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));justify-content:start;gap:.65rem 1.1rem;font-size:.95rem;line-height:1.55;width:100%;margin:1rem 0 0}
+.hero .shooting-service-links.service-paths a{white-space:normal;text-decoration:underline;text-underline-offset:.2em;color:#704331;hyphens:auto;overflow-wrap:anywhere}
+@media(max-width:600px){.hero .shooting-service-links.service-paths{font-size:.86rem;gap:.7rem 1rem}}
+/* The empty secondary grid row must not add space below the controls. */
+@media(max-width:900px){header.compact-site-header .nav{row-gap:0!important}}
