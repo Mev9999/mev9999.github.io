@@ -60,3 +60,7 @@ Quellen zur Einordnung:
 Der Bericht bestätigt die geprüfte technische Umsetzung, keine rechtliche Zertifizierung. Tatsächliche Anbieter-Verträge, Auftragsverarbeitung, internationale Übermittlungsgrundlagen und kontospezifische Löschfristen müssen zur betrieblichen Nutzung passen; sie lassen sich nicht allein aus diesem Repository bestätigen. Der echte Formspree-Empfang im Postfach wurde nicht getestet.
 
 Nach dem Push muss die veröffentlichte Website erneut stichprobenartig geprüft werden, insbesondere falls der Hosting-Anbieter Analytics zusätzlich automatisch injiziert. Neue Embeds/Tracker dürfen nicht einfach als aktive Skripte oder Iframes ergänzt werden. Dann sind Kategorien, Datenschutzerklärung und Blockierung neu zu prüfen.
+
+## Aktualisierung vom 11. September 2026
+
+Die erste Abfrage ist jetzt eine nichtmodale, kompakte Leiste ohne automatischen Fokuswechsel oder Fokusfalle. Die Detail-Einstellungen öffnen weiterhin einen nativen modalen Dialog; Escape führt zur Leiste beziehungsweise zum Footer-Auslöser zurück. Beide Entscheidungen bleiben gleichwertig, Statistik bleibt ohne Zustimmung gesperrt. Bestehende Entscheidungen werden unverändert berücksichtigt. Die automatisierten Tests prüfen auch den Wechsel zwischen Leiste und Dialog. Browserprüfung in DE/EN/BS, mobil ab 320 Pixeln: keine seitlichen Überläufe, Fokus im Hauptinhalt nach Skip-Link; keine externen Ressourcen vor Zustimmung beobachtet.

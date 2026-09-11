@@ -1,3 +1,4 @@
+import { validateInterface } from './validate-interface.mjs';
 import { validatePrivacy } from './validate-privacy.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -149,6 +150,7 @@ for (const fileName of PRICE_PAGES) {
 
 await validateImprovements(htmlCache, report);
 await validatePrivacy(htmlCache, report);
+await validateInterface(htmlCache);
 
 for (const { dom } of htmlCache.values()) {
   dom.window.close();

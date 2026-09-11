@@ -16,7 +16,7 @@
     try {const value=JSON.parse(raw);return value?.version===VERSION && typeof value.statistics==='boolean' && Number.isFinite(value.expiresAt) && value.expiresAt>Date.now() && value.expiresAt<=Date.now()+LIFETIME+60000 ? value : null;} catch {return null;}
   };
   const read = () => {try{return parse(localStorage.getItem(KEY));}catch{return null;}};
-  let choice=read(), active=false, opener=null, dialog=null, expiryTimer;
+  let choice=read(), active=false, opener=null, dialog=null, banner=null, expiryTimer;
   let consentAllowed=choice?.statistics===true;
   const pending=new Set();
   const isAnalytics = value => {try{const u=new URL(value,location.href);return u.hostname==='cloudflareinsights.com'||u.hostname==='static.cloudflareinsights.com'||(u.origin===location.origin&&u.pathname.startsWith('/cdn-cgi/rum'));}catch{return false;}};
@@ -40,11 +40,22 @@
   }
   function apply(next,reloadOnRevoke=true){
     const wasActive=active;choice=next;consentAllowed=next?.statistics===true;
+    if(next&&banner){banner.remove();banner=null;}
     clearTimeout(expiryTimer);
     if(next)expiryTimer=setTimeout(()=>apply(next.expiresAt>Date.now()?next:null),Math.min(next.expiresAt-Date.now(),2147483647));
     if(consentAllowed){startAnalytics();return;}
     pending.forEach(request=>request.abort());pending.clear();
     if(wasActive){document.getElementById('consented-cloudflare-beacon')?.remove();if(reloadOnRevoke)location.reload();}
+  }
+  function showBanner(){
+    if(banner)return;
+    banner=document.createElement('section');banner.id='privacy-banner';banner.className='privacy-banner';banner.setAttribute('aria-labelledby','privacy-banner-title');
+    const intro=({de:'Freiwillige, cookie-freie Statistik mit Cloudflare hilft uns, diese Website zu verbessern. Ohne Zustimmung bleibt sie aus. Deine Auswahl ist jederzeit im Footer änderbar.',en:'Optional, cookie-free Cloudflare statistics help us improve this website. They stay off without consent. Change your choice in the footer at any time.',bs:'Dobrovoljna Cloudflare statistika bez kolačića pomaže nam poboljšati stranicu. Bez saglasnosti ostaje isključena. Izbor možeš promijeniti u podnožju.'})[lang];
+    banner.innerHTML=`<div><h2 id="privacy-banner-title">${text.title}</h2><p>${intro} <a href="${policy}">${text.privacy}</a></p></div><div class="privacy-actions"><button type="button" class="privacy-button" data-privacy-accept>${text.accept}</button><button type="button" class="privacy-button" data-privacy-reject>${text.reject}</button><button type="button" class="privacy-button secondary" data-banner-settings>${text.settings}</button></div>`;
+    document.body.append(banner);
+    banner.querySelector('[data-privacy-accept]').addEventListener('click',()=>save(true));
+    banner.querySelector('[data-privacy-reject]').addEventListener('click',()=>save(false));
+    banner.querySelector('[data-banner-settings]').addEventListener('click',event=>show(event.currentTarget));
   }
   function create(){
     if(dialog)return;
@@ -65,7 +76,7 @@
     dialog.querySelector('.privacy-save').addEventListener('click',()=>save(dialog.querySelector('#privacy-statistics').checked));
     dialog.querySelector('.privacy-close').addEventListener('click',()=>dialog.close());
     dialog.addEventListener('cancel',event=>{event.preventDefault();dialog.close();});
-    dialog.addEventListener('close',()=>{opener?.focus({preventScroll:true});});
+    dialog.addEventListener('close',()=>{if(banner)banner.hidden=false;opener?.focus({preventScroll:true});});
     dialog.addEventListener('keydown',event=>{
       if(event.key!=='Tab')return;
       const controls=[...dialog.querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),summary')].filter(e=>e.getClientRects().length);
@@ -76,14 +87,19 @@
   }
   function show(trigger){
     create();opener=trigger||document.activeElement;
+    if(banner)banner.hidden=true;
     dialog.querySelector('#privacy-statistics').checked=choice?.statistics===true;
     dialog.querySelector('.privacy-details').hidden=true;dialog.querySelector('.privacy-save').hidden=true;dialog.querySelector('.privacy-close').hidden=true;dialog.querySelector('.privacy-settings-action').setAttribute('aria-expanded','false');
+    dialog.querySelector('.privacy-details').hidden=false;dialog.querySelector('.privacy-save').hidden=false;dialog.querySelector('.privacy-close').hidden=false;dialog.querySelector('.privacy-settings-action').hidden=true;
     if(!dialog.open){dialog.showModal();dialog.querySelector('#privacy-title').focus();}
   }
   function save(statistics){
     const next={version:VERSION,statistics,expiresAt:Date.now()+LIFETIME};
     let stored=true;try{localStorage.setItem(KEY,JSON.stringify(next));}catch{stored=false;}
-    dialog.close();apply(next,stored);
+    if(dialog?.open)dialog.close();
+    const bannerHadFocus=banner?.contains(document.activeElement);
+    apply(next,stored);
+    if(bannerHadFocus)document.querySelector('footer [data-privacy-settings]')?.focus({preventScroll:true});
     if(!stored){let status=document.getElementById('privacy-storage-status');if(!status){status=document.createElement('p');status.id='privacy-storage-status';status.setAttribute('role','status');document.querySelector('.privacy-settings-link')?.parentElement.append(status);}status.textContent=text.storageError;}
   }
   document.querySelectorAll('[data-privacy-settings]').forEach(button=>button.addEventListener('click',()=>show(button)));
@@ -91,5 +107,5 @@
   window.addEventListener('pageshow',event=>{if(event.persisted)apply(read());});
   window.lizaPrivacy={open:show};
   apply(choice);
-  if(!choice&&!/^datenschutz(?:-(en|bs))?\.html$/.test(location.pathname.split('/').pop()))show();
+  if(!choice&&!/^datenschutz(?:-(en|bs))?\.html$/.test(location.pathname.split('/').pop()))showBanner();
 })();

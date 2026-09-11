@@ -164,7 +164,7 @@ function getSizesForImage(img) {
     return '(max-width: 900px) calc(100vw - 2rem), 36vw';
   }
   if (img.closest('.hero .art')) {
-    return '(max-width: 900px) calc(100vw - 2rem), 38vw';
+    return '(max-width: 900px) calc(100vw - 2rem), (max-width: 1232px) calc((100vw - 64px) * 0.4), 468px';
   }
   if (img.closest('.story-band-main')) {
     return '(max-width: 1000px) calc(100vw - 2rem), 760px';

@@ -31,8 +31,8 @@ export async function validatePrivacy(cache, report) {
     return {dom,w,d:w.document,click:s=>w.document.querySelector(s).click(),sent:()=>transmissions};
   }
   for(const lang of ['de','en','bs']){
-    let p=page(lang);assert(p.d.querySelector('dialog').open);assert(!p.d.querySelector('#privacy-statistics').checked);assert(!p.d.querySelector('script[src]'));assert.equal(p.w.localStorage.getItem(key),null);
-    p.click('[data-privacy-reject]');assert.equal(JSON.parse(p.w.localStorage.getItem(key)).statistics,false);assert(!p.d.querySelector('script[src]'));p.dom.window.close();
+    let p=page(lang);assert(p.d.querySelector('#privacy-banner'));assert(!p.d.querySelector('dialog'));assert.equal(p.d.activeElement,p.d.body);assert(!p.d.querySelector('script[src]'));assert.equal(p.w.localStorage.getItem(key),null);
+    p.click('[data-banner-settings]');assert(p.d.querySelector('dialog').open);assert(p.d.querySelector('#privacy-banner').hidden);assert(!p.d.querySelector('#privacy-statistics').checked);p.d.querySelector('dialog').dispatchEvent(new p.w.Event('cancel',{cancelable:true}));assert(!p.d.querySelector('#privacy-banner').hidden);assert(p.d.activeElement.matches('[data-banner-settings]'));p.click('[data-privacy-reject]');assert.equal(JSON.parse(p.w.localStorage.getItem(key)).statistics,false);assert(!p.d.querySelector('script[src]'));p.dom.window.close();
     p=page(lang,valid(false));assert(!p.d.querySelector('dialog'));assert(!p.d.querySelector('script[src]'));p.click('[data-privacy-settings]');p.click('[data-privacy-accept]');assert.equal(p.d.querySelectorAll('script[src]').length,1);assert.equal(JSON.parse(p.w.localStorage.getItem(key)).statistics,true);
     assert(p.w.navigator.sendBeacon('https://cloudflareinsights.com/cdn-cgi/rum','x'));assert.equal(p.sent(),1);
     p.click('[data-privacy-settings]');p.click('[data-privacy-reject]');assert(!p.d.querySelector('script[src]'));assert.equal(p.w.navigator.sendBeacon('https://cloudflareinsights.com/cdn-cgi/rum','x'),false);
@@ -41,7 +41,7 @@ export async function validatePrivacy(cache, report) {
     await p.w.fetch('https://formspree.io/f/test');assert.equal(p.sent(),2);
     p.click('[data-privacy-settings]');p.d.querySelector('dialog').dispatchEvent(new p.w.Event('cancel',{cancelable:true}));assert(!p.d.querySelector('dialog').open);assert(p.d.activeElement.matches('[data-privacy-settings]'));p.dom.window.close();
   }
-  for(const raw of ['bad','{}',JSON.stringify({version:1,statistics:true,expiresAt:1})]){const p=page('de',raw);assert(!p.d.querySelector('script[src]'));assert(p.d.querySelector('dialog').open);p.dom.window.close();}
+  for(const raw of ['bad','{}',JSON.stringify({version:1,statistics:true,expiresAt:1})]){const p=page('de',raw);assert(!p.d.querySelector('script[src]'));assert(p.d.querySelector('#privacy-banner'));p.dom.window.close();}
   const p=page('de',valid(true));assert(p.d.querySelector('script[src]'));p.w.localStorage.setItem(key,valid(false));p.w.dispatchEvent(new p.w.StorageEvent('storage',{key}));assert(!p.d.querySelector('script[src]'));p.dom.window.close();
   console.log('Privacy checks passed: all pages, local fonts, DE/EN/BS, default denial, persistence, expiry, withdrawal, cross-tab changes and isolated Formspree requests.');
 }

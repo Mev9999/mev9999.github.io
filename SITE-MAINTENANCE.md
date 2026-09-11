@@ -59,3 +59,9 @@ Hochzeit und Porträt bekommen weitere Arbeitsproben, sobald entsprechende Bilde
 ## Datenschutz (10. September 2026)
 
 Details und Testbericht: `PRIVACY-AUDIT.md`. Die Datenschutztexte werden aus `scripts/privacy-policy-content.mjs` erzeugt. `scripts/privacy-build.mjs` integriert lokale Fonts, die inerte Cloudflare-Konfiguration und Footer-Einstellungen. `scripts/privacy-consent.js` aktiviert den Beacon nur nach Zustimmung; `scripts/validate-privacy.mjs` ist Bestandteil von `npm run site:check`. Neue externe Inhalte erfordern eine erneute Prüfung.
+
+## Bedienung und Darstellung (11. September 2026)
+
+Media-Buttons erhalten ihre gemeinsamen Klassen im Build über `improve-site.mjs`; dekorative Foto-/Video-Icons und gedämpfte Metallfarben liegen in `site-improvements.css`. Header-Ausblendung: nach Abwärtsscrollen 900 ms, nach Aufwärtsscrollen 4500 ms; Interaktion im Header schützt weiterhin vor Ausblendung. Impressumslinks verwenden #704331 mit Unterstreichung/Fokusrahmen.
+
+Hero und Preload verwenden identische, auf 468 CSS-Pixel begrenzte Desktop-Größenangaben. Browsermessung bei 2560 × 1440: dargestellte Breite 465,875 Pixel, ausgewählte 480w-WebP-Datei; der lokale HTTP-Server lieferte 16.982 Bildbytes. Größere Varianten bis 1600w bleiben für hochauflösende Displays erhalten. Keine erneute Bildkomprimierung. `validate-interface.mjs` prüft Header-Zeiten, Kontrast einschließlich Hover, Hero-Preload und Media-Buttons.

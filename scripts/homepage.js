@@ -43,6 +43,13 @@
     // ---------- Smooth scroll for internal links ----------
     $$('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
+        if (a.classList.contains('skip-link')) {
+          e.preventDefault();
+          const main = document.getElementById('main-content');
+          main?.focus({preventScroll:true});
+          main?.scrollIntoView({block:'start'});
+          return;
+        }
         const href = a.getAttribute('href');
         if(href.length > 1){
           e.preventDefault();

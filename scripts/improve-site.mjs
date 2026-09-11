@@ -21,6 +21,11 @@ export function improveSite(document,file){
  for(const [tag,attr,src] of [['link','href','scripts/site-improvements.css'],['script','src','scripts/contact-flow.js']]){
   let e=document.querySelector(`${tag}[${attr}^="${src}"]`);if(!e){e=node(tag);e.setAttribute(attr,src+'?v=20260910');if(tag==='link')e.rel='stylesheet';else e.defer=true;}document.head.append(e);
  }
+ document.querySelectorAll('.hero a.btn').forEach(a=>{
+  const href=a.getAttribute('href')||'';
+  const video=/#shooting-video$/.test(href),photo=/#(?:portfolio|gallery-showcase)$/.test(href);
+  if(video||photo){a.classList.remove('ghost');a.classList.add('video-cta','media-cta',video?'media-cta-video':'media-cta-photo');}
+ });
  const promos=[...document.querySelectorAll('script[src*="home-promo.js"]')];promos.slice(1).forEach(e=>e.remove());if(promos[0])promos[0].id='homePromoScript';
  const headerStyles=[...document.querySelectorAll('style')].filter(e=>e.textContent.includes('header.scroll-aware-header {transition:transform'));
  headerStyles.slice(1).forEach(e=>e.remove());if(headerStyles[0])headerStyles[0].id='scroll-header-style';
