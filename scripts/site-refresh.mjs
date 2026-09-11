@@ -85,6 +85,7 @@ export function refreshSite(d,file){
    note.replaceChildren(...lines.map((text,n)=>el('span',n===0?'tax-note-line':'price-note-line',text)));note.dataset.refreshKey='pricing_note_new';note.removeAttribute('data-i18n');
   }
  }
+ if(base==='babybauch-und-neugeborenen-shooting-graz.html'){const img=d.querySelector('.hero-visual img');img.src='kombi-babybauch-neugeborene-hero.webp';img.width=1122;img.height=1402;}
  if(base==='newborn-fotografie-graz.html'){const img=d.querySelector('.hero-visual img');img.src='newborn-hero-dsc01433.webp';img.width=1600;img.height=2400;}
  if(base==='babybauch-und-neugeborenen-shooting-graz.html'&&i===0){const h=d.querySelector('#faq h2');h.replaceChildren();for(const [n,t] of ['Häufige Fragen zur Babybauch','-',' und Neugeborenen','-','Kombi'].entries())h.append(n===1||n===3?el('span','straight-hyphen',t):d.createTextNode(t));}
  if(base==='preise.html'){
