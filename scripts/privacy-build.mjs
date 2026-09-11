@@ -24,5 +24,5 @@ export function applyPrivacy(document,fileName){
   // Never serialize an auto-open runtime dialog into generated HTML.
   document.getElementById('privacy-dialog')?.remove();
   document.getElementById('privacy-banner')?.remove();
-  document.querySelectorAll('script[src],link[rel=stylesheet]').forEach(e=>{const attr=e.tagName==='SCRIPT'?'src':'href';const value=e.getAttribute(attr);if(/(?:homepage.js|scroll-header.js|privacy-consent\.(?:js|css)|site-improvements.css)(?:\?|$)/.test(value))e.setAttribute(attr,value.split('?')[0]+'?v=20260911-ui');});
+  document.querySelectorAll('script[src],link[rel=stylesheet]').forEach(e=>{const attr=e.tagName==='SCRIPT'?'src':'href';const value=e.getAttribute(attr);if(/(?:homepage.js|scroll-header.js|privacy-consent\.(?:js|css)|site-improvements.css)(?:\?|$)/.test(value))e.setAttribute(attr,value.split('?')[0]+'?v=20260912-refresh');});
 }

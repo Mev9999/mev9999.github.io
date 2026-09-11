@@ -12,7 +12,7 @@
   header.classList.add('scroll-aware-header');
   let timer;
   let previousY = window.scrollY;
-  let hideDelay = 900;
+  let hideDelay = 4000;
   let pointerInside = false;
   const show = () => header.classList.remove('header-idle-hidden');
   const inUse = () => pointerInside || header.querySelector('[aria-expanded="true"], :focus-visible');
@@ -24,7 +24,7 @@
   }
   window.addEventListener('scroll', () => {
     const currentY = window.scrollY;
-    if (currentY !== previousY) hideDelay = currentY < previousY ? 4500 : 900;
+    if (currentY !== previousY) hideDelay = currentY < previousY ? 4000 : 4000;
     previousY = currentY;
     show();
     scheduleHide();

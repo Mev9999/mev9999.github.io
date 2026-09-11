@@ -1,3 +1,4 @@
+import { refreshSite } from './site-refresh.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -51,7 +52,7 @@ const ALL_HTML = [
   'agb-bs.html'
 ];
 const LOCAL_IMAGE_PATTERN = /\.(?:avif|gif|jpe?g|png|webp)$/i;
-const IMAGE_WIDTHS = [320, 480, 640, 800];
+const IMAGE_WIDTHS = [320, 480, 640, 800, 960, 1200];
 const RESPONSIVE_DIR = 'responsive';
 const SOCIAL_DIR = 'social';
 const OG_IMAGE_REL = `${SOCIAL_DIR}/og-share-20.jpg`;
@@ -164,7 +165,7 @@ function getSizesForImage(img) {
     return '(max-width: 900px) calc(100vw - 2rem), 36vw';
   }
   if (img.closest('.hero .art')) {
-    return '(max-width: 900px) calc(100vw - 2rem), (max-width: 1232px) calc((100vw - 64px) * 0.4), 468px';
+    return '(max-width: 900px) calc(100vw - 2rem), (max-width: 1232px) calc((100vw - 64px) * 0.525), 614px';
   }
   if (img.closest('.story-band-main')) {
     return '(max-width: 1000px) calc(100vw - 2rem), 760px';
@@ -433,7 +434,16 @@ function applyResponsiveImages(document, variantMap, fileName) {
       .join(', ');
 
     img.setAttribute('srcset', srcset);
-    img.setAttribute('sizes', getSizesForImage(img));
+    let sizes = getSizesForImage(img);
+    // A landscape image cropped into a portrait tile needs more source pixels
+    // than the visible tile width. Retain originals for the lightbox.
+    const tileRatio = img.closest('.masonry') ? 4/5 : img.closest('.gallery-grid') ? 4/4.8 : 0;
+    if(tileRatio){
+      const ratio = Number(img.getAttribute('width')) / Number(img.getAttribute('height'));
+      const scale = Math.max(1, ratio / tileRatio);
+      if(Number.isFinite(scale) && scale>1.05) sizes=sizes.split(/,\s*/).map(part=>{const m=part.match(/^(\([^)]*\)\s+)?(.+)$/);return (m[1]||'')+'calc(('+m[2]+') * '+scale.toFixed(3)+')';}).join(', ');
+    }
+    img.setAttribute('sizes', sizes);
   });
 
   document.querySelectorAll('link[rel="preload"][as="image"]').forEach((link) => {
@@ -496,6 +506,9 @@ async function buildResponsiveImages() {
 
   await fs.mkdir(path.join(ROOT, RESPONSIVE_DIR), { recursive: true });
   const variantMap = new Map();
+  const recipePath = path.join(ROOT, RESPONSIVE_DIR, 'image-settings.json');
+  const recipe = JSON.stringify({quality:88,widths:IMAGE_WIDTHS});
+  const refreshImages = await fs.readFile(recipePath,'utf8').catch(()=> '') !== recipe;
 
   for (const src of imageRefs) {
     const inputPath = path.join(ROOT, src);
@@ -512,11 +525,11 @@ async function buildResponsiveImages() {
 
       const outputRel = `${RESPONSIVE_DIR}/${baseName}-${width}w${extension}`;
       const outputPath = path.join(ROOT, outputRel);
-      if (!(await isOutputCurrent(outputPath, [inputPath]))) {
+      if (refreshImages || !(await isOutputCurrent(outputPath, [inputPath]))) {
         const pipeline = sharp(inputPath).resize({ width, withoutEnlargement: true });
 
         if (extension === '.webp') {
-          await pipeline.webp({ quality: 82 }).toFile(outputPath);
+          await pipeline.webp({ quality: 88 }).toFile(outputPath);
         } else if (extension === '.png') {
           await pipeline.png({ compressionLevel: 9 }).toFile(outputPath);
         } else {
@@ -531,6 +544,7 @@ async function buildResponsiveImages() {
     variantMap.set(src, variants.sort((a, b) => a.width - b.width));
   }
 
+  await fs.writeFile(recipePath,recipe,'utf8');
   return variantMap;
 }
 
@@ -656,6 +670,7 @@ function applyStaticPagePostProcessing(dom, fileName, variantMap) {
   updateSocialMeta(document, fileName);
   updateJsonLd(document, fileName);
   improveSite(document, fileName);
+  refreshSite(document, fileName);
   applyPrivacy(document, fileName);
   applyResponsiveImages(document, variantMap, fileName);
 }
@@ -752,6 +767,7 @@ async function main() {
   // Legal pages are not rendered by the content-page generator.
   for (const fileName of (await fs.readdir(ROOT)).filter(name => name.endsWith('.html') && !RENDER_PAGES.includes(name))) {
     const dom = new JSDOM(await fs.readFile(path.join(ROOT, fileName), 'utf8'));
+    refreshSite(dom.window.document, fileName);
     applyPrivacy(dom.window.document, fileName);
     await fs.writeFile(path.join(ROOT, fileName), serializeDocument(dom), 'utf8');
     dom.window.close();

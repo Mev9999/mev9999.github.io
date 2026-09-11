@@ -15,24 +15,7 @@
       dateInput.min = new Date().toISOString().split('T')[0];
     }
 
-    // ---------- Scroll reveal ----------
-    const revealTargets = $$('.price.card, .testimonial, .process-card, .faq-item, .aside, .insta-grid a, .masonry .item, .story-band-lightbox');
-    revealTargets.forEach(node => node.classList.add('reveal'));
-
-    if('IntersectionObserver' in window){
-      const revealObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if(entry.isIntersecting){
-            entry.target.classList.add('in-view');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
-
-      revealTargets.forEach(node => revealObserver.observe(node));
-    }else{
-      revealTargets.forEach(node => node.classList.add('in-view'));
-    }
+    document.querySelectorAll('.reveal').forEach(e=>e.classList.remove('reveal','in-view'));
 
     // ---------- Year in footer ----------
     const yearNode = $('#year');
