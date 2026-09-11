@@ -103,7 +103,7 @@ html body a.btn.media-cta:hover{background:linear-gradient(135deg,#fff,rgba(238,
  .service-refreshed .hero .hero-visual img{object-fit:cover;object-position:center}
  header.compact-site-header,.home-refreshed .story-band-copy,.home-refreshed form.contact,.home-refreshed aside.aside{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
  header.compact-site-header{background:#f3e4dc}
- .home-refreshed .story-band-copy{background:rgba(35,27,23,.78)}
+ .home-refreshed .story-band-copy{background:rgba(255,250,247,.9)}
  .home-refreshed form.contact,.home-refreshed aside.aside{background:#fcf8f5}
 }
 @media(max-width:900px){
