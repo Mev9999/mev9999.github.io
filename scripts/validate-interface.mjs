@@ -29,7 +29,7 @@ export async function validateInterface(cache){
   assert(d.querySelector('link[href^="scripts/site-refresh.css"]'),file+' refresh styles');
   assert(!d.documentElement.textContent.includes('\uFFFD'),file+' encoding');
   const contact=d.querySelector('.contact-grid');
-  if(contact){const cards=contact.querySelectorAll('.contact-detail');assert(cards[2].textContent.includes('Mela-Spira-Straße 32b'),file+' address');assert.equal(cards[3].querySelectorAll('a').length,6,file+' service links');}
+  if(contact){const cards=contact.querySelectorAll('.contact-detail');assert(cards[2].textContent.includes('Mela-Spira-Straße 32b'),file+' address');assert.equal(cards[3].querySelectorAll('a').length,file.startsWith('ueber-mich')?6:5,file+' service links');assert(!cards[3].querySelector('a[href="'+file+'"]'),file+' self link');}
   if(/^index(?:-(en|bs))?\.html$/.test(file)){
    assert(d.querySelector('.hero .art .hero-caption'),file+' image caption');
    assert(d.querySelector('.mobile-hero-logo'),file+' mobile logo');
