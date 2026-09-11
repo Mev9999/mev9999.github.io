@@ -48,8 +48,8 @@ export function refreshSite(d,file){
  const local=f=>lang==='de'?f:f.replace('.html',`-${lang}.html`);
  const el=(tag,cls,text)=>{const e=d.createElement(tag);e.className=cls||'';if(text)e.textContent=text;return e;};
  d.body.classList.toggle('home-refreshed',isHome);if(d.querySelector('.hero-visual'))d.body.classList.add('service-refreshed');
- if(!d.querySelector('link[href^="scripts/site-refresh.css"]')){const css=el('link');css.rel='stylesheet';css.href='scripts/site-refresh.css?v=20260912e';d.head.append(css);}
- d.querySelector('link[href^="scripts/site-refresh.css"]') .href='scripts/site-refresh.css?v=20260912e';
+ if(!d.querySelector('link[href^="scripts/site-refresh.css"]')){const css=el('link');css.rel='stylesheet';css.href='scripts/site-refresh.css?v=20260912f';d.head.append(css);}
+ d.querySelector('link[href^="scripts/site-refresh.css"]') .href='scripts/site-refresh.css?v=20260912f';
  d.head.append(d.querySelector('link[href^="scripts/site-refresh.css"]'));
  if(isHome){
   for(const [key,values] of Object.entries(home))d.querySelectorAll(`[data-i18n="${key}"],[data-refresh-key="${key}"]`).forEach(e=>{e.textContent=values[i];e.dataset.refreshKey=key;e.removeAttribute('data-i18n');});
@@ -96,9 +96,20 @@ export function refreshSite(d,file){
  d.querySelector('header')?.classList.add('compact-site-header');
  if(isHome){
   const nav=d.querySelector('.faq-topic-links');if(nav){const combo=nav.querySelector('a[href*="babybauch-und-neugeborenen"]');if(combo)nav.children[2].before(combo);}
-  const terms=d.querySelector('.home-price-notes');if(terms&&!terms.querySelector('.price-terms')){
-   const paragraphs=[...terms.querySelectorAll(':scope>p')];
-   for(const [n,p] of paragraphs.entries()){const group=el('section',n===0?'price-terms':'price-extras');group.append(el('h3','',n===0?['Gut zu wissen','Good to know','Dobro je znati'][i]:['Zusätzliche Bilder','Additional images','Dodatne fotografije'][i]),p);terms.append(group);}
+  const terms=d.querySelector('.home-price-notes');if(terms){
+   const copy=[{
+    title:'Gut zu wissen',groups:[['Preise & Umsatzsteuer','Alle Preise sind umsatzsteuerfrei gemäß § 6 Abs. 1 Z 27 UStG (Kleinunternehmerregelung).'],['Reisekosten','Reisekosten außerhalb von Graz auf Anfrage.'],['Individuelle Pakete','Individuelle Pakete für weitere, hier nicht aufgeführte Leistungen sind jederzeit möglich.']],extra:'Zusätzliche Bilder',single:'Zusätzliche bearbeitete Bilder',rate:'15 € pro Bild',bundles:'Vorteilspakete',offers:['5 Bilder für 60 €','10 Bilder für 100 €']
+   },{
+    title:'Good to know',groups:[['Prices & VAT','All prices are exempt from VAT under § 6 para. 1 no. 27 UStG (small business regulation).'],['Travel costs','Travel costs outside Graz on request.'],['Custom packages','Custom packages for other services not listed here are always available.']],extra:'Additional images',single:'Additional edited images',rate:'€15 per image',bundles:'Image bundles',offers:['5 images for €60','10 images for €100']
+   },{
+    title:'Dobro je znati',groups:[['Cijene i PDV','Sve cijene su oslobođene PDV-a prema § 6 st. 1 br. 27 UStG (pravilo za male poduzetnike).'],['Putni troškovi','Putni troškovi van Graza na upit.'],['Individualni paketi','Individualni paketi za druge usluge koje ovdje nisu navedene uvijek su mogući.']],extra:'Dodatne fotografije',single:'Dodatne obrađene fotografije',rate:'15 € po fotografiji',bundles:'Povoljniji paketi',offers:['5 fotografija za 60 €','10 fotografija za 100 €']
+   }][i];
+   terms.replaceChildren();const info=el('section','price-terms'),extras=el('section','price-extras');
+   info.append(el('h3','',copy.title));
+   copy.groups.forEach(([title,text])=>{const group=el('div','price-info-group');group.append(el('h4','',title),el('p','',text));info.append(group);});
+   extras.append(el('h3','',copy.extra));const single=el('div','image-price-group');single.append(el('p','image-price-label',copy.single),el('p','image-price-value',copy.rate));
+   const bundles=el('div','image-bundle-group');bundles.append(el('h4','',copy.bundles));copy.offers.forEach(text=>bundles.append(el('p','image-bundle-value',text)));
+   extras.append(single,bundles);terms.append(info,extras);
   }
  }
 
@@ -120,5 +131,5 @@ export function refreshSite(d,file){
  'portraitfotografie-graz.html':['Porträt-Shooting anfragen','Enquire about a portrait session','Upit za portretno fotografisanje']};
  if(actionNames[base])d.querySelectorAll('main a.btn[href*="#contact-form-card"],.hero a.btn[href*="#contact-form-card"]').forEach(a=>{a.textContent=actionNames[base][i];});
 
- if(isHome&&!d.querySelector('script[src^="scripts/site-refresh.js"]')){const script=el('script');script.src='scripts/site-refresh.js?v=20260912e';script.defer=true;d.head.append(script);}
+ if(isHome&&!d.querySelector('script[src^="scripts/site-refresh.js"]')){const script=el('script');script.src='scripts/site-refresh.js?v=20260912f';script.defer=true;d.head.append(script);}
 }

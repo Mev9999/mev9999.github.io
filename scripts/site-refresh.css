@@ -180,3 +180,12 @@ html body a.btn.media-cta:hover{background:linear-gradient(135deg,#fff,rgba(238,
 @media(max-width:600px){.hero .shooting-service-links.service-paths{font-size:.86rem;gap:.7rem 1rem}}
 /* The empty secondary grid row must not add space below the controls. */
 @media(max-width:900px){header.compact-site-header .nav{row-gap:0!important}}
+
+/* Separate terms and deliberate, centered image-price lines. */
+.home-price-notes .price-info-group+.price-info-group{border-top:1px solid var(--line,#decac0);margin-top:1.1rem;padding-top:1.1rem}
+.home-price-notes h4{font:700 .95rem var(--font-body,Arial,sans-serif);color:var(--ink,#3a2e2a);margin:0 0 .4rem}
+.home-price-notes .price-extras{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.home-price-notes .image-price-group,.home-price-notes .image-bundle-group{width:100%}
+.home-price-notes .image-price-value{font-size:1.35rem;font-weight:700;color:var(--ink,#3a2e2a);margin-top:.5rem!important;white-space:nowrap}
+.home-price-notes .image-bundle-group{border-top:1px solid var(--line,#decac0);margin-top:1.4rem;padding-top:1.4rem}
+.home-price-notes .image-bundle-value{white-space:nowrap;margin-top:.4rem!important}
