@@ -199,3 +199,5 @@ html body a.btn.media-cta:hover{background:linear-gradient(135deg,#fff,rgba(238,
  .home-refreshed .hero .hero-side .art img{width:100%;height:100%;object-fit:cover}
 }
 @media(max-width:900px){.hero>.shooting-service-links.service-paths{flex-wrap:wrap;gap:.75rem 1.2rem;overflow-x:visible;font-size:.9rem}.hero>.shooting-service-links.service-paths a{white-space:nowrap}}
+/* Give desktop terms more room while keeping image prices centered. */
+@media(min-width:901px){.home-price-notes{grid-template-columns:minmax(0,2.4fr) minmax(0,1fr)}}
