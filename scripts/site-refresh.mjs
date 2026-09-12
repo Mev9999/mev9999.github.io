@@ -43,13 +43,49 @@ const pages={
  title:['Porträtfotografie in Graz – persönlich, natürlich und ganz du.','Portrait photography in Graz – personal, natural and truly you.','Portretno fotografisanje u Grazu – lično, prirodno i baš ti.'],
  lead:['Bei deinem Porträtshooting in Graz begleite ich dich mit ruhiger Anleitung und einem Blick dafür, was zu dir passt. Du musst keine Erfahrung vor der Kamera mitbringen – gemeinsam finden wir Posen und Perspektiven, in denen du dich wohlfühlst. So entstehen natürliche, ausdrucksstarke Porträts, in denen du dich wiedererkennst und gerne siehst.','During your portrait session in Graz, I offer calm guidance and an eye for what suits you. You do not need any experience in front of the camera – together we find poses and perspectives that feel comfortable. The result is natural, expressive portraits in which you recognise yourself and enjoy what you see.','Tokom tvog portretnog fotografisanja u Grazu pružam ti mirno vođenje i pažnju usmjerenu na ono što ti odgovara. Ne treba ti iskustvo pred objektivom – zajedno pronalazimo poze i perspektive u kojima se osjećaš ugodno. Tako nastaju prirodni, izražajni portreti na kojima prepoznaješ sebe i rado se vidiš.']}
 };
+const SITE_ORIGIN = 'https://liza-memories-photography.com';
+const LOCALIZED_PAGE_BASES = new Set([
+ 'index', 'ueber-mich', 'preise', 'babybauch-shooting-graz',
+ 'newborn-fotografie-graz', 'babybauch-und-neugeborenen-shooting-graz',
+ 'familienfotografie-graz', 'hochzeitsfotograf-graz', 'portraitfotografie-graz',
+ 'impressum', 'datenschutz', 'agb'
+]);
+
+// Static language pages must contain their final destinations before JavaScript runs.
+export function localizeHomepageLinks(document, fileName) {
+ const match = /^index(?:-(en|bs))?\.html$/.exec(fileName);
+ if (!match) return;
+ const language = match[1] || 'de';
+ const pageUrl = SITE_ORIGIN + '/' + (language === 'de' ? '' : fileName);
+ for (const link of document.querySelectorAll('a[href]')) {
+  // Language choices deliberately leave the current language.
+  if (link.matches('.lang-option, [hreflang], [data-lang]') || link.closest('#langMenu')) continue;
+  const original = link.getAttribute('href');
+  if (!original || original.startsWith('#')) continue;
+  let url;
+  try { url = new URL(original, pageUrl); } catch { continue; }
+  if (url.origin !== SITE_ORIGIN) continue;
+  const page = /^\/([^/]+?)(?:-(?:en|bs))?\.html$/.exec(url.pathname);
+  const base = url.pathname === '/' ? 'index' : page?.[1];
+  // Do not invent translations for media, downloads, or unknown page paths.
+  if (!LOCALIZED_PAGE_BASES.has(base)) continue;
+  const localizedPath = base === 'index' && language === 'de'
+   ? '/' : '/' + base + (language === 'de' ? '' : '-' + language) + '.html';
+  if (url.pathname === localizedPath) continue;
+  const prefix = original.startsWith('//') ? '//' + url.host
+   : /^https?:/i.test(original) ? url.origin : '';
+  const path = localizedPath === '/' || prefix || original.startsWith('/') ? localizedPath : localizedPath.slice(1);
+  link.setAttribute('href', prefix + path + url.search + url.hash);
+ }
+}
+
 export function refreshSite(d,file){
  const lang=file.match(/-(en|bs)\.html$/)?.[1]||'de',i=['de','en','bs'].indexOf(lang),base=file.replace(/-(en|bs)\.html$/,'.html'),isHome=base==='index.html';
  const local=f=>lang==='de'?f:f.replace('.html',`-${lang}.html`);
  const el=(tag,cls,text)=>{const e=d.createElement(tag);e.className=cls||'';if(text)e.textContent=text;return e;};
  d.body.classList.toggle('home-refreshed',isHome);if(d.querySelector('.hero-visual'))d.body.classList.add('service-refreshed');
- if(!d.querySelector('link[href^="scripts/site-refresh.css"]')){const css=el('link');css.rel='stylesheet';css.href='scripts/site-refresh.css?v=20260912k';d.head.append(css);}
- d.querySelector('link[href^="scripts/site-refresh.css"]') .href='scripts/site-refresh.css?v=20260912k';
+ if(!d.querySelector('link[href^="scripts/site-refresh.css"]')){const css=el('link');css.rel='stylesheet';css.href='scripts/site-refresh.css?v=20260912-seo1';d.head.append(css);}
+ d.querySelector('link[href^="scripts/site-refresh.css"]') .href='scripts/site-refresh.css?v=20260912-seo1';
  d.head.append(d.querySelector('link[href^="scripts/site-refresh.css"]'));
  if(isHome){
   for(const [key,values] of Object.entries(home))d.querySelectorAll(`[data-i18n="${key}"],[data-refresh-key="${key}"]`).forEach(e=>{e.textContent=values[i];e.dataset.refreshKey=key;e.removeAttribute('data-i18n');});
@@ -135,5 +171,6 @@ export function refreshSite(d,file){
  'portraitfotografie-graz.html':['Porträt-Shooting anfragen','Enquire about a portrait session','Upit za portretno fotografisanje']};
  if(actionNames[base])d.querySelectorAll('main a.btn[href*="#contact-form-card"],.hero a.btn[href*="#contact-form-card"]').forEach(a=>{a.textContent=actionNames[base][i];});
 
+ if(isHome)localizeHomepageLinks(d,file);
  if(isHome&&!d.querySelector('script[src^="scripts/site-refresh.js"]')){const script=el('script');script.src='scripts/site-refresh.js?v=20260912k';script.defer=true;d.head.append(script);}
 }

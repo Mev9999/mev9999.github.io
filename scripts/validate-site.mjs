@@ -1,3 +1,5 @@
+import { validateImageLoading } from './validate-image-loading.mjs';
+import { validateLanguageLinks } from './validate-language-links.mjs';
 import { validateInterface } from './validate-interface.mjs';
 import { validatePrivacy } from './validate-privacy.mjs';
 import fs from 'node:fs/promises';
@@ -151,6 +153,8 @@ for (const fileName of PRICE_PAGES) {
 await validateImprovements(htmlCache, report);
 await validatePrivacy(htmlCache, report);
 await validateInterface(htmlCache);
+validateImageLoading(htmlCache);
+await validateLanguageLinks(htmlCache);
 
 for (const { dom } of htmlCache.values()) {
   dom.window.close();

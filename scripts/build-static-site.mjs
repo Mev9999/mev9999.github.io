@@ -153,16 +153,25 @@ function isContentImage(src) {
   return isLocalImage(src) && !/logo-liza\.(png|webp)$/i.test(src) && !src.startsWith(`${SOCIAL_DIR}/`);
 }
 
-function getSizesForImage(img) {
+function getSizesForImage(img, fileName) {
+  // Gallery slots follow the CSS grid. Crop scaling is applied exactly once below.
+  if (img.closest('.masonry')) {
+    return '(max-width: 640px) calc(100vw - 2rem), (max-width: 1000px) calc((100vw - 3rem) / 2), (max-width: 1232px) calc((100vw - 4rem) / 3), 390px';
+  }
+  if (img.closest('.hero-visual')) {
+    const mobileSlot = '(max-width: 900px) calc(100vw - 2rem), ';
+    // Desktop photos cover text-height boxes. Preserve pixels for the wider source crops.
+    if (/^hochzeitsfotograf-graz(?:-(?:en|bs))?\.html$/.test(fileName)) return mobileSlot + '1000px';
+    if (/^ueber-mich(?:-(?:en|bs))?\.html$/.test(fileName)) return mobileSlot + '(max-width: 1212px) 1000px, 800px';
+    // Medium desktops have narrower, taller copy; 640px also covers that extra crop.
+    return mobileSlot + '(max-width: 1212px) 640px, 488px';
+  }
   if (img.hasAttribute("data-responsive-sizes")) return img.getAttribute("data-responsive-sizes");
   if (img.closest('.insta-grid')) {
     return '(max-width: 640px) calc((100vw - 2.6rem) / 2), (max-width: 1000px) calc((100vw - 3.2rem) / 3), 180px';
   }
   if (img.closest('.session-stories-grid')) {
     return '(max-width: 900px) calc(100vw - 2rem), 390px';
-  }
-  if (img.closest('.hero-visual')) {
-    return '(max-width: 900px) calc(100vw - 2rem), 36vw';
   }
   if (img.closest('.hero .art')) {
     return '(max-width: 900px) calc(100vw - 2rem), (max-width: 1232px) calc((100vw - 64px) * 0.525), 614px';
@@ -176,7 +185,7 @@ function getSizesForImage(img) {
   if (img.closest('.gallery-grid')) {
     return '(max-width: 487px) calc(100vw - 2rem), (max-width: 723px) calc((100vw - 3rem) / 2), (max-width: 959px) calc((100vw - 4rem) / 3), (max-width: 1195px) calc((100vw - 5rem) / 4), 224px';
   }
-  if (img.closest('.masonry') || img.closest('#gallery')) {
+  if (img.closest('#gallery')) {
     return '(max-width: 640px) calc(100vw - 2rem), (max-width: 1000px) calc((100vw - 3rem) / 2), 390px';
   }
   if (img.closest('.about .portrait')) {
@@ -423,6 +432,18 @@ function applyResponsiveImages(document, variantMap, fileName) {
       return;
     }
 
+    if (img.closest('.hero-visual')) {
+      const width = Number(img.getAttribute('width'));
+      const height = Number(img.getAttribute('height'));
+      if (width > 0 && height > 0 && Number.isFinite(width) && Number.isFinite(height)) {
+        // Keep an intrinsic fallback before decode; the mobile CSS sets aspect-ratio:auto.
+        img.style.aspectRatio = 'auto ' + width + ' / ' + height;
+      }
+    }
+    if (img.closest('.masonry')) {
+      // Retire legacy manually enlarged hints, which otherwise compound crop scaling.
+      img.removeAttribute('data-responsive-sizes');
+    }
 
     const variants = variantMap.get(src);
     if (!variants || !variants.length) {
@@ -434,7 +455,7 @@ function applyResponsiveImages(document, variantMap, fileName) {
       .join(', ');
 
     img.setAttribute('srcset', srcset);
-    let sizes = getSizesForImage(img);
+    let sizes = getSizesForImage(img, fileName);
     // A landscape image cropped into a portrait tile needs more source pixels
     // than the visible tile width. Retain originals for the lightbox.
     const tileRatio = img.closest('.masonry') ? 4/5 : img.closest('.gallery-grid') ? 4/4.8 : 0;
@@ -446,19 +467,26 @@ function applyResponsiveImages(document, variantMap, fileName) {
     img.setAttribute('sizes', sizes);
   });
 
-  document.querySelectorAll('link[rel="preload"][as="image"]').forEach((link) => {
-    const href = link.getAttribute('href');
-    const heroImg = document.querySelector(`img[src="${href}"]`);
-    if (!heroImg) {
-      return;
+  // Select the final visible hero after all content refreshes, not a stale preload URL.
+  const heroImg = document.querySelector('.hero-visual img, .hero .art img');
+  if (heroImg && isContentImage(heroImg.getAttribute('src'))) {
+    let link = document.querySelector('link[rel="preload"][as="image"]');
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'preload';
+      link.setAttribute('as', 'image');
+      document.head.append(link);
     }
-    const srcset = heroImg.getAttribute('srcset');
-    const sizes = heroImg.getAttribute('sizes');
-    if (srcset && sizes) {
-      link.setAttribute('imagesrcset', srcset);
-      link.setAttribute('imagesizes', sizes);
+    link.setAttribute('href', heroImg.getAttribute('src'));
+    link.setAttribute('fetchpriority', 'high');
+    heroImg.setAttribute('loading', 'eager');
+    heroImg.setAttribute('fetchpriority', 'high');
+    for (const [source, target] of [['srcset', 'imagesrcset'], ['sizes', 'imagesizes']]) {
+      const value = heroImg.getAttribute(source);
+      if (value) link.setAttribute(target, value);
+      else link.removeAttribute(target);
     }
-  });
+  }
 }
 
 function collectImageEntries(document) {
