@@ -46,10 +46,16 @@
 .home-refreshed .story-card-cta{align-self:center;margin-inline:auto}
 
 /* Center all review content beneath the section heading. */
-#testimonials .google-review-panel{grid-template-columns:minmax(0,1fr);text-align:center;gap:1.25rem}
-#testimonials .google-review-identity{padding:0;border:0;justify-self:center}
+#testimonials .google-review-panel{text-align:center}
+#testimonials .google-review-identity{justify-self:stretch}
 #testimonials .google-review-copy{text-align:center;width:100%}
 #testimonials .google-review-copy .btn{margin-inline:auto}
 #testimonials .customer-reviews .review-slide,#testimonials .customer-reviews .review-slide blockquote,#testimonials .customer-reviews .review-slide blockquote p{text-align:center}
 #testimonials .review-stars,#testimonials .review-author,#testimonials .review-source{text-align:center}
 @media(min-width:901px){.home-refreshed #pricing .hd p{max-width:none;width:100%;text-wrap:pretty}}
+
+.home-refreshed .story-card-body,.home-refreshed #pricing .hd,.home-refreshed #pricing .price.card{text-align:center}
+.home-refreshed .story-card-body ul,.home-refreshed #pricing .price.card ul{padding-left:0;list-style-position:inside;text-align:center}
+.home-refreshed #pricing .price.card>.chip{align-self:center}
+
+.home-refreshed .story-card-body,.home-refreshed .story-card-body h3,.home-refreshed .story-card-body p,.home-refreshed #pricing .hd,.home-refreshed #pricing .price.card,.home-refreshed #pricing .price.card h3,.home-refreshed #pricing .price.card li{text-align:center!important}
