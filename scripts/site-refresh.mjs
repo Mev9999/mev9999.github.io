@@ -163,6 +163,7 @@ export function refreshSite(d,file){
  }
  if(base==='babybauch-und-neugeborenen-shooting-graz.html'){const img=d.querySelector('.hero-visual img');img.src='kombi-babybauch-neugeborene-hero.webp';img.width=1122;img.height=1402;}
  if(base==='babybauch-shooting-graz.html'){const img=d.querySelector('.hero-visual img');img.src='babybauch-hero-dsc03641.webp';img.width=1600;img.height=1143;}
+ if(base==='familienfotografie-graz.html'){const img=d.querySelector('.hero-visual img');img.src='familien-hero-dsc02431.webp';img.width=1600;img.height=1723;}
  if(base==='newborn-fotografie-graz.html'){const img=d.querySelector('.hero-visual img');img.src='newborn-hero-dsc03309.webp';img.width=1600;img.height=1632;}
  if(base==='babybauch-und-neugeborenen-shooting-graz.html'&&i===0){const h=d.querySelector('#faq h2');h.replaceChildren();for(const [n,t] of ['Häufige Fragen zur Babybauch','-',' und Neugeborenen','-','Kombi'].entries())h.append(n===1||n===3?el('span','straight-hyphen',t):d.createTextNode(t));}
  if(base==='preise.html'){
