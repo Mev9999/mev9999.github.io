@@ -32,6 +32,6 @@ export function addReviewCarousel(d, lang, entries = reviews) {
   article.append(stars,rating,quote,name,link);track.append(article);
  });
  frame.append(track);const dots=el('div','review-dots');dots.hidden=true;entries.forEach((r,n)=>{const dot=button('review-dot',`${copy[7]} ${n+1} ${copy[8]} ${entries.length}`,'');dot.dataset.index=n;dots.append(dot);});box.append(dots);container.append(box);
- const css=el('link','');css.rel='stylesheet';css.href='scripts/reviews-carousel.css?v=20260913c';css.dataset.reviewAsset='';d.head.append(css);
- const script=el('script','');script.src='scripts/reviews-carousel.js?v=20260913c';script.defer=true;script.dataset.reviewAsset='';d.head.append(script);
+ const css=el('link','');css.rel='stylesheet';css.href='scripts/reviews-carousel.css?v=20260913d';css.dataset.reviewAsset='';d.head.append(css);
+ const script=el('script','');script.src='scripts/reviews-carousel.js?v=20260913d';script.defer=true;script.dataset.reviewAsset='';d.head.append(script);
 }
