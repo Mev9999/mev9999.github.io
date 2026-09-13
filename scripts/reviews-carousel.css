@@ -1,6 +1,6 @@
 
-.customer-reviews{margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e4cec3;text-align:left;color:#3a2e2a}
-.customer-reviews h3{margin:0 0 1.2rem;font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.5rem);text-align:left}
+.customer-reviews{margin-top:2.5rem;padding-top:2rem;border-top:0;text-align:left;color:#3a2e2a}
+.customer-reviews h3{margin:0 0 1.2rem;font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.5rem);text-align:center}
 .review-frame{position:relative;border:1px solid #e4cec3;border-radius:24px;background:linear-gradient(125deg,#fffdfb,#f7ebe5)}
 .review-slide{padding:1.5rem 3.8rem;min-width:0}
 .customer-reviews .review-slide blockquote{max-width:none;width:auto;margin:.7rem 0 1rem;font:inherit;font-size:1rem;line-height:1.45;text-align:left;overflow-wrap:anywhere}
