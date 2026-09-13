@@ -1,3 +1,4 @@
+import { addReviewCarousel } from './reviews-build.mjs';
 // Requested copy and component adjustments, applied after language rendering.
 const home = {
 hero_proof_label_1:['Standort','Location','Lokacija'],
@@ -171,6 +172,6 @@ export function refreshSite(d,file){
  'portraitfotografie-graz.html':['Porträt-Shooting anfragen','Enquire about a portrait session','Upit za portretno fotografisanje']};
  if(actionNames[base])d.querySelectorAll('main a.btn[href*="#contact-form-card"],.hero a.btn[href*="#contact-form-card"]').forEach(a=>{a.textContent=actionNames[base][i];});
 
- if(isHome)localizeHomepageLinks(d,file);
+ if(isHome){localizeHomepageLinks(d,file);addReviewCarousel(d,lang);}
  if(isHome&&!d.querySelector('script[src^="scripts/site-refresh.js"]')){const script=el('script');script.src='scripts/site-refresh.js?v=20260912k';script.defer=true;d.head.append(script);}
 }
