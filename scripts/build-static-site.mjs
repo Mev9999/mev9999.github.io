@@ -1,3 +1,4 @@
+import { applyCoreImageContent, coreImageScope, coreImageAliases } from './core-image-content.mjs';
 import { refreshSite } from './site-refresh.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -528,6 +529,7 @@ async function buildResponsiveImages() {
       const src = match[1];
       if (isContentImage(src)) {
         imageRefs.add(src);
+        if(coreImageAliases[src]) imageRefs.add(coreImageAliases[src]);
       }
     }
   }
@@ -699,6 +701,8 @@ function applyStaticPagePostProcessing(dom, fileName, variantMap) {
   updateJsonLd(document, fileName);
   improveSite(document, fileName);
   refreshSite(document, fileName);
+  applyCoreImageContent(document, fileName);
+  if(coreImageScope(fileName)) updateSocialMeta(document, fileName);
   applyPrivacy(document, fileName);
   applyResponsiveImages(document, variantMap, fileName);
 }

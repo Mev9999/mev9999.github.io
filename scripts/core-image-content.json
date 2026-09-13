@@ -1,0 +1,984 @@
+{
+  "descriptions": {
+    "newborn-hero-dsc03309.webp": {
+      "de": "Schlafendes Neugeborenes in fliederfarbenem Tuch mit Stoffhäschen im Korb vor rosa Hintergrund",
+      "en": "Sleeping newborn wrapped in lilac fabric with a toy rabbit in a basket against a pink backdrop",
+      "bs": "Novorođenče spava umotano u lila tkaninu, uz igračku zeku u korpi na ružičastoj pozadini"
+    },
+    "9.webp": {
+      "de": "Mutter in weißer Bluse küsst ihr schlafendes Baby auf die Stirn",
+      "en": "Mother in a white blouse kissing her sleeping baby on the forehead",
+      "bs": "Majka u bijeloj bluzi ljubi svoju usnulu bebu u čelo"
+    },
+    "16.webp": {
+      "de": "Nahaufnahme von Nase und Lippen eines Neugeborenen in Schwarzweiß",
+      "en": "Black-and-white close-up of a newborn's nose and lips",
+      "bs": "Crno-bijeli krupni plan nosa i usana novorođenčeta"
+    },
+    "17.webp": {
+      "de": "Schlafendes Baby mit Hosenträgern im Korb neben einem Teddy und orangefarbenen Blüten",
+      "en": "Sleeping baby wearing braces in a basket beside a teddy bear and orange flowers",
+      "bs": "Beba s tregerima spava u korpi pored medvjedića i narandžastog cvijeća"
+    },
+    "18.webp": {
+      "de": "Vater küsst sein Baby mit brauner Strickmütze im weich ausgelegten Korb",
+      "en": "Father kissing his baby in a brown knitted hat in a softly lined basket",
+      "bs": "Otac ljubi svoju bebu sa smeđom pletenom kapicom u meko obloženoj korpi"
+    },
+    "19.webp": {
+      "de": "Neugeborenes in weißem Strampler auf tätowierten Unterarmen, in Schwarzweiß fotografiert",
+      "en": "Newborn in a white romper resting on tattooed forearms, photographed in black and white",
+      "bs": "Novorođenče u bijeloj benkici leži na tetoviranim podlakticama, fotografisano crno-bijelo"
+    },
+    "20.webp": {
+      "de": "Baby mit weißer Strickmütze schläft quer in einem kleinen Holzbett neben einem Häkelbären",
+      "en": "Baby in a white knitted hat sleeping across a little wooden bed beside a crocheted bear",
+      "bs": "Beba s bijelom pletenom kapicom spava poprijeko u malom drvenom krevetu pored heklanog medvjedića"
+    },
+    "21.webp": {
+      "de": "Schwarzweißfoto einer Mutter, die neben dem kleinen Bett ihres schlafenden Babys liegt",
+      "en": "Black-and-white photo of a mother lying beside her sleeping baby's little bed",
+      "bs": "Crno-bijela fotografija majke koja leži pored malog kreveta svoje usnule bebe"
+    },
+    "22.webp": {
+      "de": "Waches Baby im rosa Kleid mit Blumenstirnband liegt in einem weißen Bettchen zwischen Blüten",
+      "en": "Awake baby in a pink dress and floral headband lying in a white cot surrounded by flowers",
+      "bs": "Budna beba u ružičastoj haljinici s cvjetnom trakom leži u bijelom krevetiću među cvijećem"
+    },
+    "23.webp": {
+      "de": "Baby mit Blumenstirnband schaut über eine hellrosa Strickdecke in die Kamera",
+      "en": "Baby with a floral headband looking over a pale pink knitted blanket at the camera",
+      "bs": "Beba s cvjetnom trakom gleda u kameru preko svijetloružičaste pletene dekice"
+    },
+    "24.webp": {
+      "de": "Frau küsst ein waches Baby mit Blumenstirnband, dessen Kopf auf einer rosa Decke ruht",
+      "en": "Woman kissing an awake baby with a floral headband, its head resting on a pink blanket",
+      "bs": "Žena ljubi budnu bebu s cvjetnom trakom čija glava počiva na ružičastoj dekici"
+    },
+    "25.webp": {
+      "de": "Kleines Mädchen beugt sich über ein Baby mit Blumenstirnband und küsst es",
+      "en": "Little girl leaning over and kissing a baby wearing a floral headband",
+      "bs": "Djevojčica se naginje nad bebu s cvjetnom trakom i ljubi je"
+    },
+    "26.webp": {
+      "de": "Neugeborenes in rosa Tuch liegt auf einer gelben Decke im Korb mit Blumenkranz, von oben gesehen",
+      "en": "Overhead view of a newborn wrapped in pink on a yellow blanket in a flower-trimmed basket",
+      "bs": "Pogled odozgo na novorođenče umotano u ružičastu tkaninu na žutoj dekici u korpi ukrašenoj cvijećem"
+    },
+    "28.webp": {
+      "de": "Schlafendes Babygesicht mit feinem Blumenband neben violetten Blüten und einer roten Strickdecke",
+      "en": "Sleeping baby's face with a delicate floral headband beside purple flowers and a red knitted blanket",
+      "bs": "Lice usnule bebe s nježnom cvjetnom trakom pored ljubičastog cvijeća i crvene pletene dekice"
+    },
+    "29.webp": {
+      "de": "Schwarzweißes Detailfoto von Babyfüßen, die aus einer gestrickten Wickeldecke schauen",
+      "en": "Black-and-white detail of baby feet peeking out of a knitted wrap",
+      "bs": "Crno-bijeli detalj bebinih stopala koja vire iz pletenog povoja"
+    },
+    "30.webp": {
+      "de": "Frau beugt sich für einen Kuss über ein eingewickeltes Baby auf roter Decke vor violettem Hintergrund",
+      "en": "Woman leaning down to kiss a wrapped baby on a red blanket against a purple backdrop",
+      "bs": "Žena se naginje da poljubi umotanu bebu na crvenoj dekici ispred ljubičaste pozadine"
+    },
+    "galerie-neugeborene-dsc03101.webp": {
+      "de": "Dunkelhaarige Frau berührt mit ihrer Nase die Nase eines Babys in grauweißem Outfit",
+      "en": "Dark-haired woman touching noses with a baby in a grey and white outfit",
+      "bs": "Tamnokosa žena dodiruje svojim nosom nos bebe u sivo-bijeloj odjeći"
+    },
+    "galerie-neugeborene-dsc03113.webp": {
+      "de": "Paar hält gemeinsam ein Neugeborenes vor einem hellen Fenster, als Schwarzweißporträt",
+      "en": "Black-and-white portrait of a couple holding a newborn together beside a bright window",
+      "bs": "Crno-bijeli portret para koji zajedno drži novorođenče uz svijetli prozor"
+    },
+    "galerie-neugeborene-dsc03117.webp": {
+      "de": "Mann im weißen Poloshirt hält den Kopf eines Babys behutsam in der Hand, in Schwarzweiß",
+      "en": "Black-and-white portrait of a man in a white polo shirt gently supporting a baby's head",
+      "bs": "Crno-bijeli portret muškarca u bijeloj polo majici koji nježno pridržava bebinu glavu"
+    },
+    "galerie-neugeborene-dsc03147-bearbeitet.webp": {
+      "de": "Baby in grauer Latzhose schläft in einem kleinen Holzwagen neben Lichterzweigen und einem Teddy",
+      "en": "Baby in grey dungarees sleeping in a small wooden pram beside illuminated branches and a teddy bear",
+      "bs": "Beba u sivim hlačama s naramenicama spava u malim drvenim kolicima uz osvijetljene grančice i medvjedića"
+    },
+    "galerie-neugeborene-dsc03160.webp": {
+      "de": "Schlafendes Baby mit grauer Fliege hält einen weißen Häkelbären an seiner Seite",
+      "en": "Sleeping baby wearing a grey bow tie and holding a white crocheted bear at its side",
+      "bs": "Usnula beba sa sivom leptir-mašnom drži bijelog heklanog medvjedića uz sebe"
+    },
+    "galerie-neugeborene-dsc03176-bearbeitet.webp": {
+      "de": "Neugeborenes in grünem Wickeltuch auf grauer Strickdecke zwischen Blättern und trockenen Gräsern",
+      "en": "Newborn in a green wrap on a grey knitted blanket among leaves and dried grasses",
+      "bs": "Novorođenče u zelenom povoju na sivoj pletenoj dekici među lišćem i suhim travama"
+    },
+    "galerie-neugeborene-dsc03178-bearbeitet.webp": {
+      "de": "Waches Baby mit grauer Hasenohrenmütze liegt unter einer locker drapierten Decke",
+      "en": "Awake baby wearing a grey bunny-eared hat beneath a loosely draped blanket",
+      "bs": "Budna beba sa sivom kapicom sa zečijim ušima leži pod lagano prebačenom dekicom"
+    },
+    "galerie-neugeborene-dsc03212.webp": {
+      "de": "Baby in rosa Strickmütze schläft im weißen Bettchen neben Blumen und einem rosa Wecker",
+      "en": "Baby in a pink knitted hat sleeping in a white cot beside flowers and a pink alarm clock",
+      "bs": "Beba s ružičastom pletenom kapicom spava u bijelom krevetiću uz cvijeće i ružičasti budilnik"
+    },
+    "galerie-neugeborene-dsc03222.webp": {
+      "de": "Kleine Babyfüße ragen unter einer rosa Strickdecke hervor, das schlafende Gesicht liegt im Hintergrund",
+      "en": "Tiny baby feet emerging from a pink knitted blanket, with the sleeping face in the background",
+      "bs": "Malena bebina stopala vire ispod ružičaste pletene dekice, a usnulo lice je u pozadini"
+    },
+    "galerie-neugeborene-dsc03258.webp": {
+      "de": "Silhouetten eines Paares mit berührenden Stirnen und einem Baby zwischen ihren Armen",
+      "en": "Silhouettes of a couple touching foreheads with a baby cradled between their arms",
+      "bs": "Siluete para koji se dodiruje čelima držeći bebu između svojih ruku"
+    },
+    "galerie-neugeborene-dsc03275.webp": {
+      "de": "Frau hält ein Baby im rosa Spitzenkleid auf Augenhöhe und berührt es mit ihrer Nase",
+      "en": "Woman holding a baby in a pink lace dress at eye level and touching it with her nose",
+      "bs": "Žena drži bebu u ružičastoj čipkastoj haljinici u visini očiju i dodiruje je nosom"
+    },
+    "galerie-neugeborene-dsc03304.webp": {
+      "de": "Von oben fotografiertes Baby in fliederfarbenem Tuch mit weißem Häkelhasen in einem rosa dekorierten Korb",
+      "en": "Overhead photo of a baby in a lilac wrap with a white crocheted rabbit in a pink-decorated basket",
+      "bs": "Fotografija odozgo bebe u lila povoju s bijelim heklanim zekom u ružičasto ukrašenoj korpi"
+    },
+    "galerie-neugeborene-dsc03332.webp": {
+      "de": "Zwei erwachsene Hände halten je einen Finger einer kleinen Babyhand vor hellem Hintergrund",
+      "en": "Two adult hands each gently holding a finger of a tiny baby hand against a light background",
+      "bs": "Dvije odrasle ruke drže po jedan prst malene bebine ruke na svijetloj pozadini"
+    },
+    "galerie-neugeborene-firefly-output-1779625596725.webp": {
+      "de": "Schlafendes Baby mit Blumenstirnband auf weißem Kissen unter cremefarbenen und rosa Ballons",
+      "en": "Sleeping baby with a floral headband on a white cushion beneath cream and pink balloons",
+      "bs": "Usnula beba s cvjetnom trakom na bijelom jastuku ispod krem i ružičastih balona"
+    },
+    "galerie-neugeborene-firefly-output-1779625738172.webp": {
+      "de": "Baby mit rosa Blumenstirnband schläft seitlich auf einem weißen Kissen vor cremefarbenen Vorhängen",
+      "en": "Baby with a pink floral headband sleeping on its side on a white cushion in front of cream curtains",
+      "bs": "Beba s ružičastom cvjetnom trakom spava na boku na bijelom jastuku ispred krem zavjesa"
+    },
+    "galerie-neugeborene-unbenannt-1-bearbeitet.webp": {
+      "de": "Weite Ansicht eines schlafenden Babys im Korb auf einem runden rosa Häkelteppich am Fenster",
+      "en": "Wide view of a sleeping baby in a basket on a round pink crocheted rug beside a window",
+      "bs": "Širi kadar usnule bebe u korpi na okruglom ružičastom heklanom tepihu pored prozora"
+    },
+    "galerie-neugeborene-dsc01355.webp": {
+      "de": "Baby mit grauer Schiebermütze und Hosenträgern schläft in einem herbstlich dekorierten Korb",
+      "en": "Baby in a grey flat cap and braces sleeping in a basket with autumn decorations",
+      "bs": "Beba sa sivom kapom sa šiltom i tregerima spava u korpi s jesenjim ukrasima"
+    },
+    "galerie-neugeborene-dsc01364.webp": {
+      "de": "Schlafendes Baby in brauner Hose mit einem angewinkelten Arm neben dem Kopf auf weicher Unterlage",
+      "en": "Sleeping baby in brown trousers with one arm bent beside its head on a soft blanket",
+      "bs": "Usnula beba u smeđim hlačama sa savijenom rukom pored glave na mekoj podlozi"
+    },
+    "galerie-neugeborene-dsc01366.webp": {
+      "de": "Nahes Babyfoto mit geschlossenen Augen, einer Hand an der Wange und grauen Hosenträgern",
+      "en": "Close-up baby photo with closed eyes, one hand against the cheek and grey braces",
+      "bs": "Krupni plan bebe zatvorenih očiju, s rukom uz obraz i sivim tregerima"
+    },
+    "galerie-neugeborene-dsc01398-2.webp": {
+      "de": "Schwarzweißaufnahme einer Frau, die ein Baby mit Strickmütze im Korb neben einem Teddy küsst",
+      "en": "Black-and-white photo of a woman kissing a baby in a knitted hat in a basket beside a teddy bear",
+      "bs": "Crno-bijela fotografija žene koja ljubi bebu s pletenom kapicom u korpi pored medvjedića"
+    },
+    "galerie-neugeborene-dsc01408.webp": {
+      "de": "Schwarzweißes Babyfoto im kleinen Holzbett mit einem Bein über dem Bettrand und Häkelbär daneben",
+      "en": "Black-and-white baby photo in a little wooden bed with one leg over the edge and a crocheted bear alongside",
+      "bs": "Crno-bijela fotografija bebe u malom drvenom krevetu s jednom nogom preko ruba i heklanim medvjedićem pored"
+    },
+    "galerie-neugeborene-dsc01437.webp": {
+      "de": "Schlafendes Neugeborenes mit blauer Zipfelmütze, eng in eine blaue Strickdecke gewickelt",
+      "en": "Sleeping newborn in a blue pointed hat, snugly wrapped in a blue knitted blanket",
+      "bs": "Novorođenče s plavom šiljastom kapicom spava čvrsto umotano u plavu pletenu dekicu"
+    },
+    "galerie-neugeborene-dsc01440.webp": {
+      "de": "Mann mit tätowiertem Arm hält ein Baby im weißen Strampler nah an sein Gesicht",
+      "en": "Man with a tattooed arm holding a baby in a white romper close to his face",
+      "bs": "Muškarac s tetoviranom rukom drži bebu u bijeloj benkici blizu svog lica"
+    },
+    "galerie-neugeborene-dsc01468.webp": {
+      "de": "Neugeborenes liegt waagerecht auf den Händen zweier Erwachsener, in Schwarzweiß aufgenommen",
+      "en": "Newborn lying horizontally across two adults' hands, photographed in black and white",
+      "bs": "Novorođenče leži vodoravno na rukama dvoje odraslih, fotografisano crno-bijelo"
+    },
+    "galerie-neugeborene-dsc01896.webp": {
+      "de": "Blonde Frau hält ein rosa eingewickeltes Baby vor sich, Blumen stehen im Vordergrund",
+      "en": "Blonde woman holding a baby wrapped in pink in front of her, with flowers in the foreground",
+      "bs": "Plavokosa žena drži ispred sebe bebu umotanu u ružičasto, s cvijećem u prvom planu"
+    },
+    "galerie-neugeborene-dsc01904.webp": {
+      "de": "Frau in weißer Bluse hält ein Baby und ein kleines Mädchen eng bei sich, hinter bunten Blumen",
+      "en": "Woman in a white blouse holding a baby and a little girl close behind colourful flowers",
+      "bs": "Žena u bijeloj bluzi privija uz sebe bebu i djevojčicu iza raznobojnog cvijeća"
+    },
+    "galerie-neugeborene-dsc01942.webp": {
+      "de": "Frau im Seitenprofil küsst ein Baby mit Blumenstirnband vor einer rosa Wand",
+      "en": "Side profile of a woman kissing a baby with a floral headband against a pink wall",
+      "bs": "Profil žene koja ljubi bebu s cvjetnom trakom ispred ružičastog zida"
+    },
+    "galerie-neugeborene-dsc03248.webp": {
+      "de": "Neugeborenes mit Blumenband schläft auf der Seite, eine rosa Strickdecke bedeckt den Unterkörper",
+      "en": "Newborn with a floral headband sleeping on its side, with a pink knitted blanket covering its lower body",
+      "bs": "Novorođenče s cvjetnom trakom spava na boku, a ružičasta pletena dekica prekriva donji dio tijela"
+    },
+    "galerie-neugeborene-dsc03292.webp": {
+      "de": "Mann im blauen Hemd küsst ein Baby in rosa Spitze auf die Stirn",
+      "en": "Man in a blue shirt kissing a baby dressed in pink lace on the forehead",
+      "bs": "Muškarac u plavoj košulji ljubi u čelo bebu odjevenu u ružičastu čipku"
+    },
+    "galerie-neugeborene-dsc03340-2.webp": {
+      "de": "Draufsicht auf ein Baby im grauen Bärenanzug in einem flauschigen Körbchen mit Blättern und Wecker",
+      "en": "Overhead view of a baby in a grey bear suit in a fluffy basket with leaves and an alarm clock",
+      "bs": "Pogled odozgo na bebu u sivom odijelcu medvjedića u čupavoj korpi s lišćem i budilnikom"
+    },
+    "galerie-neugeborene-dsc03341.webp": {
+      "de": "Baby im grauen Strickanzug liegt mit ausgebreiteten Armen im Körbchen vor hellen Holzbrettern",
+      "en": "Baby in a grey knitted suit lying with outstretched arms in a basket against pale wooden boards",
+      "bs": "Beba u sivom pletenom odijelcu leži raširenih ruku u korpi ispred svijetlih drvenih dasaka"
+    },
+    "galerie-neugeborene-dsc03343.webp": {
+      "de": "Schlafendes Baby mit Herzschild auf der Brust im grauen Körbchen neben Kalender und Wecker",
+      "en": "Sleeping baby with a heart-shaped plaque on its chest in a grey basket beside a calendar and alarm clock",
+      "bs": "Usnula beba s pločicom u obliku srca na prsima u sivoj korpi pored kalendara i budilnika"
+    },
+    "galerie-neugeborene-dsc03347.webp": {
+      "de": "Nahes Neugeborenenporträt im grauen Anzug mit Bärenohren und einer Hand am Kragen",
+      "en": "Close newborn portrait in a grey suit with bear ears and one hand at the collar",
+      "bs": "Krupni portret novorođenčeta u sivom odijelcu s medvjeđim ušima i rukom uz okovratnik"
+    },
+    "galerie-neugeborene-dsc03350.webp": {
+      "de": "Scharf abgebildete Babyfüße unter einem grauen Strickanzug, während das Gesicht im Hintergrund verschwimmt",
+      "en": "Baby feet in sharp focus beneath a grey knitted suit, with the face blurred in the background",
+      "bs": "Bebina stopala u oštrom fokusu ispod sivog pletenog odijelca, dok je lice zamućeno u pozadini"
+    },
+    "galerie-neugeborene-dsc03352.webp": {
+      "de": "Seitliche Nahaufnahme des schlafenden Babygesichts mit grauer Kapuze und kleiner Faust daneben",
+      "en": "Side close-up of a sleeping baby's face in a grey hood with a tiny fist beside it",
+      "bs": "Bočni krupni plan usnulog bebinog lica sa sivom kapuljačom i malenom šakom pored"
+    },
+    "galerie-neugeborene-dsc03353.webp": {
+      "de": "Baby im grauen Bärenanzug mit beiden Händen neben dem Kopf und einem Herzschild auf der Brust",
+      "en": "Baby in a grey bear suit with both hands beside its head and a heart-shaped plaque on its chest",
+      "bs": "Beba u sivom odijelcu medvjedića s obje ruke pored glave i pločicom u obliku srca na prsima"
+    },
+    "galerie-neugeborene-dsc03355.webp": {
+      "de": "Baby im flauschigen grauen Anzug schläft eingerollt auf der Seite vor einer Holzwand",
+      "en": "Baby in a fluffy grey suit sleeping curled on its side in front of a wooden wall",
+      "bs": "Beba u čupavom sivom odijelcu spava sklupčana na boku ispred drvenog zida"
+    },
+    "galerie-neugeborene-dsc03365.webp": {
+      "de": "Von oben fotografiertes Baby in blauem Wickeltuch auf einer türkisblauen groben Strickdecke",
+      "en": "Overhead photo of a baby in a blue wrap on a turquoise chunky knitted blanket",
+      "bs": "Fotografija odozgo bebe u plavom povoju na tirkiznoj dekici krupnog pletiva"
+    },
+    "galerie-neugeborene-dsc03381-2.webp": {
+      "de": "Waches Baby mit blauer Zipfelmütze legt den Kopf auf seine Hände und schaut in die Kamera",
+      "en": "Awake baby in a blue pointed hat resting its head on its hands and looking at the camera",
+      "bs": "Budna beba s plavom šiljastom kapicom naslanja glavu na ruke i gleda u kameru"
+    },
+    "galerie-neugeborene-dsc03381.webp": {
+      "de": "Schwarzweißporträt eines wachen Babys mit Zipfelmütze, das auf einer groben Strickdecke liegt",
+      "en": "Black-and-white portrait of an awake baby in a pointed hat lying on a chunky knitted blanket",
+      "bs": "Crno-bijeli portret budne bebe sa šiljastom kapicom na dekici krupnog pletiva"
+    },
+    "galerie-neugeborene-dsc03382.webp": {
+      "de": "Schwarzweiße Draufsicht auf ein Baby mit langer Strickmütze, umgeben von locker gefalteten Decken",
+      "en": "Black-and-white overhead view of a baby in a long knitted hat surrounded by loosely folded blankets",
+      "bs": "Crno-bijeli pogled odozgo na bebu s dugom pletenom kapicom okruženu lagano složenim dekicama"
+    },
+    "galerie-neugeborene-dsc03388.webp": {
+      "de": "Lächelnde Frau legt den Kopf neben ein waches Baby auf einer türkisblauen Strickdecke",
+      "en": "Smiling woman resting her head beside an awake baby on a turquoise knitted blanket",
+      "bs": "Nasmijana žena naslanja glavu pored budne bebe na tirkiznoj pletenoj dekici"
+    },
+    "galerie-neugeborene-dsc03390.webp": {
+      "de": "Frau mit Schleife im Haar küsst ein liegendes Baby auf die Wange, in Schwarzweiß",
+      "en": "Black-and-white photo of a woman with a hair bow kissing a reclining baby on the cheek",
+      "bs": "Crno-bijela fotografija žene s mašnom u kosi koja ljubi u obraz bebu koja leži"
+    },
+    "galerie-neugeborene-dsc03396.webp": {
+      "de": "Frau im cremefarbenen Kleid sitzt lächelnd neben einem Baby auf mehreren blauen Decken",
+      "en": "Smiling woman in a cream dress sitting beside a baby on layered blue blankets",
+      "bs": "Nasmijana žena u krem haljini sjedi pored bebe na nekoliko plavih dekica"
+    },
+    "galerie-neugeborene-dsc03406.webp": {
+      "de": "Ganzkörperporträt einer barfüßigen Frau im cremefarbenen Kleid mit Baby vor rostbraunem Hintergrund",
+      "en": "Full-length portrait of a barefoot woman in a cream dress holding a baby against a rust-brown backdrop",
+      "bs": "Portret cijele figure bosonoge žene u krem haljini s bebom ispred hrđastosmeđe pozadine"
+    },
+    "galerie-neugeborene-dsc03413.webp": {
+      "de": "Schwarzweißporträt eines Paares, das gemeinsam auf das Baby in seinen Armen blickt",
+      "en": "Black-and-white portrait of a couple looking down together at the baby in their arms",
+      "bs": "Crno-bijeli portret para koji zajedno gleda bebu u svom naručju"
+    },
+    "galerie-neugeborene-dsc03416.webp": {
+      "de": "Paar hält ein Baby zwischen sich, während der Mann dessen kleine Hand küsst",
+      "en": "Couple holding a baby between them as the man kisses its tiny hand",
+      "bs": "Par drži bebu između sebe dok muškarac ljubi njenu malenu ruku"
+    },
+    "galerie-neugeborene-dsc03422.webp": {
+      "de": "Mann im hellen T-Shirt hält ein Neugeborenes auf Augenhöhe vor warmbraunem Hintergrund",
+      "en": "Man in a light T-shirt holding a newborn at eye level against a warm brown backdrop",
+      "bs": "Muškarac u svijetloj majici drži novorođenče u visini očiju ispred tople smeđe pozadine"
+    },
+    "galerie-neugeborene-dsc03425.webp": {
+      "de": "Nahes Porträt eines Mannes, der ein Baby an sein Gesicht hält und dessen Kopf mit einer Hand stützt",
+      "en": "Close portrait of a man holding a baby near his face and supporting its head with one hand",
+      "bs": "Krupni portret muškarca koji drži bebu blizu svog lica i jednom rukom pridržava njenu glavu"
+    },
+    "galerie-neugeborene-dsc03433-2.webp": {
+      "de": "Braunhaarige Frau küsst ein schlafendes Baby im Arm, Nahaufnahme vor rostbraunem Hintergrund",
+      "en": "Close-up of a brown-haired woman kissing a sleeping baby in her arms against a rust-brown backdrop",
+      "bs": "Krupni plan smeđokose žene koja ljubi usnulu bebu u naručju ispred hrđastosmeđe pozadine"
+    },
+    "galerie-neugeborene-dsc03433.webp": {
+      "de": "Schwarzweißfoto einer Frau, die ihr Gesicht zu einem Baby in der Armbeuge neigt und es küsst",
+      "en": "Black-and-white photo of a woman lowering her face to kiss a baby cradled in the crook of her arm",
+      "bs": "Crno-bijela fotografija žene koja spušta lice da poljubi bebu koju drži u pregibu ruke"
+    },
+    "galerie-neugeborene-dsc03441.webp": {
+      "de": "Zwei erwachsene Hände umfassen behutsam die nackten Füße eines Babys vor hellem Hintergrund",
+      "en": "Two adult hands gently cupping a baby's bare feet against a light background",
+      "bs": "Dvije odrasle ruke nježno obuhvataju bebina bosa stopala na svijetloj pozadini"
+    },
+    "babybauch-hero-dsc03641.webp": {
+      "de": "Schwarzweißes Babybauchfoto mit kleinen Babyschuhen in den Händen eines Paares in Jeans",
+      "en": "Black-and-white maternity photo with tiny baby shoes held in the hands of a couple wearing jeans",
+      "bs": "Crno-bijela trudnička fotografija s malim bebinim cipelicama u rukama para u farmerkama"
+    },
+    "3.webp": {
+      "de": "Mann küsst die Stirn einer schwangeren Frau im schwarzen Kleid; ihre Hände liegen auf dem Babybauch",
+      "en": "Man kissing the forehead of a pregnant woman in a black dress, with their hands resting on her bump",
+      "bs": "Muškarac ljubi čelo trudnice u crnoj haljini, dok njihove ruke počivaju na njenom stomaku"
+    },
+    "4.webp": {
+      "de": "Paar hält kleine schwarz-weiße Turnschuhe unter den verschränkten Händen vor dem Babybauch",
+      "en": "Couple holding tiny black-and-white trainers beneath their joined hands in front of the baby bump",
+      "bs": "Par drži male crno-bijele patike ispod spojenih ruku ispred trudničkog stomaka"
+    },
+    "5.webp": {
+      "de": "Kind mit Schleife im Haar küsst den Babybauch einer Frau in offenem weißem Hemd",
+      "en": "Child with a hair bow kissing the baby bump of a woman wearing an open white shirt",
+      "bs": "Dijete s mašnom u kosi ljubi trudnički stomak žene u raskopčanoj bijeloj košulji"
+    },
+    "6.webp": {
+      "de": "Schwarzweißfoto eines sitzenden Mannes, der eine schwangere Frau seitlich in seinen Armen hält",
+      "en": "Black-and-white photo of a seated man holding a pregnant woman reclining across his arms",
+      "bs": "Crno-bijela fotografija muškarca koji sjedi i u naručju drži trudnicu naslonjenu bočno"
+    },
+    "7.webp": {
+      "de": "Seitliche Silhouette einer schwangeren Frau mit zurückgelegtem Kopf vor einem hellen Lichtschein",
+      "en": "Side silhouette of a pregnant woman with her head tilted back against a soft glow of light",
+      "bs": "Bočna silueta trudnice sa zabačenom glavom ispred blagog svjetlosnog sjaja"
+    },
+    "8.webp": {
+      "de": "Paar in weißen Oberteilen und Jeans umarmt sich; die schwangere Frau hält ein Ultraschallbild an die Schulter des Mannes",
+      "en": "Couple in white tops and jeans embracing, with the pregnant woman holding an ultrasound photo against the man's shoulder",
+      "bs": "Par u bijelim majicama i farmerkama se grli; trudnica drži ultrazvučnu sliku uz muškarčevo rame"
+    },
+    "11.webp": {
+      "de": "Schwarzweißes Schwangerschaftsporträt im langen offenen Kleid, dessen Stoff die Frau seitlich ausbreitet",
+      "en": "Black-and-white maternity portrait in a long open dress, with the woman spreading the fabric to one side",
+      "bs": "Crno-bijeli trudnički portret u dugoj otvorenoj haljini čiju tkaninu žena širi u stranu"
+    },
+    "13.webp": {
+      "de": "Schwangere Frau sitzt im weißen Oberteil und in Jeans auf einem Hocker und hält kleine Babyschuhe",
+      "en": "Pregnant woman in a white top and jeans sitting on a stool and holding tiny baby shoes",
+      "bs": "Trudnica u bijeloj majici i farmerkama sjedi na barskoj stolici i drži male bebine cipelice"
+    },
+    "14.webp": {
+      "de": "Babybauchfoto einer knienden Frau im roséfarbenen Kleid mit langer Schleppe vor beigem Hintergrund",
+      "en": "Maternity photo of a kneeling woman in a blush dress with a long train against a beige background",
+      "bs": "Trudnička fotografija žene koja kleči u ružičastoj haljini s dugim šlepom ispred bež pozadine"
+    },
+    "15.webp": {
+      "de": "Dunkle Silhouette eines knienden Mannes, der den Babybauch küsst, vor blauem Lichtschein",
+      "en": "Dark silhouette of a kneeling man kissing a baby bump against a blue glow of light",
+      "bs": "Tamna silueta muškarca koji kleči i ljubi trudnički stomak ispred plavog svjetlosnog sjaja"
+    },
+    "DSC01963.webp": {
+      "de": "Schwangere Frau im bodenlangen fliederfarbenen Kleid mit Blumenkrone und Händen am Babybauch",
+      "en": "Pregnant woman in a floor-length lilac dress and flower crown, with her hands resting on her bump",
+      "bs": "Trudnica u dugoj haljini boje jorgovana s cvjetnim vijencem na glavi i rukama na stomaku"
+    },
+    "DSC01974.webp": {
+      "de": "Schwarzweißes Ganzkörperporträt einer Schwangeren im langen Kleid mit Blumenstrauß und Blüten auf dem Boden",
+      "en": "Full-length black-and-white portrait of a pregnant woman in a long dress, holding flowers with more blooms on the floor",
+      "bs": "Crno-bijeli portret trudnice u punoj visini, u dugoj haljini s buketom i cvijećem na podu"
+    },
+    "DSC01975.webp": {
+      "de": "Schwangere Frau im fliederfarbenen Kleid blickt auf ihren Bauch und hält einen gelben Blumenstrauß",
+      "en": "Pregnant woman in a lilac dress looking down at her bump while holding a bouquet of yellow flowers",
+      "bs": "Trudnica u haljini boje jorgovana gleda svoj stomak i drži buket žutog cvijeća"
+    },
+    "DSC01981.webp": {
+      "de": "Schwarzweißes Babybauchfoto eines küssenden Paares; die Frau legt einen Arm um den Hals des Mannes",
+      "en": "Black-and-white maternity photo of a couple kissing, with the woman's arm around the man's neck",
+      "bs": "Crno-bijela trudnička fotografija para koji se ljubi, dok žena drži ruku oko muškarčevog vrata"
+    },
+    "DSC01986.webp": {
+      "de": "Paar in schwarzer Kleidung: Der Mann küsst die Stirn der Schwangeren und hält mit ihr den Babybauch",
+      "en": "Couple in black clothing: the man kisses the pregnant woman's forehead as they cradle her bump together",
+      "bs": "Par u crnoj odjeći: muškarac ljubi trudnicu u čelo dok zajedno drže njen stomak"
+    },
+    "DSC02025.webp": {
+      "de": "Schwangere Frau im offenen hellblauen Hemd lehnt sich in die Umarmung eines Mannes im blauen Poloshirt",
+      "en": "Pregnant woman in an open light-blue shirt leaning into the embrace of a man in a blue polo shirt",
+      "bs": "Trudnica u raskopčanoj svijetloplavoj košulji naslanja se u zagrljaj muškarca u plavoj polo majici"
+    },
+    "DSC02036-2.webp": {
+      "de": "Schwarzweißporträt eines Paares mit aneinandergelegten Stirnen und gemeinsam gehaltenen Händen neben dem Babybauch",
+      "en": "Black-and-white portrait of a couple touching foreheads and holding hands beside the baby bump",
+      "bs": "Crno-bijeli portret para sa spojenim čelima i rukama koje se drže pored trudničkog stomaka"
+    },
+    "DSC02054.webp": {
+      "de": "Lächelnde Schwangere steht barfuß in Jeans und hält einen bunten Blumenstrauß vor die Brust",
+      "en": "Smiling pregnant woman standing barefoot in jeans and holding a colourful bouquet in front of her chest",
+      "bs": "Nasmijana trudnica stoji bosa u farmerkama i drži šareni buket ispred grudi"
+    },
+    "DSC02057.webp": {
+      "de": "Nahaufnahme vom Babybauch über dem Jeansbund und einem bunten Blumenstrauß in verschränkten Armen",
+      "en": "Close-up of a baby bump above a jeans waistband and a colourful bouquet held in crossed arms",
+      "bs": "Krupni plan trudničkog stomaka iznad pojasa farmerki i šarenog buketa u prekriženim rukama"
+    },
+    "DSC02060-2.webp": {
+      "de": "Schwarzweißfoto einer barfüßigen Schwangeren in Jeans, die mit Blumen vor der Brust zur Seite lacht",
+      "en": "Black-and-white photo of a barefoot pregnant woman in jeans, laughing to one side with flowers across her chest",
+      "bs": "Crno-bijela fotografija bose trudnice u farmerkama koja se smije gledajući u stranu, s cvijećem ispred grudi"
+    },
+    "DSC02070.webp": {
+      "de": "Schwangere Frau hält einen großen bunten Blumenstrauß vor die Brust und legt eine Hand ins Haar",
+      "en": "Pregnant woman holding a large colourful bouquet in front of her chest with one hand in her hair",
+      "bs": "Trudnica drži veliki šareni buket ispred grudi, s jednom rukom u kosi"
+    },
+    "DSC02081.webp": {
+      "de": "Schwangere Frau im offenen blauen Hemd sitzt seitlich auf dem Boden; rosa Blumen liegen auf ihren Jeans",
+      "en": "Pregnant woman in an open blue shirt sitting sideways on the floor, with pink flowers resting on her jeans",
+      "bs": "Trudnica u raskopčanoj plavoj košulji sjedi bočno na podu, s ružičastim cvijećem na farmerkama"
+    },
+    "DSC02089.webp": {
+      "de": "Paar in hellblauen Oberteilen küsst sich im Sitzen auf dem Boden; ein Blumenstrauß liegt unterhalb des Babybauchs",
+      "en": "Couple in light-blue tops kissing while seated on the floor, with a bouquet resting below the baby bump",
+      "bs": "Par u svijetloplavoj odjeći ljubi se sjedeći na podu, s buketom položenim ispod trudničkog stomaka"
+    },
+    "DSC02107.webp": {
+      "de": "Mann beugt sich zum Kuss über eine schwangere Frau im grauen Kleid, die neben Blumen auf blauem Boden liegt",
+      "en": "Man leaning down to kiss a pregnant woman in a grey dress lying beside flowers on a blue floor",
+      "bs": "Muškarac se saginje da poljubi trudnicu u sivoj haljini koja leži pored cvijeća na plavom podu"
+    },
+    "DSC02116.webp": {
+      "de": "Aufsicht auf eine schwangere Frau im grauen Kleid mit rosa Rose in der Hand und Blumen um ihr Haar",
+      "en": "Overhead view of a pregnant woman in a grey dress holding a pink rose, with flowers around her hair",
+      "bs": "Pogled odozgo na trudnicu u sivoj haljini s ružičastom ružom u ruci i cvijećem oko kose"
+    },
+    "DSC02120.webp": {
+      "de": "Schwangere Frau im gerippten grauen Kleid sitzt seitlich vor blauem Hintergrund und blickt in die Kamera",
+      "en": "Pregnant woman in a ribbed grey dress sitting sideways against a blue background and looking at the camera",
+      "bs": "Trudnica u rebrastoj sivoj haljini sjedi bočno ispred plave pozadine i gleda u kameru"
+    },
+    "galerie-babybauch-dsc01200.webp": {
+      "de": "Schwangere Frau im weißen Hemd sitzt neben einem lächelnden Kind, das sich an ihren Babybauch schmiegt",
+      "en": "Pregnant woman in a white shirt sitting beside a smiling child who nestles against her baby bump",
+      "bs": "Trudnica u bijeloj košulji sjedi pored nasmijanog djeteta koje se privija uz njen stomak"
+    },
+    "galerie-babybauch-dsc01230.webp": {
+      "de": "Farbiges Bauchdetail eines Paares in weißen Oberteilen und Jeans mit hellen Babyschuhen in den Händen",
+      "en": "Colour close-up of a couple in white tops and jeans holding pale baby shoes beside the bump",
+      "bs": "Detalj stomaka u boji: par u bijelim majicama i farmerkama drži svijetle bebine cipelice"
+    },
+    "galerie-babybauch-dsc01261.webp": {
+      "de": "Schwangere Frau in Jeans lehnt sich auf einem schwarzen Hocker zurück, vor blaugrauem Hintergrund",
+      "en": "Pregnant woman in jeans leaning back on a black stool against a blue-grey background",
+      "bs": "Trudnica u farmerkama naslanja se unazad na crnoj barskoj stolici ispred plavosive pozadine"
+    },
+    "galerie-babybauch-dsc01282.webp": {
+      "de": "Schwarzweißfoto einer Schwangeren neben einem sitzenden Mann, der ein lachendes Kind auf dem Schoß hält",
+      "en": "Black-and-white photo of a pregnant woman beside a seated man holding a laughing child on his lap",
+      "bs": "Crno-bijela fotografija trudnice pored muškarca koji sjedi i u krilu drži dijete koje se smije"
+    },
+    "galerie-babybauch-dsc01302.webp": {
+      "de": "Kind schaut unter dem roséfarbenen Kleid einer schwangeren Frau hervor, die lächelnd nach unten blickt",
+      "en": "Child peeking from beneath a pregnant woman's blush dress as she smiles down",
+      "bs": "Dijete proviruje ispod ružičaste haljine trudnice koja ga gleda s osmijehom"
+    },
+    "galerie-babybauch-dsc01322.webp": {
+      "de": "Schwangerschaftsporträt im roséfarbenen Kleid mit Blick in die Kamera und beiden Händen am Bauch",
+      "en": "Maternity portrait in a blush dress, looking at the camera with both hands resting on the bump",
+      "bs": "Trudnički portret u ružičastoj haljini, s pogledom u kameru i objema rukama na stomaku"
+    },
+    "galerie-babybauch-dsc01333.webp": {
+      "de": "Seitliches Ganzkörperfoto einer Schwangeren im offenen roséfarbenen Kleid mit angewinkeltem Bein und langer Schleppe",
+      "en": "Full-length side view of a pregnant woman in an open blush dress with one leg bent and a long train",
+      "bs": "Bočna fotografija trudnice u punoj visini, u otvorenoj ružičastoj haljini s podignutom nogom i dugim šlepom"
+    },
+    "galerie-babybauch-dsc02032.webp": {
+      "de": "Schwarzweißes Schwangerschaftsshooting: Ein Paar legt die Stirnen aneinander, während die Frau ihren Bauch hält",
+      "en": "Black-and-white maternity session: a couple touching foreheads as the woman cradles her bump",
+      "bs": "Crno-bijela trudnička fotografija: par spaja čela dok žena rukom pridržava stomak"
+    },
+    "galerie-babybauch-dsc02034.webp": {
+      "de": "Ganzkörperfoto eines Paares in hellblauer Kleidung; die schwangere Frau lehnt ein Bein an den Mann",
+      "en": "Full-length portrait of a couple in light-blue clothing, with the pregnant woman resting one leg against the man",
+      "bs": "Portret para u punoj visini u svijetloplavoj odjeći; trudnica naslanja jednu nogu na muškarca"
+    },
+    "galerie-babybauch-dsc02050.webp": {
+      "de": "Seitliches Babybauchfoto einer lächelnden Frau in Jeans mit buntem Blumenstrauß vor beigem Hintergrund",
+      "en": "Side-view maternity photo of a smiling woman in jeans holding a colourful bouquet against a beige background",
+      "bs": "Bočna trudnička fotografija nasmijane žene u farmerkama sa šarenim buketom ispred bež pozadine"
+    },
+    "galerie-babybauch-dsc02073-2.webp": {
+      "de": "Schwarzweißes Halbporträt einer Schwangeren mit Blumenstrauß vor der Brust und Blick in die Kamera",
+      "en": "Black-and-white half-length portrait of a pregnant woman holding a bouquet across her chest and looking at the camera",
+      "bs": "Crno-bijeli portret trudnice do struka s buketom ispred grudi i pogledom u kameru"
+    },
+    "galerie-babybauch-dsc02083.webp": {
+      "de": "Schwangere Frau im blauen Hemd sitzt mit einer Hand im Haar auf dem Boden, mit rosa Blumen auf dem Schoß",
+      "en": "Pregnant woman in a blue shirt sitting on the floor with one hand in her hair and pink flowers on her lap",
+      "bs": "Trudnica u plavoj košulji sjedi na podu s jednom rukom u kosi i ružičastim cvijećem u krilu"
+    },
+    "galerie-babybauch-dsc02085.webp": {
+      "de": "Sitzendes Paar in Hellblau beim Babybauch-Shooting; die Frau lacht mit Blumen auf den ausgestreckten Beinen",
+      "en": "Couple in light blue seated during a maternity shoot; the woman laughs with flowers resting on her outstretched legs",
+      "bs": "Par u svijetloplavoj odjeći sjedi tokom trudničkog fotografisanja; žena se smije s cvijećem na ispruženim nogama"
+    },
+    "galerie-babybauch-dsc02088.webp": {
+      "de": "Mann küsst die Schläfe einer schwangeren Frau; beide sitzen in blauer Kleidung neben einem rosa Blumenstrauß",
+      "en": "Man kissing a pregnant woman's temple as they sit in blue clothing beside a pink bouquet",
+      "bs": "Muškarac ljubi trudnicu u sljepoočnicu dok sjede u plavoj odjeći pored ružičastog buketa"
+    },
+    "galerie-babybauch-dsc03602.webp": {
+      "de": "Nahaufnahme eines Babybauchs im weißen Oberteil mit zwei Ultraschallbildern darüber und Händen an der Bauchunterseite",
+      "en": "Close-up of a baby bump in a white top, with two ultrasound pictures above it and hands cradling it below",
+      "bs": "Krupni plan trudničkog stomaka u bijeloj majici, s dvije ultrazvučne slike iznad i rukama koje ga pridržavaju"
+    },
+    "galerie-babybauch-dsc03616.webp": {
+      "de": "Mann beugt sich zu einer auf dem Hocker sitzenden Schwangeren für einen Kuss; Blumen umgeben den Hocker",
+      "en": "Man leaning down to kiss a pregnant woman seated on a stool surrounded by flowers",
+      "bs": "Muškarac se saginje da poljubi trudnicu koja sjedi na barskoj stolici okruženoj cvijećem"
+    },
+    "galerie-babybauch-dsc03619.webp": {
+      "de": "Schwangere Frau im weißen Oberteil blickt von einem Hocker in die Kamera, mit Blumen auf dem Schoß und am Boden",
+      "en": "Pregnant woman in a white top looking at the camera from a stool, with flowers on her lap and on the floor",
+      "bs": "Trudnica u bijeloj majici sjedi na barskoj stolici i gleda u kameru, s cvijećem u krilu i na podu"
+    },
+    "galerie-babybauch-dsc03621.webp": {
+      "de": "Sitzende Schwangere schaut auf ihren Bauch; ein bunter Strauß liegt auf ihrem Schoß über den Jeans",
+      "en": "Seated pregnant woman looking down at her bump, with a colourful bouquet resting on her lap over her jeans",
+      "bs": "Trudnica koja sjedi gleda svoj stomak, sa šarenim buketom u krilu preko farmerki"
+    },
+    "galerie-babybauch-dsc03623.webp": {
+      "de": "Schwarzweißdetail von Händen am Babybauch unter einem weißen Oberteil, mit Blumen im Vordergrund",
+      "en": "Black-and-white detail of hands resting on a baby bump beneath a white top, with flowers in the foreground",
+      "bs": "Crno-bijeli detalj ruku na trudničkom stomaku ispod bijele majice, s cvijećem u prvom planu"
+    },
+    "galerie-babybauch-dsc03624.webp": {
+      "de": "Ganzkörperporträt eines Paares in weißen Oberteilen und Jeans; der Mann umarmt die Schwangere von hinten",
+      "en": "Full-length portrait of a couple in white tops and jeans, with the man embracing the pregnant woman from behind",
+      "bs": "Portret para u punoj visini u bijelim majicama i farmerkama; muškarac grli trudnicu s leđa"
+    },
+    "galerie-babybauch-dsc03631.webp": {
+      "de": "Schwarzweißdetail eines Paares mit Ultraschallbildern vor der Brust und gemeinsam gehaltenem Babybauch",
+      "en": "Black-and-white close-up of a couple holding ultrasound pictures at chest level and cradling the baby bump together",
+      "bs": "Crno-bijeli krupni plan para s ultrazvučnim slikama ispred grudi i rukama koje zajedno drže trudnički stomak"
+    },
+    "galerie-babybauch-dsc03633.webp": {
+      "de": "Paar in weißen Oberteilen blickt in die Kamera und hält Ultraschallbilder neben dem Gesicht der schwangeren Frau",
+      "en": "Couple in white tops looking at the camera and holding ultrasound pictures beside the pregnant woman's face",
+      "bs": "Par u bijelim majicama gleda u kameru i drži ultrazvučne slike pored lica trudnice"
+    },
+    "galerie-babybauch-dsc03635.webp": {
+      "de": "Ganzkörperfoto eines Paares mit Ultraschallbildern vor graubraunem Hintergrund; beide tragen Jeans und weiße Socken",
+      "en": "Full-length photo of a couple holding ultrasound pictures against a grey-brown background, both wearing jeans and white socks",
+      "bs": "Fotografija para u punoj visini s ultrazvučnim slikama ispred sivkasto-smeđe pozadine; oboje nose farmerke i bijele čarape"
+    },
+    "galerie-babybauch-dsc03641.webp": {
+      "de": "Schwarzweißdetail eines Paares in Jeans: verschränkte Hände mit Babyschuhen neben dem Babybauch",
+      "en": "Black-and-white detail of a couple in jeans: joined hands holding baby shoes beside the baby bump",
+      "bs": "Crno-bijeli detalj para u farmerkama: spojene ruke drže bebine cipelice pored trudničkog stomaka"
+    },
+    "galerie-babybauch-dsc03651.webp": {
+      "de": "Dunkles Schwarzweißporträt eines knienden Mannes, der den Babybauch küsst, während die Frau den Kopf zurücklegt",
+      "en": "Dark black-and-white portrait of a kneeling man kissing a baby bump as the woman tilts her head back",
+      "bs": "Tamni crno-bijeli portret muškarca koji kleči i ljubi trudnički stomak dok žena zabacuje glavu"
+    },
+    "galerie-babybauch-dsc03654.webp": {
+      "de": "Mann legt das Gesicht seitlich an den Babybauch und blickt vor dunklem Hintergrund in die Kamera",
+      "en": "Man resting his face against the side of a baby bump and looking at the camera against a dark background",
+      "bs": "Muškarac naslanja lice na trudnički stomak i gleda u kameru ispred tamne pozadine"
+    },
+    "galerie-babybauch-dsc03660.webp": {
+      "de": "Paar formt gemeinsam mit den Händen ein Herz auf dem Babybauch und schaut nach unten",
+      "en": "Couple looking down as they form a heart with their hands on the baby bump",
+      "bs": "Par gleda prema dolje i rukama zajedno oblikuje srce na trudničkom stomaku"
+    },
+    "galerie-babybauch-dsc03672.webp": {
+      "de": "Seitliche Silhouette einer Schwangeren mit Händen unter dem Bauch vor rosa Lichtschein",
+      "en": "Side silhouette of a pregnant woman with her hands beneath her bump against a pink glow",
+      "bs": "Bočna silueta trudnice s rukama ispod stomaka ispred ružičastog sjaja"
+    },
+    "galerie-babybauch-dsc03673.webp": {
+      "de": "Schwangere Frau im weißen Spitzenkleid blickt auf ihren Bauch, beleuchtet von einem warmen Lichtschein",
+      "en": "Pregnant woman in a white lace dress looking down at her bump in a warm glow of light",
+      "bs": "Trudnica u bijeloj čipkastoj haljini gleda svoj stomak, obasjana toplim svjetlosnim sjajem"
+    },
+    "galerie-babybauch-dsc03676.webp": {
+      "de": "Seitliches Schwangerschaftsporträt im weißen Spitzenkleid mit nach oben gerichtetem Blick vor dunklem Hintergrund",
+      "en": "Side-view maternity portrait in a white lace dress, looking upwards against a dark background",
+      "bs": "Bočni trudnički portret u bijeloj čipkastoj haljini, s pogledom prema gore ispred tamne pozadine"
+    },
+    "galerie-babybauch-dsc03680.webp": {
+      "de": "Schwarzweißes Paarporträt: Schwangere im Spitzenkleid lehnt sich zurück an einen Mann im weißen Oberteil",
+      "en": "Black-and-white couple portrait: a pregnant woman in a lace dress leaning back against a man in a white top",
+      "bs": "Crno-bijeli portret para: trudnica u čipkastoj haljini naslanja se na muškarca u bijeloj majici"
+    },
+    "galerie-babybauch-dsc03681.webp": {
+      "de": "Babybauchfoto im Grünen: Eine Frau mit Blumenkranz schaut zu einem Mann, der sein Gesicht hinter einem Strauß versteckt",
+      "en": "Maternity photo among greenery: a woman wearing a flower crown looks at a man hiding his face behind a bouquet",
+      "bs": "Trudnička fotografija u zelenilu: žena s cvjetnim vijencem gleda muškarca koji skriva lice iza buketa"
+    },
+    "galerie-babybauch-dsc03706.webp": {
+      "de": "Mann umarmt eine schwangere Frau im weißen Kleid und mit rosa Blumenkranz draußen vor grünen Bäumen",
+      "en": "Man embracing a pregnant woman in a white dress and pink flower crown outdoors in front of green trees",
+      "bs": "Muškarac grli trudnicu u bijeloj haljini s ružičastim cvjetnim vijencem na otvorenom ispred zelenog drveća"
+    },
+    "galerie-babybauch-dsc02038.webp": {
+      "de": "Nahaufnahme eines Paares in hellblauer Kleidung mit ineinandergelegten Händen oberhalb des Babybauchs",
+      "en": "Close-up of a couple in light-blue clothing with their hands held together above the baby bump",
+      "bs": "Krupni plan para u svijetloplavoj odjeći sa spojenim rukama iznad trudničkog stomaka"
+    },
+    "1.webp": {
+      "de": "Schwangere Frau neben einem sitzenden Mann, der ein lachendes Kind auf dem Arm hält",
+      "en": "Pregnant woman beside a seated man holding a laughing child",
+      "bs": "Trudnica pored muškarca koji sjedi i drži nasmijano dijete"
+    },
+    "2.webp": {
+      "de": "Schwarz-Weiß-Porträt eines Paares mit geschlossenen Augen, die Frau im schwarzen Kleid",
+      "en": "Black-and-white portrait of a couple with closed eyes, the woman in a black dress",
+      "bs": "Crno-bijeli portret para zatvorenih očiju, žena u crnoj haljini"
+    },
+    "10.webp": {
+      "de": "Ein Paar berührt sich an der Stirn und hält ein Neugeborenes zwischen sich",
+      "en": "A couple touch foreheads while holding a newborn between them",
+      "bs": "Par se dodiruje čelima dok između sebe drži novorođenče"
+    },
+    "27.webp": {
+      "de": "Eine Frau hält ein Baby und ein älteres Kind, mit bunten Blumen im Vordergrund",
+      "en": "A woman holds a baby and an older child, with colourful flowers in the foreground",
+      "bs": "Žena drži bebu i starije dijete, uz šareno cvijeće u prvom planu"
+    },
+    "DSC02171.webp": {
+      "de": "Frau und Mädchen liegen auf dem Bauch und schauen sich neben Fliederblüten an",
+      "en": "A woman and a girl lie on their stomachs, looking at each other beside lilac blossoms",
+      "bs": "Žena i djevojčica leže na stomaku i gledaju se pored cvjetova jorgovana"
+    },
+    "DSC02189.webp": {
+      "de": "Ein Mädchen umarmt eine Frau von hinten und küsst ihre Wange neben violettem Flieder",
+      "en": "A girl hugs a woman from behind and kisses her cheek beside purple lilacs",
+      "bs": "Djevojčica grli ženu s leđa i ljubi je u obraz pored ljubičastog jorgovana"
+    },
+    "DSC02218.webp": {
+      "de": "Ein Mädchen sitzt lachend auf den Schultern einer Frau und breitet die Arme aus",
+      "en": "A smiling girl sits on a woman’s shoulders with her arms spread wide",
+      "bs": "Nasmijana djevojčica sjedi ženi na ramenima raširenih ruku"
+    },
+    "DSC02253-2.webp": {
+      "de": "Schwarz-Weiß-Aufnahme von Frau und Mädchen, die Kopf an Kopf auf einer Spitzendecke liegen",
+      "en": "Black-and-white overhead view of a woman and a girl lying head to head on a lace blanket",
+      "bs": "Crno-bijeli snimak odozgo žene i djevojčice koje leže glavama jedna uz drugu na čipkastom prekrivaču"
+    },
+    "DSC02267.webp": {
+      "de": "Eine Frau trägt ein Mädchen vor rosa Hintergrund; beide lachen in die Kamera",
+      "en": "A woman holds a girl against a pink background, both smiling at the camera",
+      "bs": "Žena drži djevojčicu ispred ružičaste pozadine; obje se smiju prema kameri"
+    },
+    "DSC02303-2.webp": {
+      "de": "Schwarz-Weiß-Bild eines Mädchens, das neben einer liegenden Frau sitzt und ihren Kopf umarmt",
+      "en": "Black-and-white photo of a girl sitting beside a reclining woman and hugging her head",
+      "bs": "Crno-bijela fotografija djevojčice koja sjedi pored žene i grli joj glavu"
+    },
+    "galerie-familie-dsc02346.webp": {
+      "de": "Ein Mann hockt auf einer Wiese und umarmt ein Mädchen im Jeanskleid",
+      "en": "A man crouches on a lawn and hugs a girl in a denim dress",
+      "bs": "Muškarac čuči na travnjaku i grli djevojčicu u teksas haljini"
+    },
+    "galerie-familie-dsc02350.webp": {
+      "de": "Eine Frau hebt einen kleinen Jungen vor grünen Bäumen in die Luft",
+      "en": "A woman lifts a little boy into the air in front of green trees",
+      "bs": "Žena podiže dječaka u zrak ispred zelenih stabala"
+    },
+    "galerie-familie-dsc02354.webp": {
+      "de": "Ein Mädchen lehnt sich auf den Schultern eines Mannes lachend an seinen Kopf",
+      "en": "A girl riding on a man’s shoulders smiles and leans against his head",
+      "bs": "Djevojčica na muškarčevim ramenima smije se i naslanja na njegovu glavu"
+    },
+    "galerie-familie-dsc02410-2.webp": {
+      "de": "Schwarz-Weiß-Porträt eines kleinen Jungen, der nach einer Seifenblase greift",
+      "en": "Black-and-white portrait of a little boy reaching for a soap bubble",
+      "bs": "Crno-bijeli portret dječaka koji poseže za mjehurićem sapunice"
+    },
+    "galerie-familie-dsc02461.webp": {
+      "de": "Ein Mann hält einen lächelnden kleinen Jungen im weißen Shirt vor grünem Laub",
+      "en": "A man holds a smiling little boy in a white shirt against green foliage",
+      "bs": "Muškarac drži nasmijanog dječaka u bijeloj majici ispred zelenog lišća"
+    },
+    "galerie-familie-dsc02484.webp": {
+      "de": "Ein Mädchen streckt die Hände nach Seifenblasen aus, neben ihr steht ein kleiner Junge",
+      "en": "A girl reaches up for soap bubbles with a little boy beside her",
+      "bs": "Djevojčica pruža ruke prema mjehurićima sapunice, a pored nje stoji dječak"
+    },
+    "galerie-familie-dsc02504.webp": {
+      "de": "Paar in weißen Oberteilen vor einem Baum, die Frau lehnt den Kopf an seine Schulter",
+      "en": "A couple in white tops by a tree, the woman resting her head on his shoulder",
+      "bs": "Par u bijeloj odjeći pored drveta, žena naslanja glavu na njegovo rame"
+    },
+    "galerie-familie-dsc02524.webp": {
+      "de": "Schwarz-Weiß-Nahaufnahme eines Mädchens, das eine kleine Blüte vor ein Auge hält",
+      "en": "Black-and-white close-up of a girl holding a small flower over one eye",
+      "bs": "Crno-bijeli krupni plan djevojčice koja drži mali cvijet ispred jednog oka"
+    },
+    "galerie-familie-dsc02547.webp": {
+      "de": "Ein Mädchen küsst eine Frau auf die Wange vor einem weiß blühenden Strauch",
+      "en": "A girl kisses a woman’s cheek in front of a shrub with white flowers",
+      "bs": "Djevojčica ljubi ženu u obraz ispred grma s bijelim cvjetovima"
+    },
+    "galerie-familie-dsc02634.webp": {
+      "de": "Eine Frau schaut lächelnd auf ein Baby im braunen Strampler in ihren Armen",
+      "en": "A woman smiles down at a baby in a brown romper in her arms",
+      "bs": "Žena s osmijehom gleda bebu u smeđem kombinezonu koju drži u naručju"
+    },
+    "galerie-familie-dsc02690.webp": {
+      "de": "Eine lachende Frau hält zwei Kinder in brauner Kleidung vor warmgelbem Hintergrund",
+      "en": "A laughing woman holds two children in brown outfits against a warm yellow background",
+      "bs": "Nasmijana žena drži dvoje djece u smeđoj odjeći ispred topložute pozadine"
+    },
+    "galerie-familie-dsc02711.webp": {
+      "de": "Schwarz-Weiß-Nahaufnahme einer Frau, die ihre Nase an die Nase eines liegenden Babys legt",
+      "en": "Black-and-white close-up of a woman touching noses with a baby lying down",
+      "bs": "Crno-bijeli krupni plan žene koja dodiruje nosić bebe svojim nosom"
+    },
+    "galerie-familie-dsc01213.webp": {
+      "de": "Ein Mädchen küsst einen Babybauch, während ein Mann die schwangere Frau von hinten hält",
+      "en": "A girl kisses a baby bump while a man holds the pregnant woman from behind",
+      "bs": "Djevojčica ljubi trudnički stomak dok muškarac grli trudnicu s leđa"
+    },
+    "galerie-familie-dsc01217.webp": {
+      "de": "Schwarz-Weiß-Familienfoto: Ein Paar küsst sich, ein Mädchen sitzt neben dem Babybauch",
+      "en": "Black-and-white family photo: a couple kiss with a girl seated beside the baby bump",
+      "bs": "Crno-bijela porodična fotografija: par se ljubi dok djevojčica sjedi pored trudničkog stomaka"
+    },
+    "galerie-familie-dsc01473.webp": {
+      "de": "Ein Paar beugt sich von beiden Seiten zu einem Neugeborenen in seinen Händen",
+      "en": "A couple lean in from either side towards a newborn held in their hands",
+      "bs": "Par se naginje s obje strane prema novorođenčetu koje drže u rukama"
+    },
+    "galerie-familie-dsc02297-2.webp": {
+      "de": "Schwarz-Weiß-Bild von Frau und Mädchen, die am Boden sitzen und einander anlächeln",
+      "en": "Black-and-white photo of a woman and a girl sitting on the floor and smiling at each other",
+      "bs": "Crno-bijela fotografija žene i djevojčice koje sjede na podu i smiješe se jedna drugoj"
+    },
+    "galerie-familie-dsc02381.webp": {
+      "de": "Familienfoto im Grünen: Ein kleiner Junge zwischen Seifenblasen vor drei weiteren Personen",
+      "en": "Family portrait outdoors: a little boy among soap bubbles in front of three other people",
+      "bs": "Porodična fotografija na otvorenom: dječak među mjehurićima sapunice ispred još tri osobe"
+    },
+    "galerie-familie-dsc02431.webp": {
+      "de": "Zwei Erwachsene halten ihre Kinder im Grünen auf dem Arm und kuscheln mit ihnen",
+      "en": "Two adults hold their children outdoors and cuddle them",
+      "bs": "Dvije odrasle osobe drže djecu u naručju na otvorenom i maze se s njima"
+    },
+    "galerie-familie-dsc02456.webp": {
+      "de": "Eine Frau trägt ein Mädchen im Jeanskleid vor grünen Bäumen und schaut in die Kamera",
+      "en": "A woman carries a girl in a denim dress in front of green trees and looks at the camera",
+      "bs": "Žena nosi djevojčicu u teksas haljini ispred zelenih stabala i gleda prema kameri"
+    },
+    "galerie-familie-dsc02468.webp": {
+      "de": "Schwarz-Weiß-Bild eines Mannes und eines kleinen Jungen, die ihre Stirnen aneinanderlegen",
+      "en": "Black-and-white image of a man and a little boy touching foreheads",
+      "bs": "Crno-bijela fotografija muškarca i dječaka koji prislanjaju čela jedno uz drugo"
+    },
+    "galerie-familie-dsc02554.webp": {
+      "de": "Eine Frau küsst ein Mädchen im Jeanskleid auf die Wange neben rosa Blüten",
+      "en": "A woman kisses a girl in a denim dress on the cheek beside pink blossoms",
+      "bs": "Žena ljubi djevojčicu u teksas haljini u obraz pored ružičastih cvjetova"
+    },
+    "galerie-familie-dsc02555.webp": {
+      "de": "Ein Paar in weißen Oberteilen umarmt sich vor einem blühenden Rosenstrauch",
+      "en": "A couple in white tops embrace in front of a flowering rose bush",
+      "bs": "Par u bijeloj odjeći grli se ispred rascvjetalog grma ruža"
+    },
+    "galerie-familie-dsc02623.webp": {
+      "de": "Eine Frau blickt auf das Baby in ihrem Arm, das mit offenem Mund zur Kamera schaut",
+      "en": "A woman looks at the baby in her arms as it faces the camera with its mouth open",
+      "bs": "Žena gleda bebu u svom naručju koja otvorenih usta gleda prema kameri"
+    },
+    "galerie-familie-dsc02683.webp": {
+      "de": "Frau mit zwei Kindern auf einer hellen Decke vor gelbem Hintergrund und Trockenblumen",
+      "en": "A woman with two children on a light blanket against a yellow background with dried flowers",
+      "bs": "Žena s dvoje djece na svijetlom prekrivaču ispred žute pozadine sa suhim cvijećem"
+    },
+    "galerie-familie-dsc03243.webp": {
+      "de": "Ein Paar küsst sich hinter einem schlafenden Baby in einem rosa ausgelegten Körbchen",
+      "en": "A couple kiss behind a sleeping baby in a basket lined with pink fabric",
+      "bs": "Par se ljubi iza uspavane bebe u korpici obloženoj ružičastom tkaninom"
+    },
+    "galerie-familie-dsc03265.webp": {
+      "de": "Ein Mann küsst den Kopf eines Babys, während eine Frau seine Stirn küsst",
+      "en": "A man kisses a baby’s head while a woman kisses his forehead",
+      "bs": "Muškarac ljubi bebinu glavu dok žena ljubi njegovo čelo"
+    },
+    "galerie-familie-dsc03285-2.webp": {
+      "de": "Schwarz-Weiß-Porträt eines Paares mit einem schlafenden Baby in den Armen der Frau",
+      "en": "Black-and-white portrait of a couple with a sleeping baby in the woman’s arms",
+      "bs": "Crno-bijeli portret para s uspavanom bebom u ženinom naručju"
+    },
+    "galerie-familie-dsc03400.webp": {
+      "de": "Schwarz-Weiß-Familienporträt: Ein Paar sitzt neben einem Neugeborenen im geflochtenen Korb",
+      "en": "Black-and-white family portrait: a couple sit beside a newborn in a woven basket",
+      "bs": "Crno-bijeli porodični portret: par sjedi pored novorođenčeta u pletenoj korpi"
+    },
+    "galerie-familie-dsc03416-2.webp": {
+      "de": "Schwarz-Weiß-Ganzkörperbild eines Paares, das sein Baby zwischen sich hält und anschaut",
+      "en": "Black-and-white full-length portrait of a couple holding and looking at their baby between them",
+      "bs": "Crno-bijeli portret para u punoj dužini koji između sebe drži i gleda bebu"
+    },
+    "galerie-familie-dsc03419.webp": {
+      "de": "Ein Paar mit Baby im Arm steht vor rostbraunem Hintergrund und lächelt zur Kamera",
+      "en": "A couple holding a baby stand against a rust-brown background and smile at the camera",
+      "bs": "Par s bebom u naručju stoji ispred hrđastosmeđe pozadine i smiješi se prema kameri"
+    },
+    "homepage-family-20260906.webp": {
+      "de": "Silhouette eines Paares mit Baby im Gegenlicht, ihre Stirnen berühren sich",
+      "en": "Silhouette of a couple holding a baby against the light, their foreheads touching",
+      "bs": "Silueta para s bebom u naručju u pozadinskom svjetlu, čela im se dodiruju"
+    },
+    "hero-bild-a00f7cd29c.webp": {
+      "de": "Schlafendes Neugeborenes mit Blumenhaarband, auf der Seite in eine rosafarbene Spitzendecke gekuschelt",
+      "en": "Sleeping newborn with a floral headband, lying on its side in a pink lace blanket",
+      "bs": "Uspavano novorođenče s cvjetnom trakom, na boku u ružičastoj čipkastoj dekici"
+    },
+    "portfolio-babybauch-11-20260906.webp": {
+      "de": "Schwangere Frau im langen weißen Spitzenkleid im warmen Licht vor dunklem Hintergrund",
+      "en": "Pregnant woman in a long white lace dress in warm light against a dark background",
+      "bs": "Trudnica u dugoj bijeloj čipkastoj haljini u toplom svjetlu ispred tamne pozadine"
+    },
+    "portfolio-babybauch-13-20260906.webp": {
+      "de": "Ein Mann küsst eine schwangere Frau mit Blumenkranz im Haar unter grünen Bäumen",
+      "en": "A man kisses a pregnant woman wearing a flower crown beneath green trees",
+      "bs": "Muškarac ljubi trudnicu s cvjetnim vijencem u kosi ispod zelenih stabala"
+    },
+    "portfolio-babybauch-15-20260906.webp": {
+      "de": "Paar vor schwarzem Hintergrund mit herzförmig auf dem Babybauch gelegten Händen",
+      "en": "Couple against a black background with their hands forming a heart on the baby bump",
+      "bs": "Par ispred crne pozadine s rukama u obliku srca na trudničkom stomaku"
+    },
+    "portfolio-babybauch-4-20260906.webp": {
+      "de": "Schwarz-Weiß-Detail von Babybauch und verschränkten Händen, zwischen denen Babyschuhe hängen",
+      "en": "Black-and-white detail of a baby bump and joined hands with baby shoes hanging between them",
+      "bs": "Crno-bijeli detalj trudničkog stomaka i spojenih ruku između kojih vise cipelice za bebu"
+    },
+    "DSC01965.webp": {
+      "de": "Babybauchporträt im bodenlangen rosa Kleid mit Schleppe und Blumenkranz",
+      "en": "Maternity portrait in a floor-length pink dress with a train and flower crown",
+      "bs": "Trudnički portret u dugoj ružičastoj haljini sa šlepom i cvjetnim vijencem"
+    },
+    "portfolio-babybauch-8-20260906.webp": {
+      "de": "Schwarz-Weiß-Nahaufnahme: Eine Hand hält Ultraschallbilder über dem bekleideten Babybauch",
+      "en": "Black-and-white close-up: a hand holds ultrasound pictures above a clothed baby bump",
+      "bs": "Crno-bijeli krupni plan: ruka drži ultrazvučne snimke iznad odjevenog trudničkog stomaka"
+    },
+    "galerie-babybauch-dsc02054.webp": {
+      "de": "Barfüßige Schwangere in Jeans hält einen bunten Blumenstrauß vor der Brust",
+      "en": "Barefoot pregnant woman in jeans holding a colourful bouquet against her chest",
+      "bs": "Bosonoga trudnica u farmerkama drži šareni buket ispred grudi"
+    },
+    "portfolio-newborn-geborgenheit-hq.webp": {
+      "de": "Schlafendes Baby mit grauer Mütze im Flechtkorb, neben ihm ein kleiner Teddy und Herbstblätter",
+      "en": "Sleeping baby in a grey hat in a woven basket beside a small teddy bear and autumn leaves",
+      "bs": "Uspavana beba u sivoj kapici u pletenoj korpi, uz malog medvjedića i jesenje lišće"
+    },
+    "portfolio-neugeborene-20-20260906.webp": {
+      "de": "Baby mit rosa Mütze im kleinen Bett, daneben Blumen, Strickhase und Wecker",
+      "en": "Baby in a pink bonnet in a small bed beside flowers, a knitted rabbit and an alarm clock",
+      "bs": "Beba u ružičastoj kapici u malom krevetu, uz cvijeće, pletenog zeca i budilnik"
+    },
+    "galerie-neugeborene-dsc01844.webp": {
+      "de": "Waches Baby im rosa Spitzenkleid liegt auf einem weißen Kissen neben bunten Blüten",
+      "en": "Awake baby in a pink lace dress lying on a white cushion beside colourful flowers",
+      "bs": "Budna beba u ružičastoj čipkastoj haljinici leži na bijelom jastuku pored šarenog cvijeća"
+    },
+    "portfolio-neugeborene-dsc03275.webp": {
+      "de": "Eine Frau und ein Baby mit Blumenhaarband berühren sich beinahe mit den Nasen",
+      "en": "A woman and a baby wearing a floral headband almost touch noses",
+      "bs": "Žena i beba s cvjetnom trakom gotovo se dodiruju nosevima"
+    },
+    "portfolio-neugeborene-dsc03309.webp": {
+      "de": "Schlafendes Baby in einem rosafarbenen Korb mit Häschen auf der Decke und Trockenblumen",
+      "en": "Sleeping baby in a pink-lined basket with a rabbit toy on the blanket and dried flowers",
+      "bs": "Uspavana beba u korpi obloženoj ružičastom tkaninom, sa zečićem na dekici i suhim cvijećem"
+    },
+    "portfolio-familie-18-20260906.webp": {
+      "de": "Ein Mädchen im Jeanskleid schmiegt sich von den Schultern eines Mannes an seinen Kopf",
+      "en": "A girl in a denim dress nestles against a man’s head while riding on his shoulders",
+      "bs": "Djevojčica u teksas haljini privija se uz muškarčevu glavu dok mu sjedi na ramenima"
+    },
+    "12.webp": {
+      "de": "Ein Mädchen schaut unter dem langen rosa Kleid einer schwangeren Frau hervor",
+      "en": "A girl peeks out from beneath a pregnant woman’s long pink dress",
+      "bs": "Djevojčica proviruje ispod duge ružičaste haljine trudnice"
+    }
+  },
+  "filenames": {
+    "9.webp": "neugeborenes-mutter-stirnkuss.webp",
+    "16.webp": "baby-nase-lippen-schwarzweiss.webp",
+    "17.webp": "baby-korb-teddy-herbst.webp",
+    "18.webp": "baby-vater-kuss-strickmuetze.webp",
+    "19.webp": "neugeborenes-taetowierte-arme-schwarzweiss.webp",
+    "20.webp": "baby-holzbett-haekelbaer.webp",
+    "21.webp": "baby-mutter-bettchen-schwarzweiss.webp",
+    "22.webp": "baby-blumenstirnband-weisses-bettchen.webp",
+    "23.webp": "baby-blumenstirnband-rosa-decke.webp",
+    "24.webp": "baby-kuss-blumenstirnband.webp",
+    "25.webp": "baby-maedchen-kuss.webp",
+    "26.webp": "neugeborenes-korb-blumenkranz.webp",
+    "28.webp": "babygesicht-violette-blueten.webp",
+    "29.webp": "babyfuesse-strickdecke-schwarzweiss.webp",
+    "30.webp": "baby-kuss-rote-decke.webp",
+    "3.webp": "babybauch-paar-stirnkuss.webp",
+    "4.webp": "babybauch-paar-kleine-turnschuhe.webp",
+    "5.webp": "babybauch-kind-kuesst-bauch.webp",
+    "6.webp": "babybauch-paar-liegend-schwarzweiss.webp",
+    "7.webp": "babybauch-silhouette-gegenlicht.webp",
+    "8.webp": "babybauch-paar-ultraschallbild.webp",
+    "11.webp": "babybauch-offenes-kleid-schwarzweiss.webp",
+    "13.webp": "babybauch-hocker-babyschuhe.webp",
+    "14.webp": "babybauch-rose-kleid-kniend.webp",
+    "15.webp": "babybauch-kuss-silhouette-blau.webp",
+    "DSC01963.webp": "babybauch-fliederkleid-blumenkrone.webp",
+    "DSC01974.webp": "babybauch-blumen-schleppe-schwarzweiss.webp",
+    "DSC01975.webp": "babybauch-fliederkleid-gelbe-blumen.webp",
+    "DSC01981.webp": "babybauch-paar-kuss-schwarzweiss.webp",
+    "DSC01986.webp": "babybauch-paar-schwarze-kleidung.webp",
+    "DSC02025.webp": "babybauch-paar-blaue-kleidung-umarmung.webp",
+    "DSC02036-2.webp": "babybauch-paar-stirnen-schwarzweiss.webp",
+    "DSC02054.webp": "babybauch-jeans-bunter-blumenstrauss.webp",
+    "DSC02057.webp": "babybauch-blumenstrauss-detail.webp",
+    "DSC02060-2.webp": "babybauch-jeans-blumen-schwarzweiss.webp",
+    "DSC02070.webp": "babybauch-blumen-hand-im-haar.webp",
+    "DSC02081.webp": "babybauch-blaues-hemd-sitzend.webp",
+    "DSC02089.webp": "babybauch-paar-sitzend-kuss.webp",
+    "DSC02107.webp": "babybauch-paar-blauer-boden.webp",
+    "DSC02116.webp": "babybauch-graues-kleid-rosa-rose.webp",
+    "DSC02120.webp": "babybauch-graues-kleid-blauer-hintergrund.webp",
+    "1.webp": "familie-babybauch-kind-auf-dem-arm.webp",
+    "2.webp": "paar-geschlossene-augen-schwarzweiss.webp",
+    "10.webp": "eltern-neugeborenes-stirn-an-stirn.webp",
+    "27.webp": "frau-baby-kind-blumen.webp",
+    "DSC02171.webp": "familie-frau-maedchen-liegend-flieder.webp",
+    "DSC02189.webp": "familie-maedchen-wangenkuss-flieder.webp",
+    "DSC02218.webp": "familie-maedchen-auf-schultern.webp",
+    "DSC02253-2.webp": "familie-kopf-an-kopf-schwarzweiss.webp",
+    "DSC02267.webp": "familie-frau-kind-rosa-hintergrund.webp",
+    "DSC02303-2.webp": "familie-maedchen-umarmung-liegend.webp",
+    "DSC01965.webp": "babybauch-rosa-kleid-blumenkranz.webp",
+    "12.webp": "babybauch-maedchen-rosa-kleid.webp"
+  }
+}

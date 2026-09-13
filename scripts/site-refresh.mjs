@@ -36,13 +36,52 @@ const pages={
  points:[[['Mein Stil','My style','Moj stil'],['Natürlich, warm & liebevoll','Natural, warm & heartfelt','Prirodno, toplo i nježno']],[['Mein Shooting','My sessions','Moje fotografisanje'],['Entspannt, mit Zeit für Pausen & kleine Bedürfnisse','Relaxed, with time for breaks & little needs','Opušteno, uz vrijeme za pauze i male potrebe']],[['Mein Fokus','My focus','Moj fokus'],['Babybauch · Neugeborene · Familie','Maternity · Newborn · Family','Trudnoća · Novorođenčad · Porodica']]]},
 'babybauch-shooting-graz.html':{
  title:['Babybauchfotografie in Graz – Erinnerungen an eine ganz besondere Zeit.','Maternity photography in Graz – memories of a very special time.','Trudničko fotografisanje u Grazu – uspomene na posebno vrijeme.'],
- lead:['Eine Schwangerschaft vergeht oft viel schneller, als man denkt. Bei eurem Babybauch Shooting nehmen wir uns deshalb Zeit für euch und halten diese besondere Zeit so fest, wie sie zu euch passt. Ich begleite euch bei Posen und kleinen Details, sodass ihr euch auch dann sicher vor der Kamera fühlt, wenn ihr noch nie ein professionelles Shooting hattet.','Pregnancy often passes much faster than you expect. During your maternity session, we take time for you and capture this special chapter in a way that feels right for you. I guide you through poses and little details so that you can feel confident in front of the camera, even if you have never had a professional session before.','Trudnoća često prođe mnogo brže nego što očekujemo. Zato tokom trudničkog fotografisanja odvajamo vrijeme za vas i bilježimo ovo posebno razdoblje na način koji vam odgovara. Pomažem vam s pozama i malim detaljima kako biste se osjećali sigurno pred objektivom, čak i ako nikada ranije niste imali profesionalno fotografisanje.']},
+ lead:['Eine Schwangerschaft vergeht oft viel schneller, als man denkt. Bei eurem Babybauch-Shooting nehmen wir uns deshalb Zeit für euch und halten diese besondere Zeit so fest, wie sie zu euch passt. Ich begleite euch bei Posen und kleinen Details, sodass ihr euch auch dann sicher vor der Kamera fühlt, wenn ihr noch nie ein professionelles Shooting hattet.','Pregnancy often passes much faster than you expect. During your maternity session, we take time for you and capture this special chapter in a way that feels right for you. I guide you through poses and little details so that you can feel confident in front of the camera, even if you have never had a professional session before.','Trudnoća često prođe mnogo brže nego što očekujemo. Zato tokom trudničkog fotografisanja odvajamo vrijeme za vas i bilježimo ovo posebno razdoblje na način koji vam odgovara. Pomažem vam s pozama i malim detaljima kako biste se osjećali sigurno pred objektivom, čak i ako nikada ranije niste imali profesionalno fotografisanje.']},
 'familienfotografie-graz.html':{
  lead:['Bei eurem Familienshooting in Graz steht eure gemeinsame Zeit im Mittelpunkt. Mit viel Ruhe und einem Blick für die kleinen Momente begleite ich euch durch das Shooting und gebe euch dabei die nötige Orientierung vor der Kamera. Die Kinder dürfen lachen, spielen, neugierig sein oder zwischendurch eine Pause brauchen. So entstehen natürliche und liebevolle Familienfotos, die euch noch viele Jahre an diese besondere Zeit erinnern.','Your family session in Graz is all about spending time together. With patience and an eye for the little moments, I guide you through the session and help you feel at ease in front of the camera. Children are free to laugh, play, be curious or take a break. Together we create natural, heartfelt family photographs that will remind you of this special time for years to come.','Tokom porodičnog fotografisanja u Grazu u središtu je vaše zajedničko vrijeme. Mirno vas vodim kroz fotografisanje, primjećujem male trenutke i pružam vam potrebnu podršku pred objektivom. Djeca se mogu smijati, igrati, biti radoznala ili napraviti pauzu. Tako nastaju prirodne i nježne porodične fotografije koje će vas još godinama podsjećati na ovo posebno vrijeme.'],
  points:[[['Für wen','For whom','Za koga'],['Für Eltern, Kinder und Geschwister – ganz egal, ob zu dritt oder als größere Familie.','For parents, children and siblings – whether there are three of you or a larger family.','Za roditelje, djecu i braću i sestre – bilo da vas je troje ili ste veća porodica.']],[['Mit Kindern','With children','S djecom'],['Pausen, Spielen und kleine Bedürfnisse gehören einfach dazu – wir richten uns ganz nach euren Kindern.','Breaks, play and little needs are all part of the session – we follow your children’s pace.','Pauze, igra i male potrebe sastavni su dio fotografisanja – prilagođavamo se vašoj djeci.']],[['Eure Erinnerungen','Your memories','Vaše uspomene'],delivery]]},
 'portraitfotografie-graz.html':{
  title:['Porträtfotografie in Graz – persönlich, natürlich und ganz du.','Portrait photography in Graz – personal, natural and truly you.','Portretno fotografisanje u Grazu – lično, prirodno i baš ti.'],
  lead:['Bei deinem Porträtshooting in Graz begleite ich dich mit ruhiger Anleitung und einem Blick dafür, was zu dir passt. Du musst keine Erfahrung vor der Kamera mitbringen – gemeinsam finden wir Posen und Perspektiven, in denen du dich wohlfühlst. So entstehen natürliche, ausdrucksstarke Porträts, in denen du dich wiedererkennst und gerne siehst.','During your portrait session in Graz, I offer calm guidance and an eye for what suits you. You do not need any experience in front of the camera – together we find poses and perspectives that feel comfortable. The result is natural, expressive portraits in which you recognise yourself and enjoy what you see.','Tokom tvog portretnog fotografisanja u Grazu pružam ti mirno vođenje i pažnju usmjerenu na ono što ti odgovara. Ne treba ti iskustvo pred objektivom – zajedno pronalazimo poze i perspektive u kojima se osjećaš ugodno. Tako nastaju prirodni, izražajni portreti na kojima prepoznaješ sebe i rado se vidiš.']}
+};
+// Existing service copy only: retain headings and body structure while clarifying the image galleries.
+const coreServiceCopy = {
+  "babybauch-shooting-graz.html": {
+    "[data-gallery-title]": [
+      "Babybauchfotos in Graz",
+      "Maternity photos in Graz",
+      "Trudničke fotografije u Grazu"
+    ],
+    "[data-section-head=\"section1\"] h2": [
+      "Was euer Schwangerschaftsshooting besonders macht",
+      "What makes your maternity session special",
+      "Šta vaše trudničko fotografisanje čini posebnim"
+    ]
+  },
+  "newborn-fotografie-graz.html": {
+    "[data-gallery-title]": [
+      "Babyfotos in Graz",
+      "Baby photos in Graz",
+      "Fotografije beba u Grazu"
+    ],
+    "[data-section-head=\"section1\"] h2": [
+      "Was Eltern an einem Newborn-Shooting schätzen",
+      "What parents appreciate about this newborn session",
+      "Šta roditelji cijene kod ovog fotografisanja novorođenčadi"
+    ]
+  },
+  "familienfotografie-graz.html": {
+    "[data-gallery-title]": [
+      "Familienfotos in Graz",
+      "Family photos in Graz",
+      "Porodične fotografije u Grazu"
+    ],
+    "[data-section-head=\"section1\"] p": [
+      "Hier erfahrt ihr, wie euer Familien-Fotoshooting abläuft und wie natürliche Bilder mit echter Nähe entstehen.",
+      "Find out how your family photo session works and how we capture natural images full of connection.",
+      "Saznajte kako izgleda vaše porodično fotografisanje i kako nastaju prirodne fotografije pune bliskosti."
+    ]
+  }
 };
 const SITE_ORIGIN = 'https://liza-memories-photography.com';
 const LOCALIZED_PAGE_BASES = new Set([
@@ -173,6 +212,10 @@ export function refreshSite(d,file){
  'portraitfotografie-graz.html':['Porträt-Shooting anfragen','Enquire about a portrait session','Upit za portretno fotografisanje']};
  if(actionNames[base])d.querySelectorAll('main a.btn[href*="#contact-form-card"],.hero a.btn[href*="#contact-form-card"]').forEach(a=>{a.textContent=actionNames[base][i];});
 
+ for (const [selector, values] of Object.entries(coreServiceCopy[base] || {})) {
+  const target = d.querySelector(selector);
+  if (target) target.textContent = values[i];
+ }
  if(isHome){localizeHomepageLinks(d,file);addReviewCarousel(d,lang);}
  if(isHome&&!d.querySelector('script[src^="scripts/site-refresh.js"]')){const script=el('script');script.src='scripts/site-refresh.js?v=20260912k';script.defer=true;d.head.append(script);}
 }
