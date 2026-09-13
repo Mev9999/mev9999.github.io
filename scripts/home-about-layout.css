@@ -54,8 +54,4 @@
 #testimonials .review-stars,#testimonials .review-author,#testimonials .review-source{text-align:center}
 @media(min-width:901px){.home-refreshed #pricing .hd p{max-width:none;width:100%;text-wrap:pretty}}
 
-.home-refreshed .story-card-body,.home-refreshed #pricing .hd,.home-refreshed #pricing .price.card{text-align:center}
-.home-refreshed .story-card-body ul,.home-refreshed #pricing .price.card ul{padding-left:0;list-style-position:inside;text-align:center}
-.home-refreshed #pricing .price.card>.chip{align-self:center}
 
-.home-refreshed .story-card-body,.home-refreshed .story-card-body h3,.home-refreshed .story-card-body p,.home-refreshed #pricing .hd,.home-refreshed #pricing .price.card,.home-refreshed #pricing .price.card h3,.home-refreshed #pricing .price.card li{text-align:center!important}

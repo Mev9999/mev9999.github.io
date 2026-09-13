@@ -28,3 +28,10 @@
 .customer-reviews .review-author{margin-top:.85rem}
 .review-dots:not([hidden]){margin-top:.4rem}
 @media(max-width:480px){.customer-reviews{margin-top:1.1rem}.customer-reviews h3{margin-bottom:1.1rem}.review-frame{border-radius:24px 24px 24px 6px}.review-slide{padding-top:1.1rem;padding-bottom:1.1rem}}
+/* Align the testimonial with the two columns of the Google introduction. */
+@media(min-width:901px){
+ .customer-reviews{display:grid;grid-template-columns:230px minmax(0,1fr);column-gap:2.5rem;padding:1.5rem 2.5rem 0;position:relative}
+ .customer-reviews:before{content:'“';grid-column:1;grid-row:1 / 4;align-self:stretch;display:flex;align-items:center;justify-content:center;border-right:1px solid rgba(176,111,87,.18);padding-right:1.5rem;font-family:Georgia,serif;font-size:6rem;line-height:1;color:#bd8c76}
+ .customer-reviews>h3,.customer-reviews>.review-frame,.customer-reviews>.review-dots{grid-column:2;min-width:0}
+ .customer-reviews>h3{grid-row:1}.customer-reviews>.review-frame{grid-row:2}.customer-reviews>.review-dots{grid-row:3}
+}
