@@ -85,8 +85,8 @@ export function refreshSite(d,file){
  const local=f=>lang==='de'?f:f.replace('.html',`-${lang}.html`);
  const el=(tag,cls,text)=>{const e=d.createElement(tag);e.className=cls||'';if(text)e.textContent=text;return e;};
  d.body.classList.toggle('home-refreshed',isHome);d.body.classList.toggle('compact-mobile-hero',['babybauch-shooting-graz.html','newborn-fotografie-graz.html','babybauch-und-neugeborenen-shooting-graz.html','familienfotografie-graz.html','portraitfotografie-graz.html'].includes(base));if(d.querySelector('.hero-visual'))d.body.classList.add('service-refreshed');
- if(!d.querySelector('link[href^="scripts/site-refresh.css"]')){const css=el('link');css.rel='stylesheet';css.href='scripts/site-refresh.css?v=20260913-mobile2';d.head.append(css);}
- d.querySelector('link[href^="scripts/site-refresh.css"]') .href='scripts/site-refresh.css?v=20260913-mobile2';
+ if(!d.querySelector('link[href^="scripts/site-refresh.css"]')){const css=el('link');css.rel='stylesheet';css.href='scripts/site-refresh.css?v=20260913-fullhero';d.head.append(css);}
+ d.querySelector('link[href^="scripts/site-refresh.css"]') .href='scripts/site-refresh.css?v=20260913-fullhero';
  d.head.append(d.querySelector('link[href^="scripts/site-refresh.css"]'));
  if(isHome){
   for(const [key,values] of Object.entries(home))d.querySelectorAll(`[data-i18n="${key}"],[data-refresh-key="${key}"]`).forEach(e=>{e.textContent=values[i];e.dataset.refreshKey=key;e.removeAttribute('data-i18n');});
