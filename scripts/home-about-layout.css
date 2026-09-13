@@ -24,7 +24,6 @@
 @media(max-width:374px){.home-refreshed .hero>.shooting-service-links.compact-home-links{grid-template-columns:1fr!important;grid-template-rows:none;grid-auto-flow:row}.home-refreshed .compact-home-links a{min-height:30px!important}.home-refreshed .mobile-address{white-space:normal!important}}
 
 .about-moved-section h2,.about-moved-section h3{font-family:'Cormorant Garamond',serif}
-@media(min-width:901px){.service-refreshed.desktop-full-hero .hero .hero-visual{align-self:stretch;height:auto!important;max-height:none!important;min-height:0!important;aspect-ratio:auto!important}.service-refreshed.desktop-full-hero .hero .hero-visual img{position:absolute!important;inset:0;height:100%!important;max-height:none!important;width:100%!important;object-fit:cover!important;object-position:center;display:block}}
 
 /* Quiet contact introduction, using the surrounding typography. */
 .contact-intro-panels{display:block;text-align:center;margin-bottom:1.8rem}
@@ -32,5 +31,8 @@
 .contact-intro-panels .contact-intro-label{display:none}
 .contact-intro-panels p{line-height:1.6}
 @media(max-width:900px){.home-refreshed .hero{padding-bottom:1rem!important}.home-refreshed #portfolio{padding-top:1.5rem!important}.home-refreshed .compact-home-links{margin-bottom:0!important}}
-@media(min-width:901px){.service-refreshed.desktop-full-hero .hero-grid.early-photo{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 @media(min-width:375px) and (max-width:900px){html[lang=bs] .home-refreshed .hero>.shooting-service-links.compact-home-links{grid-template-columns:1fr!important;grid-template-rows:none;grid-auto-flow:row}}
+
+@media(min-width:901px){.service-refreshed .hero-visual:has(source[data-desktop-hero]){height:clamp(480px,42.57vw,613px)!important;max-height:613px!important;align-self:start;overflow:hidden}}
+
+@media(min-width:901px){.contact-intro-panels .aside-copy-block{max-width:none;width:100%}.contact-intro-panels p{max-width:none!important;width:100%;text-wrap:initial!important}}

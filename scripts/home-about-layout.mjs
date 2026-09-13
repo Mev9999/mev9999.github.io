@@ -20,9 +20,16 @@ export function updateHomeAboutLayout(d,file){
  // Keep navigation to the relocated content valid on every language page.
  for(const a of d.querySelectorAll('a[href]')){const raw=a.getAttribute('href');try{const url=new URL(raw,'https://liza-memories-photography.com/'+file);if(url.origin!=='https://liza-memories-photography.com')continue;if(['#services','#process'].includes(url.hash)&&/^\/(?:index(?:-(?:en|bs))?\.html)?$/.test(url.pathname))a.href=local('ueber-mich.html')+url.hash;if(url.hash==='#editorial-moments')a.href=local('index.html')+'#portfolio';}catch{}}
  if(base==='familienfotografie-graz.html')d.body.classList.add('family-mobile-focus');
- if(['familienfotografie-graz.html','babybauch-shooting-graz.html'].includes(base))d.body.classList.add('desktop-full-hero');
+ d.body.classList.remove('desktop-full-hero');
+ if(['familienfotografie-graz.html','babybauch-shooting-graz.html'].includes(base)){
+  const img=d.querySelector('.hero-visual img');
+  let picture=img.closest('picture');if(!picture){picture=d.createElement('picture');img.before(picture);picture.append(img);}
+  picture.querySelectorAll('source[data-desktop-hero]').forEach(e=>e.remove());
+  const source=d.createElement('source');source.dataset.desktopHero='';source.media='(min-width: 901px)';source.type='image/webp';source.srcset=base==='babybauch-shooting-graz.html'?'galerie-babybauch-dsc01322.webp':'portfolio-familie-18-20260906.webp';picture.prepend(source);
+ }
+
  if(base==='preise.html'){const p=d.querySelector('.price-note p');if(p){const text=p.textContent,cut=text.indexOf('. ');if(cut>=0){const first=['Zusatzbild: 15 € pro Bild.','Extra photo: €15 per image.','Dodatna fotografija: 15 €.'][i],rest=text.slice(cut+2);p.replaceChildren(el('span','extra-image-sentence',first),el('span','extra-image-bundles',rest));}}}
  if(home||about||base==='preise.html'||base==='familienfotografie-graz.html'||base==='babybauch-shooting-graz.html'){
-  let css=d.querySelector('link[data-home-layout]');if(!css){css=el('link','');css.rel='stylesheet';css.dataset.homeLayout='';d.head.append(css);}css.href='scripts/home-about-layout.css?v=20260913c';d.head.append(css);
+  let css=d.querySelector('link[data-home-layout]');if(!css){css=el('link','');css.rel='stylesheet';css.dataset.homeLayout='';d.head.append(css);}css.href='scripts/home-about-layout.css?v=20260913d';d.head.append(css);
  }
 }
