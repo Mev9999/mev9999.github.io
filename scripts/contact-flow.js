@@ -41,7 +41,12 @@
     const next=a.dataset.lang;const target=new URL(next==='de'?'index.html':`index-${next}.html`,location.href);
     target.searchParams.set('service',serviceInput.value);if(packageInput.value)target.searchParams.set('package',packageInput.value);target.searchParams.set('source',source);target.hash='contact-form-card';location.href=target.href;
   },true));
-  let sending=false;
+  let sending=false,delivered=false;
+  window.addEventListener('pageshow',event=>{
+    if(!event.persisted)return;
+    sending=false;delivered=false;button.disabled=false;
+    button.removeAttribute('aria-busy');form.removeAttribute('aria-busy');
+  });
   form.addEventListener('submit',async event=>{
     event.preventDefault();if(sending||!form.reportValidity())return;
     sending=true;button.disabled=true;button.setAttribute('aria-busy','true');form.setAttribute('aria-busy','true');
@@ -49,9 +54,14 @@
     const selectedService=serviceInput.value,selectedPackage=packageInput.value;
     try{
       const response=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
-      if(response.ok){status.textContent=copy.success;emit('lead_success',selectedService,selectedPackage);form.reset();hidden('source_page',source);hidden('language',lang);packageInput.value=selectedPackage;refresh();}
+      if(response.ok){status.textContent=copy.success;emit('lead_success',selectedService,selectedPackage);form.reset();hidden('source_page',source);hidden('language',lang);packageInput.value=selectedPackage;refresh();
+        delivered=true;
+        const destination=new URL(lang==='de'?'danke.html':`danke-${lang}.html`,location.href);
+        destination.searchParams.set('from',validSource(file)?file:(lang==='de'?'index.html':`index-${lang}.html`));
+        location.assign(destination.href);
+      }
       else status.textContent=copy.error;
     }catch{status.textContent=copy.network;}
-    finally{sending=false;button.disabled=false;button.removeAttribute('aria-busy');form.removeAttribute('aria-busy');button.textContent=label;}
+    finally{sending=delivered;button.disabled=delivered;button.removeAttribute('aria-busy');form.removeAttribute('aria-busy');button.textContent=label;}
   });
 })();

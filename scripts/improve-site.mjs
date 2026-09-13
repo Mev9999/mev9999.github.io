@@ -19,7 +19,7 @@ export function improveSite(document,file){
  if(main){main.id ||= 'main-content';main.setAttribute('tabindex','-1');let skip=document.querySelector('.skip-link');if(!skip){skip=link('#'+main.id,t.skip);skip.className='skip-link';document.body.prepend(skip);}skip.textContent=t.skip;}
  if(!document.querySelector('header'))return;
  for(const [tag,attr,src] of [['link','href','scripts/site-improvements.css'],['script','src','scripts/contact-flow.js']]){
-  let e=document.querySelector(`${tag}[${attr}^="${src}"]`);if(!e){e=node(tag);e.setAttribute(attr,src+'?v=20260910');if(tag==='link')e.rel='stylesheet';else e.defer=true;}document.head.append(e);
+  let e=document.querySelector(`${tag}[${attr}^="${src}"]`);if(!e){e=node(tag);e.setAttribute(attr,src+'?v=20260910');if(tag==='link')e.rel='stylesheet';else e.defer=true;}if(src==='scripts/contact-flow.js')e.setAttribute(attr,src+'?v=20260913-thanks');document.head.append(e);
  }
  document.querySelectorAll('.hero a.btn').forEach(a=>{
   const href=a.getAttribute('href')||'';

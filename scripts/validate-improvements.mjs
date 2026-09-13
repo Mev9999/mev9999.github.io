@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-import { JSDOM } from 'jsdom';
+import { JSDOM, VirtualConsole } from 'jsdom';
 import assert from 'node:assert/strict';
 
 export async function validateImprovements(cache,report){
@@ -27,7 +27,9 @@ export async function validateImprovements(cache,report){
  const script=await fs.readFile('scripts/contact-flow.js','utf8');
  for(const lang of ['de','en','bs']){
   const file=lang==='de'?'index.html':`index-${lang}.html`;
-  const dom=new JSDOM(cache.get(file).html,{url:`https://example.test/${file}?service=newborn&package=bronze&source=preise.html`,runScripts:'outside-only'});
+  const virtualConsole=new VirtualConsole();let navigations=0;
+  virtualConsole.on('jsdomError',error=>{if(error.message==='Not implemented: navigation (except hash changes)')navigations++;else throw error;});
+  const dom=new JSDOM(cache.get(file).html,{url:`https://example.test/${file}?service=newborn&package=bronze&source=preise.html`,runScripts:'outside-only',virtualConsole});
   const w=dom.window,d=w.document,events=[];let calls=0,resolve;
   w.fetch=()=>{calls++;return new Promise(r=>{resolve=r;});};
   d.addEventListener('liza:conversion',e=>events.push(e.detail));w.eval(script);
@@ -38,7 +40,9 @@ export async function validateImprovements(cache,report){
   const submit=()=>form.dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));
   submit();submit();assert.equal(calls,1);assert.equal(form.querySelector('[type=submit]').disabled,true);assert.equal(events.length,0);
   resolve({ok:true});await new Promise(r=>setTimeout(r,0));
-  assert.equal(events.length,1);assert.equal(events[0].event,'lead_success');assert(!JSON.stringify(events).includes('PRIVATE'));assert(!JSON.stringify(events).includes('private@'));assert.equal(form.querySelector('[type=submit]').disabled,false);
+  assert.equal(navigations,1);assert.equal(events.length,1);assert.equal(events[0].event,'lead_success');assert(!JSON.stringify(events).includes('PRIVATE'));assert(!JSON.stringify(events).includes('private@'));assert.equal(form.querySelector('[type=submit]').disabled,true);
+  w.dispatchEvent(new w.PageTransitionEvent('pageshow',{persisted:true}));
+  assert.equal(form.querySelector('[type=submit]').disabled,false);
   submit();resolve({ok:false});await new Promise(r=>setTimeout(r,0));assert.equal(events.length,1);
   w.fetch=()=>Promise.reject(new Error('offline'));submit();await new Promise(r=>setTimeout(r,0));assert.equal(events.length,1);assert.equal(form.querySelector('[type=submit]').disabled,false);
   d.querySelector('#service').value='Familie';d.querySelector('#service').dispatchEvent(new w.Event('change'));assert.equal(form.elements.package.value,'');assert.equal(form.elements.service_id.value,'family');
@@ -46,5 +50,6 @@ export async function validateImprovements(cache,report){
  }
  const invalid=new JSDOM(cache.get('index.html').html,{url:'https://example.test/?service=evil&package=gold&source=https://evil.test/private',runScripts:'outside-only'});
  invalid.window.eval(script);assert.equal(invalid.window.document.querySelector('[name=package]').value,'');assert.equal(invalid.window.document.querySelector('[name=source_page]').value,'index.html');invalid.window.close();
+ for(const lang of ['de','en','bs']){const suffix=lang==='de'?'':'-'+lang;const d=cache.get('danke'+suffix+'.html').document;assert.equal(d.documentElement.lang,lang);assert(d.querySelector('meta[name=robots]').content.includes('noindex'));assert.equal(d.querySelectorAll('h1').length,1);assert(d.querySelector('main').textContent.includes('24'));assert(d.querySelector('a[href="tel:+4368181942780"]'));assert(d.querySelector('a[href="https://wa.me/4368181942780"]'));assert(d.querySelector('#return-link'));}assert(!(await fs.readFile('sitemap.xml','utf8')).includes('danke'));
  console.log('Inquiry tests passed: DE/EN/BS, allowlists, duplicate submission, success, server error, network error and event privacy.');
 }
