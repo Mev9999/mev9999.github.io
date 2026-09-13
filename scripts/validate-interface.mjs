@@ -34,7 +34,7 @@ export async function validateInterface(cache){
   if(/^index(?:-(en|bs))?\.html$/.test(file)){
    assert(d.querySelector('.hero .art .hero-caption'),file+' image caption');
    assert(d.querySelector('.mobile-hero-logo'),file+' mobile logo');
-   assert(d.querySelector('.mobile-services-toggle>summary'),file+' services disclosure');
+   assert(!d.querySelector('#services,#process,#editorial-moments'),file+' removed or relocated home sections');
    assert(d.querySelector('.home-price-notes p'),file+' price notes');
    assert.equal(d.querySelectorAll('.home-price-notes>section').length,2,file+' separated price information');
    assert(d.querySelectorAll('.faq-topic-links a')[2].href.includes('babybauch-und-neugeborenen'),file+' FAQ order');
@@ -42,6 +42,7 @@ export async function validateInterface(cache){
    assert.equal(d.querySelector('.media-action-pair').children.length,2);
    for(const image of d.querySelectorAll('.masonry img,.story-band-grid img'))assert(image.srcset&&image.sizes,file+' responsive preview');
   }
+  if(file.startsWith('ueber-mich')){assert(d.querySelector('#process')?.previousElementSibling?.querySelector('.faq-grid'),file+' process after personal FAQ');assert(d.querySelector('#services')?.previousElementSibling?.id==='process',file+' services after process');}
   if(d.body.classList.contains('service-refreshed')){
    assert(d.querySelector('.hero-grid.early-photo'),file+' image order');
    assert(!d.querySelector('.hero-emotion'),file+' redundant introduction');

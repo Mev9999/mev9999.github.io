@@ -1,3 +1,4 @@
+import { updateHomeAboutLayout } from './home-about-layout.mjs';
 import { addReviewCarousel } from './reviews-build.mjs';
 // Requested copy and component adjustments, applied after language rendering.
 const home = {
@@ -218,5 +219,6 @@ export function refreshSite(d,file){
   if (target) target.textContent = values[i];
  }
  if(isHome){localizeHomepageLinks(d,file);addReviewCarousel(d,lang);}
+ updateHomeAboutLayout(d,file);
  if(isHome&&!d.querySelector('script[src^="scripts/site-refresh.js"]')){const script=el('script');script.src='scripts/site-refresh.js?v=20260912k';script.defer=true;d.head.append(script);}
 }
