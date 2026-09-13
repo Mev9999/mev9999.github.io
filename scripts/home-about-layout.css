@@ -55,3 +55,5 @@
 @media(min-width:901px){.home-refreshed #pricing .hd p{max-width:none;width:100%;text-wrap:pretty}}
 
 
+
+@media(min-width:901px){.home-refreshed .contact-intro-panels{column-gap:.75rem;text-align:left}.home-refreshed .contact-intro-panels .aside-copy-block{box-sizing:border-box;padding-inline:calc(.8rem + 1px);text-align:left}.home-refreshed .contact-intro-panels p{text-align:left}}
