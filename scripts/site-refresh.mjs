@@ -11,8 +11,8 @@ hero_proof_label_4:['Eure fertigen Bilder','Your finished images','Vaše gotove 
 hero_proof_value_4:['Ich wähle die schönsten Aufnahmen für euch aus und bearbeite sie liebevoll. Meist bekommt ihr eure fertigen Bilder innerhalb weniger Tage in eurer persönlichen Online-Galerie. Zusätzliche Bilder könnt ihr dort ganz in Ruhe selbst auswählen.','I select your loveliest photographs and edit them with care. Your finished images are usually ready within a few days in your personal online gallery, where you can also take your time choosing additional images.','Biram vaše najljepše snimke i pažljivo ih obrađujem. Gotove fotografije najčešće dobijete u roku od nekoliko dana u svojoj online galeriji. Tamo možete u miru sami odabrati i dodatne fotografije.'],
 google_review_text:['Wie war das Shooting? Wie haben sich die Familien bei mir gefühlt?\nLest ihre persönlichen Erfahrungen direkt auf meinem Google-Profil.','What was the session like? How did families feel?\nRead their personal experiences directly on my Google profile.','Kako je proteklo fotografisanje? Kako su se porodice osjećale?\nPročitajte njihova iskustva direktno na mom Google profilu.'],
 stories_card_1_text:['Wir halten eure Vorfreude in Ruhe fest. Ich begleite euch bei Posen und kleinen Details – für natürliche Babybauchfotos, die zu euch passen.','We capture your anticipation at a relaxed pace. I guide you through poses and little details for natural maternity photographs that feel like you.','U miru bilježimo vaše iščekivanje. Vodim vas kroz poze i male detalje kako bi trudničke fotografije bile prirodne i baš vaše.'],
-stories_card_1_li1:['Ideal: 28. bis 34. Schwangerschaftswoche','Ideal: weeks 28 to 34 of pregnancy','Idealno: od 28. do 34. sedmice trudnoće'],
-stories_card_1_li2:['Partner und Geschwister je nach Paket','Partner and siblings, depending on package','Partner i djeca, zavisno od paketa'],
+stories_card_1_li1:['Ideal: 28.–34. SSW','Ideal: pregnancy weeks 28–34','Idealno: 28.–34. sedmica'],
+stories_card_1_li2:['Familie je nach Paket','Family, depending on package','Porodica, zavisno od paketa'],
 stories_card_1_li3:['Bis zu 3 Outfits oder Sets je nach Paket','Up to 3 outfits or sets, depending on package','Do 3 outfita ili seta, zavisno od paketa'],
 stories_card_2_text:['Mit viel Zeit für Nähe, Pausen und die Bedürfnisse eures Babys entstehen bei mir liebevolle Neugeborenenfotos.','With plenty of time for closeness, breaks and your baby’s needs, we create tender newborn photographs.','Uz dovoljno vremena za bliskost, pauze i potrebe vaše bebe nastaju nježne fotografije novorođenčeta.'],
 stories_card_2_li1:['Ideal: 5 bis 14 Tage nach der Geburt','Ideal: 5 to 14 days after birth','Idealno: 5 do 14 dana nakon rođenja'],
@@ -84,9 +84,9 @@ export function refreshSite(d,file){
  const lang=file.match(/-(en|bs)\.html$/)?.[1]||'de',i=['de','en','bs'].indexOf(lang),base=file.replace(/-(en|bs)\.html$/,'.html'),isHome=base==='index.html';
  const local=f=>lang==='de'?f:f.replace('.html',`-${lang}.html`);
  const el=(tag,cls,text)=>{const e=d.createElement(tag);e.className=cls||'';if(text)e.textContent=text;return e;};
- d.body.classList.toggle('home-refreshed',isHome);if(d.querySelector('.hero-visual'))d.body.classList.add('service-refreshed');
- if(!d.querySelector('link[href^="scripts/site-refresh.css"]')){const css=el('link');css.rel='stylesheet';css.href='scripts/site-refresh.css?v=20260912-seo1';d.head.append(css);}
- d.querySelector('link[href^="scripts/site-refresh.css"]') .href='scripts/site-refresh.css?v=20260912-seo1';
+ d.body.classList.toggle('home-refreshed',isHome);d.body.classList.toggle('compact-mobile-hero',['babybauch-shooting-graz.html','newborn-fotografie-graz.html','babybauch-und-neugeborenen-shooting-graz.html','familienfotografie-graz.html','portraitfotografie-graz.html'].includes(base));if(d.querySelector('.hero-visual'))d.body.classList.add('service-refreshed');
+ if(!d.querySelector('link[href^="scripts/site-refresh.css"]')){const css=el('link');css.rel='stylesheet';css.href='scripts/site-refresh.css?v=20260913-mobile2';d.head.append(css);}
+ d.querySelector('link[href^="scripts/site-refresh.css"]') .href='scripts/site-refresh.css?v=20260913-mobile2';
  d.head.append(d.querySelector('link[href^="scripts/site-refresh.css"]'));
  if(isHome){
   for(const [key,values] of Object.entries(home))d.querySelectorAll(`[data-i18n="${key}"],[data-refresh-key="${key}"]`).forEach(e=>{e.textContent=values[i];e.dataset.refreshKey=key;e.removeAttribute('data-i18n');});
