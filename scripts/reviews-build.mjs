@@ -11,13 +11,13 @@ export function addReviewCarousel(d, lang, entries = reviews) {
  const container=d.querySelector('#testimonials>.container');if(!container)return;
  const el=(tag,cls,text)=>{const e=d.createElement(tag);e.className=cls;if(text)e.textContent=text;return e;};
  const box=el('div','customer-reviews');box.setAttribute('role','region');box.setAttribute('aria-labelledby','customer-reviews-title');
- const h=el('h3','',copy[0]);h.id='customer-reviews-title';box.append(h,el('p','review-intro',copy[1]));
+ const h=el('h3','',copy[0]);h.id='customer-reviews-title';box.append(h);
  const controls=el('div','review-controls');controls.hidden=true;
  const button=(cls,label,text)=>{const b=el('button',cls,text);b.type='button';b.setAttribute('aria-label',label);return b;};
  const previous=button('review-prev',copy[2],'←'),next=button('review-next',copy[3],'→'),pause=button('review-pause',copy[4],copy[4]),count=el('span','review-count');
  pause.dataset.pause=copy[4];pause.dataset.play=copy[5];
  count.setAttribute('role','status');count.setAttribute('aria-live','polite');
- controls.append(previous,count,next,pause);box.append(controls);
+ controls.append(previous,count,next);const frame=el('div','review-frame');frame.append(controls);box.append(frame);
  const track=el('div','review-track');
  entries.forEach((r,n)=>{
   if(!r.name||!r.text||!Number.isInteger(r.rating)||r.rating<1||r.rating>5||!['de','en','bs'].includes(r.lang))throw new Error('Incomplete original review');
@@ -25,11 +25,13 @@ export function addReviewCarousel(d, lang, entries = reviews) {
   article.setAttribute('aria-label',article.dataset.label);
   const stars=el('div','review-stars','★'.repeat(r.rating));stars.setAttribute('aria-hidden','true');
   const rating=el('span','review-rating',`${r.rating}/5`);
-  const quote=el('blockquote','',r.text);quote.lang=r.lang;
+  const quote=el('blockquote','');quote.lang=r.lang;
+  const parts=r.text.split(/\n+/).flatMap(part=>part.length>450?part.split(/(?<=\.) (?=Was ich|Wer möchte|Emina ist|Außerdem|Die neuen|Preis-Leistung|Wir haben bei|Hier bekommt|We received|We will)/):[part]);
+  parts.filter(Boolean).forEach(text=>quote.append(el('p','',text)));
   const name=el('p','review-author',r.name),link=el('a','review-source',copy[9]);link.href='https://maps.app.goo.gl/Absk5FRMgyCuUwxe9';link.target='_blank';link.rel='noopener noreferrer';
   article.append(stars,rating,quote,name,link);track.append(article);
  });
- box.append(track);container.append(box);
- const css=el('link','');css.rel='stylesheet';css.href='scripts/reviews-carousel.css?v=20260913';css.dataset.reviewAsset='';d.head.append(css);
- const script=el('script','');script.src='scripts/reviews-carousel.js?v=20260913';script.defer=true;script.dataset.reviewAsset='';d.head.append(script);
+ frame.append(track);const dots=el('div','review-dots');dots.hidden=true;entries.forEach((r,n)=>{const dot=button('review-dot',`${copy[7]} ${n+1} ${copy[8]} ${entries.length}`,'');dot.dataset.index=n;dots.append(dot);});box.append(dots);container.append(box);
+ const css=el('link','');css.rel='stylesheet';css.href='scripts/reviews-carousel.css?v=20260913b';css.dataset.reviewAsset='';d.head.append(css);
+ const script=el('script','');script.src='scripts/reviews-carousel.js?v=20260913b';script.defer=true;script.dataset.reviewAsset='';d.head.append(script);
 }
