@@ -42,3 +42,5 @@
 
 .desktop-proof-copy{display:none!important}.mobile-proof-copy{display:inline!important}
 @media(min-width:901px){.desktop-proof-copy{display:inline!important}.mobile-proof-copy{display:none!important}.home-refreshed .hero-grid.early-photo>.hero-proof{margin-top:2.5rem!important}.home-refreshed .hero-proof{grid-auto-rows:1fr}.home-refreshed .hero-proof .proof{min-height:0!important}.home-refreshed .hero-proof .proof>span{margin-bottom:0!important}}
+
+.home-refreshed .story-card-cta{align-self:center;margin-inline:auto}
