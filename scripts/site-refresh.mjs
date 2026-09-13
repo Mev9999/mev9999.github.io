@@ -26,7 +26,7 @@ stories_card_3_li3:['Gruppen- und Einzelbilder je nach Paket','Group and individ
 contact_sub:['Schreib mir kurz, worum es geht – ich melde mich spätestens innerhalb von 24 Stunden zurück.','Tell me a little about what you have in mind – I will reply within 24 hours at the latest.','Napišite mi ukratko šta želite – odgovorit ću vam najkasnije u roku od 24 sata.'],
 aside_note_1:['Shootings nach Vereinbarung bei mir im Studio in Graz-Straßgang.','Sessions by appointment at my studio in Graz-Straßgang.','Fotografisanja po dogovoru u mom studiju u Graz-Straßgangu.'],
 aside_note_2:['Outdoor- und individuelle Wunschlocations sind auch möglich.','Outdoor sessions and your preferred locations are also possible.','Moguće je i fotografisanje na otvorenom ili na lokaciji po vašoj želji.'],
-aside_text_new_1:['Gerne erstelle ich für andere Leistungswünsche auch ein individuelles Angebot.','I am also happy to prepare a personalised quote for other photography requests.','Za druge fotografske želje rado ću pripremiti individualnu ponudu.'],
+aside_text_new_1:['Für weitere Wünsche erstelle ich euch gerne ein individuelles Angebot.','I am happy to provide a personalised quote for other requests.','Za druge fotografske želje rado ću pripremiti individualnu ponudu.'],
 aside_location_value:['Mela-Spira-Straße 32b · 8054 Graz-Straßgang','Mela-Spira-Straße 32b · 8054 Graz-Straßgang','Mela-Spira-Straße 32b · 8054 Graz-Straßgang']
 };
 const delivery=['Liebevoll ausgewählt & bearbeitet, meist innerhalb weniger Tage in eurer persönlichen Online-Galerie.','Carefully selected and edited, usually ready within a few days in your personal online gallery.','Pažljivo odabrane i obrađene, najčešće u roku od nekoliko dana u vašoj online galeriji.'];
