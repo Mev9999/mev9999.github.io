@@ -25,6 +25,7 @@ export function updateHomeAboutLayout(d,file){
   const faq=d.querySelector('.faq-grid')?.closest('section');
   if(faq){const template=d.createElement('template');template.innerHTML=sections[lang];faq.after(template.content);}
  }
+ d.querySelectorAll('header .price-dropdown > a').forEach(a=>a.setAttribute('href',local('index.html')+'#pricing'));
  // Keep navigation to the relocated content valid on every language page.
  for(const a of d.querySelectorAll('a[href]')){const raw=a.getAttribute('href');try{const url=new URL(raw,'https://liza-memories-photography.com/'+file);if(url.origin!=='https://liza-memories-photography.com')continue;if(['#services','#process'].includes(url.hash)&&/^\/(?:index(?:-(?:en|bs))?\.html)?$/.test(url.pathname))a.href=local('ueber-mich.html')+url.hash;if(url.hash==='#editorial-moments')a.href=local('index.html')+'#portfolio';}catch{}}
  if(base==='familienfotografie-graz.html')d.body.classList.add('family-mobile-focus');
