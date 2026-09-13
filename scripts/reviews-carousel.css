@@ -36,3 +36,8 @@
  .customer-reviews>h3{grid-row:1}.customer-reviews>.review-frame{grid-row:2}.customer-reviews>.review-dots{grid-row:3}
 }
 @media(min-width:901px){.customer-reviews{padding-inline:0;grid-template-columns:270px minmax(0,1fr)}.customer-reviews>h3{margin:0 2.5rem 0 0;align-self:center}.customer-reviews>.review-frame{grid-column:1 / -1;margin-top:1.4rem}.customer-reviews>.review-dots{grid-column:1 / -1}.customer-reviews:before{padding-block:.25rem}}
+
+/* Curved bubble tail: retain its origin and point toward the heading center. */
+@media(min-width:901px){
+ .review-frame:before{top:-25px;left:calc(50% - 9px);width:145px;height:26px;border:0;transform:none;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 145 26' preserveAspectRatio='none'%3E%3Cpath d='M0 26 C10 4 27 13 48 12 C83 15 124 15 144 1 C132 23 68 22 18 26' fill='%23fffdfb' stroke='%23e4cec3' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;pointer-events:none}
+}
