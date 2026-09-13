@@ -14,14 +14,23 @@
 .extra-image-sentence,.extra-image-bundles{display:block}.extra-image-bundles{margin-top:.65rem}
 @media(max-width:900px){
  .desktop-link-label,.desktop-address{display:none!important}.mobile-link-label,.mobile-address{display:inline!important}
- .home-refreshed .mobile-address{white-space:nowrap!important;font-size:clamp(.68rem,2.9vw,.82rem);letter-spacing:-.01em}
- .home-refreshed .hero>.shooting-service-links.compact-home-links{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:.2rem .5rem!important;grid-auto-flow:column;grid-template-rows:repeat(2,auto);font-size:clamp(.72rem,3.3vw,.9rem)!important}
+ .home-refreshed .mobile-address{white-space:pre-line!important;font-size:inherit;letter-spacing:normal}
+ .home-refreshed .hero>.shooting-service-links.compact-home-links{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:.2rem .5rem!important;grid-auto-flow:column;grid-template-rows:repeat(2,auto);font-size:.95rem!important}
  .home-refreshed .compact-home-links a{min-height:36px!important;padding:.2rem 0!important;line-height:1.2!important;white-space:nowrap!important;display:block!important}
  .about-moved-section .hd{display:block}.about-moved-section .hd p{max-width:none;margin-top:.7rem}.about-moved-section .process-grid,.about-moved-section .signature-grid{grid-template-columns:1fr}
  .family-mobile-focus.service-refreshed .hero .hero-visual img{object-position:center 50%!important}
- .price-note .extra-image-sentence{white-space:nowrap;font-size:clamp(.72rem,3.2vw,.95rem)}
+ .price-note .extra-image-sentence{white-space:normal;font-size:inherit}
 }
-@media(max-width:319px){.home-refreshed .hero>.shooting-service-links.compact-home-links{grid-template-columns:1fr!important;grid-template-rows:none;grid-auto-flow:row}.home-refreshed .compact-home-links a{min-height:30px!important}.home-refreshed .mobile-address{white-space:normal!important}}
+@media(max-width:374px){.home-refreshed .hero>.shooting-service-links.compact-home-links{grid-template-columns:1fr!important;grid-template-rows:none;grid-auto-flow:row}.home-refreshed .compact-home-links a{min-height:30px!important}.home-refreshed .mobile-address{white-space:normal!important}}
 
 .about-moved-section h2,.about-moved-section h3{font-family:'Cormorant Garamond',serif}
-@media(min-width:901px){.service-refreshed.desktop-full-hero .hero .hero-visual{align-self:center;height:auto!important;max-height:none!important;min-height:0!important;aspect-ratio:auto!important}.service-refreshed.desktop-full-hero .hero .hero-visual img{position:static!important;height:auto!important;max-height:none!important;width:100%!important;object-fit:contain!important;display:block}}
+@media(min-width:901px){.service-refreshed.desktop-full-hero .hero .hero-visual{align-self:stretch;height:auto!important;max-height:none!important;min-height:0!important;aspect-ratio:auto!important}.service-refreshed.desktop-full-hero .hero .hero-visual img{position:absolute!important;inset:0;height:100%!important;max-height:none!important;width:100%!important;object-fit:cover!important;object-position:center;display:block}}
+
+/* Quiet contact introduction, using the surrounding typography. */
+.contact-intro-panels{display:block;text-align:center;margin-bottom:1.8rem}
+.contact-intro-panels .aside-copy-block{padding:0;border:0;background:none;border-radius:0;margin:0 auto 1.2rem;max-width:48ch}
+.contact-intro-panels .contact-intro-label{display:none}
+.contact-intro-panels p{line-height:1.6}
+@media(max-width:900px){.home-refreshed .hero{padding-bottom:1rem!important}.home-refreshed #portfolio{padding-top:1.5rem!important}.home-refreshed .compact-home-links{margin-bottom:0!important}}
+@media(min-width:901px){.service-refreshed.desktop-full-hero .hero-grid.early-photo{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media(min-width:375px) and (max-width:900px){html[lang=bs] .home-refreshed .hero>.shooting-service-links.compact-home-links{grid-template-columns:1fr!important;grid-template-rows:none;grid-auto-flow:row}}
