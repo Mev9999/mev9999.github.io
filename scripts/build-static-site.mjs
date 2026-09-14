@@ -1,3 +1,4 @@
+import { applyVideoSeo } from './video-seo.mjs';
 import { applyCoreImageContent, coreImageScope, coreImageAliases } from './core-image-content.mjs';
 import { refreshSite } from './site-refresh.mjs';
 import fs from 'node:fs/promises';
@@ -704,6 +705,7 @@ function applyStaticPagePostProcessing(dom, fileName, variantMap) {
   improveSite(document, fileName);
   refreshSite(document, fileName);
   applyCoreImageContent(document, fileName);
+  applyVideoSeo(document, fileName);
   if(coreImageScope(fileName)) updateSocialMeta(document, fileName);
   applyPrivacy(document, fileName);
   applyResponsiveImages(document, variantMap, fileName);
