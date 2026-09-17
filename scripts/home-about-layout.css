@@ -71,3 +71,4 @@
 
 @media(max-width:900px){.studio-route-card .contact-address-separator{display:none}.studio-route-card .contact-postal{display:block;white-space:nowrap}}
 .contact-list .studio-route-card [data-refresh-key="aside_location_value"]{font-size:.95rem;line-height:1.42}@media(max-width:900px){.contact-list .studio-route-card [data-refresh-key="aside_location_value"]{font-size:.88rem;line-height:1.34}}
+@media(max-width:900px){.contact-list .studio-route-card [data-refresh-key="aside_location_value"]{display:flex!important;flex-direction:column!important;gap:0!important}.contact-list .studio-route-card .contact-street,.contact-list .studio-route-card .contact-postal{display:block!important;white-space:nowrap!important}.contact-list .studio-route-card .contact-address-separator{display:none!important}}
