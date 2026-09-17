@@ -57,3 +57,5 @@
 
 
 @media(min-width:901px){.home-refreshed .contact-intro-panels{column-gap:.75rem;text-align:left}.home-refreshed .contact-intro-panels .aside-copy-block{box-sizing:border-box;padding-inline:calc(.8rem + 1px);text-align:left}.home-refreshed .contact-intro-panels p{text-align:left}}
+
+.partner-context-link{margin-top:24px;margin-bottom:0;font-size:inherit;line-height:1.6}.partner-context-link a{text-decoration:underline;text-underline-offset:4px}

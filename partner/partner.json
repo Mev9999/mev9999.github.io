@@ -1,6 +1,58 @@
-{"partners":[
-{"name":"BabyOne Graz · Center West","website":"https://www.babyone.at/fachmarkt/graz/079","description":{"de":"Im BabyOne-Fachmarkt im Center West findet ihr Babyausstattung, Kinderwagen und Kindersitze mit persönlicher Beratung.","en":"BabyOne at Center West offers baby essentials, pushchairs and car seats with personal advice.","bs":"BabyOne u centru Center West nudi opremu za bebe, kolica i autosjedalice uz lično savjetovanje."}},
-{"name":"Floriani Apotheke","website":"https://floriani-apotheke.at/apotheke/","description":{"de":"Die Eltern-Kind-Apotheke in Graz-Straßgang bietet Beratung und Produkte rund um die Gesundheit der ganzen Familie.","en":"This parent-and-child pharmacy in Graz-Straßgang offers advice and products for the health of the whole family.","bs":"Apoteka za roditelje i djecu u Graz-Straßgangu nudi savjetovanje i proizvode za zdravlje cijele porodice."}},
-{"name":"Friseursalon CULT","website":"https://www.hair-cult.at/","description":{"de":"CULT in der Kärntner Straße in Graz-Straßgang bietet Haarschnitte, Colorationen und Styling mit individueller Beratung.","en":"CULT on Kärntner Straße in Graz-Straßgang offers haircuts, colouring and styling with individual advice.","bs":"CULT u ulici Kärntner Straße u Graz-Straßgangu nudi šišanje, bojenje i stilizovanje kose uz individualno savjetovanje."}},
-{"name":"Ordination Dr. Antonia Lipp-Pump","website":"https://lipp-pump.at/","description":{"de":"Die gynäkologische Wahlordination am Schillerplatz in Graz begleitet Frauen unter anderem bei Vorsorge, Kinderwunsch und Schwangerschaft.","en":"This private gynaecology practice on Schillerplatz in Graz supports women with preventive care, family planning and pregnancy care.","bs":"Privatna ginekološka ordinacija na Schillerplatzu u Grazu pruža ženama preventivnu njegu, podršku pri planiranju porodice i praćenje trudnoće."}}
-]}
+{
+  "partners": [
+    {
+      "name": "BabyOne Graz · Center West",
+      "website": "https://www.babyone.at/fachmarkt/graz/079",
+      "description": {
+        "de": "Im BabyOne-Fachmarkt im Center West findet ihr Babyausstattung, Kinderwagen und Kindersitze mit persönlicher Beratung. Von der Vorbereitung auf euer Baby bis zum ersten gemeinsamen Fotoshooting begleitet euch hier vieles durch die neue Familienzeit.",
+        "en": "BabyOne at Center West offers baby essentials, pushchairs and car seats with personal advice. From preparing for your baby to your first photo session together, you will find essentials for this new chapter of family life.",
+        "bs": "BabyOne u centru Center West nudi opremu za bebe, kolica i autosjedalice uz lično savjetovanje. Od priprema za dolazak bebe do prvog zajedničkog fotografisanja, ovdje ćete pronaći mnogo toga za novo porodično poglavlje."
+      }
+    },
+    {
+      "name": "Floriani Apotheke",
+      "website": "https://floriani-apotheke.at/apotheke/",
+      "description": {
+        "de": "Die Eltern-Kind-Apotheke in Graz-Straßgang bietet Beratung und Produkte rund um die Gesundheit der ganzen Familie. Eine Anlaufstelle für euren Familienalltag – von der Babyzeit bis zu den größeren Kindern, deren Entwicklung ich auf euren Fotos festhalte.",
+        "en": "This parent-and-child pharmacy in Graz-Straßgang offers advice and products for the health of the whole family. A place to turn to throughout family life, from the baby days to the growing children whose milestones I capture in your photos.",
+        "bs": "Apoteka za roditelje i djecu u Graz-Straßgangu nudi savjetovanje i proizvode za zdravlje cijele porodice. Podrška u porodičnoj svakodnevici – od prvih dana s bebom do odrastanja djece koje bilježim na vašim fotografijama."
+      }
+    },
+    {
+      "name": "Friseursalon CULT",
+      "website": "https://www.hair-cult.at/",
+      "description": {
+        "de": "CULT in der Kärntner Straße in Graz-Straßgang bietet Haarschnitte, Colorationen und Styling mit individueller Beratung. Wenn ihr euch vor eurem Shooting ein frisches Styling wünscht, findet ihr hier die passende Anlaufstelle.",
+        "en": "CULT on Kärntner Straße in Graz-Straßgang offers haircuts, colouring and styling with individual advice. If you would like a fresh hairstyle before your photo session, this is a place to turn to.",
+        "bs": "CULT u ulici Kärntner Straße u Graz-Straßgangu nudi šišanje, bojenje i stilizovanje kose uz individualno savjetovanje. Ako prije fotografisanja poželite novu frizuru, ovdje možete pronaći podršku."
+      }
+    },
+    {
+      "name": "Ordination Dr. Antonia Lipp-Pump",
+      "website": "https://lipp-pump.at/",
+      "description": {
+        "de": "Die gynäkologische Wahlordination am Schillerplatz in Graz begleitet Frauen unter anderem bei Vorsorge, Kinderwunsch und Schwangerschaft. Ein schöner Bezug zu meiner Babybauch- und Neugeborenenfotografie: Auch hier stehen die Schwangerschaft und der Beginn eines neuen Lebensabschnitts im Mittelpunkt.",
+        "en": "This private gynaecology practice on Schillerplatz in Graz supports women with preventive care, family planning and pregnancy care. A natural connection to my maternity and newborn photography: pregnancy and the start of a new chapter are part of the care offered here too.",
+        "bs": "Privatna ginekološka ordinacija na Schillerplatzu u Grazu pruža ženama preventivnu njegu, podršku pri planiranju porodice i praćenje trudnoće. Prirodna poveznica s mojom trudničkom fotografijom i fotografisanjem novorođenčadi: i ovdje se pažnja posvećuje trudnoći i početku novog životnog poglavlja."
+      }
+    },
+    {
+      "name": "Smart City Dental · Dr. Biljana Milicevic",
+      "website": "https://smartcity.dental/",
+      "description": {
+        "de": "Smart City Dental in Graz bietet Zahnmedizin und Vorsorge für Erwachsene und Kinder. Gesunde Kinderzähne und ein unbeschwertes Lächeln sind im Alltag wertvoll – und dieses Lächeln halte ich gerne auf euren Familienfotos fest.",
+        "en": "Smart City Dental in Graz offers dental treatment and preventive care for adults and children. Healthy little teeth and carefree smiles matter every day — and I love capturing those smiles in your family photos.",
+        "bs": "Smart City Dental u Grazu nudi stomatološke tretmane i preventivnu njegu za odrasle i djecu. Zdravi dječiji zubi i bezbrižan osmijeh važni su svaki dan – a taj osmijeh rado bilježim na vašim porodičnim fotografijama."
+      }
+    },
+    {
+      "name": "PROreparatur",
+      "website": "https://www.proreparatur.com/",
+      "description": {
+        "de": "PROreparatur in Graz repariert Smartphones, Tablets, Laptops und Spielkonsolen. Ob die Konsole eurer Kinder streikt oder das Handy mit euren liebsten Familienfotos kaputt ist: Hier findet ihr Hilfe bei technischen Defekten.",
+        "en": "PROreparatur in Graz repairs smartphones, tablets, laptops and games consoles. Whether your children’s console stops working or the phone holding your favourite family photos breaks, they offer help with technical faults.",
+        "bs": "PROreparatur u Grazu popravlja pametne telefone, tablete, laptope i igraće konzole. Ako konzola vaše djece ne radi ili se pokvari telefon s omiljenim porodičnim fotografijama, ovdje možete potražiti pomoć za tehničke kvarove."
+      }
+    }
+  ]
+}

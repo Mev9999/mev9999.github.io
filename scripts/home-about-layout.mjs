@@ -39,6 +39,13 @@ export function updateHomeAboutLayout(d,file){
  }
 
  if(base==='preise.html'){const p=d.querySelector('.price-note p');if(p){const text=p.textContent,cut=text.indexOf('. ');if(cut>=0){const first=['Zusatzbild: 15 € pro Bild.','Extra photo: €15 per image.','Dodatna fotografija: 15 €.'][i],rest=text.slice(cut+2);p.replaceChildren(el('span','extra-image-sentence',first),el('span','extra-image-bundles',rest));}}}
+ if(about||base==='preise.html'){
+  d.querySelectorAll('.partner-context-link').forEach(e=>e.remove());
+  const note=el('p','container partner-context-link');
+  const a=el('a','');a.href='partner/'+(lang==='de'?'':lang+'.html');
+  if(about){a.textContent=['Meine Kooperationspartner kennenlernen','Meet my cooperation partners','Upoznajte moje partnere'][i];note.append(a);d.querySelector('.faq-grid')?.after(note);}
+  else{note.append(d.createTextNode(['Ihr habt einen Partnercode? ','Have a partner code? ','Imate partnerski kod? '][i]));a.textContent=['Entdeckt euren 10-%-Partnervorteil.','Discover your 10% partner benefit.','Otkrijte svoju partnersku pogodnost od 10%.'][i];note.append(a);d.querySelector('.price-note-grid')?.after(note);}
+ }
  if(home||about||base==='preise.html'||base==='familienfotografie-graz.html'||base==='babybauch-shooting-graz.html'){
   let css=d.querySelector('link[data-home-layout]');if(!css){css=el('link','');css.rel='stylesheet';css.dataset.homeLayout='';d.head.append(css);}css.href='scripts/home-about-layout.css?v=20260913f';d.head.append(css);
  }
