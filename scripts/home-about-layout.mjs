@@ -5,6 +5,10 @@ export function updateHomeAboutLayout(d,file){
  const local=f=>lang==='de'?f:f.replace('.html',`-${lang}.html`);
  const el=(tag,cls,text)=>{const e=d.createElement(tag);e.className=cls;if(text)e.textContent=text;return e;};
  if(home){
+  const address=d.querySelector('[data-refresh-key=aside_location_value]');
+  if(address){const box=address.parentElement;box.classList.add('studio-route-card');box.querySelector('.studio-route-link')?.remove();const a=el('a','studio-route-link',['Route planen ↗','Get directions ↗','Upute za dolazak ↗'][i]);a.href='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent('Mela-Spira-Straße 32b, 8054 Graz, Österreich');a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',['Route zum Studio mit Google Maps planen (öffnet einen neuen Tab)','Plan your route to the studio with Google Maps (opens a new tab)','Planirajte put do studija putem Google Maps (otvara novu karticu)'][i]);box.prepend(a);}
+ }
+ if(home){
   d.querySelectorAll('#editorial-moments,#process,#services').forEach(e=>e.remove());
   const lead=d.querySelector('.hero .lead');lead.textContent=['Vom Babybauch über die ersten Babyfotos bis zu euren Familienfotos begleite ich euch und halte eure besonderen Momente liebevoll, emotional und zeitlos fest.','From maternity portraits and your baby’s first photos to family photographs, I’m here to capture your special moments with warmth, emotion and a timeless feel.','Od trudničkih fotografija i prvih fotografija vaše bebe do porodičnih fotografija, pratim vas i bilježim vaše posebne trenutke s ljubavlju, emocijom i bezvremenskim stilom.'][i];lead.removeAttribute('data-i18n');
   const portfolio=d.querySelector('[data-i18n=portfolio_sub],[data-layout-key=portfolio_sub]');if(portfolio){portfolio.textContent=['Eine Auswahl aus Babybauchfotos, Neugeborenenfotos und Familienfotos.','A selection of maternity, newborn and family photos.','Izbor trudničkih fotografija, fotografija novorođenčadi i porodičnih fotografija.'][i];portfolio.removeAttribute('data-i18n');portfolio.dataset.layoutKey='portfolio_sub';}
