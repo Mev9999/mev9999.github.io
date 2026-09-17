@@ -231,3 +231,4 @@ header.site .header-social-links svg{width:21px!important;height:21px!important}
 }
 
 @media(max-width:360px){header.compact-site-header .nav{width:calc(100% - 16px)!important}}
+@media(min-width:901px){header.site .header-social-links .nav-icon-link,header.site .header-social-links .header-social-badge{width:48px!important;height:48px!important;min-width:48px!important}header.site .header-social-links .header-social-badge{border-radius:12px}header.site .header-social-links .header-social-badge--whatsapp{border-radius:50%}header.site .header-social-links svg{width:26px!important;height:26px!important}}
