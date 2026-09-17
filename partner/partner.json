@@ -62,6 +62,17 @@
         "en": "Kinderspaß organises children’s birthdays and family celebrations in Styria and offers childcare at weddings. I would also be happy to photograph your birthday party or celebration there, capturing the joyful, special moments for you.",
         "bs": "Kinderspaß organizuje dječije rođendane i porodične proslave u Štajerskoj te nudi čuvanje i animaciju djece na vjenčanjima. Rado ću i fotografski pratiti vaš rođendan ili proslavu kod njih i zabilježiti vesele, posebne trenutke za vas."
       }
+    },
+    {
+      "name": "ZWEI & MEHR – Steirischer Familienpass",
+      "website": "https://www.zweiundmehr.steiermark.at/",
+      "active": false,
+      "editorNote": "Prepared at owner request. Activate after confirmation of the signed cooperation and agreed family-pass conditions. Family pass, not a partner code.",
+      "description": {
+        "de": "Der ZWEI & MEHR-Steirische Familienpass ist ein Angebot des Landes Steiermark für Familien. Bei LiZa Memories Photography erhalten Familienpass-Inhaberinnen und -Inhaber 10 % Ermäßigung auf alle Shootings und Pakete – für Erinnerungen vom Babybauch bis zu euren Familienfotos; bitte gebt euren Familienpass bei der Anfrage an.",
+        "en": "The ZWEI & MEHR Styrian Family Pass is a service for families provided by the Province of Styria. At LiZa Memories Photography, family pass holders receive 10% off all sessions and packages, capturing memories from pregnancy to family life; please mention your family pass when enquiring.",
+        "bs": "ZWEI & MEHR štajerska porodična kartica je usluga Pokrajine Štajerske za porodice. U LiZa Memories Photography vlasnici porodične kartice ostvaruju 10% popusta na sva fotografisanja i pakete, za uspomene od trudnoće do porodičnih trenutaka; pri slanju upita navedite da imate porodičnu karticu."
+      }
     }
   ]
 }

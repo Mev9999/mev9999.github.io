@@ -4,6 +4,7 @@ export function updateHomeAboutLayout(d,file){
  const lang=file.match(/-(en|bs)\.html$/)?.[1]||'de',i=['de','en','bs'].indexOf(lang),base=file.replace(/-(en|bs)\.html$/,'.html'),home=base==='index.html',about=base==='ueber-mich.html';
  const local=f=>lang==='de'?f:f.replace('.html',`-${lang}.html`);
  const el=(tag,cls,text)=>{const e=d.createElement(tag);e.className=cls;if(text)e.textContent=text;return e;};
+ const headerCta=d.querySelector('header .header-cta');if(headerCta){const full=headerCta.querySelector('.header-cta-full');if(full)headerCta.textContent=full.textContent;}
  if(home){
   const address=d.querySelector('[data-refresh-key=aside_location_value]');
   if(address){const box=address.parentElement;box.classList.add('studio-route-card');box.querySelector('.studio-route-link')?.remove();const a=el('a','studio-route-link',['Route planen ↗','Get directions ↗','Upute za dolazak ↗'][i]);a.href='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent('Mela-Spira-Straße 32b, 8054 Graz, Österreich');a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',['Route zum Studio mit Google Maps planen (öffnet einen neuen Tab)','Plan your route to the studio with Google Maps (opens a new tab)','Planirajte put do studija putem Google Maps (otvara novu karticu)'][i]);box.append(a);}
