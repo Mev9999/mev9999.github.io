@@ -53,6 +53,15 @@
         "en": "PROreparatur in Graz repairs smartphones, tablets, laptops and games consoles. Whether your children’s console stops working or the phone holding your favourite family photos breaks, they offer help with technical faults.",
         "bs": "PROreparatur u Grazu popravlja pametne telefone, tablete, laptope i igraće konzole. Ako konzola vaše djece ne radi ili se pokvari telefon s omiljenim porodičnim fotografijama, ovdje možete potražiti pomoć za tehničke kvarove."
       }
+    },
+    {
+      "name": "Kinderspaß",
+      "website": "https://www.kinderspass.at/",
+      "description": {
+        "de": "Kinderspaß organisiert Kindergeburtstage und Familienfeste in der Steiermark und bietet Kinderbetreuung bei Hochzeiten an. Gerne begleite ich euren Geburtstag oder eure Feier dort auch fotografisch und halte die fröhlichen, besonderen Momente für euch fest.",
+        "en": "Kinderspaß organises children’s birthdays and family celebrations in Styria and offers childcare at weddings. I would also be happy to photograph your birthday party or celebration there, capturing the joyful, special moments for you.",
+        "bs": "Kinderspaß organizuje dječije rođendane i porodične proslave u Štajerskoj te nudi čuvanje i animaciju djece na vjenčanjima. Rado ću i fotografski pratiti vaš rođendan ili proslavu kod njih i zabilježiti vesele, posebne trenutke za vas."
+      }
     }
   ]
 }
