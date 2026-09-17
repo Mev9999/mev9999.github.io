@@ -5,8 +5,9 @@ export function updateHomeAboutLayout(d,file){
  const local=f=>lang==='de'?f:f.replace('.html',`-${lang}.html`);
  const el=(tag,cls,text)=>{const e=d.createElement(tag);e.className=cls;if(text)e.textContent=text;return e;};
  const headerCta=d.querySelector('header .header-cta');if(headerCta){const full=headerCta.querySelector('.header-cta-full');if(full)headerCta.textContent=full.textContent;}
- if(home){
-  const address=d.querySelector('[data-refresh-key=aside_location_value]');
+ for(const address of d.querySelectorAll('[data-refresh-key=aside_location_value],.contact-detail > span')){
+  if(!address.textContent.includes('Mela-Spira'))continue;
+  address.setAttribute('data-refresh-key','aside_location_value');
   if(address){address.replaceChildren(el('span','contact-street','Mela-Spira-Straße 32b'),el('span','contact-address-separator',' · '),el('span','contact-postal','8054 Graz-Straßgang'));const box=address.parentElement;box.classList.add('studio-route-card');box.querySelector('.studio-route-link')?.remove();const a=el('a','studio-route-link',['Route planen ↗','Get directions ↗','Upute za dolazak ↗'][i]);a.href='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent('Mela-Spira-Straße 32b, 8054 Graz, Österreich');a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',['Route zum Studio mit Google Maps planen (öffnet einen neuen Tab)','Plan your route to the studio with Google Maps (opens a new tab)','Planirajte put do studija putem Google Maps (otvara novu karticu)'][i]);box.append(a);}
  }
  if(home){
@@ -51,7 +52,7 @@ export function updateHomeAboutLayout(d,file){
   if(about){a.textContent=['Meine Kooperationspartner kennenlernen','Meet my cooperation partners','Upoznajte moje partnere'][i];note.append(a);d.querySelector('.faq-grid')?.after(note);}
   else{note.append(d.createTextNode(['Ihr habt einen Partnercode? ','Have a partner code? ','Imate partnerski kod? '][i]));a.textContent=['Entdeckt euren 10-%-Partnervorteil.','Discover your 10% partner benefit.','Otkrijte svoju partnersku pogodnost od 10%.'][i];note.append(a);d.querySelector('.price-note-grid')?.after(note);}
  }
- if(home||about||base==='preise.html'||base==='familienfotografie-graz.html'||base==='babybauch-shooting-graz.html'){
-  let css=d.querySelector('link[data-home-layout]');if(!css){css=el('link','');css.rel='stylesheet';css.dataset.homeLayout='';d.head.append(css);}css.href='scripts/home-about-layout.css?v=20260917-contact-lines-v2';d.head.append(css);
+ if(d.querySelector('.studio-route-card')||home||about||base==='preise.html'||base==='familienfotografie-graz.html'||base==='babybauch-shooting-graz.html'){
+  let css=d.querySelector('link[data-home-layout]');if(!css){css=el('link','');css.rel='stylesheet';css.dataset.homeLayout='';d.head.append(css);}css.href='scripts/home-about-layout.css?v=20260917-all-contact-routes';d.head.append(css);
  }
 }
