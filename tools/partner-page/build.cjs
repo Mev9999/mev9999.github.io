@@ -11,7 +11,7 @@ const copies={
 const files={de:'index.html',en:'en.html',bs:'bs.html'},origin='https://liza-memories-photography.com';
 for(const [lang,t] of Object.entries(copies)){
  const suffix=lang==='de'?'':'-'+lang,home='../index'+suffix+'.html',contact=home+'#contact-form-card';
- const partners=data.partners.filter(p=>p.active!==false);
+ const partners=data.partners.filter(p=>p.active!==false).sort((a,b)=>a.name.localeCompare(b.name,'de',{sensitivity:'base',numeric:true}));
  const thanks={de:'Danke von Herzen für die Kooperation und euer Vertrauen!',en:'Thank you for your partnership and trust!',bs:'Hvala od srca na saradnji i povjerenju!'}[lang];
  const cards=partners.map(p=>{if(!p.name||!p.website||!p.description?.[lang])throw Error('Partner name, website and translated description required');const url=new URL(p.website);if(!['https:','http:'].includes(url.protocol))throw Error('Invalid partner website');return `<article class="partner-card"><span class="partner-initial" aria-hidden="true">${escape(p.name[0])}</span><h3>${escape(p.name)}</h3><p>${escape(p.description[lang])}</p><p class="partner-thanks">${thanks}</p>${p.code?`<p class="code"><span>${t.code}</span> <strong>${escape(p.code)}</strong></p>`:''}<a class="text-link" href="${escape(url.href)}" target="_blank" rel="noopener noreferrer">${t.web} ↗</a></article>`}).join('');
  const alternates=Object.entries(files).map(([l,f])=>`<link rel="alternate" hreflang="${l}" href="${origin}/partner/${l==='de'?'':f}">`).join('');
