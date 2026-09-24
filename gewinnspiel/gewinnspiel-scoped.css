@@ -185,5 +185,8 @@ html{scroll-behavior: smooth; scroll-padding-top: 24px;}
 .giveaway-content .entry{gap: 22px;}
 .giveaway-content .entry-section{padding-block: 30px;}
 .giveaway-content .optional-count{margin-left: 0;}}
+@media (max-width:700px){.giveaway-content .story h2{font-size: clamp(25px,8vw,40px); line-height: 1.12;}
+.giveaway-content .story h2 em{font-size: inherit;}
+.giveaway-content .form-card h3{font-size: clamp(20px,6.4vw,30px); line-height: 1.16;}}
  html{scroll-padding-top:110px}.giveaway-content main{padding:0}.giveaway-content .hero{min-height:0}.giveaway-content .entry-section,.giveaway-content details,.giveaway-content #bildnutzung{scroll-margin-top:110px}.giveaway-content dialog{margin:auto}.giveaway-content .form-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.giveaway-content .form-heading .eyebrow{margin:0}.giveaway-content .form-share{flex-shrink:0;border:1px solid #b7806e;border-radius:24px;background:#eed5c9;color:#593c31;font:600 12px/1.3 Manrope,Arial,sans-serif;padding:11px 14px;min-height:44px;cursor:pointer}.giveaway-content .form-share:hover{background:#e1b7a7}.giveaway-content .form-share-status{font-size:12px;overflow-wrap:anywhere}.giveaway-content .form-share-status:empty{display:none}.giveaway-content .newsletter p{font-size:13px}.giveaway-content .form-card{min-width:0}@media(max-width:400px){.giveaway-content .form-heading{flex-wrap:wrap}.giveaway-content .form-share{margin-left:auto}}
  
