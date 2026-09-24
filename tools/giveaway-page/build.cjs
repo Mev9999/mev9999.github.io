@@ -9,3 +9,5 @@ fs.cpSync(path.join(source,'assets'),path.join(out,'assets'),{recursive:true});
 console.log('Gewinnspielseite erstellt.');
 
 require('./notice.cjs')(root,source);
+
+require('./localize.cjs')(root,source,out);
