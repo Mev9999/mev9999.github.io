@@ -49,5 +49,5 @@ document.querySelector('#copy').addEventListener('click',copyLink);
 document.querySelector('#share').addEventListener('click',async()=>{if(!navigator.share)return copyLink();try{await navigator.share({title:'Ein Shooting gewinnen – LiZa Memories Photography',url:(config?.canonicalUrl||'https://liza-memories-photography.com/gewinnspiel/')+'#mitmachen'});}catch(error){if(error.name!=='AbortError')await copyLink();}});
 
 const extras=document.querySelector('.optional-consents');
-extras.addEventListener('change',()=>{const count=extras.querySelectorAll('input:checked').length;extras.querySelector('.optional-count').textContent=count?count+' ausgewählt':'Angebote & Fotos';});
-form.addEventListener('reset',()=>{extras.open=false;extras.querySelector('.optional-count').textContent='Angebote & Fotos';});
+extras.addEventListener('change',()=>{const count=extras.querySelectorAll('input:checked').length;extras.querySelector('.optional-count').textContent=count?count+' ausgewählt':'E-Mail-Angebote';});
+form.addEventListener('reset',()=>{extras.open=false;extras.querySelector('.optional-count').textContent='E-Mail-Angebote';});
