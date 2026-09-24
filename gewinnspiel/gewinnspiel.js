@@ -43,7 +43,7 @@ form.addEventListener('submit',async event=>{
   } finally {clearTimeout(timeout);pending=null;refresh();}
 });
 document.querySelector('#close-success').addEventListener('click',()=>dialog.close());
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>{const target=document.getElementById(a.getAttribute('href').slice(1));if(target?.tagName==='DETAILS')target.open=true;}));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>{const target=document.getElementById(a.getAttribute('href').slice(1));if(target){let section=target.closest('details');while(section){section.open=true;section=section.parentElement?.closest('details');}}}));
 async function copyLink(){try{await navigator.clipboard.writeText((config?.canonicalUrl||'https://liza-memories-photography.com/gewinnspiel/')+'#mitmachen');document.querySelector('#share-status').textContent='Link kopiert.';}catch{document.querySelector('#share-status').textContent='Der Link lautet: https://liza-memories-photography.com/gewinnspiel/#mitmachen';}}
 document.querySelector('#copy').addEventListener('click',copyLink);
 document.querySelector('#share').addEventListener('click',async()=>{if(!navigator.share)return copyLink();try{await navigator.share({title:'Ein Shooting gewinnen – LiZa Memories Photography',url:(config?.canonicalUrl||'https://liza-memories-photography.com/gewinnspiel/')+'#mitmachen'});}catch(error){if(error.name!=='AbortError')await copyLink();}});
