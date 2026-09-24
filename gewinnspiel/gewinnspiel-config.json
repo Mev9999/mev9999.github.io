@@ -1,0 +1,23 @@
+{
+  "status": "ready",
+  "startsAt": "2026-09-26T00:00:00+02:00",
+  "endsAt": "2026-10-24T23:59:59+02:00",
+  "timeZone": "Europe/Vienna",
+  "minimumAge": 18,
+  "residence": "AT",
+  "winners": 1,
+  "voucherValidityMonths": 6,
+  "giftable": true,
+  "venue": "Graz-Straßgang",
+  "prizeScope": "Ein reguläres Paket nach Wahl, einschließlich Hochzeit und Kombi",
+  "consentDesignApproved": true,
+  "submissionEndpoint": "https://script.google.com/macros/s/AKfycbyf8SE-GJXMWFuu_j4BXeTCsIRPhtmzTrHFTwunGMK08d8lEem-c35z_fsX7fAU2Dy1vA/exec",
+  "newsletterProvider": null,
+  "winnerAnnouncement": null,
+  "marketingRequired": false,
+  "photoPublicationRequired": false,
+  "textVersion": "2026-09-24-v2",
+  "canonicalUrl": "https://liza-memories-photography.com/gewinnspiel/",
+  "drawing": "manual_random",
+  "perPersonLimit": 1
+}

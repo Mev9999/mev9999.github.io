@@ -1,7 +1,7 @@
 {
   "scripts": {
     "gallery:import": "node scripts/import-gallery-images.mjs",
-    "site:build": "node scripts/generate-new-pages.mjs && node scripts/build-static-site.mjs && node scripts/build-thank-you.mjs && node tools/partner-page/build.cjs",
+    "site:build": "node scripts/generate-new-pages.mjs && node scripts/build-static-site.mjs && node scripts/build-thank-you.mjs && node tools/partner-page/build.cjs && node tools/giveaway-page/build.cjs",
     "site:check": "node scripts/validate-site.mjs"
   },
   "devDependencies": {
