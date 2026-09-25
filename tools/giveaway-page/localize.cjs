@@ -51,7 +51,7 @@ module.exports=function(root,source,out){
   const feedback=doc.createElement('p');feedback.dataset.shareStatus='';feedback.className='form-share-status';feedback.setAttribute('role','status');top.after(feedback);
   doc.querySelector('link[href="gewinnspiel.css"]').remove();
   homepage.querySelectorAll('link[rel=stylesheet]').forEach(el=>{if(/fonts|reviews/.test(el.getAttribute('href')))return;const copy=el.cloneNode(true);copy.href=local(el.getAttribute('href'));doc.head.append(copy);});
-  for(const href of ['../scripts/accessibility-fixes.css','gewinnspiel-scoped.css?v=20260925-final-luck']){const el=doc.createElement('link');el.rel='stylesheet';el.href=href;doc.head.append(el);}
+  for(const href of ['../scripts/accessibility-fixes.css','gewinnspiel-scoped.css?v=20260925-soft-luck']){const el=doc.createElement('link');el.rel='stylesheet';el.href=href;doc.head.append(el);}
   for(const src of ['../partner/shell.js','../scripts/accessibility-menu.js','../scripts/privacy-consent.js']){const el=doc.createElement('script');el.src=src;el.defer=true;doc.head.append(el);}
   const messages=doc.createElement('script');messages.textContent='window.GIVEAWAY_MESSAGES='+JSON.stringify(lang==='de'?{}:Object.fromEntries(Object.entries(runtime).map(([k,v])=>[k,v[idx]]))).replace(/</g,'\\u003c')+';';doc.head.prepend(messages);
   if(lang!=='de'){doc.querySelectorAll('[aria-label="Zur Startseite"]').forEach(el=>el.setAttribute('aria-label',lang==='en'?'Home':'Početna'));}
