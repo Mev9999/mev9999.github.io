@@ -11,6 +11,7 @@ module.exports=function(root,source,out){
    while(node=walker.nextNode()) {const key=node.textContent.trim();if(!key)continue;if(catalog[key])node.textContent=node.textContent.replace(key,catalog[key][idx]);else if(/[a-zA-ZäöüÄÖÜß]/.test(key)&&!['Graz-Straßgang','info@liza-memories-photography.com','OK'].includes(key))throw Error('Missing translation: '+key);}
    const attrs={
     'Vor- und Nachname laut Ausweis':['Full name as shown on your ID','Ime i prezime kao na ličnom dokumentu'],
+    '@dein.name':['@your.name','@tvoje.ime'],
     'du@beispiel.at':['you@example.at','ti@primjer.at'],
     'Eltern halten ihre zwei lachenden Kinder auf dem Arm im Grünen':['Parents holding their two smiling children outdoors','Roditelji drže svoje dvoje nasmijane djece u prirodi'],
     'Schlafendes Baby mit Stoffhäschen in einem Korb auf rosafarbenen Decken':['Sleeping baby with a toy bunny in a basket on pink blankets','Beba spava s plišanim zečićem u korpi na ružičastim dekama'],

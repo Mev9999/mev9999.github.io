@@ -18,7 +18,7 @@ console.log('PASS: Partner shell DE/EN/BS, language destinations and local asset
  w.eval(fs.readFileSync(path.join(__dirname,'source/gewinnspiel.js'),'utf8'));
  const tick=()=>new Promise(r=>setTimeout(r,10));await tick();
  assert.equal(d.querySelectorAll('input[type=checkbox][required]').length,1);assert.equal(d.querySelector('.optional-consents').open,false);
- async function submit(){d.querySelector('#name').value='Test Person';d.querySelector('#email').value='test@example.invalid';d.querySelector('[name=terms]').checked=true;d.querySelector('form').dispatchEvent(new w.Event('submit',{cancelable:true}));await tick();}
+ async function submit(){d.querySelector('#name').value='Test Person';d.querySelector('#instagram').value='@test.person';d.querySelector('#email').value='test@example.invalid';d.querySelector('[name=terms]').checked=true;d.querySelector('form').dispatchEvent(new w.Event('submit',{cancelable:true}));await tick();}
  await submit();assert.ok(d.querySelector('#success-dialog').hasAttribute('open'));d.querySelector('#close-success').click();outcome=false;await submit();assert.equal(d.querySelector('#form-status').textContent,'Testfehler');assert.equal(d.querySelector('#success-dialog').hasAttribute('open'),false);
  d.querySelector('#copy').click();await tick();assert.equal(copied,'https://liza-memories-photography.com/gewinnspiel/#mitmachen');
  dom.window.close();console.log('PASS: Combined eligibility/terms, optional unchecked consents, confirmed success/error, form deep link.');

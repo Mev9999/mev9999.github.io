@@ -1,9 +1,13 @@
 // Only the entry endpoint is public. Keep the Google spreadsheet restricted.
 const SHEET_ID = '1IbP5murCkSfThFUa38PvIdXx-oyxZh2ffS7VnLIdsMk';
-const START = Date.parse('2026-09-26T00:00:00+02:00');
-const END = Date.parse('2026-10-24T23:59:59+02:00');
-const TEXT_VERSION = '2026-09-24-v2';
-const ORIGINS = ['https://liza-memories-photography.com', 'https://www.liza-memories-photography.com', 'http://127.0.0.1:8771'];
+const START = Date.parse('2026-10-01T00:00:00+02:00');
+const END = Date.parse('2026-10-14T23:59:59+02:00');
+const TEXT_VERSION = '2026-09-25-v3';
+const ORIGINS = ['https://liza-memories-photography.com', 'https://www.liza-memories-photography.com', 'http://127.0.0.1:8771', 'http://127.0.0.1:8772'];
+const INSTAGRAM_HEADERS = ['Instagram-Name','Folgt (Prüfstatus)','Kommentar (Prüfstatus)','Geteilt (Prüfstatus)','Instagram geprüft am'];
+function instagramKey_(value) { return String(value || '').trim().replace(/^@/, '').toLowerCase(); }
+function ensureInstagramColumns_(sheet) { sheet.getRange(1, 13, 1, INSTAGRAM_HEADERS.length).setValues([INSTAGRAM_HEADERS]); }
+function aktualisiereInstagramSpalten() { const sheet=SpreadsheetApp.openById(SHEET_ID).getSheetByName('Teilnahmen'); if(!sheet)throw Error('Missing sheet'); ensureInstagramColumns_(sheet); SpreadsheetApp.flush(); }
 function doGet() { return HtmlService.createHtmlOutput('LiZa Memories Photography – Anmeldung über die Gewinnspielseite.'); }
 function emailKey_(value) {
   const parts = value.trim().toLowerCase().split('@');
@@ -16,7 +20,7 @@ function safeCell_(value) { return /^[=+@\-]/.test(value) ? "'" + value : value;
 function doPost(e) { return processEntry_(e, new Date(), 'Teilnahmen'); }
 function processEntry_(e, now, sheetName) {
   const p = e && e.parameter || {};
-  if (+now < START || +now > END) return reply_(p, false, 'Die Teilnahme ist vom 26. September bis 24. Oktober 2026 möglich.');
+  if (+now < START || +now > END) return reply_(p, false, 'Die Teilnahme ist vom 1. Oktober bis 14. Oktober 2026 möglich.');
   if (e.postData && e.postData.length > 12000) return reply_(p, false, 'Die Anfrage ist zu groß. Bitte prüfe deine Angaben.');
   const name = String(p.name || '').trim(), email = String(p.email || '').trim().toLowerCase();
   if (!ORIGINS.includes(p.parent_origin) || !/^[a-f0-9]{32}$/.test(p.request_id || '') || p.website ||
@@ -25,6 +29,8 @@ function processEntry_(e, now, sheetName) {
       p.eligibility !== 'on' || p.terms !== 'on' || p.text_version !== TEXT_VERSION) {
     return reply_(p, false, 'Bitte gib deinen vollständigen Namen und eine gültige E-Mail-Adresse ein und bestätige die Teilnahmevoraussetzungen.');
   }
+  const instagram = instagramKey_(p.instagram);
+  if (!/^[a-z0-9_]+(?:[.][a-z0-9_]+)*$/.test(instagram) || instagram.length > 30) return reply_(p, false, 'Bitte gib einen gültigen Instagram-Benutzernamen ein.');
   const lock = LockService.getScriptLock();
   if (!lock.tryLock(15000)) return reply_(p, false, 'Bitte versuche es in einer Minute erneut.');
   try {
@@ -33,14 +39,16 @@ function processEntry_(e, now, sheetName) {
     cache.put(key, String(requests + 1), 120);
     const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(sheetName);
     if (!sheet) throw new Error('Missing sheet');
-    const last = sheet.getLastRow(), rows = last > 1 ? sheet.getRange(2, 1, last - 1, 12).getValues() : [];
+    ensureInstagramColumns_(sheet);
+    const last = sheet.getLastRow(), rows = last > 1 ? sheet.getRange(2, 1, last - 1, 17).getValues() : [];
     const duplicate = rows.some(row => emailKey_(String(row[3]).replace(/^'/, '')) === emailKey_(email));
     if (!duplicate) {
       const sameName = rows.some(row => nameKey_(String(row[2]).replace(/^'/, '')) === nameKey_(name));
+      const sameInstagram=rows.some(row => instagramKey_(row[12]) === instagram);
       sheet.appendRow([Utilities.getUuid(), now, safeCell_(name), safeCell_(email), true, true,
         p.marketing === 'on', p.photo_publication === 'on', p.newsletter === 'on', TEXT_VERSION,
-        sameName ? 'Namensgleichheit prüfen' : 'eingegangen',
-        sameName ? 'Gleicher Name vorhanden – kein automatischer Ausschluss. Identität vor Gewinnvergabe prüfen.' : 'Identität und E-Mail nicht geprüft']);
+        sameInstagram ? 'Instagram-Mehrfachangabe prüfen' : sameName ? 'Namensgleichheit prüfen' : 'Instagram-Prüfung offen',
+        sameName ? 'Gleicher Name vorhanden – kein automatischer Ausschluss. Identität vor Gewinnvergabe prüfen.' : 'Identität und E-Mail nicht geprüft', instagram, 'ungeprüft', 'ungeprüft', 'ungeprüft', '']);
       SpreadsheetApp.flush();
     }
     // No disclosure of whether somebody else's email was already registered.
@@ -64,9 +72,9 @@ function pruefeVerbindung() {
   if (!sheet.getLastRow()) sheet.appendRow(['Teilnahme-ID','Eingang','Name','E-Mail','Berechtigt','Bedingungen','Werbung','Fotos','Newsletter','Textversion','Status','Anmerkung']);
   const before = sheet.getLastRow();
   const address = 'test-' + Utilities.getUuid() + '@example.invalid';
-  const event = {parameter:{name:'Technischer Test',email:address,eligibility:'on',terms:'on',parent_origin:ORIGINS[2],request_id:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',text_version:TEXT_VERSION}};
-  const first = processEntry_(event, new Date('2026-09-27T12:00:00+02:00'), sheetName).getContent();
-  const second = processEntry_(event, new Date('2026-09-27T12:00:00+02:00'), sheetName).getContent();
+  const event = {parameter:{name:'Technischer Test',email:address,instagram:'liza_techniktest',eligibility:'on',terms:'on',parent_origin:ORIGINS[2],request_id:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',text_version:TEXT_VERSION}};
+  const first = processEntry_(event, new Date('2026-10-02T12:00:00+02:00'), sheetName).getContent();
+  const second = processEntry_(event, new Date('2026-10-02T12:00:00+02:00'), sheetName).getContent();
   if (!first.includes('"ok":true') || !second.includes('"ok":true') || sheet.getLastRow() !== before + 1) throw new Error('Speicher-/Duplikattest fehlgeschlagen');
   sheet.getRange(sheet.getLastRow(), 12).setValue('TECHNIKTEST – keine Teilnahme, kein Versand, nicht auslosen');
   console.log('BESTANDEN: Google speichert eine Testzeile; erneute identische Einsendung erzeugt keine zweite. Echte Teilnahmen unverändert.');

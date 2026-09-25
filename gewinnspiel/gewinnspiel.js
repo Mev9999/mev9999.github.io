@@ -9,7 +9,7 @@ const dialog = document.querySelector('#success-dialog');
 let config, pending = null, timeout;
 function availability() {
   if (!config || !config.submissionEndpoint || config.status !== 'ready') return t("Die Teilnahme wird gerade vorbereitet. Bitte schau später noch einmal vorbei.");
-  if (Date.now() < Date.parse(config.startsAt)) return t("Die Teilnahme startet am 26. September 2026.");
+  if (Date.now() < Date.parse(config.startsAt)) return t("Die Teilnahme startet am 1. Oktober 2026.");
   if (Date.now() > Date.parse(config.endsAt)) return t("Das Gewinnspiel ist beendet. Vielen Dank fürs Mitmachen!");
   return '';
 }
@@ -17,11 +17,15 @@ function refresh() {
   const note = availability();
   button.disabled = !!note || !!pending;
   button.textContent = pending ? t("Wird gesendet …") : note ? t("Teilnahme derzeit geschlossen") : t("Jetzt teilnehmen ♡");
-  document.querySelector('#campaign-status').textContent = note || t("Jetzt teilnehmen · bis 24. Oktober 2026");
+  document.querySelector('#campaign-status').textContent = note || t("Jetzt teilnehmen · bis 14. Oktober 2026");
 }
 fetch('gewinnspiel-config.json', {cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(c=>{
   if(c.submissionEndpoint && !/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(c.submissionEndpoint))throw Error();
-  config=c; if(c.submissionEndpoint)form.action=c.submissionEndpoint; refresh();
+  config=c;
+  const campaignLink=document.querySelector('[data-instagram-campaign]');
+  const candidate=c.instagramPostUrl||c.instagramReelUrl;
+  if(campaignLink&&candidate){try{const u=new URL(candidate);if(u.protocol==='https:'&&['instagram.com','www.instagram.com'].includes(u.hostname))campaignLink.href=u.href;}catch{}}
+  if(c.submissionEndpoint)form.action=c.submissionEndpoint; refresh();
 }).catch(()=>{status.textContent=t("Das Formular konnte nicht geladen werden. Bitte lade die Seite erneut.");refresh();});
 setInterval(refresh,30000);
 form.addEventListener('submit',async event=>{
@@ -29,6 +33,9 @@ form.addEventListener('submit',async event=>{
   const note=availability();
   if(note||pending){event.preventDefault();status.textContent=note||t("Bitte warte auf die Bestätigung.");return;}
   if(!/\S+\s+\S+/.test(form.elements.name.value.trim())){event.preventDefault();status.textContent=t("Bitte gib deinen vollständigen Vor- und Nachnamen ein.");form.elements.name.focus();return;}
+  const instagram=form.elements.instagram.value.trim().replace(/^@/,'').toLowerCase();
+  if(!/^[a-z0-9_]+(?:[.][a-z0-9_]+)*$/.test(instagram)||instagram.length>30){status.textContent=t("Bitte gib einen gültigen Instagram-Benutzernamen ein.");form.elements.instagram.focus();return;}
+  form.elements.instagram.value=instagram;
   pending=Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>b.toString(16).padStart(2,'0')).join('');
   form.elements.request_id.value=pending;form.elements.parent_origin.value=location.origin;
   status.textContent=t("Deine Teilnahme wird gespeichert …");refresh();

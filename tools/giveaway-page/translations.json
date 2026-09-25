@@ -1,7 +1,7 @@
 {
-  "Teilnahme vom 26. September bis 24. Oktober 2026": [
-    "Enter from 26 September to 24 October 2026",
-    "Učešće od 26. septembra do 24. oktobra 2026."
+  "Teilnahme vom 1. Oktober bis 14. Oktober 2026": [
+    "Enter from 1 October to 14 October 2026",
+    "Učešće od 1. oktobra do 14. oktobra 2026."
   ],
   "Zum Inhalt": [
     "Skip to content",
@@ -31,9 +31,9 @@
     "Count me in",
     "Želim učestvovati"
   ],
-  "26. September – 24. Oktober 2026 · Teilnahme ab 18 Jahren": [
-    "26 September – 24 October 2026 · Ages 18 and over",
-    "26. septembar – 24. oktobar 2026. · Za osobe od 18 godina"
+  "1. Oktober – 14. Oktober 2026 · Teilnahme ab 18 Jahren": [
+    "1 October – 14 October 2026 · Ages 18 and over",
+    "1. oktobar – 14. oktobar 2026. · Za osobe od 18 godina"
   ],
   "Für dich": [
     "For you",
@@ -59,9 +59,9 @@
     "YOUR TIME",
     "TVOJE VRIJEME"
   ],
-  "6 Monate gültig": [
-    "Valid for 6 months",
-    "Vrijedi 6 mjeseci"
+  "3 Monate gültig": [
+    "Valid for 3 months",
+    "Vrijedi 3 mjeseca"
   ],
   "Für dich oder zum Verschenken.": [
     "For yourself or as a gift.",
@@ -127,9 +127,9 @@
     "Look forward.",
     "Raduj se."
   ],
-  "Gewinne ein Paket deiner Wahl – auch Hochzeit oder Kombi. Für dich oder zum Verschenken, sechs Monate gültig.": [
-    "Win a package of your choice – including weddings or combined sessions. For yourself or as a gift, valid for six months.",
-    "Osvoji paket po svom izboru – uključujući vjenčanja i kombinovane pakete. Za sebe ili kao poklon, vrijedi šest mjeseci."
+  "Gewinne ein Paket deiner Wahl – auch Hochzeit oder Kombi. Für dich oder zum Verschenken, drei Monate gültig.": [
+    "Win a package of your choice – including weddings or combined sessions. For yourself or as a gift, valid for three months.",
+    "Osvoji paket po svom izboru – uključujući vjenčanja i kombinovane pakete. Za sebe ili kao poklon, vrijedi tri mjeseca."
   ],
   "Name & E-Mail eintragen": [
     "Enter your name & email",
@@ -175,9 +175,9 @@
     "starts right here.",
     "počinje upravo ovdje."
   ],
-  "Kostenlos teilnehmen vom 26.09. bis 24.10.2026. Kein Benutzerkonto nötig. Eine Teilnahme pro Person.": [
-    "Enter for free from 26 September to 24 October 2026. No account needed. One entry per person.",
-    "Besplatno učešće od 26.09. do 24.10.2026. Korisnički račun nije potreban. Jedna prijava po osobi."
+  "Kostenlos teilnehmen vom 01.10. bis 14.10.2026. Kein Benutzerkonto nötig. Eine Teilnahme pro Person.": [
+    "Enter for free from 1 October to 14 October 2026. No account needed. One entry per person.",
+    "Besplatno učešće od 01.10. do 14.10.2026. Korisnički račun nije potreban. Jedna prijava po osobi."
   ],
   "Website": [
     "Website",
@@ -355,9 +355,9 @@
     "Can I give the session as a gift?",
     "Mogu li pokloniti fotografisanje?"
   ],
-  "Ja. Du kannst den Gewinn selbst nutzen oder verschenken. Der Gutschein gilt sechs Monate ab seiner Ausstellung; die Teilnahmeberechtigung der gewonnenen Person wird vor der Übergabe geprüft.": [
-    "Yes. You can use the prize yourself or give it as a gift. The voucher is valid for six months from issue; the winner's eligibility is checked before the prize is handed over.",
-    "Da. Nagradu možeš iskoristiti ili pokloniti. Vaučer vrijedi šest mjeseci od izdavanja; prije predaje provjerava se ispunjava li dobitnik uslove učešća."
+  "Ja. Du kannst den Gewinn selbst nutzen oder verschenken. Der Gutschein gilt drei Monate ab seiner Ausstellung; die Teilnahmeberechtigung der gewonnenen Person wird vor der Übergabe geprüft.": [
+    "Yes. You can use the prize yourself or give it as a gift. The voucher is valid for three months from issue; the winner's eligibility is checked before the prize is handed over.",
+    "Da. Nagradu možeš iskoristiti ili pokloniti. Vaučer vrijedi tri mjeseca od izdavanja; prije predaje provjerava se ispunjava li dobitnik uslove učešća."
   ],
   "Muss ich Erfahrung vor der Kamera haben?": [
     "Do I need experience in front of the camera?",
@@ -403,10 +403,6 @@
     "Period and eligibility:",
     "Period i uslovi učešća:"
   ],
-  "26. September 2026, 00:00 Uhr, bis 24. Oktober 2026, 23:59:59 Uhr, Zeitzone Europe/Vienna. Maßgeblich ist der Eingang auf dem Server. Teilnahmeberechtigt sind natürliche Personen ab 18 Jahren mit Wohnsitz in Österreich. Die Teilnahme ist kostenlos und ohne Kauf oder Benutzerkonto möglich. Der vollständige Vor- und Nachname muss mit dem amtlichen Lichtbildausweis übereinstimmen. Fantasienamen und vorsätzlich falsche Namen sind unzulässig. Erforderlich sind der richtige vollständige Vor- und Nachname, die eigene E-Mail-Adresse sowie die Bestätigung der Teilnahmevoraussetzungen und dieser Bedingungen.": [
-    "26 September 2026, 00:00, to 24 October 2026, 23:59:59, Europe/Vienna time. The time of receipt on the server is decisive. Individuals aged 18 or over residing in Austria may enter. Entry is free; no purchase or account is required. Your full first and last name must match your official photo ID. Invented or deliberately false names are not permitted. Your correct full name, your own email address and confirmation of eligibility and these terms are required.",
-    "Od 26. septembra 2026. u 00:00 do 24. oktobra 2026. u 23:59:59, vremenska zona Europe/Vienna. Mjerodavno je vrijeme prijema na serveru. Učestvovati mogu fizičke osobe od najmanje 18 godina s prebivalištem u Austriji. Učešće je besplatno, bez kupovine ili korisničkog računa. Puno ime i prezime moraju odgovarati službenom dokumentu s fotografijom. Izmišljena i namjerno netačna imena nisu dozvoljena. Potrebni su tačno puno ime i prezime, vlastita e-mail adresa i potvrda uslova učešća i ovih pravila."
-  ],
   "Einmal pro Person:": [
     "One entry per person:",
     "Jedna prijava po osobi:"
@@ -427,9 +423,9 @@
     "pricing page",
     "stranici s cijenama"
   ],
-  "zum Beginn der Aktion beschriebenen Paketleistungen. Zusätzlich gewünschte, nicht im Paket enthaltene Leistungen sind nicht Teil des Gewinns. Eine Barauszahlung ist ausgeschlossen. Der Gutschein darf verschenkt werden und gilt sechs Monate ab Ausstellung. Termin und Durchführung werden persönlich nach Verfügbarkeit abgestimmt; bitte meldet euch frühzeitig. Die Anreise nach Graz-Straßgang sowie Reise- und Übernachtungskosten sind nicht enthalten. Ist innerhalb der Frist aus Gründen der Veranstalterin kein Termin verfügbar, wird eine angemessene Verlängerung vereinbart.": [
-    "at the start of the giveaway apply. Additional services not included in the package are not part of the prize. No cash alternative is available. The voucher may be gifted and is valid for six months from issue. The date and arrangements are agreed personally, subject to availability; please get in touch early. Travel to Graz-Straßgang and travel and accommodation costs are not included. If the organiser cannot offer an appointment within the validity period, an appropriate extension will be agreed.",
-    "na početku nagradne igre. Dodatne usluge koje nisu uključene u paket nisu dio nagrade. Isplata u gotovini nije moguća. Vaučer se može pokloniti i vrijedi šest mjeseci od izdavanja. Termin i realizacija se lično dogovaraju prema raspoloživosti; javite se na vrijeme. Dolazak u Graz-Straßgang te troškovi putovanja i smještaja nisu uključeni. Ako organizatorica ne može ponuditi termin unutar roka, dogovorit će se odgovarajuće produženje."
+  "zum Beginn der Aktion beschriebenen Paketleistungen. Zusätzlich gewünschte, nicht im Paket enthaltene Leistungen sind nicht Teil des Gewinns. Eine Barauszahlung ist ausgeschlossen. Der Gutschein darf verschenkt werden und gilt drei Monate ab Ausstellung. Termin und Durchführung werden persönlich nach Verfügbarkeit abgestimmt; bitte meldet euch frühzeitig. Die Anreise nach Graz-Straßgang sowie Reise- und Übernachtungskosten sind nicht enthalten. Ist innerhalb der Frist aus Gründen der Veranstalterin kein Termin verfügbar, wird eine angemessene Verlängerung vereinbart.": [
+    "at the start of the giveaway apply. Additional services not included in the package are not part of the prize. No cash alternative is available. The voucher may be gifted and is valid for three months from issue. The date and arrangements are agreed personally, subject to availability; please get in touch early. Travel to Graz-Straßgang and travel and accommodation costs are not included. If the organiser cannot offer an appointment within the validity period, an appropriate extension will be agreed.",
+    "na početku nagradne igre. Dodatne usluge koje nisu uključene u paket nisu dio nagrade. Isplata u gotovini nije moguća. Vaučer se može pokloniti i vrijedi tri mjeseca od izdavanja. Termin i realizacija se lično dogovaraju prema raspoloživosti; javite se na vrijeme. Dolazak u Graz-Straßgang te troškovi putovanja i smještaja nisu uključeni. Ako organizatorica ne može ponuditi termin unutar roka, dogovorit će se odgovarajuće produženje."
   ],
   "Ermittlung und Benachrichtigung:": [
     "Draw and notification:",
@@ -455,9 +451,9 @@
     "The winner's first name and surname initial will be published only with separate consent. Otherwise, this page will only confirm that the prize has been awarded.",
     "Ime i početno slovo prezimena dobitnika objavljuju se samo uz posebnu saglasnost. U suprotnom se ovdje navodi samo da je nagrada dodijeljena."
   ],
-  "Instagram und Facebook sind weder Veranstalter noch Sponsor oder Ansprechpartner der Aktion. Gesetzliche Rechte der Teilnehmenden bleiben unberührt. Stand: 24. September 2026.": [
-    "Instagram and Facebook are not the organisers, sponsors or contacts for this giveaway. Entrants' statutory rights remain unaffected. Last updated: 24 September 2026.",
-    "Instagram i Facebook nisu organizatori, sponzori niti kontakt za ovu nagradnu igru. Zakonska prava učesnika ostaju nepromijenjena. Stanje: 24. septembar 2026."
+  "Instagram und Facebook sind weder Veranstalter noch Sponsor oder Ansprechpartner der Aktion. Gesetzliche Rechte der Teilnehmenden bleiben unberührt. Stand: 25. September 2026.": [
+    "Instagram and Facebook are not the organisers, sponsors or contacts for this giveaway. Entrants' statutory rights remain unaffected. Last updated: 25 September 2026.",
+    "Instagram i Facebook nisu organizatori, sponzori niti kontakt za ovu nagradnu igru. Zakonska prava učesnika ostaju nepromijenjena. Stanje: 25. septembar 2026."
   ],
   "Datenschutzhinweise zum Gewinnspiel": [
     "Giveaway privacy notice",
@@ -558,5 +554,77 @@
   "Danke fürs Mitmachen!": [
     "Thank you for entering!",
     "Hvala na učešću!"
+  ],
+  "Mein Geburtstag. Dein Geschenk.": [
+    "My birthday. Your gift.",
+    "Moj rođendan. Tvoj poklon."
+  ],
+  "Am 14. Oktober habe ich Geburtstag – und möchte jemand anderem eine Freude machen. Gewinne ein Shooting-Paket deiner Wahl bei mir in Graz: für dich selbst oder zum Verschenken.": [
+    "My birthday is on 14 October – and I want to give someone else a gift. Win a photography package of your choice with me in Graz, for yourself or someone special.",
+    "Moj rođendan je 14. oktobra – i želim nekome drugome pokloniti radost. Osvoji paket fotografisanja po svom izboru kod mene u Grazu, za sebe ili kao poklon."
+  ],
+  "Kostenlos mitmachen vom 01.10. bis 14.10.2026: Instagram-Schritte erledigen, dann hier anmelden. Eine Teilnahme pro Person.": [
+    "Enter free from 1 to 14 October 2026: complete the Instagram steps, then register here. One entry per person.",
+    "Učestvuj besplatno od 1. do 14. oktobra 2026: obavi korake na Instagramu, zatim se prijavi ovdje. Jedna prijava po osobi."
+  ],
+  "Folge mir auf Instagram": [
+    "Follow me on Instagram",
+    "Zaprati me na Instagramu"
+  ],
+  "Folge @liza.memories.photography. Wenn du schon folgst, bist du bereit für Schritt 2.": [
+    "Follow @liza.memories.photography. Already following? Continue with step 2.",
+    "Zaprati @liza.memories.photography. Ako me već pratiš, nastavi na korak 2."
+  ],
+  "Markiere 5 Freunde": [
+    "Tag 5 friends",
+    "Označi 5 prijatelja"
+  ],
+  "Markiere 5 unterschiedliche Freunde in einem Kommentar unter meinem Gewinnspiel-Post oder Gewinnspiel-Reel. Eines von beiden genügt.": [
+    "Tag 5 different friends in one comment on my giveaway post or giveaway reel. Either one is enough.",
+    "Označi 5 različitih prijatelja u jednom komentaru ispod moje objave ili reela za nagradnu igru. Dovoljno je jedno od toga."
+  ],
+  "Teile die Aktion": [
+    "Share the giveaway",
+    "Podijeli nagradnu igru"
+  ],
+  "Teile den Gewinnspiel-Post oder das Gewinnspiel-Reel in deiner Story und erwähne @liza.memories.photography.": [
+    "Share the giveaway post or giveaway reel in your story and mention @liza.memories.photography.",
+    "Podijeli objavu ili reel za nagradnu igru u svojoj priči i spomeni @liza.memories.photography."
+  ],
+  "Melde dich hier an": [
+    "Register here",
+    "Prijavi se ovdje"
+  ],
+  "Trage Vor- und Nachnamen, E-Mail und deinen Instagram-Namen ein. Erst mit dem Formular ist deine Anmeldung erfasst.": [
+    "Enter your full name, email and Instagram username. Your entry is recorded only after submitting the form.",
+    "Unesi ime i prezime, e-mail i Instagram korisničko ime. Prijava se evidentira tek nakon slanja obrasca."
+  ],
+  "Zum Instagram-Profil ↗": [
+    "Open Instagram profile ↗",
+    "Otvori Instagram profil ↗"
+  ],
+  "Dein Instagram-Name": [
+    "Your Instagram username",
+    "Tvoje Instagram korisničko ime"
+  ],
+  "Nutze denselben Account wie beim Folgen, Kommentieren und Teilen. Gib deinen Benutzernamen an, nicht den angezeigten Profilnamen.": [
+    "Use the same account you used to follow, comment and share. Enter your username, not your display name.",
+    "Koristi isti profil za praćenje, komentarisanje i dijeljenje. Unesi korisničko ime, ne prikazano ime profila."
+  ],
+  "Instagram-Teilnahme: Folge @liza.memories.photography, markiere 5 unterschiedliche Freunde in einem Kommentar unter dem als Gewinnspiel gekennzeichneten Post ODER Reel und teile einen dieser Beiträge in deiner Story mit Erwähnung von @liza.memories.photography. Melde dich anschließend mit deinem richtigen vollständigen Namen, eigener E-Mail-Adresse und demselben Instagram-Benutzernamen im Formular an. Ein eigener Instagram-Account ist erforderlich; ein zusätzliches Website- oder Google-Konto brauchst du nicht. Ein Kommentar unter einem der beiden Beiträge genügt. Mehrere Kommentare oder die Teilnahme unter beiden Beiträgen ergeben keine zusätzlichen Gewinnchancen.": [
+    "Instagram entry: Follow @liza.memories.photography, tag 5 different friends in one comment on the designated giveaway post OR reel, and share one of these posts in your story, mentioning @liza.memories.photography. Then submit the form with your correct full name, your own email address and the same Instagram username. You need an Instagram account, but no additional website or Google account. A comment on either post is enough. Multiple comments or comments on both posts do not give additional chances to win.",
+    "Učešće putem Instagrama: Zaprati @liza.memories.photography, označi 5 različitih prijatelja u jednom komentaru ispod objave ILI reela označenog kao nagradna igra i podijeli jednu od tih objava u svojoj priči uz spominjanje @liza.memories.photography. Zatim pošalji obrazac sa svojim tačnim imenom i prezimenom, vlastitom e-mail adresom i istim Instagram korisničkim imenom. Potreban je Instagram profil, ali ne i dodatni profil na web-stranici ili Google račun. Dovoljan je komentar ispod jedne objave. Više komentara ili komentarisanje obje objave ne donosi dodatne šanse."
+  ],
+  "Prüfung der Instagram-Schritte: Die Formularanmeldung bestätigt noch nicht, dass die Instagram-Voraussetzungen erfüllt sind. Vor der Gewinnbestätigung prüfen wir das Folgen, den Kommentar und die Story-Erwähnung. Ein Screenshot ist nicht erforderlich. Eine fehlende Benachrichtigung allein führt nicht zum Ausschluss; bei unklarem Prüfstatus fragen wir nach. Der angegebene Instagram-Account muss dir gehören. Bei Unklarheiten erhältst du Gelegenheit, die Angaben zu erklären. Nur gültige Teilnahmen werden berücksichtigt.": [
+    "Checking the Instagram steps: Submitting the form does not confirm that the Instagram requirements have been met. Before confirming the prize, we check the follow, comment and story mention. No screenshot is required. A missing notification alone does not lead to exclusion; we ask for clarification if the status is unclear. The Instagram account must belong to you. If anything is unclear, you will have an opportunity to explain. Only valid entries are eligible.",
+    "Provjera Instagram koraka: Slanje obrasca ne potvrđuje da su Instagram uslovi ispunjeni. Prije potvrde dobitka provjeravamo praćenje, komentar i spominjanje u priči. Snimak ekrana nije potreban. Sam izostanak obavijesti ne dovodi do isključenja; ako status nije jasan, tražimo pojašnjenje. Instagram profil mora pripadati tebi. Ako nešto nije jasno, moći ćeš objasniti podatke. Uvažavaju se samo važeće prijave."
+  ],
+  "Instagram-Prüfung: Zusätzlich speichern wir deinen Instagram-Benutzernamen und den Prüfstatus für Folgen, Kommentar und Teilen zur Prüfung der Teilnahmebedingungen. Gegebenenfalls übermittelte Nachweise werden nur dafür verwendet und nach den oben genannten Fristen gelöscht. Wir rufen über dieses Formular keine Instagram-Passwörter ab. Die Nutzung von Instagram unterliegt zusätzlich den Datenschutzbestimmungen von Meta.": [
+    "Instagram checks: We also store your Instagram username and the check status for following, commenting and sharing to verify eligibility. Any evidence supplied is used only for this purpose and deleted within the periods stated above. This form never asks for your Instagram password. Instagram use is also subject to Meta’s privacy policy.",
+    "Provjera Instagrama: Dodatno čuvamo tvoje Instagram korisničko ime i status provjere praćenja, komentara i dijeljenja radi provjere uslova učešća. Dostavljeni dokazi koriste se samo u tu svrhu i brišu u gore navedenim rokovima. Ovaj obrazac nikada ne traži Instagram lozinku. Korištenje Instagrama podliježe i pravilima privatnosti kompanije Meta."
+  ],
+  "1. Oktober 2026, 00:00 Uhr, bis 14. Oktober 2026, 23:59:59 Uhr, Zeitzone Europe/Vienna. Maßgeblich ist der Eingang auf dem Server. Teilnahmeberechtigt sind natürliche Personen ab 18 Jahren mit Wohnsitz in Österreich. Die Teilnahme ist kostenlos und ohne Kauf möglich. Der vollständige Vor- und Nachname muss mit dem amtlichen Lichtbildausweis übereinstimmen. Fantasienamen und vorsätzlich falsche Namen sind unzulässig. Erforderlich sind der richtige vollständige Vor- und Nachname, die eigene E-Mail-Adresse sowie die Bestätigung der Teilnahmevoraussetzungen und dieser Bedingungen.": [
+    "1 October 2026, 00:00, to 14 October 2026, 23:59:59, Europe/Vienna time. The time of receipt on the server is decisive. Individuals aged 18 or over residing in Austria may enter. Entry is free; no purchase is required. Your full first and last name must match your official photo ID. Invented or deliberately false names are not permitted. Your correct full name, your own email address and confirmation of eligibility and these terms are required.",
+    "Od 1. oktobra 2026. u 00:00 do 14. oktobra 2026. u 23:59:59, vremenska zona Europe/Vienna. Mjerodavno je vrijeme prijema na serveru. Učestvovati mogu fizičke osobe od najmanje 18 godina s prebivalištem u Austriji. Učešće je besplatno, bez kupovine. Puno ime i prezime moraju odgovarati službenom dokumentu s fotografijom. Izmišljena i namjerno netačna imena nisu dozvoljena. Potrebni su tačno puno ime i prezime, vlastita e-mail adresa i potvrda uslova učešća i ovih pravila."
   ]
 }

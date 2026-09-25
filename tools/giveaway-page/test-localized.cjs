@@ -15,7 +15,7 @@ for(const [lang,file] of Object.entries({de:'index.html',en:'en.html',bs:'bs.htm
  w.eval(fs.readFileSync(path.join(out,'gewinnspiel.js'),'utf8'));const tick=()=>new Promise(r=>setTimeout(r,10));await tick();
  d.querySelector('[data-share]').click();await tick();assert.equal(shared.url,d.querySelector('link[rel=canonical]').href+'#mitmachen');
  d.querySelector('a[href="#bildnutzung"]').click();assert.equal(d.querySelector('#bedingungen').open,true);
- const form=d.querySelector('form');form.elements.name.value='Test Person';form.elements.email.value='test@example.invalid';form.elements.terms.checked=true;
+ const form=d.querySelector('form');form.elements.name.value='Test Person';form.elements.instagram.value='@test.person';form.elements.email.value='test@example.invalid';form.elements.terms.checked=true;
  form.dispatchEvent(new w.Event('submit',{cancelable:true}));await tick();assert.ok(d.querySelector('#success-dialog').open);assert.equal(posted.has('photo_publication'),false);assert.equal(posted.has('marketing'),false);
  assert.equal(d.querySelector('#success-message').textContent,lang==='de'?'Deine Teilnahme wurde bestätigt.':w.GIVEAWAY_MESSAGES['Deine Teilnahme wurde bestätigt.']);
  dom.window.close();console.log('PASS '+lang+': shell, links, consent, share destination, expanded photo details, localized success and entry without optional consents.');

@@ -1,7 +1,7 @@
 const fs=require('node:fs'),path=require('node:path');
 module.exports=function(root,source){
  const config=JSON.parse(fs.readFileSync(path.join(source,'gewinnspiel-config.json'),'utf8'));
- const copies={de:['Gewinne ein Shooting-Paket deiner Wahl','Kostenlos mitmachen · 26.09.–24.10.2026','Jetzt teilnehmen'],en:['Win a photography package of your choice','Free entry · 26 Sep–24 Oct 2026','Enter the giveaway'],bs:['Osvoji paket fotografisanja po svom izboru','Besplatno učešće · 26.09.–24.10.2026.','Učestvuj']};
+ const copies={de:['Gewinne ein Shooting-Paket deiner Wahl','Kostenlos mitmachen · 01.10.–14.10.2026','Jetzt teilnehmen'],en:['Win a photography package of your choice','Free entry · 1 Oct–14 Oct 2026','Enter the giveaway'],bs:['Osvoji paket fotografisanja po svom izboru','Besplatno učešće · 01.10.–14.10.2026.','Učestvuj']};
  for(const ext of ['css','js'])fs.copyFileSync(path.join(source,'giveaway-notice.'+ext),path.join(root,'scripts','giveaway-notice.'+ext));
  const files=fs.readdirSync(root).filter(f=>/^(index|ueber-mich|portraitfotografie-graz|babybauch-shooting-graz|newborn-fotografie-graz|familienfotografie-graz|hochzeitsfotograf-graz|babybauch-und-neugeborenen-shooting-graz|preise)(-en|-bs)?\.html$/.test(f)).concat(['partner/index.html','partner/en.html','partner/bs.html']);
  for(const file of files){
