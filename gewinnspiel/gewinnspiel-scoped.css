@@ -279,5 +279,18 @@ html{scroll-behavior: smooth; scroll-padding-top: 24px;}
 @media (max-width:700px){.giveaway-content .facts>div>span{font-weight: 700;}
 .giveaway-content .partner-links{flex-direction: column; align-items: center; gap: 14px;}
 .giveaway-content .partner-links>.text-link{text-align: center; align-self: center;}}
+.giveaway-content .birthday-illustration{display: none;}
+@media (min-width:701px){.giveaway-content .hero{align-items: start;}
+.giveaway-content .hero>.hero-copy{align-self: stretch; display: flex; flex-direction: column; align-items: stretch;}
+.giveaway-content .hero-copy>.campaign-badge{align-self: flex-start;}
+.giveaway-content .hero-copy>.birthday-illustration{display: block; margin-top: auto; padding-top: 28px; padding-bottom: 18px; color: #b57f6b;}
+.giveaway-content .birthday-illustration svg{display: block; width: 100%; height: auto; max-height: 130px; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;}
+.giveaway-content .birthday-illustration .gift-trail{opacity: .55;}
+.giveaway-content .entry-copy .steps strong{font-size: 18px;}
+.giveaway-content .entry-copy .steps p{font-size: 16px; line-height: 1.65;}
+.giveaway-content .entry-copy .steps .step-link{font-size: 14px;}
+.giveaway-content .entry-copy .steps li{padding: 20px;}
+.giveaway-content .form-heading>.eyebrow{font-size: 12px; letter-spacing: 1.2px;}}
+@media (min-width:701px){.giveaway-content .hero-copy>.campaign-badge{margin-top: 0;}}
  html{scroll-padding-top:110px}.giveaway-content main{padding:0}.giveaway-content .hero{min-height:0}.giveaway-content .entry-section,.giveaway-content details,.giveaway-content #bildnutzung{scroll-margin-top:110px}.giveaway-content dialog{margin:auto}.giveaway-content .form-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.giveaway-content .form-heading .eyebrow{margin:0}.giveaway-content .form-share{flex-shrink:0;border:1px solid #b7806e;border-radius:24px;background:#eed5c9;color:#593c31;font:600 12px/1.3 Manrope,Arial,sans-serif;padding:11px 14px;min-height:44px;cursor:pointer}.giveaway-content .form-share:hover{background:#e1b7a7}.giveaway-content .form-share-status{font-size:12px;overflow-wrap:anywhere}.giveaway-content .form-share-status:empty{display:none}.giveaway-content .newsletter p{font-size:13px}.giveaway-content .form-card{min-width:0}@media(max-width:700px){.giveaway-content .form-heading{flex-wrap:nowrap;gap:8px}.giveaway-content .form-heading .eyebrow{font-size:9px;letter-spacing:.8px;max-width:145px}.giveaway-content .form-share{padding:10px 12px;font-size:12px}}
  
