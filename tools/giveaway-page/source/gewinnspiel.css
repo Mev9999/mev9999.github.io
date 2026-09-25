@@ -106,3 +106,12 @@
 }
 
 @media(min-width:701px){.hero-copy>.hero-luck{margin-bottom:40px}}
+
+/* Approved step illustration already uses a soft rose palette. */
+@media(min-width:701px){.hero-luck img{opacity:1;filter:none;mix-blend-mode:multiply}}
+
+@media(max-width:700px){
+.hero-copy>.hero-luck{display:block;margin:18px auto 0;width:100%;max-width:430px}
+.hero-luck img{display:block;position:static;width:100%;height:auto;max-height:none;opacity:1;filter:none;mix-blend-mode:multiply}
+.entry-copy>.entry-luck{display:none}
+}
