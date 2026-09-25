@@ -11,6 +11,7 @@ module.exports=function(root,source,out){
    while(node=walker.nextNode()) {const key=node.textContent.trim();if(!key)continue;if(catalog[key])node.textContent=node.textContent.replace(key,catalog[key][idx]);else if(/[a-zA-ZäöüÄÖÜß]/.test(key)&&!['Graz-Straßgang','info@liza-memories-photography.com','OK'].includes(key))throw Error('Missing translation: '+key);}
    const attrs={
     'Schwangere Frau im rosafarbenen Kleid':['Pregnant woman in a pink dress','Trudnica u ružičastoj haljini'],
+    'Schwangere Frau mit buntem Blumenstrauß und Jeans':['Pregnant woman holding a colourful bouquet and wearing jeans','Trudnica s raznobojnim buketom u farmerkama'],
     'Vor- und Nachname laut Ausweis':['Full name as shown on your ID','Ime i prezime kao na ličnom dokumentu'],
     '@dein.name':['@your.name','@tvoje.ime'],
     'du@beispiel.at':['you@example.at','ti@primjer.at'],
