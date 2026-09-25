@@ -21,3 +21,6 @@
 @media(min-width:701px){.hero>.hero-copy{grid-column:1;grid-row:1;max-width:none}.hero>.collage{grid-column:2;grid-row:1}.hero .campaign-badge{width:fit-content}.hero .button{width:auto}}
 
 .facts strong{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}.collage .maternity-pair img{object-position:50% 30%}
+@media(min-width:701px){.collage .maternity{background:#f2f0e7}.collage .maternity img{object-fit:contain;object-position:center}}
+.hero-copy>.micro{text-align:center}
+.straight-dash{all:unset;font-family:Arial,sans-serif;font-style:normal;letter-spacing:0}

@@ -51,6 +51,10 @@ module.exports=function(root,source,out){
   for(const src of ['../partner/shell.js','../scripts/accessibility-menu.js','../scripts/privacy-consent.js']){const el=doc.createElement('script');el.src=src;el.defer=true;doc.head.append(el);}
   const messages=doc.createElement('script');messages.textContent='window.GIVEAWAY_MESSAGES='+JSON.stringify(lang==='de'?{}:Object.fromEntries(Object.entries(runtime).map(([k,v])=>[k,v[idx]]))).replace(/</g,'\\u003c')+';';doc.head.prepend(messages);
   if(lang!=='de'){doc.querySelectorAll('[aria-label="Zur Startseite"]').forEach(el=>el.setAttribute('aria-label',lang==='en'?'Home':'Početna'));}
+  // Keep typographic dashes horizontal even in the display serif and italic text.
+  const dashWalker=doc.createTreeWalker(wrapper,4),dashNodes=[];let dashNode;
+  while(dashNode=dashWalker.nextNode())if(/[-‐‑‒–—]/.test(dashNode.textContent)&&!dashNode.parentElement.closest('script,style,svg'))dashNodes.push(dashNode);
+  for(const node of dashNodes){const fragment=doc.createDocumentFragment();for(const part of node.textContent.split(/([-‐‑‒–—])/)){if(/^[-‐‑‒–—]$/.test(part)){const dash=doc.createElement('span');dash.className='straight-dash';dash.textContent=part;fragment.append(dash);}else fragment.append(doc.createTextNode(part));}node.replaceWith(fragment);}
   fs.writeFileSync(path.join(out,files[lang]),'<!doctype html>'+doc.documentElement.outerHTML);
  }
  const css=fs.readFileSync(path.join(source,'gewinnspiel.css'),'utf8');
