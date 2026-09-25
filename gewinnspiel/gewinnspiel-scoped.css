@@ -292,5 +292,22 @@ html{scroll-behavior: smooth; scroll-padding-top: 24px;}
 .giveaway-content .entry-copy .steps li{padding: 20px;}
 .giveaway-content .form-heading>.eyebrow{font-size: 12px; letter-spacing: 1.2px;}}
 @media (min-width:701px){.giveaway-content .hero-copy>.campaign-badge{margin-top: 0;}}
+.giveaway-content .birthday-services{display: none;}
+@media (min-width:701px){.giveaway-content .hero-copy>.micro{font-size: 14px; line-height: 1.6;}
+.giveaway-content .form-card .field label{font-size: 15px;}
+.giveaway-content .form-card .field input{font-size: 17px; min-height: 52px;}
+.giveaway-content .form-card .draft-info,.giveaway-content .form-card .check,.giveaway-content .form-card .field-hint,.giveaway-content .form-card .form-note,.giveaway-content .form-card .newsletter p,.giveaway-content .form-card .optional-intro{font-size: 14px; line-height: 1.7;}
+.giveaway-content .form-card .optional-consents summary{font-size: 15px;}
+.giveaway-content .form-card .optional-count,.giveaway-content .form-card .small-tag{font-size: 13px;}
+.giveaway-content .form-card .submit{font-size: 16px;}
+.giveaway-content .form-card h3{font-size: 38px; line-height: 1.12;}
+.giveaway-content .form-card .form-heading>.eyebrow{font-size: 13px;}
+.giveaway-content .hero-copy>.birthday-services{display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 0; margin-top: auto; padding-top: 32px; padding-bottom: 12px;}
+.giveaway-content .birthday-service{text-align: center; padding: 0 10px; position: relative;}
+.giveaway-content .birthday-service+.birthday-service:before{content: ''; position: absolute; left: 0; top: 20px; bottom: 0; width: 1px; background: var(--line);}
+.giveaway-content .service-symbol{display: flex; width: 60px; height: 60px; align-items: center; justify-content: center; margin: 0 auto 11px; background: #f0e3db; border-radius: 50%; color: #a06a57;}
+.giveaway-content .service-symbol svg{width: 39px; height: 42px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;}
+.giveaway-content .birthday-service h4{font: 500 21px/1.15 'Cormorant Garamond',Georgia,serif; margin: 0 0 7px; color: var(--ink);}
+.giveaway-content .birthday-service p{font-size: 12px; line-height: 1.45; margin: 0; color: var(--muted);}}
  html{scroll-padding-top:110px}.giveaway-content main{padding:0}.giveaway-content .hero{min-height:0}.giveaway-content .entry-section,.giveaway-content details,.giveaway-content #bildnutzung{scroll-margin-top:110px}.giveaway-content dialog{margin:auto}.giveaway-content .form-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.giveaway-content .form-heading .eyebrow{margin:0}.giveaway-content .form-share{flex-shrink:0;border:1px solid #b7806e;border-radius:24px;background:#eed5c9;color:#593c31;font:600 12px/1.3 Manrope,Arial,sans-serif;padding:11px 14px;min-height:44px;cursor:pointer}.giveaway-content .form-share:hover{background:#e1b7a7}.giveaway-content .form-share-status{font-size:12px;overflow-wrap:anywhere}.giveaway-content .form-share-status:empty{display:none}.giveaway-content .newsletter p{font-size:13px}.giveaway-content .form-card{min-width:0}@media(max-width:700px){.giveaway-content .form-heading{flex-wrap:nowrap;gap:8px}.giveaway-content .form-heading .eyebrow{font-size:9px;letter-spacing:.8px;max-width:145px}.giveaway-content .form-share{padding:10px 12px;font-size:12px}}
  

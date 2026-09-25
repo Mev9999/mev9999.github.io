@@ -64,3 +64,18 @@
 .form-heading>.eyebrow{font-size:12px;letter-spacing:1.2px}
 }
 @media(min-width:701px){.hero-copy>.campaign-badge{margin-top:0}}
+
+.birthday-services{display:none}
+@media(min-width:701px){
+.hero-copy>.micro{font-size:14px;line-height:1.6}
+.form-card .field label{font-size:15px}.form-card .field input{font-size:17px;min-height:52px}
+.form-card .draft-info,.form-card .check,.form-card .field-hint,.form-card .form-note,.form-card .newsletter p,.form-card .optional-intro{font-size:14px;line-height:1.7}
+.form-card .optional-consents summary{font-size:15px}.form-card .optional-count,.form-card .small-tag{font-size:13px}
+.form-card .submit{font-size:16px}.form-card h3{font-size:38px;line-height:1.12}.form-card .form-heading>.eyebrow{font-size:13px}
+.hero-copy>.birthday-services{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:auto;padding-top:32px;padding-bottom:12px}
+.birthday-service{text-align:center;padding:0 10px;position:relative}.birthday-service+.birthday-service:before{content:'';position:absolute;left:0;top:20px;bottom:0;width:1px;background:var(--line)}
+.service-symbol{display:flex;width:60px;height:60px;align-items:center;justify-content:center;margin:0 auto 11px;background:#f0e3db;border-radius:50%;color:#a06a57}
+.service-symbol svg{width:39px;height:42px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.birthday-service h4{font:500 21px/1.15 'Cormorant Garamond',Georgia,serif;margin:0 0 7px;color:var(--ink)}
+.birthday-service p{font-size:12px;line-height:1.45;margin:0;color:var(--muted)}
+}
