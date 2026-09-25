@@ -22,9 +22,9 @@ function refresh() {
 fetch('gewinnspiel-config.json', {cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(c=>{
   if(c.submissionEndpoint && !/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(c.submissionEndpoint))throw Error();
   config=c;
-  const campaignLink=document.querySelector('[data-instagram-campaign]');
+  const campaignLinks=document.querySelectorAll('[data-instagram-campaign]');
   const candidate=c.instagramPostUrl||c.instagramReelUrl;
-  if(campaignLink&&candidate){try{const u=new URL(candidate);if(u.protocol==='https:'&&['instagram.com','www.instagram.com'].includes(u.hostname))campaignLink.href=u.href;}catch{}}
+  if(candidate){try{const u=new URL(candidate);if(u.protocol==='https:'&&['instagram.com','www.instagram.com'].includes(u.hostname))campaignLinks.forEach(link=>link.href=u.href);}catch{}}
   if(c.submissionEndpoint)form.action=c.submissionEndpoint; refresh();
 }).catch(()=>{status.textContent=t("Das Formular konnte nicht geladen werden. Bitte lade die Seite erneut.");refresh();});
 setInterval(refresh,30000);
