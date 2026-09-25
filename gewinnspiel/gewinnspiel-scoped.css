@@ -266,5 +266,18 @@ html{scroll-behavior: smooth; scroll-padding-top: 24px;}
 @media (max-width:700px){.giveaway-content .hero-copy>.campaign-badge{width: fit-content; margin-inline: auto; justify-content: center;}}
 .giveaway-content .winner{text-align: left; max-width: 1220px;}
 .giveaway-content .details{max-width: 1220px;}
+@media (min-width:701px){.giveaway-content .facts span{font-size: 13px; font-weight: 700; letter-spacing: 1.2px;}
+.giveaway-content .facts strong{font-size: 36px; line-height: 1.2;}
+.giveaway-content .facts p{font-size: 16px; line-height: 1.7;}
+.giveaway-content .partner-teaser p:not(.eyebrow),.giveaway-content .winner p:not(.eyebrow),.giveaway-content .details>details p{font-size: 16px; line-height: 1.75;}
+.giveaway-content .partner-teaser .eyebrow,.giveaway-content .winner .eyebrow,.giveaway-content .details>.eyebrow{font-size: 12px;}
+.giveaway-content .partner-teaser h2,.giveaway-content .winner h2,.giveaway-content .details>h2{font-size: 48px;}
+.giveaway-content .details>details>summary{font-size: 17px;}
+.giveaway-content .details .newsletter p{font-size: 16px; line-height: 1.75;}
+.giveaway-content .details .small-tag{font-size: 15px;}
+.giveaway-content .partner-links .text-link,.giveaway-content .flyer-preview span{font-size: 16px;}}
+@media (max-width:700px){.giveaway-content .facts>div>span{font-weight: 700;}
+.giveaway-content .partner-links{flex-direction: column; align-items: center; gap: 14px;}
+.giveaway-content .partner-links>.text-link{text-align: center; align-self: center;}}
  html{scroll-padding-top:110px}.giveaway-content main{padding:0}.giveaway-content .hero{min-height:0}.giveaway-content .entry-section,.giveaway-content details,.giveaway-content #bildnutzung{scroll-margin-top:110px}.giveaway-content dialog{margin:auto}.giveaway-content .form-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.giveaway-content .form-heading .eyebrow{margin:0}.giveaway-content .form-share{flex-shrink:0;border:1px solid #b7806e;border-radius:24px;background:#eed5c9;color:#593c31;font:600 12px/1.3 Manrope,Arial,sans-serif;padding:11px 14px;min-height:44px;cursor:pointer}.giveaway-content .form-share:hover{background:#e1b7a7}.giveaway-content .form-share-status{font-size:12px;overflow-wrap:anywhere}.giveaway-content .form-share-status:empty{display:none}.giveaway-content .newsletter p{font-size:13px}.giveaway-content .form-card{min-width:0}@media(max-width:700px){.giveaway-content .form-heading{flex-wrap:nowrap;gap:8px}.giveaway-content .form-heading .eyebrow{font-size:9px;letter-spacing:.8px;max-width:145px}.giveaway-content .form-share{padding:10px 12px;font-size:12px}}
  

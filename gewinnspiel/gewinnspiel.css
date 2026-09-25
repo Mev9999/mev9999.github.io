@@ -31,3 +31,21 @@
 @media(min-width:701px){.hero>.collage{grid-template-rows:auto auto auto}.collage figure{aspect-ratio:6/7;min-width:0;min-height:0}.collage figure img{width:100%;height:100%;object-fit:cover}.collage .maternity-pair img{object-position:50% 78%}.collage .maternity img{object-position:50% 42%}.collage .baby img{object-position:50% 12%}}
 @media(max-width:700px){.hero-copy>.campaign-badge{width:fit-content;margin-inline:auto;justify-content:center}}
 .winner{text-align:left;max-width:1220px}.details{max-width:1220px}
+/* Match the campaign's reading text across desktop sections. */
+@media(min-width:701px){
+.facts span{font-size:13px;font-weight:700;letter-spacing:1.2px}
+.facts strong{font-size:36px;line-height:1.2}
+.facts p{font-size:16px;line-height:1.7}
+.partner-teaser p:not(.eyebrow),.winner p:not(.eyebrow),.details>details p{font-size:16px;line-height:1.75}
+.partner-teaser .eyebrow,.winner .eyebrow,.details>.eyebrow{font-size:12px}
+.partner-teaser h2,.winner h2,.details>h2{font-size:48px}
+.details>details>summary{font-size:17px}
+.details .newsletter p{font-size:16px;line-height:1.75}
+.details .small-tag{font-size:15px}
+.partner-links .text-link,.flyer-preview span{font-size:16px}
+}
+@media(max-width:700px){
+.facts>div>span{font-weight:700}
+.partner-links{flex-direction:column;align-items:center;gap:14px}
+.partner-links>.text-link{text-align:center;align-self:center}
+}
