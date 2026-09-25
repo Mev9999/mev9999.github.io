@@ -79,3 +79,7 @@
 .birthday-service h4{font:500 21px/1.15 'Cormorant Garamond',Georgia,serif;margin:0 0 7px;color:var(--ink)}
 .birthday-service p{font-size:12px;line-height:1.45;margin:0;color:var(--muted)}
 }
+
+@media(min-width:701px){.service-symbol{width:72px;height:72px;background:#f5eae3;color:#a46f5d;border:1px solid #e9d4c8;box-shadow:0 3px 10px #84574906}.service-symbol svg{width:48px;height:48px;stroke:none}.birthday-service{padding-inline:9px}.birthday-service h4{margin-top:13px}}
+
+@media(min-width:701px){.birthday-services>.service-medallions{grid-column:1/-1;display:block;width:100%;height:auto;mix-blend-mode:multiply;margin:0 0 -8px}.birthday-service h4{margin-top:0}.birthday-service+.birthday-service:before{top:0}.hero-copy>.birthday-services{padding-top:20px}}
