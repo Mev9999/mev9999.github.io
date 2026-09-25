@@ -12,6 +12,10 @@ module.exports=function(root,source,out){
    const attrs={
     'Schwangere Frau im rosafarbenen Kleid':['Pregnant woman in a pink dress','Trudnica u ružičastoj haljini'],
     'Schwangere Frau mit buntem Blumenstrauß und Jeans':['Pregnant woman holding a colourful bouquet and wearing jeans','Trudnica s raznobojnim buketom u farmerkama'],
+    "Werdende Eltern in hellblauer Kleidung halten einander und den Babybauch":["Expectant parents in light blue clothing holding each other and the baby bump","Budući roditelji u svijetloplavoj odjeći drže jedno drugo i trudnički stomak"],
+    "Vater legt sein Gesicht und seine Hand an den Babybauch vor dunklem Hintergrund":["Father resting his face and hand against the baby bump against a dark background","Otac prislanja lice i ruku uz trudnički stomak ispred tamne pozadine"],
+    "Kleinkind spielt zwischen Seifenblasen mit Eltern und Schwester im Hintergrund":["Toddler playing among soap bubbles with parents and sister in the background","Malo dijete se igra među balončićima sapunice, s roditeljima i sestrom u pozadini"],
+    "Mutter und Neugeborenes berühren sich sanft mit der Nase":["Mother and newborn gently touching noses","Majka i novorođenče nježno dodiruju noseve"],
     'Vor- und Nachname laut Ausweis':['Full name as shown on your ID','Ime i prezime kao na ličnom dokumentu'],
     '@dein.name':['@your.name','@tvoje.ime'],
     'du@beispiel.at':['you@example.at','ti@primjer.at'],

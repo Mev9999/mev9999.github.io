@@ -24,3 +24,6 @@
 @media(min-width:701px){.collage .maternity{background:#f2f0e7}.collage .maternity img{object-fit:contain;object-position:center}}
 .hero-copy>.micro{text-align:center}
 .straight-dash{all:unset;font-family:Arial,sans-serif;font-style:normal;letter-spacing:0}
+
+.collage .maternity img{object-fit:cover;object-position:50% 42%}.collage .maternity-pair img{object-position:center}.collage .baby img{object-position:50% 35%}.collage .family img{object-position:50% 50%}
+@media(max-width:700px){.hero-copy h1,.hero-copy .lead{text-align:center}}
