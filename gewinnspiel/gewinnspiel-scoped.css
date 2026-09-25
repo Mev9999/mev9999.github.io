@@ -317,5 +317,16 @@ html{scroll-behavior: smooth; scroll-padding-top: 24px;}
 .giveaway-content .birthday-service h4{margin-top: 0;}
 .giveaway-content .birthday-service+.birthday-service:before{top: 0;}
 .giveaway-content .hero-copy>.birthday-services{padding-top: 20px;}}
+@media (min-width:701px){.giveaway-content .birthday-services>.service-medallions{height: 84px; object-fit: contain; object-position: center; margin: 0 auto 8px;}}
+.giveaway-content .submit{justify-content: center; text-align: center;}
+.giveaway-content .entry-luck{display: none;}
+@media (min-width:701px){.giveaway-content .service-relief{display: block; width: 72px; height: 80px; margin: 0 auto 10px; background-image: url("assets/service-reliefs-rose.webp"); background-size: 400% auto; background-repeat: no-repeat; mix-blend-mode: multiply;}
+.giveaway-content .service-relief-1{background-position: 0 center;}
+.giveaway-content .service-relief-2{background-position: 33.333% center;}
+.giveaway-content .service-relief-3{background-position: 66.667% center;}
+.giveaway-content .service-relief-4{background-position: 100% center;}
+.giveaway-content .entry-copy{align-self: stretch; display: flex; flex-direction: column;}
+.giveaway-content .entry-luck{display: flex; flex: 1; align-items: flex-end; padding-top: 28px; margin: 0;}
+.giveaway-content .entry-luck img{display: block; width: 100%; height: auto; max-height: 350px; object-fit: contain;}}
  html{scroll-padding-top:110px}.giveaway-content main{padding:0}.giveaway-content .hero{min-height:0}.giveaway-content .entry-section,.giveaway-content details,.giveaway-content #bildnutzung{scroll-margin-top:110px}.giveaway-content dialog{margin:auto}.giveaway-content .form-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.giveaway-content .form-heading .eyebrow{margin:0}.giveaway-content .form-share{flex-shrink:0;border:1px solid #b7806e;border-radius:24px;background:#eed5c9;color:#593c31;font:600 12px/1.3 Manrope,Arial,sans-serif;padding:11px 14px;min-height:44px;cursor:pointer}.giveaway-content .form-share:hover{background:#e1b7a7}.giveaway-content .form-share-status{font-size:12px;overflow-wrap:anywhere}.giveaway-content .form-share-status:empty{display:none}.giveaway-content .newsletter p{font-size:13px}.giveaway-content .form-card{min-width:0}@media(max-width:700px){.giveaway-content .form-heading{flex-wrap:nowrap;gap:8px}.giveaway-content .form-heading .eyebrow{font-size:9px;letter-spacing:.8px;max-width:145px}.giveaway-content .form-share{padding:10px 12px;font-size:12px}}
  
