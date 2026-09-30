@@ -9,7 +9,7 @@ const dialog = document.querySelector('#success-dialog');
 let config, pending = null, timeout;
 function availability() {
   if (!config || !config.submissionEndpoint || config.status !== 'ready') return t("Die Teilnahme wird gerade vorbereitet. Bitte schau später noch einmal vorbei.");
-  if (Date.now() < Date.parse(config.startsAt)) return t("Die Teilnahme startet am 1. Oktober 2026.");
+  if (Date.now() < Date.parse(config.startsAt)) return t("Die Teilnahme startet am 1. Oktober 2026 um 10:00 Uhr (österreichische Zeit).");
   if (Date.now() > Date.parse(config.endsAt)) return t("Das Gewinnspiel ist beendet. Vielen Dank fürs Mitmachen!");
   return '';
 }

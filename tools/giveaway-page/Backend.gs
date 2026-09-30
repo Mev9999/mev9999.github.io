@@ -1,6 +1,6 @@
 // Only the entry endpoint is public. Keep the Google spreadsheet restricted.
 const SHEET_ID = '1IbP5murCkSfThFUa38PvIdXx-oyxZh2ffS7VnLIdsMk';
-const START = Date.parse('2026-10-01T00:00:00+02:00');
+const START = Date.parse('2026-10-01T10:00:00+02:00');
 const END = Date.parse('2026-10-14T23:59:59+02:00');
 const TEXT_VERSION = '2026-09-25-v3';
 const ORIGINS = ['https://liza-memories-photography.com', 'https://www.liza-memories-photography.com', 'http://127.0.0.1:8771', 'http://127.0.0.1:8772'];
@@ -73,8 +73,8 @@ function pruefeVerbindung() {
   const before = sheet.getLastRow();
   const address = 'test-' + Utilities.getUuid() + '@example.invalid';
   const event = {parameter:{name:'Technischer Test',email:address,instagram:'liza_techniktest',eligibility:'on',terms:'on',parent_origin:ORIGINS[2],request_id:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',text_version:TEXT_VERSION}};
-  const first = processEntry_(event, new Date('2026-10-02T12:00:00+02:00'), sheetName).getContent();
-  const second = processEntry_(event, new Date('2026-10-02T12:00:00+02:00'), sheetName).getContent();
+  const first = processEntry_(event, new Date('2026-10-02T12:10:00+02:00'), sheetName).getContent();
+  const second = processEntry_(event, new Date('2026-10-02T12:10:00+02:00'), sheetName).getContent();
   if (!first.includes('"ok":true') || !second.includes('"ok":true') || sheet.getLastRow() !== before + 1) throw new Error('Speicher-/Duplikattest fehlgeschlagen');
   sheet.getRange(sheet.getLastRow(), 12).setValue('TECHNIKTEST – keine Teilnahme, kein Versand, nicht auslosen');
   console.log('BESTANDEN: Google speichert eine Testzeile; erneute identische Einsendung erzeugt keine zweite. Echte Teilnahmen unverändert.');
