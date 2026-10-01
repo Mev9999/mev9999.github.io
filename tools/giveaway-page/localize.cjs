@@ -32,7 +32,7 @@ module.exports=function(root,source,out){
    doc.querySelectorAll('a[href]').forEach(a=>{let u=a.getAttribute('href');u=u.replace(base+'/partner/',base+'/partner/'+files[lang]);u=u.replace(base+'/#',base+'/index-'+lang+'.html#');u=u.replace(/\/(preise|datenschutz|impressum)\.html/, '/$1-'+lang+'.html');a.setAttribute('href',u);});
   }
   doc.documentElement.lang=lang;doc.documentElement.dataset.staticLang=lang;doc.body.className='home-refreshed giveaway-page';
-  const titles={de:'Ein Shooting. Eure Erinnerungen. | LiZa Memories Photography',en:'Win a photo session | LiZa Memories Photography',bs:'Osvoji fotografisanje | LiZa Memories Photography'};
+  const titles={de:'Gewinnspiel: Shooting-Paket nach Wahl gewinnen | LiZa Memories',en:'Giveaway: Win a photo package of your choice | LiZa Memories',bs:'Nagradna igra: Osvoji paket fotografisanja po izboru | LiZa Memories'};
   const desc={de:'Gewinne ein Fotoshooting bei LiZa Memories Photography in Graz – für dich oder als Geschenk für einen Herzensmenschen.',en:'Win a photo session with LiZa Memories Photography in Graz – for yourself or as a gift for someone special.',bs:'Osvoji fotografisanje uz LiZa Memories Photography u Grazu – za sebe ili kao poklon dragoj osobi.'};
   doc.title=titles[lang];doc.querySelector('meta[name=description]').content=desc[lang];doc.querySelector('meta[property="og:title"]').content=titles[lang];doc.querySelector('meta[property="og:description"]').content=desc[lang];
   const url=base+'/gewinnspiel/'+(lang==='de'?'':files[lang]);doc.querySelector('link[rel=canonical]').href=url;doc.querySelector('meta[property="og:url"]').content=url;
