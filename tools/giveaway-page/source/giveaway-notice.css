@@ -7,3 +7,7 @@
 .giveaway-notice__link{flex-shrink:0;display:inline-flex;justify-content:center;align-items:center;min-height:44px;padding:8px 20px;border:1px solid #ab7866;border-radius:999px;background:#fff8f2;color:#49332b;font:700 14px/1.4 Manrope,Arial,sans-serif;text-decoration:none;white-space:nowrap}
 .giveaway-notice__link:hover{background:#f2d7c8}.giveaway-notice__link:focus-visible{outline:3px solid #704331;outline-offset:3px}
 @media(max-width:700px){.giveaway-notice{padding:14px 18px}.giveaway-notice__inner{gap:12px;flex-direction:column;text-align:center}.giveaway-notice__copy{display:block}.giveaway-notice__copy strong{display:block;font-size:16px}.giveaway-notice__date{display:block;margin-top:3px;font-size:12px}.giveaway-notice__link{padding:8px 22px}}
+
+/* Keep the active campaign and navigation together in the sticky header. */
+header:has(> .giveaway-notice:not([hidden])){position:sticky;top:0;z-index:50;transform:none!important;opacity:1!important;pointer-events:auto!important}
+header>.giveaway-notice{width:100%;border-top:1px solid #e2c8bb}

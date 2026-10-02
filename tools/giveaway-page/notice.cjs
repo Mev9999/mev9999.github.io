@@ -12,7 +12,7 @@ module.exports=function(root,source){
   const ready=config.status==='ready'&&!!config.submissionEndpoint;
   const banner=`<!-- giveaway-notice:start --><aside class="giveaway-notice" data-giveaway-notice data-starts="${config.startsAt}" data-ends="${config.endsAt}" data-ready="${ready}" aria-label="${lang==='de'?'Gewinnspiel':lang==='en'?'Giveaway':'Nagradna igra'}" hidden><div class="giveaway-notice__inner"><div class="giveaway-notice__copy"><strong>${t[0]}</strong><span class="giveaway-notice__date">${t[1]}</span></div><a class="giveaway-notice__link" href="${prefix}gewinnspiel/#mitmachen">${t[2]} <span aria-hidden="true">&nbsp;↗</span></a></div></aside><!-- giveaway-notice:end -->`;
   if(!html.includes('</header>'))throw Error('Missing header: '+file);
-  html=html.replace('</header>','</header>'+banner).replace('</head>',`<link rel="stylesheet" href="${prefix}scripts/giveaway-notice.css" data-giveaway-asset><script defer src="${prefix}scripts/giveaway-notice.js" data-giveaway-asset></script></head>`);
+  html=html.replace('</header>',banner+'</header>').replace('</head>',`<link rel="stylesheet" href="${prefix}scripts/giveaway-notice.css?v=20261002-sticky" data-giveaway-asset><script defer src="${prefix}scripts/giveaway-notice.js" data-giveaway-asset></script></head>`);
   fs.writeFileSync(target,html);
  }
  console.log('Zeitgesteuerter Gewinnspielhinweis: '+files.length+' Seiten.');
