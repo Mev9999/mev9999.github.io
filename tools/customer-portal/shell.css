@@ -1,0 +1,19 @@
+/* Shared website shell; collapse navigation before the logo loses its space. */
+html:has(body.client-portal),body.client-portal{overflow-x:clip}
+@media(min-width:901px){
+ .client-portal header.site .nav{grid-template-columns:minmax(200px,1fr) auto auto}
+ .client-portal header.site .nav>.brand{min-width:200px}
+ .client-portal header.site .nav>.brand img{width:225px;height:auto;max-width:100%}
+ .client-portal header.site nav.primary{display:flex;align-items:center;white-space:nowrap}
+ .client-portal header.site nav.primary a{margin-inline:.25rem}
+}
+@media(min-width:901px) and (max-width:1500px){
+ .client-portal header.site .nav{position:relative;grid-template-columns:46px minmax(200px,1fr) auto}
+ .client-portal header.site #burger{display:flex;grid-column:1;grid-row:1}
+ .client-portal header.site .nav>.brand{grid-column:2;grid-row:1}
+ .client-portal header.site .nav-actions{grid-column:3;grid-row:1}
+ .client-portal header.site nav.primary{position:absolute;top:calc(100% + 8px);left:0;display:flex;flex-direction:column;align-items:stretch;width:260px;padding:12px;background:var(--surface,#f3e4dc);border:1px solid #e8d4c9;border-radius:16px;box-shadow:0 18px 36px #49372b20;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px)}
+ .client-portal header.site nav.primary.open{opacity:1;visibility:visible;pointer-events:auto;transform:none}
+ .client-portal header.site nav.primary a{display:block;padding:12px;margin:0}
+ .client-portal header.site nav.primary .nav-dropdown-menu{left:calc(100% + 6px);top:0}
+}

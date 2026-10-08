@@ -66,12 +66,12 @@
     {
       "name": "ZWEI & MEHR – Steirischer Familienpass",
       "website": "https://www.zweiundmehr.steiermark.at/",
-      "active": false,
-      "editorNote": "Prepared at owner request. Activate after confirmation of the signed cooperation and agreed family-pass conditions. Family pass, not a partner code.",
+      "active": true,
+      "editorNote": "Published at owner request on 2026-10-06. Owner grants 10% off every package with a valid family pass from any Austrian federal state. No partner code required.",
       "description": {
-        "de": "Der ZWEI & MEHR-Steirische Familienpass ist ein Angebot des Landes Steiermark für Familien. Bei LiZa Memories Photography erhalten Familienpass-Inhaberinnen und -Inhaber 10 % Ermäßigung auf alle Shootings und Pakete – für Erinnerungen vom Babybauch bis zu euren Familienfotos; bitte gebt euren Familienpass bei der Anfrage an.",
-        "en": "The ZWEI & MEHR Styrian Family Pass is a service for families provided by the Province of Styria. At LiZa Memories Photography, family pass holders receive 10% off all sessions and packages, capturing memories from pregnancy to family life; please mention your family pass when enquiring.",
-        "bs": "ZWEI & MEHR štajerska porodična kartica je usluga Pokrajine Štajerske za porodice. U LiZa Memories Photography vlasnici porodične kartice ostvaruju 10% popusta na sva fotografisanja i pakete, za uspomene od trudnoće do porodičnih trenutaka; pri slanju upita navedite da imate porodičnu karticu."
+        "de": "ZWEI & MEHR ist das Familienangebot des Landes Steiermark mit Informationen und Vorteilen für Familien. Bei LiZa Memories Photography erhaltet ihr mit einem gültigen Familienpass aus jedem österreichischen Bundesland 10 % Rabatt auf jedes Paket – vom Babybauch über Neugeborenen- und Familienfotos bis zu Hochzeit und Kombi. Bitte gebt euren Familienpass bei der Anfrage an und zeigt ihn beim Shooting vor.",
+        "en": "ZWEI & MEHR is the Province of Styria’s family programme, offering information and benefits for families. At LiZa Memories Photography, a valid family pass from any Austrian federal state gives you 10% off every package, including maternity, newborn, family, wedding and combined packages. Please mention your family pass when enquiring and present it at your session.",
+        "bs": "ZWEI & MEHR je porodični program Pokrajine Štajerske s informacijama i pogodnostima za porodice. U LiZa Memories Photography uz važeću porodičnu karticu iz bilo koje austrijske savezne pokrajine ostvarujete 10% popusta na svaki paket – za trudnice, novorođenčad, porodice, vjenčanja i kombinovane pakete. Pri slanju upita navedite da imate porodičnu karticu i pokažite je na fotografisanju."
       }
     },
     {

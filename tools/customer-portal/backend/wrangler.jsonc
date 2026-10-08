@@ -1,0 +1,43 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "liza-customer-portal",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-07",
+  "account_id": "0d62599be18e03f3b8d92dd0a2081250",
+  "workers_dev": false,
+  "preview_urls": false,
+  "assets": {
+    "directory": "../dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  },
+  "vars": {
+    "PORTAL_ORIGIN": "https://portal.liza-memories-photography.com",
+    "PORTAL_PATH": "/",
+    "LOCAL_DEV": "false",
+    "PAYPAL_ENVIRONMENT": "sandbox",
+    "PAYMENT_METHODS": "transfer",
+    "BUSINESS_NAME": "Emina Huremovic · LiZa Memories Photography",
+    "BUSINESS_ADDRESS": "Mela-Spira-Straße 32b, 8054 Graz-Straßgang, Österreich",
+    "CONTACT_EMAIL": "info@liza-memories-photography.com",
+    "CONTACT_PHONE": "+43 681 819 427 80"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "liza-customer-portal",
+      "database_id": "d0609db8-34b4-4bc5-822a-cfa9167bb6dd"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "PHOTOS",
+      "bucket_name": "liza-memories-gallerie",
+      "jurisdiction": "eu"
+    }
+  ],
+  "triggers": { "crons": ["17 3 * * *"] },
+  "observability": { "enabled": false }
+}

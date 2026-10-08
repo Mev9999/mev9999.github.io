@@ -1,2 +1,9 @@
 node_modules/
 npm-debug.log*
+
+tools/customer-portal/dist/
+tools/customer-portal/dist-pages/
+tools/customer-portal/.local-state/
+tools/customer-portal/.private/
+tools/customer-portal/backend/.dev.vars
+tools/customer-portal/backend/.wrangler/
