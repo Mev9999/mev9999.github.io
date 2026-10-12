@@ -1,0 +1,1 @@
+if(['liza-memories-photography.com','www.liza-memories-photography.com','mev9999.github.io'].includes(location.hostname)){const lang=document.documentElement.lang;location.replace('https://portal.liza-memories-photography.com/'+(['en','bs'].includes(lang)?lang+'.html':'')+location.search+location.hash);}

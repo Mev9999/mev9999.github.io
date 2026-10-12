@@ -1,0 +1,52 @@
+﻿LiZa-Portal – Verwaltung und fertige Bilder, Update vom 12.10.2026
+
+Enthalten: Korrektur für Aktivitäten als gelesen, Testbestellungen löschen, frei wählbare Paket-Reihenfolge und automatische Auslieferung der fertig bearbeiteten Dateien. Die ZIP enthält auch alle vorherigen Portal-Änderungen.
+
+1. DATENBANK ZUERST
+Cloudflare → Storage & databases → D1 → liza-customer-portal → Console.
+LiZa-Portal-Datenbank-Update-Verwaltung.txt öffnen und den gesamten Inhalt einmal ausführen.
+Diese Datei enthält nur die neuen Erweiterungen für dieses Verwaltungs-Update. Bereits ausgeführte ältere Datenbank-Updates nicht wiederholen.
+Bei einer Fehlermeldung die Meldung zeigen, bevor die ZIP veröffentlicht wird.
+
+2. PORTAL HOCHLADEN
+Cloudflare → Workers & Pages → liza-kundenportal → Create deployment → Production.
+LiZa-Portal-Cloudflare-Verwaltung-Fertige-Bilder.zip hochladen und veröffentlichen.
+Danach das Portal neu laden; auf dem Handy bei Bedarf den alten Tab schließen und neu öffnen.
+
+3. AKTIVITÄTEN
+Verwaltung → Aktivitäten → Als gelesen markieren.
+Die Funktion verwendet nun den Zeitstand des Servers statt der Uhrzeit deines Geräts. Später eingetroffene Aktivitäten bleiben ungelesen.
+
+4. TESTBESTELLUNG LÖSCHEN
+Verwaltung → Bestellungen → Testbestellung löschen.
+Die zwei Bestätigungen durchgehen und die angezeigte Bestellreferenz exakt eingeben.
+Die Funktion ist für Testbestellungen mit Zahlungsart Überweisung gedacht, auch wenn sie für einen Test bereits als bezahlt markiert oder storniert wurden.
+Die Bestellung verschwindet aus Verwaltung und Kundenansicht. Downloadrechte, die nur durch diese Testbestellung entstanden sind, werden zurückgenommen; andere bezahlte Bestellungen und manuelle Freigaben bleiben wirksam. Bereits auf ein Gerät heruntergeladene Dateien können nicht zurückgeholt werden.
+Es wird kein Geld zurücküberwiesen und keine E-Mail ausgelöst. Interne Bestell- und Prüfunterlagen bleiben nachvollziehbar gespeichert. Tatsächliche Onlinezahlungen werden über diese Testfunktion nicht gelöscht.
+Das Update selbst löscht keine vorhandene Bestellung. Die beiden Testbestellungen kannst du nach dem Veröffentlichen gezielt entfernen.
+
+5. PAKETE SORTIEREN
+Verwaltung → Galerie öffnen → Pakete.
+Mit den Pfeilen nach oben und unten die Angebote in die gewünschte Reihenfolge bringen. Die neue Reihenfolge wird direkt gespeichert.
+Der Kunde sieht die aktiven Angebote anschließend in dieser Reihenfolge. Das Pflichtpaket bleibt verpflichtend; die günstigste Berechnung der zusätzlichen Bilder bleibt unabhängig von der Anzeige-Reihenfolge.
+Ein neues Paket wird am Ende ergänzt.
+
+6. AUSWAHLBILDER UND FERTIGE DATEIEN IN EINER GALERIE
+Verwaltung → Galerie öffnen → Einstellungen → Erst fertige Bilder ausliefern aktivieren und Galerie speichern. Im Bilder-Bereich führt ein Hinweis direkt zu dieser Option. Bestehende Galerien bleiben ohne diese Option beim bisherigen direkten Downloadablauf.
+Kunden wählen und bestellen wie bisher. Du kannst den Zahlungseingang bereits vor der Bearbeitung als bezahlt bestätigen. Im neuen Modus erhält der Kunde dadurch noch keinen Download der unbearbeiteten Auswahlbilder.
+Bearbeite die gekauften Bilder und exportiere sie mit denselben Dateinamen, beispielsweise DSC04378.jpg. Die fertigen Dateien ersetzen im Portal die bisherigen Auswahl-Dateien desselben Bildes. Behalte deine Arbeitsoriginale auf deinem Computer.
+Öffne in der Galerie Fertige Bilder hochladen und ziehe alle fertigen Dateien gemeinsam hinein, oder wähle sie gemeinsam über den Dateidialog aus.
+Das Portal erkennt passende Auswahlbilder anhand des Dateinamens. Prüfe die Übersicht und bestätige den gemeinsamen Upload einmal. Bei unbekannten oder mehrdeutigen Namen wird keine Zuordnung geraten; korrigiere dann den Namen oder die angezeigte Zuordnung.
+Sobald alle Bilder einer bezahlten Bestellung fertig hochgeladen sind und die Vertragsbestätigung versandt ist, werden genau diese Bilder automatisch zum Download freigegeben und die Download-Mail ausgelöst. Bereits manuell gesperrte Downloads werden dadurch nicht eigenmächtig wieder freigegeben.
+Wenn du erst die fertigen Dateien hochlädst und danach auf bezahlt klickst, erfolgt die Freigabe mit der Zahlungsbestätigung. Unvollständige Bestellungen warten, bis auch die fehlenden fertigen Dateien vorliegen.
+Der Download liefert die hochgeladene fertige Datei in ihrer ursprünglichen Qualität; verkleinert werden nur die Vorschaubilder. Die übrigen Auswahlbilder bleiben in der Galerie und unterliegen weiterhin deinen Wasserzeichen- und Freigabeeinstellungen.
+Keine zweite Galerie und kein Verschieben einer Bestellung nötig: Bildauswahl, Preise, Rechnung und Bestellung behalten ihre Zuordnung. Die Bearbeitung wird mit denselben Bild-IDs verbunden.
+BEREITS FERTIGE BILDER / BARZAHLUNG IM VORAUS
+Beim direkten Hochladen fertiger Bilder kannst du Diese Bilder sind bereits fertig bearbeitet anhaken. Die Datei wird dadurch als fertige Download-Datei gekennzeichnet; ein weiterer Upload entfällt.
+Sind die richtigen Dateien schon in der Galerie: die betreffenden Bilder auswählen → Als fertig bearbeitet markieren → bestätigen. Das speichert nur den Fertig-Status der ausgewählten Dateien; die Dateien selbst werden nicht neu berechnet.
+Danach bei der passenden Bestellung Bezahlt anklicken, sobald du das Geld tatsächlich erhalten hast (auch bei Barzahlung). Ist die Bestellung bereits bezahlt, löst das Markieren des letzten noch fehlenden Bildes die Freigabe automatisch aus. Eine Kennzeichnung als fertig ersetzt keine Zahlungsbestätigung.
+Es werden nur die bestellten fertigen Dateien freigegeben, sobald alle Bilder dieser Bestellung fertig sind. Die restlichen Bilder bleiben geschützt. Die Download-Mail wird nicht nochmals verschickt, wenn du erneut klickst.
+Die neue Option unbedingt vor der Download-Freigabe der Auswahlbilder aktivieren. Bereits zuvor heruntergeladene Dateien kann das Portal auf fremden Geräten nicht zurückholen.
+
+7. NACHRICHTEN ANSEHEN
+LiZa-Portal-Mail-Vorschau.html öffnen. Dort findest du zusätzlich Muster für die Einladung zur Auswahlgalerie, die Bestellung vor der Zahlung und den Status bezahlt, Bilder in Bearbeitung. Die Vorschau versendet nichts.

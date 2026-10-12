@@ -1,6 +1,6 @@
 # Tägliche Bereinigung bei Cloudflare Pages
 
-Das Portal auf Pages benötigt für die tägliche Bereinigung einen separaten Worker. `backend/cleanup-worker.mjs` ist ein vollständiges JavaScript-Modul zum Kopieren in den Dashboard-Editor. Es löscht ausschließlich abgelaufene Sessions, abgelaufene Setup-/Reset-Tokens und Rate-Limits, deren Reset mehr als 24 Stunden zurückliegt. Galerien, Bilder, Benutzer, Bestellungen und Freigaben bleiben erhalten, auch bei abgelaufenen Galerien.
+Das Portal auf Pages benötigt für die tägliche Bereinigung einen separaten Worker. `backend/cleanup-worker.mjs` ist ein vollständiges JavaScript-Modul zum Kopieren in den Dashboard-Editor. Es löscht ausschließlich abgelaufene Sessions, abgelaufene Setup-/Reset-Tokens Rate-Limits, deren Reset mehr als 24 Stunden zurückliegt, sowie Favoriten-/Download-Aktivitäten, die älter als 90 Tage sind. Die Prüfung der neuen Aktivitätstabelle ist optional; der Worker funktioniert auch vor dem Update vom 9. Oktober. Galerien, Bilder, Benutzer, Bestellungen und Freigaben bleiben erhalten, auch bei abgelaufenen Galerien.
 
 ## Einmalige Einrichtung im Dashboard
 

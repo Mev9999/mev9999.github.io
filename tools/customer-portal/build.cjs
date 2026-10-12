@@ -10,6 +10,8 @@ const site = 'https://liza-memories-photography.com/';
 fs.mkdirSync(output, { recursive: true });
 const assetDir = path.join(output, 'assets');
 fs.mkdirSync(assetDir, { recursive: true });
+// PNG is supported by email clients and shares the exact website logo.
+fs.copyFileSync(path.join(root, 'logo-liza.png'), path.join(assetDir, 'logo-liza.png'));
 fs.cpSync(path.join(root, 'fonts'), path.join(assetDir, 'fonts'), { recursive: true });
 const labels = { de: 'Kundenportal', en: 'Client portal', bs: 'Portal za klijente' };
 const files = { de: 'index.html', en: 'en.html', bs: 'bs.html' };
@@ -41,8 +43,7 @@ for (const [lang, file] of Object.entries(files)) {
   // Local previews and the Cloudflare deployment must stay on their current host.
   const redirect = doc.createElement('script');
   redirect.dataset.portalRedirect = '';
-  const livePath = lang === 'de' ? '' : file;
-  redirect.textContent = `if(['liza-memories-photography.com','www.liza-memories-photography.com','mev9999.github.io'].includes(location.hostname)){location.replace('https://portal.liza-memories-photography.com/${livePath}'+location.search+location.hash);}`;
+  redirect.src = 'portal-redirect.js';
   doc.head.prepend(redirect);
   function fragment(selector) {
     const copy = source.querySelector(selector).cloneNode(true);
@@ -117,7 +118,17 @@ fs.copyFileSync(path.join(__dirname, 'shell.js'), path.join(output, 'shell.js'))
 fs.copyFileSync(path.join(__dirname, 'shell.css'), path.join(output, 'shell.css'));
 fs.copyFileSync(path.join(__dirname, 'THIRD-PARTY.txt'), path.join(output, 'THIRD-PARTY.txt'));
 if (fs.existsSync(path.join(__dirname, 'legal'))) fs.cpSync(path.join(__dirname, 'legal'), output, { recursive: true });
-fs.writeFileSync(path.join(output, '_headers'), '/*\n  X-Robots-Tag: noindex, nofollow, noarchive\n  Referrer-Policy: no-referrer\n  X-Content-Type-Options: nosniff\n');
+fs.writeFileSync(path.join(output, 'portal-redirect.js'), `if(['liza-memories-photography.com','www.liza-memories-photography.com','mev9999.github.io'].includes(location.hostname)){const lang=document.documentElement.lang;location.replace('https://portal.liza-memories-photography.com/'+(['en','bs'].includes(lang)?lang+'.html':'')+location.search+location.hash);}\n`);
+// Pages serves static assets outside the API worker, so protect both surfaces.
+fs.writeFileSync(path.join(output, '_headers'), `/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=31536000
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://liza-memories-photography.com; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'
+`);
 console.log('Kundenportal DE/EN/BS: ' + output);
 if (!args.includes('--out')) {
   const deployDir = path.join(__dirname, 'dist');

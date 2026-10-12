@@ -1,4 +1,17 @@
 const rows = {
+  themeCream:['Creme','Cream','Krem'],themeRose:['Rosé','Rose','Ružičasta'],themeBlush:['Blütenrosa','Blush','Nježna ružičasta'],themeSand:['Sand','Sand','Pijesak'],themeClay:['Terrakotta','Terracotta','Terakota'],themeSage:['Salbei','Sage','Kadulja'],themeOlive:['Olive','Olive','Maslina'],themeForest:['Waldgrün','Forest','Šumska zelena'],themeSea:['Meeresgrün','Sea green','Morska zelena'],themeSky:['Himmelblau','Sky blue','Nebesko plava'],themeLavender:['Lavendel','Lavender','Lavanda'],themeSlate:['Schieferblau','Slate blue','Škriljac plava'],
+  coverSplitReverse:['Titel links · Foto rechts','Title left · Photo right','Naslov lijevo · Fotografija desno'],coverCard:['Titelkarte auf dem Foto','Title card on photo','Kartica s naslovom na fotografiji'],coverArch:['Foto mit Bogen','Arched photo','Fotografija s lukom'],coverPolaroid:['Fotodruck mit Rand','Framed photo print','Fotografija s obrubom'],coverMinimal:['Titel oben · Foto darunter','Title above · Photo below','Naslov iznad · Fotografija ispod'],
+  coverHeightDesktop:['Coverhöhe · Desktop','Cover height · Desktop','Visina naslovnice · Računar'],coverHeightMobile:['Coverhöhe · Handy','Cover height · Mobile','Visina naslovnice · Mobitel'],coverFitDesktop:['Bilddarstellung · Desktop','Image fit · Desktop','Prikaz fotografije · Računar'],coverFitMobile:['Bilddarstellung · Handy','Image fit · Mobile','Prikaz fotografije · Mobitel'],coverFitContain:['Ganzes Foto · ohne Beschnitt','Entire photo · No crop','Cijela fotografija · Bez rezanja'],coverFitCover:['Fläche füllen · mit Beschnitt','Fill area · Cropped','Popuni prostor · Izrezano'],
+  decorationDoubleFrame:['Doppelter Rahmen','Double frame','Dvostruki okvir'],decorationCorners:['Feine Ecklinien','Fine corners','Tanke ugaone linije'],decorationUnderline:['Linie unter dem Titel','Line below title','Linija ispod naslova'],decorationShadow:['Weicher Schatten','Soft shadow','Blaga sjena'],decorationRounded:['Sanft gerundet','Softly rounded','Blago zaobljeno'],
+  selectionRegion:['Bildauswahl','Photo selection','Izbor fotografija'],selectionClearShort:['Leeren','Clear','Poništi'],selectionDownloadShort:['Download','Download','Preuzmi'],selectionOrderShort:['Bestellen','Order','Naruči'],
+  watermarkVisible:['Wasserzeichen sichtbar','Watermark visible','Vodeni žig je vidljiv'],
+  watermarkInactive:['Wasserzeichen aus','Watermark off','Vodeni žig je isključen'],
+  watermarkSavePreview:['Speichere die Wasserzeichen-Einstellung zuerst. Aktualisiere danach bei Bedarf die Vorschauen, um das Ergebnis hier zu sehen.','Save the watermark setting first. Then update previews if needed to see the result here.','Prvo sačuvaj postavku vodenog žiga. Zatim po potrebi ažuriraj preglede da ovdje vidiš rezultat.'],
+  watermarkPreviewsMissing:['Bei {n} von {total} Bildern fehlt die aktuelle Wasserzeichen-Vorschau. Klicke auf „Vorschauen aktualisieren“ und lasse die Seite offen. Bis dahin sehen Kunden ohne Freigabe ein Schloss. Du musst die Bilder nicht neu hochladen.','The current watermark preview is missing for {n} of {total} images. Click Update previews and keep this page open. Until then, clients without release see a lock. You do not need to upload the images again.','Za {n} od {total} fotografija nedostaje ažurirani pregled s vodenim žigom. Klikni Ažuriraj preglede i ostavi stranicu otvorenu. Do tada klijenti bez odobrenja vide lokot. Fotografije ne moraš ponovo učitati.'],
+  galleryView:['Galerieansicht','Gallery view','Prikaz galerija'],
+  galleryViewLarge:['Große Kacheln','Large tiles','Velike kartice'],
+  galleryViewCompact:['Kleine Kacheln','Small tiles','Male kartice'],
+  galleryViewList:['Liste','List','Lista'],
   title:['Kundenportal','Client portal','Portal za klijente'], private:['Dein persönlicher Bildbereich','Your private photo space','Tvoj privatni prostor za fotografije'],
   welcome:['Eure Erinnerungen.','Your memories.','Vaše uspomene.'], welcomeAccent:['Einfach bei euch.','Always with you.','Uvijek uz vas.'], intro:['Hier warten eure Bilder auf euch – in einer geschützten Galerie, die nur für euch bestimmt ist. Ansehen, Lieblingsbilder auswählen und freigegebene Fotos herunterladen.','Your photographs have a space of their own. View your private gallery, choose your favourites and download the images released for you.','Vaše fotografije imaju svoje mjesto. Pogledajte privatnu galeriju, odaberite omiljene fotografije i preuzmite one koje su vam dostupne.'],
   protected:['Geschützter Zugang','Private access','Zaštićen pristup'], favourites:['Lieblingsbilder','Favourites','Omiljene fotografije'], downloads:['Digitale Downloads','Digital downloads','Digitalno preuzimanje'], loginTitle:['Willkommen zurück','Welcome back','Dobro došli nazad'], loginIntro:['Melde dich mit der E-Mail-Adresse an, die du mir für deine Galerie gegeben hast.','Use the email address you provided for your gallery.','Prijavi se e-mail adresom koju si navela za svoju galeriju.'], login:['Anmelden','Sign in','Prijava'], setup:['Zugang einrichten','Set up access','Aktiviraj pristup'], reset:['Passwort zurücksetzen','Reset password','Promijeni lozinku'], email:['E-Mail-Adresse','Email address','E-mail adresa'], password:['Passwort','Password','Lozinka'], newPassword:['Neues Passwort','New password','Nova lozinka'], repeatPassword:['Passwort wiederholen','Repeat password','Ponovi lozinku'], showPassword:['Passwort anzeigen','Show password','Prikaži lozinku'], hidePassword:['Passwort verbergen','Hide password','Sakrij lozinku'], forgot:['Passwort vergessen?','Forgot password?','Zaboravljena lozinka?'], requestSetup:['Bestätigungslink senden','Send setup link','Pošalji link za aktivaciju'], requestReset:['Link zum Zurücksetzen senden','Send reset link','Pošalji link za promjenu'], setupIntro:['Noch kein Passwort? Ein Bestätigungslink geht an die E-Mail-Adresse, die für deine Galerie hinterlegt ist. Darüber legst du dein eigenes Passwort fest.','No password yet? A setup link will be sent to the email address registered for your gallery. Use it to choose your own password.','Još nemaš lozinku? Link za aktivaciju stiže na adresu registrovanu za tvoju galeriju. Putem njega postavljaš svoju lozinku.'], resetIntro:['Du bekommst einen kurz gültigen Link an deine hinterlegte E-Mail-Adresse. Dein bisheriges Passwort wird niemals per E-Mail verschickt.','Receive a short-lived reset link at your registered email address. Your existing password is never sent by email.','Dobit ćeš kratkotrajni link za promjenu na registrovanu e-mail adresu. Postojeća lozinka se nikada ne šalje e-mailom.'], requestSent:['Wenn diese Adresse freigeschaltet ist, erhältst du gleich eine E-Mail. Bitte prüfe auch deinen Spam-Ordner.','If this address has access, you will receive an email shortly. Please also check your spam folder.','Ako je ova adresa registrovana, uskoro će stići e-mail. Provjeri i neželjenu poštu.'], secureNote:['Deine Galerie ist erst nach der Anmeldung sichtbar. Auch die einzelnen Bilder sind geschützt.','Your gallery and individual images are available only after you sign in.','Galerija i pojedinačne fotografije dostupne su tek nakon prijave.'], help:['Fragen zum Zugang?','Need help accessing your gallery?','Pitanja o pristupu?'], contact:['Schreib mir gerne','Get in touch','Javi mi se'], loading:['Dein Kundenportal wird geladen …','Loading your client portal …','Učitavanje portala …'], saving:['Wird gespeichert …','Saving …','Spremanje …'], working:['Einen Moment …','One moment …','Samo trenutak …'], offlineTitle:['Dein Portal wird vorbereitet','Your portal is being prepared','Tvoj portal se priprema'], offlineText:['Die sichere Verbindung ist noch nicht eingerichtet oder gerade nicht erreichbar. Deine Angaben wurden nicht gespeichert. Bitte versuche es später erneut oder melde dich bei mir.','The secure connection is not configured yet or is currently unavailable. Your details have not been saved. Please try again later or contact me.','Sigurna veza još nije postavljena ili trenutno nije dostupna. Tvoji podaci nisu spremljeni. Pokušaj kasnije ili mi se javi.'], retry:['Erneut versuchen','Try again','Pokušaj ponovo'], signOut:['Abmelden','Sign out','Odjava'], myGalleries:['Deine Galerien','Your galleries','Tvoje galerije'], hello:['Schön, dass du da bist, {name}.','Lovely to see you, {name}.','Drago mi je da si tu, {name}.'], images:['{n} Bilder','{n} images','{n} fotografija'], openGallery:['Galerie öffnen','Open gallery','Otvori galeriju'], noGalleries:['Deine Bilder sind bald hier','Your images will be here soon','Tvoje fotografije uskoro stižu'], noGalleriesText:['Für deinen Zugang ist noch keine veröffentlichte Galerie verfügbar. Sobald deine Bilder fertig sind, bekommst du von mir eine Nachricht.','No published gallery is available for your access yet. I will let you know when your photographs are ready.','Za tvoj pristup još nema objavljene galerije. Javit ću ti kada fotografije budu spremne.'], backGalleries:['Alle Galerien','All galleries','Sve galerije'], allPhotos:['Alle Bilder','All photos','Sve fotografije'], favouritesCount:['Favoriten ({n})','Favourites ({n})','Omiljene ({n})'], selectedCount:['{n} ausgewählt','{n} selected','{n} odabrano'], selectAll:['Alle auswählen','Select all','Odaberi sve'], clearSelection:['Auswahl aufheben','Clear selection','Poništi izbor'], selectFavourites:['Favoriten auswählen','Select favourites','Odaberi omiljene'], buyPhotos:['Bilder bestellen','Order images','Naruči fotografije'], download:['Herunterladen','Download','Preuzmi'], downloadSelected:['Auswahl herunterladen','Download selection','Preuzmi odabrane'], selection:['Deine Auswahl','Your selection','Tvoj izbor'], favoriteAdd:['Als Favorit markieren','Add to favourites','Dodaj u omiljene'], favoriteRemove:['Aus Favoriten entfernen','Remove from favourites','Ukloni iz omiljenih'], selectPhoto:['Bild auswählen','Select image','Odaberi fotografiju'], deselectPhoto:['Bild aus Auswahl entfernen','Deselect image','Poništi izbor fotografije'], photoOpen:['Bild {n} vergrößern','Open image {n}','Otvori fotografiju {n}'], noFavourites:['Welche Bilder sind eure Lieblingsbilder?','Which images are your favourites?','Koje su vam fotografije omiljene?'], noFavouritesText:['Tippe auf das Herz an einem Bild, um es hier wiederzufinden. Deine Favoriten werden in deiner Galerie gespeichert.','Tap the heart on an image to find it here. Your favourites are saved in your gallery.','Dodirni srce na fotografiji da je sačuvaš ovdje. Omiljene fotografije se spremaju u tvoju galeriju.'], noImages:['Noch keine Bilder vorhanden','No images yet','Još nema fotografija'], noImagesText:['Die Bilder für diese Galerie werden gerade vorbereitet.','The photographs for this gallery are being prepared.','Fotografije za ovu galeriju se pripremaju.'], close:['Schließen','Close','Zatvori'], previous:['Vorheriges Bild','Previous image','Prethodna fotografija'], next:['Nächstes Bild','Next image','Sljedeća fotografija'], fullscreen:['Vollbild','Fullscreen','Cijeli ekran'], imagePosition:['{n} von {total}','{n} of {total}','{n} od {total}'], imageLoadError:['Dieses Bild konnte nicht geladen werden. Bitte versuche es noch einmal.','This image could not be loaded. Please try again.','Fotografiju nije moguće učitati. Pokušaj ponovo.'], favouriteSaved:['Deine Favoriten wurden gespeichert.','Your favourites have been saved.','Omiljene fotografije su spremljene.'], downloadLocked:['Die Originaldateien dieser Auswahl sind noch nicht freigegeben. Bestelle die Bilder oder frage mich nach deiner Freigabe.','The originals in this selection have not been released yet. Order the images or ask me about your download access.','Originalne datoteke ovog izbora još nisu dostupne. Naruči fotografije ili me pitaj za pristup preuzimanju.'], downloadPreparing:['Dein Download wird vorbereitet','Preparing your download','Priprema preuzimanja'], downloadProgress:['{n} von {total} Bildern geladen','{n} of {total} images loaded','Učitano {n} od {total} fotografija'], downloadStarted:['Dein Download ist bereit.','Your download is ready.','Preuzimanje je spremno.'], downloadLimit:['Bitte lade höchstens 30 Bilder auf einmal herunter, damit dein Gerät den Download zuverlässig vorbereiten kann.','Please download no more than 30 images at a time so your device can prepare the download reliably.','Preuzmi najviše 30 fotografija odjednom kako bi uređaj mogao pouzdano pripremiti preuzimanje.'], downloadSize:['Diese Auswahl ist für einen gemeinsamen Download zu groß. Bitte lade weniger Bilder auf einmal herunter.','This selection is too large for one download. Please download fewer images at a time.','Ovaj izbor je prevelik za jedno preuzimanje. Preuzmi manje fotografija odjednom.'],
@@ -8,6 +21,7 @@ const rows = {
   errorGeneric:['Das hat gerade nicht funktioniert. Bitte versuche es erneut.','Something went wrong. Please try again.','Nešto nije uspjelo. Pokušaj ponovo.'], errorAuth:['Die E-Mail-Adresse oder das Passwort stimmt nicht.','The email address or password is incorrect.','E-mail adresa ili lozinka nije tačna.'], errorSession:['Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.','Your session has expired. Please sign in again.','Sesija je istekla. Prijavi se ponovo.'], errorForbidden:['Für diese Aktion hast du keinen Zugriff.','You do not have access to this action.','Nemaš pristup ovoj radnji.'], errorNotFound:['Diese Galerie oder dieser Einrichtungslink ist nicht mehr verfügbar.','This gallery or setup link is no longer available.','Galerija ili link za aktivaciju više nije dostupan.'], errorRate:['Bitte warte einen Moment, bevor du es erneut versuchst.','Please wait a moment before trying again.','Sačekaj trenutak prije ponovnog pokušaja.'], errorConfig:['Diese Funktion ist noch nicht eingerichtet. Bitte melde dich bei mir.','This feature is not configured yet. Please contact me.','Ova funkcija još nije postavljena. Javi mi se.'], formInvalid:['Bitte fülle die erforderlichen Felder aus.','Please complete the required fields.','Popuni obavezna polja.'], security:['Sicherer Zugang','Secure access','Siguran pristup'], noPayment:['Es ist noch keine Zahlungsart eingerichtet. Bitte melde dich bei mir.','No payment method is configured yet. Please contact me.','Još nema postavljenog načina plaćanja. Javi mi se.'], chooseImages:['Bitte wähle zuerst Bilder aus.','Please select images first.','Prvo odaberi fotografije.'], cancel:['Abbrechen','Cancel','Otkaži'], choose:['Auswählen','Choose','Odaberi'], uploadedPreview:['Vorschau','Preview','Pregled'], delete:['Entfernen','Remove','Ukloni'], returnHome:['Zur Homepage','Back to website','Nazad na web stranicu']
 };
 Object.assign(rows,{
+  customerPreview:['Kundenansicht · Vorschau dieser Galerie','Client view · Gallery preview','Prikaz za klijente · Pregled galerije'],
   imageOne:['{n} Bild','{n} image','{n} fotografija'], packageOne:['{n} digitales Bild','{n} digital image','{n} digitalna fotografija'],
   checkoutIntroOne:['Du hast ein Bild ausgewählt. Wähle das passende digitale Paket für deine Auswahl.','You have selected one image. Choose the digital package for your selection.','Odabrana je jedna fotografija. Izaberi odgovarajući digitalni paket.'], uploadDoneOne:['Ein Bild wurde hochgeladen.','One image has been uploaded.','Učitana je jedna fotografija.'],
   selectionLimit:['Bitte wähle höchstens 500 Bilder einzeln aus. Für eine vollständige Galerie verwende das Galeriepaket.','Please select no more than 500 individual images. Use the gallery package for a complete gallery.','Odaberi najviše 500 pojedinačnih fotografija. Za cijelu galeriju koristi paket galerije.'], downloadBatchHint:['Für große Galerien lade deine Bilder in mehreren Teil-Auswahlen herunter: höchstens 30 Bilder und insgesamt 300 MB pro Download.','For large galleries, download your images in smaller selections: no more than 30 images and 300 MB per download.','Za velike galerije preuzimaj fotografije u manjim grupama: najviše 30 fotografija i ukupno 300 MB po preuzimanju.'],
@@ -23,5 +37,520 @@ Object.assign(rows,{
   receiptPending:['Bezahlt · Bestätigung wird versendet','Paid · Confirmation pending','Plaćeno · Čeka se potvrda'], resendReceipt:['Bestätigung erneut senden','Resend confirmation','Ponovo pošalji potvrdu'],
   withdrawal:['Rücktritt erklären','Request withdrawal','Izjavi odustajanje'], withdrawalConfirm:['Möchtest du den Rücktritt von dieser Bestellung erklären? Ich prüfe deine Erklärung. Bereits bereitgestellte digitale Fotos können vom Rücktritt ausgeschlossen sein. Es erfolgt keine automatische Erstattung.','Do you wish to withdraw from this order? I will review your request. Digital images already supplied may be excluded from withdrawal. This does not trigger an automatic refund.','Želiš li odustati od ove narudžbe? Provjerit ću tvoju izjavu. Već isporučene digitalne fotografije mogu biti isključene iz prava na odustajanje. Povrat novca nije automatski.'], withdrawalSaved:['Deine Rücktrittserklärung wurde gespeichert. Du erhältst eine Eingangsbestätigung per E-Mail.','Your withdrawal request has been recorded. You will receive an acknowledgment by email.','Izjava o odustajanju je spremljena. Potvrda primitka stiže e-mailom.'], withdrawalRequested:['Rücktritt zur Prüfung eingegangen','Withdrawal request received','Primljena izjava o odustajanju'],
   refunded:['Erstattet','Refunded','Vraćen novac'], markRefunded:['Erstattung vermerken','Record refund','Evidentiraj povrat'], refundConfirm:['Nur bestätigen, wenn du die Zahlung bereits außerhalb dieses Portals erstattet hast. Hier wird keine Bank- oder PayPal-Erstattung ausgeführt. Gekaufte Downloads werden gesperrt.','Confirm only after refunding the payment outside this portal. This does not refund money through your bank or PayPal. Purchased downloads will be blocked.','Potvrdi samo nakon što vratiš uplatu izvan ovog portala. Ovdje se ne izvršava bankovni ili PayPal povrat. Kupljeno preuzimanje će se blokirati.'], refundedSaved:['Die externe Erstattung wurde vermerkt.','The external refund has been recorded.','Povrat izvan portala je evidentiran.']
+});
+Object.assign(rows,{
+  coverLayout:['Covergestaltung','Cover layout','Izgled naslovnice'], coverOverlay:['Foto mit Titel','Photo with title','Fotografija s naslovom'], coverSplit:['Foto & Titel nebeneinander','Photo & title side by side','Fotografija i naslov jedno pored drugog'], coverEditorial:['Foto mit Titel darunter','Photo with title below','Fotografija s naslovom ispod'],
+  coverHeight:['Coverhöhe','Cover height','Visina naslovnice'], heightCompact:['Kompakt','Compact','Kompaktno'], heightStandard:['Standard','Standard','Standardno'], heightLarge:['Großzügig','Large','Veliko'],
+  gridDensity:['Bildgröße im Raster','Image size in grid','Veličina fotografija u mreži'], densityComfortable:['Mittel','Medium','Srednje'], densityCompact:['Klein · mehr Bilder','Small · more images','Male · više fotografija'], densitySpacious:['Groß · mehr Raum','Large · more space','Velike · više prostora'], gridGap:['Abstand zwischen Bildern (8–40 px)','Image spacing (8–40 px)','Razmak između fotografija (8–40 px)'], showFilenames:['Bildnamen anzeigen','Show image filenames','Prikaži nazive fotografija'],
+  customerFavourites:['Kundenfavoriten','Client favourites','Favoriti klijenata'], customerFavouritesIntro:['Herzen und Namen zeigen die Auswahl deiner Kunden. Wähle einen Kunden, um dessen Favoriten für zusätzliche Downloads freizugeben.','Hearts and names show your clients’ choices. Choose a client to release their favourites as additional downloads.','Srca i imena prikazuju izbor klijenata. Odaberi klijenta da odobriš njegove favorite za dodatno preuzimanje.'], favouriteCustomer:['Favoriten filtern','Filter favourites','Filtriraj favorite'], allCustomerFavourites:['Alle Kundenfavoriten ({n})','All client favourites ({n})','Svi favoriti klijenata ({n})'], customerFavouriteCount:['Von {n} Kunden favorisiert','Favourited by {n} clients','Favorit za {n} klijenata'], noCustomerFavourites:['Noch keine Kundenfavoriten','No client favourites yet','Još nema favorita klijenata'], refreshFavourites:['Aktualisieren','Refresh','Osvježi'], favouritesRefreshed:['Die Kundenfavoriten wurden aktualisiert.','Client favourites have been refreshed.','Favoriti klijenata su osvježeni.'],
+  imageOrder:['Bildreihenfolge','Image order','Redoslijed fotografija'], sortChoose:['Sortierung wählen','Choose sorting','Odaberi sortiranje'], filenameAscending:['Bildname A–Z','Filename A–Z','Naziv A–Z'], filenameDescending:['Bildname Z–A','Filename Z–A','Naziv Z–A'], moveImageUp:['Vor','Earlier','Ranije'], moveImageDown:['Zurück','Later','Kasnije'], movePhotoUp:['{name} nach vorne verschieben','Move {name} earlier','Pomjeri {name} ranije'], movePhotoDown:['{name} nach hinten verschieben','Move {name} later','Pomjeri {name} kasnije'], saveImageOrder:['Reihenfolge speichern','Save image order','Spremi redoslijed'], resetImageOrder:['Änderungen verwerfen','Discard changes','Odbaci izmjene'], imageOrderUnsaved:['Reihenfolge noch nicht gespeichert','Image order has not been saved','Redoslijed još nije spremljen'], imageOrderSaved:['Reihenfolge gespeichert','Image order saved','Redoslijed je spremljen'], discardOrderConfirm:['Die neue Bildreihenfolge ist noch nicht gespeichert. Änderungen verwerfen und diese Ansicht verlassen?','The new image order has not been saved. Discard the changes and leave this view?','Novi redoslijed nije spremljen. Odbaciti izmjene i napustiti ovaj prikaz?'],
+  notificationPending:['Die Freigabe ist gespeichert. Die E-Mail wurde noch nicht zugestellt. Bitte versuche den Versand erneut.','The release is saved. The email has not been delivered yet. Please retry sending it.','Odobrenje je spremljeno. E-mail još nije dostavljen. Pokušaj ponovo poslati.'], retryNotification:['E-Mail erneut senden','Retry email','Ponovo pošalji e-mail'], notificationSent:['Die ausstehenden E-Mails wurden versendet.','Pending emails have been sent.','E-mailovi na čekanju su poslani.'],
+  invoicePdf:['Rechnung (PDF)','Invoice (PDF)','Račun (PDF)'], invoiceIntro:['Ordne die Rechnung einem Kunden dieser Galerie zu und lade sie hoch, bevor er bestellt. Sie wird seiner Bestellbestätigung beigefügt und bleibt in seinem Zugang abrufbar. PDF bis 5 MB.','Assign the invoice to a client in this gallery and upload it before they place an order. It is attached to their order confirmation and remains available in their account. PDF up to 5 MB.','Dodijeli račun klijentu ove galerije i učitaj ga prije nego što naruči. Račun se prilaže potvrdi narudžbe i ostaje dostupan na njegovom računu. PDF do 5 MB.'], invoiceFile:['PDF-Datei','PDF file','PDF datoteka'], uploadInvoice:['Rechnung hochladen','Upload invoice','Učitaj račun'], replaceInvoice:['Rechnung ersetzen','Replace invoice','Zamijeni račun'], removeInvoice:['Rechnung entfernen','Remove invoice','Ukloni račun'], currentInvoice:['Aktuelle Rechnung','Current invoice','Trenutni račun'], noInvoice:['Für diesen Kunden ist noch keine Rechnung hinterlegt.','No invoice has been uploaded for this client yet.','Za ovog klijenta još nema učitanog računa.'], chooseInvoiceCustomer:['Wähle den Kunden für diese Rechnung.','Choose the client for this invoice.','Odaberi klijenta za ovaj račun.'], invoiceUploaded:['Die Rechnung wurde gespeichert.','The invoice has been saved.','Račun je spremljen.'], invoiceRemoved:['Die Rechnung wurde entfernt.','The invoice has been removed.','Račun je uklonjen.'], invoiceType:['Bitte wähle eine PDF-Datei.','Please choose a PDF file.','Odaberi PDF datoteku.'], invoiceSize:['Die PDF-Datei darf höchstens 5 MB groß sein.','The PDF file must be no larger than 5 MB.','PDF datoteka ne smije biti veća od 5 MB.'], downloadInvoice:['Rechnung herunterladen','Download invoice','Preuzmi račun']
+});
+Object.assign(rows,{
+  "galleryOverview": [
+    "Galerien",
+    "Galleries",
+    "Galerije"
+  ],
+  "yourStudio": [
+    "Dein Fotostudio",
+    "Your photo studio",
+    "Tvoj foto studio"
+  ],
+  "galleryEditor": [
+    "Galerie bearbeiten",
+    "Edit gallery",
+    "Uredi galeriju"
+  ],
+  "design": [
+    "Design",
+    "Design",
+    "Dizajn"
+  ],
+  "gallerySettings": [
+    "Galerie-Einstellungen",
+    "Gallery settings",
+    "Postavke galerije"
+  ],
+  "studioSettings": [
+    "Einstellungen",
+    "Settings",
+    "Postavke"
+  ],
+  "activity": [
+    "Aktivitäten",
+    "Activity",
+    "Aktivnosti"
+  ],
+  "search": [
+    "Suchen",
+    "Search",
+    "Pretraži"
+  ],
+  "dateFrom": [
+    "Ab Datum",
+    "From date",
+    "Od datuma"
+  ],
+  "sort": [
+    "Sortieren",
+    "Sort",
+    "Sortiraj"
+  ],
+  "dateNewest": [
+    "Neueste zuerst",
+    "Newest first",
+    "Najnovije prvo"
+  ],
+  "dateOldest": [
+    "Älteste zuerst",
+    "Oldest first",
+    "Najstarije prvo"
+  ],
+  "resetFilters": [
+    "Filter zurücksetzen",
+    "Reset filters",
+    "Poništi filtere"
+  ],
+  "noResults": [
+    "Keine passenden Einträge.",
+    "No matching results.",
+    "Nema odgovarajućih rezultata."
+  ],
+  "allGalleries": [
+    "Alle Galerien",
+    "All galleries",
+    "Sve galerije"
+  ],
+  "livePreview": [
+    "Direkte Vorschau",
+    "Live preview",
+    "Pregled uživo"
+  ],
+  "desktop": [
+    "Desktop",
+    "Desktop",
+    "Računar"
+  ],
+  "mobile": [
+    "Handy",
+    "Mobile",
+    "Mobitel"
+  ],
+  "typography": [
+    "Schriftstil",
+    "Typography",
+    "Tipografija"
+  ],
+  "typeSerif": [
+    "Elegant",
+    "Elegant",
+    "Elegantno"
+  ],
+  "typeSans": [
+    "Modern",
+    "Modern",
+    "Moderno"
+  ],
+  "typeEditorial": [
+    "Editorial · kursiv",
+    "Editorial · italic",
+    "Editorial · kurziv"
+  ],
+  "coverDecoration": [
+    "Cover-Akzent",
+    "Cover accent",
+    "Ukras naslovnice"
+  ],
+  "decorationNone": [
+    "Ohne Akzent",
+    "No accent",
+    "Bez ukrasa"
+  ],
+  "decorationFrame": [
+    "Feiner Rahmen",
+    "Fine frame",
+    "Tanki okvir"
+  ],
+  "decorationStripe": [
+    "Seitliche Linie",
+    "Side line",
+    "Bočna linija"
+  ],
+  "editImage": [
+    "Bild bearbeiten",
+    "Edit image",
+    "Uredi fotografiju"
+  ],
+  "imageName": [
+    "Bildname",
+    "Image name",
+    "Naziv fotografije"
+  ],
+  "deleteImageConfirm": [
+    "Dieses Bild dauerhaft entfernen? Bestellte Bilder bleiben geschützt und können nicht gelöscht werden.",
+    "Permanently remove this image? Images included in orders are protected and cannot be deleted.",
+    "Trajno ukloniti fotografiju? Naručene fotografije su zaštićene i ne mogu se obrisati."
+  ],
+  "imageDeleted": [
+    "Das Bild wurde entfernt.",
+    "The image has been removed.",
+    "Fotografija je uklonjena."
+  ],
+  "imageWatermarkHint": [
+    "Das hochgeladene Original bleibt unverändert. Wasserzeichen werden nur in die verkleinerte Vorschau eingebettet.",
+    "The uploaded original remains unchanged. Watermarks are embedded only in the reduced preview.",
+    "Učitani original ostaje nepromijenjen. Vodeni žig se dodaje samo umanjenom pregledu."
+  ],
+  "watermark": [
+    "Wasserzeichen & Vorschauen",
+    "Watermarks & previews",
+    "Vodeni žig i pregledi"
+  ],
+  "watermarkMode": [
+    "Wasserzeichen dieser Galerie",
+    "Gallery watermark",
+    "Vodeni žig galerije"
+  ],
+  "watermarkInherit": [
+    "Allgemeine Einstellung verwenden",
+    "Use studio default",
+    "Koristi opću postavku"
+  ],
+  "watermarkOn": [
+    "Wasserzeichen einschalten",
+    "Enable watermark",
+    "Uključi vodeni žig"
+  ],
+  "watermarkOff": [
+    "Ohne Wasserzeichen",
+    "No watermark",
+    "Bez vodenog žiga"
+  ],
+  "watermarkIntro": [
+    "Kunden sehen vor der Freigabe eine kleinere Vorschau. Nach der Freigabe stehen die saubere Vorschau und das unveränderte Original bereit.",
+    "Clients see a smaller preview before release. After release, the clean preview and unchanged original are available.",
+    "Klijenti prije odobrenja vide manji pregled. Nakon odobrenja dostupni su čisti pregled i nepromijenjeni original."
+  ],
+  "watermarkDefault": [
+    "Neue und bestehende Galerien standardmäßig mit Wasserzeichen schützen",
+    "Protect new and existing galleries with a watermark by default",
+    "Standardno zaštiti nove i postojeće galerije vodenim žigom"
+  ],
+  "watermarkText": [
+    "Text des Wasserzeichens",
+    "Watermark text",
+    "Tekst vodenog žiga"
+  ],
+  "watermarkSize": [
+    "Schriftgröße (12–96)",
+    "Text size (12–96)",
+    "Veličina teksta (12–96)"
+  ],
+  "watermarkOpacity": [
+    "Deckkraft (0,1–1)",
+    "Opacity (0.1–1)",
+    "Neprozirnost (0,1–1)"
+  ],
+  "watermarkPosition": [
+    "Position",
+    "Position",
+    "Položaj"
+  ],
+  "positionCenter": [
+    "Mittig",
+    "Centre",
+    "Sredina"
+  ],
+  "positionDiagonal": [
+    "Diagonal · wiederholt",
+    "Diagonal · repeated",
+    "Dijagonalno · ponovljeno"
+  ],
+  "positionBottomRight": [
+    "Unten rechts",
+    "Bottom right",
+    "Dolje desno"
+  ],
+  "watermarkExisting": [
+    "Nach einer Änderung: Öffne bestehende Galerien und klicke bei „Bilder“ auf „Vorschauen aktualisieren“. Bis dahin zeigt das Portal bei nicht freigegebenen Bildern einen geschützten Platzhalter. Neue Uploads erhalten das Wasserzeichen automatisch.",
+    "After changing this setting, open existing galleries and click Update previews under Photographs. Until then, unreleased images show a protected placeholder. New uploads receive the watermark automatically.",
+    "Nakon promjene otvori postojeće galerije i pod Fotografije klikni Ažuriraj preglede. Do tada neodobrene fotografije prikazuju zaštićeni placeholder. Novi prijenosi automatski dobijaju vodeni žig."
+  ],
+  "previewPending": [
+    "Geschützte Vorschau aktualisieren",
+    "Update protected preview",
+    "Ažuriraj zaštićeni pregled"
+  ],
+  "regeneratePreviews": [
+    "Vorschauen aktualisieren",
+    "Update previews",
+    "Ažuriraj preglede"
+  ],
+  "previewProgress": [
+    "Vorschau {n} von {total}",
+    "Preview {n} of {total}",
+    "Pregled {n} od {total}"
+  ],
+  "previewsReady": [
+    "Alle Vorschauen wurden aktualisiert.",
+    "All previews have been updated.",
+    "Svi pregledi su ažurirani."
+  ],
+  "protectedPreviewNote": [
+    "Wasserzeichen aktiv. Originale bleiben unverändert; Kunden ohne Freigabe sehen nur die geschützte Vorschau.",
+    "Watermark enabled. Originals stay unchanged; clients without release see only the protected preview.",
+    "Vodeni žig je uključen. Originali ostaju nepromijenjeni; klijenti bez odobrenja vide samo zaštićeni pregled."
+  ],
+  "cleanPreviewNote": [
+    "Für diese Galerie ist kein Wasserzeichen aktiv. Original-Downloads benötigen weiterhin eine Freigabe.",
+    "Watermarks are disabled for this gallery. Original downloads still require release.",
+    "Vodeni žig je isključen za ovu galeriju. Preuzimanje originala i dalje zahtijeva odobrenje."
+  ],
+  "emailSettings": [
+    "E-Mail-Texte",
+    "Email text",
+    "Tekst e-mailova"
+  ],
+  "emailSettingsIntro": [
+    "Betreff und Einleitung kannst du hier anpassen. Leere Felder verwenden die gestaltete Standardvorlage. Logo, persönliche Anrede, Bestelldaten und Pflichtinformationen bleiben erhalten.",
+    "Customize the subject and introduction here. Empty fields use the designed default template. Logo, personal greeting, order details and required information are preserved.",
+    "Ovdje možeš prilagoditi naslov i uvod. Prazna polja koriste standardni predložak. Logo, lični pozdrav, podaci narudžbe i obavezne informacije ostaju."
+  ],
+  "emailSubject": [
+    "Eigener Betreff (optional)",
+    "Custom subject (optional)",
+    "Vlastiti naslov (opcionalno)"
+  ],
+  "emailIntro": [
+    "Eigene Einleitung (optional)",
+    "Custom introduction (optional)",
+    "Vlastiti uvod (opcionalno)"
+  ],
+  "emailKind_invite": [
+    "Galerie-Einladung",
+    "Gallery invitation",
+    "Pozivnica za galeriju"
+  ],
+  "emailKind_setup": [
+    "Zugang einrichten",
+    "Set up access",
+    "Postavljanje pristupa"
+  ],
+  "emailKind_reset": [
+    "Passwort zurücksetzen",
+    "Reset password",
+    "Reset lozinke"
+  ],
+  "emailKind_order": [
+    "Bestellbestätigung",
+    "Order confirmation",
+    "Potvrda narudžbe"
+  ],
+  "emailKind_download": [
+    "Download-Freigabe",
+    "Download release",
+    "Odobrenje preuzimanja"
+  ],
+  "settingsSaved": [
+    "Einstellungen gespeichert. Bestehende Vorschauen bei Bedarf in der Galerie aktualisieren.",
+    "Settings saved. Update existing gallery previews if needed.",
+    "Postavke spremljene. Po potrebi ažuriraj postojeće preglede u galeriji."
+  ],
+  "activityIntro": [
+    "Hier erscheinen Kundenfavoriten und gestartete Downloads. Ein Eintrag bestätigt den Download-Aufruf, nicht das Speichern auf dem Gerät. Aktivitäten werden 90 Tage aufbewahrt.",
+    "Client favourites and started downloads appear here. An entry confirms the download request, not that the file was saved on the device. Activity is retained for 90 days.",
+    "Ovdje se prikazuju favoriti klijenata i započeta preuzimanja. Unos potvrđuje zahtjev za preuzimanje, ne spremanje na uređaj. Aktivnosti se čuvaju 90 dana."
+  ],
+  "activityDownload": [
+    "Download gestartet",
+    "Download started",
+    "Preuzimanje započeto"
+  ],
+  "activityFavourite": [
+    "Als Favorit markiert",
+    "Added to favourites",
+    "Dodano u favorite"
+  ],
+  "activityUnfavourite": [
+    "Favorit entfernt",
+    "Removed from favourites",
+    "Uklonjeno iz favorita"
+  ],
+  "markRead": [
+    "Als gelesen markieren",
+    "Mark as read",
+    "Označi pročitano"
+  ],
+  "noActivity": [
+    "Noch keine Kundenaktivitäten.",
+    "No client activity yet.",
+    "Još nema aktivnosti klijenata."
+  ],
+  "loadMore": [
+    "Weitere laden",
+    "Load more",
+    "Učitaj više"
+  ],
+  "copy": [
+    "Kopieren",
+    "Copy",
+    "Kopiraj"
+  ],
+  "copied": [
+    "In die Zwischenablage kopiert.",
+    "Copied to clipboard.",
+    "Kopirano u međuspremnik."
+  ],
+  "copyManual": [
+    "Der Wert ist markiert. Wähle „Kopieren“.",
+    "The value is selected. Choose Copy.",
+    "Vrijednost je označena. Odaberi Kopiraj."
+  ],
+  "imageInOrder": [
+    "Dieses Bild gehört zu einer Bestellung und kann nicht entfernt werden.",
+    "This image belongs to an order and cannot be removed.",
+    "Fotografija pripada narudžbi i ne može se ukloniti."
+  ]
+});
+Object.assign(rows,{newActivity:['Neue Kundenaktivität – unter Aktivitäten ansehen.','New client activity — view Activity.','Nova aktivnost klijenta — pogledaj Aktivnosti.']});
+Object.assign(rows,{regeneratePreview:['Wasserzeichen aktualisieren','Update watermark','Ažuriraj vodeni žig']});
+Object.assign(rows,{
+  packageAutoHint:['Die günstigste Zusammenstellung ist vorausgewählt. Passende Pakete und zusätzliche Einzelbilder werden automatisch verrechnet.','The lowest-priced combination is preselected. Matching packages and additional individual images are calculated automatically.','Najpovoljnija kombinacija je unaprijed odabrana. Odgovarajući paketi i dodatne pojedinačne fotografije obračunavaju se automatski.'],
+  choosePackage:['Dein Paket wählen','Choose your package','Odaberi svoj paket'],
+  editSelection:['Bildauswahl ändern','Change image selection','Promijeni izbor fotografija'],
+  packageChooseImages:['Wähle zuerst deine Bilder aus.','Select your images first.','Prvo odaberi fotografije.'],
+  packageNeedsMore:['Noch {n} auswählen, um dieses Paket zu nutzen.','Select {n} more to use this package.','Odaberi još {n} za ovaj paket.'],
+  packageNeedsAll:['Noch {n} auswählen – dieses Paket gilt für alle Bilder.','Select {n} more — this package includes every image.','Odaberi još {n} — ovaj paket uključuje sve fotografije.'],
+  packageCannotComplete:['Diese Auswahl lässt sich mit den verfügbaren Paketen nicht vollständig zusammenstellen. Bitte ändere die Bildanzahl.','The available packages cannot cover this selection exactly. Please change the image count.','Dostupni paketi ne mogu tačno pokriti ovaj izbor. Promijeni broj fotografija.'],
+  packageAmountLimit:['Bitte melde dich für diese große Bestellung direkt bei mir.','Please contact me directly for this large order.','Za ovu veliku narudžbu kontaktiraj me direktno.'],
+  packageNeedsSingle:['Für zusätzliche Bilder ist noch kein Einzelpreis hinterlegt. Wähle ein Vielfaches der Paketgröße.','No single-image price is available for additional images. Select a multiple of the package size.','Cijena dodatne pojedinačne fotografije još nije unesena. Odaberi višekratnik veličine paketa.'],
+  packageMultiple:['{quantity} × {name}','{quantity} × {name}','{quantity} × {name}'],
+  packageCombination:['{quantity} × {name} + {n} einzeln zu je {price}','{quantity} × {name} + {n} individual at {price} each','{quantity} × {name} + {n} pojedinačno po {price}'],
+  packageSelectionTotal:['für deine Auswahl','for your selection','za tvoj izbor'],
+  packageBasePrice:['Paketpreis','Package price','Cijena paketa'],
+  packageUnitPrice:['je {price}','{price} each','po {price}'],
+  checkoutSummary:['Deine Zusammenstellung','Your order breakdown','Pregled tvoje narudžbe'],
+  noEligiblePackage:['Für deine Auswahl ist noch kein passendes Paket verfügbar. Bitte ändere deine Bildauswahl.','No package matches your selection yet. Please change your image selection.','Još nema paketa koji odgovara tvom izboru. Promijeni izbor fotografija.'],
+  packagePriceChanged:['Die verfügbaren Pakete oder Preise wurden inzwischen geändert. Bitte lade die Galerie neu und prüfe die aktuelle Summe. Es wurde keine neue Bestellung aufgegeben.','The available packages or prices have changed. Please reload the gallery and check the current total. No new order was placed.','Dostupni paketi ili cijene su promijenjeni. Ponovo učitaj galeriju i provjeri novi iznos. Nova narudžba nije napravljena.']
+});
+Object.assign(rows,{
+  orderPaidBlocked:['Bezahlt · Downloads gesperrt','Paid · Downloads blocked','Plaćeno · Preuzimanja blokirana'],
+  orderPaidPartlyBlocked:['Bezahlt · Downloads teilweise gesperrt','Paid · Some downloads blocked','Plaćeno · Neka preuzimanja blokirana'],
+  revokeDownloads:['Freigabe zurücknehmen','Revoke download access','Ukini odobrenje za preuzimanje'],
+  revokeDownloadsHint:['Die Freigabe gilt für den ausgewählten Kunden. Eine Sperre gilt auch für bezahlte Bilder; Bestellungen bleiben erhalten. Bereits gespeicherte Dateien lassen sich nicht zurückholen.','Access applies to the selected customer. Revocation also blocks purchased images; orders remain unchanged. Previously downloaded files cannot be recalled.','Odobrenje vrijedi za odabranog klijenta. Zabrana važi i za plaćene fotografije; narudžbe ostaju sačuvane. Već preuzete datoteke ne mogu se povući.'],
+  revokeDownloadsConfirm:['Downloadfreigabe für {n} ausgewählte Bilder für {name} zurücknehmen? Auch bezahlte Bilder werden gesperrt. Du kannst sie später erneut freigeben.','Revoke download access to {n} selected images for {name}? Purchased images will also be blocked. You can release them again later.','Ukinuti preuzimanje {n} odabranih fotografija za {name}? I plaćene fotografije će biti blokirane. Kasnije ih možeš ponovo odobriti.'],
+  downloadsRevoked:['Die ausgewählten Downloads wurden für diesen Kunden gesperrt.','The selected downloads have been blocked for this customer.','Odabrana preuzimanja su blokirana za ovog klijenta.'],
+  downloadBlocked:['Für gewählten Kunden: gesperrt','Selected customer: blocked','Odabrani klijent: blokirano'],
+  downloadReleased:['Für gewählten Kunden: freigegeben','Selected customer: released','Odabrani klijent: odobreno'],
+  downloadNotReleased:['Für gewählten Kunden: nicht freigegeben','Selected customer: not released','Odabrani klijent: nije odobreno'],
+  imageWatermarkMode:['Wasserzeichen für dieses Bild','Watermark for this image','Vodeni žig za ovu fotografiju'],
+  imageWatermarkInherit:['Galerie-Einstellung übernehmen','Use gallery setting','Koristi postavku galerije'],
+  imageWatermarkOverrideHint:['Diese Einstellung gilt nur für dieses Bild und hat Vorrang vor der Galerie-Einstellung. Nach der Downloadfreigabe sieht der jeweilige Kunde es weiterhin ohne Wasserzeichen. Beim Einschalten wird die geschützte Vorschau bei Bedarf automatisch erstellt.','This setting overrides the gallery setting for this image only. Customers with download access still see it without a watermark. Enabling protection automatically prepares the preview if needed.','Ova postavka ima prednost nad postavkom galerije samo za ovu fotografiju. Klijenti s odobrenim preuzimanjem je i dalje vide bez vodenog žiga. Zaštićeni pregled se po potrebi automatski kreira.'],
+  imagePreparingWatermark:['Die Wasserzeichen-Vorschau wird erstellt. Bitte lasse diese Seite geöffnet.','Preparing the watermarked preview. Please keep this page open.','Kreira se pregled s vodenim žigom. Ostavi ovu stranicu otvorenu.'],
+  imageControlsMigration:['Bitte führe zuerst die Datenbank-Erweiterung für die Bildeinstellungen aus.','Please apply the image controls database migration first.','Prvo primijeni proširenje baze podataka za postavke fotografija.']
+});
+
+Object.assign(rows, {
+  packageRequiredPending:['Für dein Buchungspaket gibt es bereits eine offene Bestellung unter „Deine Bestellungen“. Für eine andere Bildauswahl melde dich bitte bei Emina.','There is already an open booking order under Your orders. Contact Emina to change your image selection.','Već postoji otvorena narudžba rezervisanog paketa pod Tvoje narudžbe. Za promjenu fotografija javi se Emini.'],
+  packageRequiredProcessing:['Dein Buchungspaket ist bereits bezahlt. Die Bestätigung wird noch vorbereitet. Bitte warte kurz und lade die Seite neu.','Your booking package is already paid. Its confirmation is still being prepared. Please wait and reload.','Tvoj rezervisani paket je već plaćen. Potvrda se još priprema. Sačekaj pa osvježi stranicu.'],
+  deleteGalleryChanged:['Der Galeriename wurde währenddessen geändert. Lade die Galerie neu und bestätige das Löschen erneut.','The gallery name changed. Reload the gallery and confirm deletion again.','Naziv galerije je u međuvremenu promijenjen. Osvježi galeriju i ponovo potvrdi brisanje.'],
+  packageRequiredActiveOnly:['Ein Pflichtpaket muss aktiv bleiben. Entferne zuerst die Markierung als Pflichtpaket, bevor du es deaktivierst.','A required package must remain active. Remove its required status before deactivating it.','Obavezni paket mora biti aktivan. Prvo ukloni oznaku obaveznog paketa prije deaktiviranja.'],
+  pendingOrderCannotCancel:['Nur eine noch unbezahlte Überweisungsbestellung kann hier storniert werden. Bitte lade die Bestellungen neu.','Only an unpaid bank-transfer order can be cancelled here. Please reload the orders.','Ovdje se može otkazati samo neplaćena narudžba putem bankovnog transfera. Osvježi narudžbe.'],
+  cancelPendingOrder:['Offene Bestellung stornieren','Cancel unpaid order','Otkaži neplaćenu narudžbu'],
+  cancelPendingOrderConfirm:['Diese noch unbezahlte Überweisungsbestellung stornieren? Danach kann der Kunde seine Bildauswahl neu bestellen. Bitte nur bestätigen, wenn keine Zahlung eingegangen ist. Die bisherigen Unterlagen bleiben erhalten.','Cancel this unpaid bank-transfer order? The customer can then place a new image selection. Confirm only if no payment has arrived. Existing documents are retained.','Otkazati ovu neplaćenu narudžbu putem bankovnog transfera? Klijent zatim može naručiti novi izbor fotografija. Potvrdi samo ako uplata nije stigla. Postojeći dokumenti ostaju sačuvani.'],
+  pendingOrderCancelled:['Die offene Bestellung wurde storniert. Eine neue Bildauswahl kann bestellt werden.','The unpaid order was cancelled. A new selection can be ordered.','Neplaćena narudžba je otkazana. Novi izbor fotografija se može naručiti.'],
+  packageRequiredOption:['Verpflichtendes Buchungspaket','Required booking package','Obavezni rezervisani paket'],
+  packageRequiredBadge:['Gebuchtes Pflichtpaket','Required booked package','Obavezni rezervisani paket'],
+  packageRequiredAdminHint:['Ein Pflichtpaket pro Galerie. Es wird pro Kundenzugang einmal bezahlt. Darüber hinaus ausgewählte Bilder werden mit den übrigen aktiven Paketen am günstigsten berechnet. Ein neues Pflichtpaket ersetzt das bisherige.','One required package per gallery, paid once per customer. Extra selected images use the cheapest combination of the other active packages. A new required package replaces the previous one.','Jedan obavezni paket po galeriji, plaća se jednom po klijentu. Dodatne fotografije obračunavaju se najpovoljnijom kombinacijom ostalih aktivnih paketa. Novi obavezni paket zamjenjuje prethodni.'],
+  packageRequiredCheckoutHint:['Dein gebuchtes Paket ist verbindlich enthalten. Wähle mindestens die darin enthaltene Bildanzahl. Weitere Bilder berechnen wir automatisch mit der günstigsten Kombination der Zusatzpakete.','Your booked package is required. Select at least its included number of images. Additional images automatically use the cheapest combination of extra packages.','Tvoj rezervisani paket je obavezan. Odaberi najmanje broj fotografija uključen u paket. Dodatne fotografije automatski obračunavamo najpovoljnijom kombinacijom dodatnih paketa.'],
+  packageRequiredPaidHint:['Dein Buchungspaket ist bereits bezahlt. Hier werden nur deine zusätzlich ausgewählten Bilder berechnet.','Your booking package is already paid. Only your extra selected images are charged here.','Tvoj rezervisani paket je već plaćen. Ovdje se obračunavaju samo dodatno odabrane fotografije.'],
+  packageRequiredExtra:['Zusatzpaket · wird für weitere Bilder automatisch berücksichtigt','Extra package · automatically considered for additional images','Dodatni paket · automatski se uzima u obzir za dodatne fotografije'],
+  packageRequiredPaid:['Bereits bezahlt','Already paid','Već plaćeno'],
+  packageRequiredMigration:['Bitte zuerst die Datenbank-Erweiterung für Pflichtpakete ausführen.','Please apply the required packages database migration first.','Prvo primijeni proširenje baze za obavezne pakete.'],
+  deleteGallery:['Galerie löschen','Delete gallery','Izbriši galeriju'],
+  deleteGalleryHint:['Die Galerie wird für alle Zugänge entfernt. Ihre Originalfotos und Vorschauen werden dauerhaft gelöscht. Bestell-, Rechnungs- und Zahlungsunterlagen bleiben erhalten. Dieser Vorgang lässt sich nicht rückgängig machen.','The gallery is removed for all users. Its original photos and previews are permanently deleted. Order, invoice and payment records are retained. This cannot be undone.','Galerija se uklanja za sve korisnike. Originalne fotografije i pregledi se trajno brišu. Narudžbe, računi i podaci o plaćanju ostaju sačuvani. Ovo se ne može poništiti.'],
+  deleteGalleryStep:['Bestätigung {n} von 2','Confirmation {n} of 2','Potvrda {n} od 2'],
+  deleteGalleryNext:['Weiter zum Löschen','Continue to deletion','Nastavi na brisanje'],
+  deleteGalleryFinal:['Galerie endgültig löschen','Permanently delete gallery','Trajno izbriši galeriju'],
+  deleteGalleryTypeHint:['Gib zur zweiten Bestätigung den oben angezeigten Galerienamen exakt ein.','For the second confirmation, type the exact gallery name shown above.','Za drugu potvrdu unesi tačan naziv galerije prikazan iznad.'],
+  deleteGalleryNameMismatch:['Der eingegebene Galeriename stimmt nicht überein.','The gallery name does not match.','Naziv galerije se ne podudara.'],
+  galleryDeleted:['Die Galerie und ihre Fotodateien wurden gelöscht. Bestellunterlagen bleiben erhalten.','The gallery and its photos were deleted. Order records are retained.','Galerija i fotografije su izbrisane. Dokumenti narudžbi ostaju sačuvani.'],
+  deleteGalleryCleanupPending:['Die Galerie ist gesperrt. Einige Fotodateien müssen noch entfernt werden. Bitte schließe die Löschung in der Galerieübersicht ab.','The gallery is blocked. Some photo files still need removal. Finish deletion in the gallery overview.','Galerija je blokirana. Neke datoteke još treba ukloniti. Dovrši brisanje u pregledu galerija.'],
+  finishGalleryDeletion:['Dateilöschung abschließen','Finish deleting files','Dovrši brisanje datoteka'],
+  pendingGalleryDeletions:['Ausstehende Dateilöschungen','Pending photo deletions','Brisanje datoteka na čekanju']
+});
+Object.assign(rows, {
+  activityReadInvalid:['Der Zeitpunkt der Aktivitäten konnte nicht übernommen werden. Aktualisiere die Liste und versuche es erneut.','The activity timestamp could not be used. Refresh the list and try again.','Vrijeme aktivnosti nije moglo biti preuzeto. Osvježi listu i pokušaj ponovo.'],
+  activityReadSaved:['Die bisherigen Aktivitäten sind als gelesen markiert.','The previous activities are marked as read.','Prethodne aktivnosti su označene kao pročitane.'],
+  packageOrderHint:['Mit den Pfeilen legst du die Reihenfolge für deine Kunden fest. Änderungen werden sofort gespeichert. Die günstigste Preisberechnung bleibt unabhängig davon.','Use the arrows to set the order shown to customers. Changes save immediately. The cheapest price calculation is independent of this order.','Strelicama odredi redoslijed za klijente. Promjene se odmah spremaju. Najpovoljniji obračun cijene ne zavisi od redoslijeda.'],
+  packageOrderMigration:['Bitte führe zuerst das Datenbank-Update für die Paketreihenfolge aus.','Apply the package ordering database update first.','Prvo primijeni ažuriranje baze za redoslijed paketa.'],
+  packageOrderChanged:['Die Pakete wurden zwischenzeitlich geändert. Aktualisiere die Galerie und verschiebe das Paket erneut.','The packages changed in the meantime. Refresh the gallery and move the package again.','Paketi su u međuvremenu promijenjeni. Osvježi galeriju pa ponovo premjesti paket.'],
+  packageOrderSaved:['Die Paketreihenfolge ist gespeichert und gilt auch für die Kundenansicht.','The package order is saved and applies to the customer view.','Redoslijed paketa je sačuvan i primjenjuje se u prikazu za klijente.'],
+  packageMoveUp:['Nach oben','Move up','Pomjeri gore'],
+  packageMoveDown:['Nach unten','Move down','Pomjeri dolje'],
+  packageMoveUpName:['{name} nach oben verschieben','Move {name} up','Pomjeri {name} gore'],
+  packageMoveDownName:['{name} nach unten verschieben','Move {name} down','Pomjeri {name} dolje'],
+  packageInactive:['Deaktiviert','Inactive','Neaktivan'],
+  deleteTestOrder:['Testbestellung löschen','Delete test order','Izbriši probnu narudžbu'],
+  deleteTestOrderHint:['Die Testbestellung verschwindet aus Verwaltung und Kundenansicht. Nur die durch diese Bestellung erteilten Downloadfreigaben entfallen; andere Freigaben bleiben bestehen. Die Unterlagen bleiben intern erhalten. Es wird kein Geld zurücküberwiesen und keine E-Mail verschickt.','The test order disappears from the admin and customer views. Download access granted by this order is removed; other access stays unchanged. Records are retained internally. No money is refunded and no email is sent.','Probna narudžba nestaje iz administracije i prikaza za klijenta. Ukida se samo odobrenje preuzimanja iz ove narudžbe; ostala odobrenja ostaju. Dokumenti se čuvaju interno. Novac se ne vraća i e-mail se ne šalje.'],
+  deleteTestOrderAcknowledge:['Ich bestätige, dass dies eine Testbestellung ohne echten Verkauf ist.','I confirm that this is a test order without a real sale.','Potvrđujem da je ovo probna narudžba bez stvarne prodaje.'],
+  deleteTestOrderTypeHint:['Gib zur zweiten Bestätigung die oben angezeigte Bestellreferenz exakt ein.','For the second confirmation, type the exact order reference shown above.','Za drugu potvrdu unesi tačnu referencu narudžbe prikazanu iznad.'],
+  orderReference:['Bestellreferenz','Order reference','Referenca narudžbe'],
+  deleteTestOrderFinal:['Testbestellung endgültig löschen','Permanently delete test order','Trajno izbriši probnu narudžbu'],
+  deleteTestOrderMismatch:['Bestätige die Testbestellung und gib ihre Bestellreferenz exakt ein.','Confirm that this is a test order and enter its exact order reference.','Potvrdi da je ovo probna narudžba i unesi njenu tačnu referencu.'],
+  deleteTestOrderUnavailable:['Diese Bestellung kann nicht als Testbestellung gelöscht werden. Lade die Bestellungen neu. Bestellungen mit Online-Zahlung bleiben erhalten.','This order cannot be deleted as a test order. Reload the orders. Orders with online payments are retained.','Ova narudžba se ne može izbrisati kao probna. Osvježi narudžbe. Narudžbe s online plaćanjem ostaju sačuvane.'],
+  deleteTestOrderMigration:['Bitte führe zuerst das Datenbank-Update zum Löschen von Testbestellungen aus.','Apply the test order deletion database update first.','Prvo primijeni ažuriranje baze za brisanje probnih narudžbi.'],
+  testOrderDeleted:['Die Testbestellung wurde aus beiden Ansichten entfernt.','The test order was removed from both views.','Probna narudžba je uklonjena iz oba prikaza.']
+});
+Object.assign(rows, {
+  finalModeOption:['Auswahlgalerie: erst fertige Bilder ausliefern','Proofing gallery: deliver only finished images','Galerija za izbor: isporuči samo gotove fotografije'],
+  finalAlreadyFinished:['Diese Bilder sind bereits fertig bearbeitet','These images are already fully edited','Ove fotografije su već završene'],
+  finalAlreadyFinishedHint:['Aktiviere dies, wenn die Dateien bereits die endgültigen Kundenbilder sind. Ein zweiter Upload ist dann nicht nötig. Die Zahlung bestätigst du weiterhin separat bei der Bestellung.','Enable this if these files are already the finished customer images. A second upload is unnecessary. Payment is still confirmed separately on the order.','Aktiviraj ako su ove datoteke već gotove fotografije za klijenta. Drugo učitavanje nije potrebno. Uplatu i dalje potvrđuješ zasebno u narudžbi.'],
+  finalDirectUploadTitle:['Fertige Bilder direkt hochladen','Upload finished images directly','Direktno učitaj gotove fotografije'],
+  finalExistingHint:['Schon fertig bearbeitete Bilder in der Galerie? Wähle sie unten aus und klicke auf „Als fertig bearbeitet markieren“. Dafür ist kein neuer Upload nötig.','Already have finished images in this gallery? Select them below and click “Mark as fully edited”. No new upload is needed.','U galeriji već postoje gotove fotografije? Odaberi ih ispod i klikni „Označi kao završene“. Novo učitavanje nije potrebno.'],
+  finalMarkSelected:['Als fertig bearbeitet markieren','Mark as fully edited','Označi kao završene'],
+  finalMarkConfirm:['Sind diese {n} ausgewählten Dateien die fertigen Bilder, die deine Kunden in Originalqualität herunterladen sollen? Sie werden ohne neuen Upload als fertig markiert. Dies bestätigt keine Zahlung; vollständig fertige, bereits bezahlte Bestellungen werden automatisch freigegeben.','Are these {n} selected files the finished images your customers should download in original quality? They will be marked as finished without a new upload. This does not confirm payment; paid orders with all finished files are released automatically.','Jesu li ovih {n} odabranih datoteka gotove fotografije koje klijenti trebaju preuzeti u originalnom kvalitetu? Bit će označene kao završene bez novog učitavanja. Ovo ne potvrđuje uplatu; plaćene narudžbe sa svim gotovim datotekama automatski se otključavaju.'],
+  finalMarkSaved:['Die ausgewählten Bilder sind als fertig markiert. Bereits bezahlte Bestellungen werden freigegeben, sobald alle zugehörigen Bilder fertig sind. Eine Zahlung wurde dadurch nicht bestätigt.','The selected images are marked as finished. Paid orders are released once all their images are finished. This did not confirm a payment.','Odabrane fotografije su označene kao završene. Plaćene narudžbe se otključavaju kada su sve njihove fotografije gotove. Ovim nije potvrđena uplata.'],
+  finalMarkChanged:['Die Bildauswahl hat sich geändert. Aktualisiere die Galerie und wähle die fertigen Bilder erneut aus.','The image selection changed. Refresh the gallery and select the finished images again.','Izbor fotografija se promijenio. Osvježi galeriju i ponovo odaberi gotove fotografije.'],
+  finalMarkConfirmationMissing:['Bitte bestätige, dass die ausgewählten Dateien die fertigen Kundenbilder sind.','Confirm that the selected files are the finished customer images.','Potvrdi da su odabrane datoteke gotove fotografije za klijenta.'],
+  releaseAwaitingFinal:['Die Freigabe ist gespeichert. Noch unfertige Bilder bleiben gesperrt, bis ihre fertigen Dateien zugeordnet sind.','The release is saved. Unfinished images stay locked until their finished files are assigned.','Odobrenje je sačuvano. Nedovršene fotografije ostaju zaključane dok im se ne pridruže gotove datoteke.'],
+  finalModeDisableConfirm:['Die Galerie enthält noch unfertige Auswahlbilder. Wenn du diesen Schutz ausschaltest, können bereits bezahlte oder manuell freigegebene Bilder direkt als Downloads zugänglich werden. Trotzdem ausschalten?','This gallery still contains unfinished proof images. Turning this protection off can make paid or manually released images available for download immediately. Turn it off anyway?','Galerija još sadrži nedovršene fotografije za izbor. Isključivanje ove zaštite može odmah omogućiti preuzimanje već plaćenih ili ručno odobrenih fotografija. Ipak isključiti?'],
+  finalModeHint:['Aktivieren, bevor Kunden bezahlen: Die hochgeladenen Bilder dienen zunächst nur zur Auswahl. Nach der Zahlung bleiben die Downloads gesperrt, bis für alle bestellten Bilder fertige Dateien zugeordnet sind. Dann werden genau diese Dateien automatisch freigegeben und die Download-E-Mail versendet.','Enable before customers pay: uploaded images are initially for selection only. After payment, downloads stay locked until finished files are assigned to every ordered image. Those files are then released automatically and a download email is sent.','Aktiviraj prije uplate klijenta: učitane fotografije služe samo za izbor. Nakon uplate preuzimanje ostaje zaključano dok svim naručenim fotografijama nisu pridružene gotove datoteke. Tada se te datoteke automatski otključavaju i šalje se e-mail za preuzimanje.'],
+  finalModeSettings:['In den Galerie-Einstellungen aktivieren','Enable in gallery settings','Aktiviraj u postavkama galerije'],
+  finalDeliveryMigration:['Bitte führe zuerst das Datenbank-Update für die fertigen Bilddateien aus.','Apply the finished image delivery database update first.','Prvo primijeni ažuriranje baze za isporuku gotovih fotografija.'],
+  finalModeRequired:['Aktiviere zuerst „Auswahlgalerie: erst fertige Bilder ausliefern“ und speichere die Galerie.','First enable “Proofing gallery: deliver only finished images” and save the gallery.','Prvo aktiviraj „Galerija za izbor: isporuči samo gotove fotografije“ i sačuvaj galeriju.'],
+  finalFileReady:['Fertige Datei bereit','Finished file ready','Gotova datoteka je spremna'],
+  finalFilePending:['Auswahlbild · fertige Datei fehlt','Proof image · finished file missing','Fotografija za izbor · nedostaje gotova datoteka'],
+  finalFilesCount:['{n} von {total} fertigen Dateien zugeordnet','{n} of {total} finished files assigned','Pridruženo {n} od {total} gotovih datoteka'],
+  finalProofUploadTitle:['Auswahlbilder hochladen','Upload proof images','Učitaj fotografije za izbor'],
+  finalBatchTitle:['Fertige Bilder hochladen','Upload finished images','Učitaj gotove fotografije'],
+  finalBatchIntro:['Exportiere die fertig bearbeiteten Fotos mit den ursprünglichen Dateinamen, z. B. DSC04378.jpg. Wähle alle Dateien gemeinsam oder ziehe sie in das Upload-Feld. Gleiche Namen werden automatisch zugeordnet; du prüfst die Zuordnung und bestätigst einmal.','Export edited photos using their original filenames, e.g. DSC04378.jpg. Select all files together or drop them into the upload area. Matching names are assigned automatically; review the assignments and confirm once.','Izvezi obrađene fotografije s izvornim nazivima, npr. DSC04378.jpg. Odaberi sve datoteke zajedno ili ih povuci u polje za učitavanje. Isti nazivi se automatski povezuju; provjeri podudaranja i potvrdi jednom.'],
+  finalProofUploadHint:['Das normale Feld darunter fügt neue Auswahlbilder hinzu. Für fertige Dateien verwende den Button oben, damit Auswahl, Favoriten und Bestellungen erhalten bleiben.','The regular upload below adds new proof images. Use the button above for finished files to preserve selections, favourites and orders.','Uobičajeno polje ispod dodaje nove fotografije za izbor. Za gotove datoteke koristi dugme iznad kako bi izbori, favoriti i narudžbe ostali sačuvani.'],
+  finalDropHint:['Alle fertigen Dateien hierher ziehen oder auswählen','Drop all finished files here or select files','Povuci sve gotove datoteke ovdje ili ih odaberi'],
+  finalReviewHint:['Prüfe die Zuordnung. Bei abweichenden oder mehrfach vorkommenden Namen wählst du das passende Auswahlbild aus. Jede Datei muss einem anderen Bild zugeordnet sein. Bereits fertige Dateien werden ersetzt.','Review the assignments. For different or repeated names, choose the matching proof image. Each file must be assigned to a different image. Existing finished files will be replaced.','Provjeri podudaranja. Za različite ili ponovljene nazive odaberi odgovarajuću fotografiju za izbor. Svaka datoteka mora biti pridružena drugoj fotografiji. Postojeće gotove datoteke bit će zamijenjene.'],
+  finalTargetImage:['Gehört zu diesem Auswahlbild','Belongs to this proof image','Pripada ovoj fotografiji za izbor'],
+  finalMatchFor:['Auswahlbild für {name}','Proof image for {name}','Fotografija za izbor za {name}'],
+  finalChooseImage:['Auswahlbild wählen','Choose proof image','Odaberi fotografiju za izbor'],
+  finalMatchMissing:['Kein eindeutiger Dateiname gefunden. Bitte das passende Auswahlbild wählen.','No unique filename match found. Choose the matching proof image.','Nije pronađen jedinstven naziv. Odaberi odgovarajuću fotografiju za izbor.'],
+  finalMatchAmbiguous:['Dieser Name gehört zu mehreren Bildern. Bitte das passende auswählen.','This name matches multiple images. Choose the correct one.','Ovaj naziv odgovara više fotografija. Odaberi ispravnu.'],
+  finalMatchDuplicate:['Diesem Bild sind mehrere Dateien zugeordnet. Bitte die Zuordnung korrigieren.','Multiple files are assigned to this image. Correct the assignments.','Više datoteka je pridruženo ovoj fotografiji. Ispravi podudaranja.'],
+  finalResolveMatches:['Bitte ordne jede Datei eindeutig zu und prüfe Dateiformat und Größe.','Assign each file uniquely and check its format and size.','Svaku datoteku pridruži jednoznačno i provjeri format i veličinu.'],
+  finalMatched:['Eindeutig zugeordnet','Uniquely assigned','Jednoznačno pridruženo'],
+  finalWillReplace:['Vorhandene fertige Datei wird ersetzt','Existing finished file will be replaced','Postojeća gotova datoteka bit će zamijenjena'],
+  finalUploaded:['Fertige Datei gespeichert','Finished file saved','Gotova datoteka je sačuvana'],
+  finalBatchConfirm:['Zuordnung bestätigen und hochladen','Confirm assignments and upload','Potvrdi podudaranja i učitaj'],
+  finalBatchRetry:['Verbleibende Dateien erneut hochladen','Retry remaining files','Ponovo učitaj preostale datoteke'],
+  finalUploadProgress:['Datei {n} von {total}: {name} wird gespeichert. Bitte lasse die Seite offen.','Saving file {n} of {total}: {name}. Keep this page open.','Sprema se datoteka {n} od {total}: {name}. Ostavi stranicu otvorenu.'],
+  finalUploadComplete:['Fertige Dateien gespeichert: {n}. Bezahlte Bestellungen werden freigegeben, sobald alle zugehörigen Dateien bereit sind.','Finished files saved: {n}. Paid orders are released once all their files are ready.','Sačuvane gotove datoteke: {n}. Plaćene narudžbe se otključavaju kada su sve njihove datoteke spremne.'],
+  finalSingleTitle:['Fertige Datei zuordnen','Assign finished file','Pridruži gotovu datoteku'],
+  finalSingleHint:['Die Datei wird genau diesem Auswahlbild zugeordnet. Bildname, Favoriten und Bestellungen bleiben erhalten. Eine bisherige fertige Datei wird ersetzt.','The file is assigned to this proof image. The image name, favourites and orders are retained. Any existing finished file is replaced.','Datoteka se pridružuje ovoj fotografiji za izbor. Naziv, favoriti i narudžbe ostaju sačuvani. Postojeća gotova datoteka se zamjenjuje.'],
+  orderPaidFinalPending:['Bezahlt · Bilder werden fertiggestellt','Paid · Images being finished','Plaćeno · Fotografije su u obradi'],
+  paidFinalPending:['Die Zahlung ist bestätigt. Die Downloads folgen automatisch, sobald alle bestellten Bilder als fertige Dateien bereit sind.','Payment is confirmed. Downloads follow automatically once all ordered images have finished files.','Uplata je potvrđena. Preuzimanje slijedi automatski kada su gotove datoteke svih naručenih fotografija spremne.'],
+  paidConfirm:['Nur bestätigen, wenn die Zahlung eingegangen ist. In einer Auswahlgalerie werden Downloads erst freigegeben, wenn alle bestellten fertigen Dateien bereit sind; sonst direkt nach der Zahlungsbestätigung.','Confirm only after payment has arrived. In a proofing gallery, downloads are released once all ordered finished files are ready; otherwise immediately after payment confirmation.','Potvrdi samo kada uplata stigne. U galeriji za izbor preuzimanje se omogućuje tek kada su spremne sve naručene gotove datoteke; inače odmah nakon potvrde uplate.'],
+  transferFinalInstruction:['Bitte überweise den Betrag mit der Bestellnummer als Verwendungszweck. Sobald die Zahlung bestätigt ist und deine bestellten Bilder fertig bearbeitet sind, erhältst du eine E-Mail zum Download.','Transfer the amount using your order number as the reference. Once payment is confirmed and your ordered images are finished, you will receive a download email.','Uplati iznos uz broj narudžbe kao poziv na broj. Kada je uplata potvrđena i naručene fotografije obrađene, dobit ćeš e-mail za preuzimanje.'],
+  finalFileChanged:['Das Bild wurde zwischenzeitlich geändert. Lade die Galerie neu und ordne die Datei erneut zu.','The image changed in the meantime. Refresh the gallery and assign the file again.','Fotografija je u međuvremenu promijenjena. Osvježi galeriju i ponovo pridruži datoteku.'],
+  finalWatermarkChanged:['Die Wasserzeichen-Einstellung wurde geändert. Lade die Galerie neu und starte den Upload erneut.','The watermark setting changed. Refresh the gallery and upload again.','Postavka vodenog žiga je promijenjena. Osvježi galeriju i ponovo učitaj datoteke.']
 });
 export const translations = Object.fromEntries(['de','en','bs'].map((lang,index)=>[lang,Object.fromEntries(Object.entries(rows).map(([key,values])=>[key,values[index]]))]));

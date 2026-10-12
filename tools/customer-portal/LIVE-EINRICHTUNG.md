@@ -2,7 +2,7 @@
 
 Der Code ist vorbereitet. Diese Schritte verbinden ihn mit den tatsächlichen Konten; ein GitHub-Push alleine startet die Serverfunktionen nicht.
 
-Stand 8. Oktober 2026: Die Portal-Subdomain ist per HTTPS erreichbar. Das neu veröffentlichte Pages-Projekt erkennt `DB`, `PHOTOS`, E-Mail-Versand und die Überweisungskonfiguration. Die Inhaberin hat die Einrichtungs-E-Mail erhalten, ihr Passwort gesetzt und sich mit sichtbarem Verwaltungszugang angemeldet. Der vollständige Live-Kundenablauf und die geplante Bereinigung sind noch offen; diese Anleitung ist kein Nachweis für eine bereits abgeschlossene Abnahme.
+Stand 8. Oktober 2026: Die Portal-Subdomain ist per HTTPS erreichbar. Das veröffentlichte Pages-Projekt erkennt `DB`, `PHOTOS`, E-Mail-Versand und die Überweisungskonfiguration. Die Inhaberin hat die Einrichtungs-E-Mail erhalten, ihr Passwort gesetzt und sich mit sichtbarem Verwaltungszugang angemeldet. Anschließend hat sie auch Bestellung, Zahlungsbestätigung, Freigabe und Download erfolgreich ausprobiert. Für die neu ergänzten Favoriten-, Design-, Rechnungs- und E-Mail-Funktionen gilt die [Update-Anleitung](UPGRADE-2026-10-08.md). Die geplante Bereinigung und die gezielte Prüfung fremder Kundenzugriffe sind noch offen.
 
 ## 1. Cloudflare Datenbank und privaten Speicher verbinden
 
@@ -37,7 +37,7 @@ Nach der Aktivierung müssen Einrichtungslinks und Zahlungs-Rücksprünge diesel
 
 ## 3. E-Mail-Versand
 
-Der Code ist für Resend vorbereitet. Vor Nutzung einen Versanddienst einrichten, die Absenderdomain mit den geforderten DNS-Einträgen bestätigen und `EMAIL_FROM` sowie `EMAIL_API_KEY` als Konfiguration/Secret hinterlegen. Keine bestehenden IONOS-MX-Einträge ersetzen. E-Mail-Versand erfolgt für Einladung, Passwort-Einrichtung/-Zurücksetzung und Bestellbestätigung.
+Resend, die Absenderdomain, `EMAIL_FROM` und das Secret `EMAIL_API_KEY` sind bereits eingerichtet; die echte Zugangsmail wurde zugestellt. Keine bestehenden IONOS-MX-Einträge ersetzen. E-Mail-Versand erfolgt für Einladung mit Passwort-Einrichtung bei neuen Kunden, Passwort-Zurücksetzung, Bestellbestätigung und nach dem Update auch für Downloadfreigaben. Eine zuvor hochgeladene Rechnung wird der Bestellbestätigung angehängt.
 
 Die konkreten Anbieter, Auftragsverarbeitung und Datenschutzangaben müssen zur Live-Konfiguration passen. Im Portal wird keine Werbeeinwilligung aus der Anmeldung abgeleitet.
 

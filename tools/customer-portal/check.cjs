@@ -13,6 +13,16 @@ for (const [lang, file] of Object.entries({ de:'index.html',en:'en.html',bs:'bs.
   assert(d.querySelector('meta[name="robots"]')?.content.includes('noindex'), `${file}: missing noindex`);
   assert(d.querySelector('meta[name="referrer"]')?.content === 'no-referrer', `${file}: referrer leak`);
   assert(d.querySelector('header.site #langMenu') && d.querySelector('footer .footer-secondary-links'), `${file}: missing website shell`);
+  const homepage = new JSDOM(fs.readFileSync(path.join(root, lang==='de'?'index.html':`index-${lang}.html`),'utf8')).window.document;
+  // Header and footer must use the same shared stylesheet bytes as the main site.
+  for (const link of homepage.querySelectorAll('link[rel="stylesheet"]')) {
+    const ref=link.getAttribute('href').split('?')[0];
+    if (/fonts|reviews|giveaway-notice/.test(ref)) continue;
+    const copied=path.join(dir,'assets',path.basename(ref));
+    assert(fs.existsSync(copied) && fs.readFileSync(copied).equals(fs.readFileSync(path.join(root,ref))), `${file}: outdated website styles ${ref}`);
+  }
+  assert(d.querySelector('[data-portal-redirect]')?.getAttribute('src')==='portal-redirect.js', `${file}: redirect must work with strict script CSP`);
+  assert([...d.querySelectorAll('script:not([src])')].every(s=>s.type==='application/ld+json'||s.type==='application/json'), `${file}: executable inline script blocked by CSP`);
   assert(!/customer@example\.test|Testgalerie2026|PASSWORD_PEPPER|BANK_IBAN/.test(source), `${file}: private config or demo data in HTML`);
   for (const el of d.querySelectorAll('script[src],link[href],img[src]')) {
     const url = el.getAttribute('src') || el.getAttribute('href');
@@ -21,6 +31,9 @@ for (const [lang, file] of Object.entries({ de:'index.html',en:'en.html',bs:'bs.
   }
   for (const el of d.querySelectorAll('.lang-option')) assert(fs.existsSync(path.join(dir,el.getAttribute('href'))), `${file}: language link broken`);
 }
+const staticHeaders=fs.readFileSync(path.join(dir,'_headers'),'utf8');
+assert(staticHeaders.includes("script-src 'self';") && staticHeaders.includes("frame-ancestors 'none'"), 'Pages static security headers missing');
+assert(fs.existsSync(path.join(dir,'assets/logo-liza.png')), 'Email PNG logo missing from package');
 function walk(folder) { return fs.readdirSync(folder,{withFileTypes:true}).flatMap(e => e.isDirectory() ? walk(path.join(folder,e.name)) : [path.join(folder,e.name)]); }
 for (const filename of walk(dir)) {
   assert(!/portal\.sqlite|password-pepper|\.dev\.vars|admin-bootstrap|worker\.mjs|fixtures\.mjs|\.local-state/.test(filename), `Private deployment file: ${filename}`);

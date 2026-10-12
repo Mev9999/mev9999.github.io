@@ -1,0 +1,56 @@
+﻿LiZa-Portal – Update vom 12.10.2026 (korrigierte Überschriften)
+
+Dieses Paket enthält alle bisherigen Änderungen sowie Galerielöschung, verpflichtende Buchungspakete und die gestalteten Bestätigungen. Es wurde lokal erstellt; live wird es erst nach den folgenden Schritten.
+
+1. DATENBANK ZUERST
+Cloudflare öffnen → Storage & databases → D1 → liza-customer-portal → Console.
+LiZa-Portal-Datenbank-Update-2026-10-12.txt öffnen, den gesamten Inhalt kopieren, unten ins Eingabefeld einfügen und Execute anklicken.
+Einmal ausführen. Erwartete Rückmeldung: This query successfully executed.
+Diese Datei enthält nur die neuen Erweiterungen vom 12.10.2026. Ältere bereits ausgeführte Updates nicht wiederholen. Sie ergänzt Spalten und Indizes und verändert keine bestehenden Galerie- oder Bestelldaten.
+Falls eine Fehlermeldung kommt, nicht weiter deployen, sondern die Fehlermeldung zeigen.
+
+2. PORTAL HOCHLADEN
+Cloudflare → Workers & Pages → liza-kundenportal → Create deployment → Production.
+Die neue LiZa-Portal-Cloudflare-2026-10-12-korrigiert.zip hochladen und veröffentlichen. LiZa-Portal-Cloudflare.zip enthält dieselbe aktualisierte Version.
+Production bedeutet die öffentlich verwendete Version des Kundenportals.
+Danach das Portal neu laden; auf dem Handy gegebenenfalls den alten Tab schließen und den Link neu öffnen.
+Für dieses Portal-Update ist kein GitHub-Push erforderlich.
+
+3. GALERIE LÖSCHEN
+Verwaltung → Galerie öffnen → Galerie-Einstellungen → Galerie löschen.
+Erste Bestätigung: Hinweis lesen und Weiter zum Löschen.
+Zweite Bestätigung: den vollständigen Galerienamen exakt eingeben und Galerie endgültig löschen.
+Die Galerie verschwindet aus Verwaltung und Kundenzugängen. Originalfotos und Vorschauen werden endgültig aus dem Bildspeicher entfernt. Bereits heruntergeladene Dateien auf fremden Geräten können damit nicht entfernt werden.
+Bestellungen, Rechnungsanhänge, Vertragsbestätigungen und Zahlungsnachweise bleiben erhalten. Zugehörige interne Datensätze bleiben hierfür bestehen; die Galerie ist trotzdem gesperrt, auch über alte Links.
+Bei einem Speicherfehler erscheint in der Galerieübersicht Ausstehende Dateilöschungen. Dort Dateilöschung abschließen verwenden. Bis dahin bleibt die Galerie gesperrt.
+
+4. VERPFLICHTENDES BUCHUNGSPAKET
+Verwaltung → Galerie → Pakete → Paket anlegen oder Bearbeiten.
+Verpflichtendes Buchungspaket aktivieren und speichern.
+Pro Galerie gibt es genau ein aktives Pflichtpaket. Ein anderes als verpflichtend zu markieren ersetzt die bisherige Zuordnung.
+Trage die enthaltene Bildanzahl und den tatsächlich gebuchten Gesamtpreis ein. Bildanzahl 0 bedeutet alle Bilder der Galerie.
+Zusätzlich eigene freiwillige Pakete für Einzelbilder, 5er und 10er anlegen. Das Pflichtpaket selbst wird nie mehrfach als Zusatzpaket verrechnet.
+Der Kunde muss mindestens die enthaltene Bildanzahl auswählen; bei Alle Bilder müssen alle gewählt sein. Das Pflichtpaket ist automatisch ausgewählt und kann nicht durch ein billigeres Zusatzpaket umgangen werden.
+Nur die darüber hinaus gewählten Bilder werden mit der günstigsten passenden Kombination der übrigen aktiven Zusatzpakete berechnet. Die Bestellübersicht zeigt jede Position und die Gesamtsumme.
+Beispiel mit frei gewählten Musterpreisen: Pflichtpaket enthält 5 Bilder für 200 Euro; Zusatzbild 15 Euro, 5er-Zusatzpaket 60 Euro, 10er-Zusatzpaket 100 Euro.
+  5 ausgewählte Bilder: 200 Euro.
+  7 ausgewählte Bilder: 200 + 2 × 15 = 230 Euro.
+  12 ausgewählte Bilder: 200 + 60 + 2 × 15 = 290 Euro.
+  17 ausgewählte Bilder: 200 + 100 + 2 × 15 = 330 Euro.
+Das jeweilige Pflichtpaket wird pro Kundenzugang einmal bezahlt. Wichtig: Wenn du später ein anderes Paket als verpflichtend markierst, gilt es als neue Buchung; auch Kunden, die das bisherige Pflichtpaket bezahlt haben, müssen dann dieses neue Pflichtpaket bezahlen. Nach bestätigter Zahlung und Vertragsbestätigung werden weitere Bestellungen als Zusatzbestellungen berechnet. Die bereits bestellten Bilder bleiben an diese Bestellung gebunden.
+Eine offene Pflichtbestellung wird nicht ein zweites Mal für eine andere Auswahl angelegt. Soll die Auswahl geändert werden und die Überweisung ist noch nicht bezahlt: Verwaltung → Bestellungen → Offene Bestellung stornieren. Danach kann neu bestellt werden. Bereits bezahlte oder Onlinezahlungen werden darüber nicht storniert.
+Bereits vorhandene Bestellungen behalten ihre ursprünglichen Preise. Ein nachträglich neu markiertes Pflichtpaket wird einer alten optionalen Bestellung nicht rückwirkend zugeordnet.
+Nach Zahlung bestätigen & freigeben gilt weiterhin: genau die bestellten Bilder sind für diesen Kunden ohne Wasserzeichen und in Originalqualität verfügbar; die Download-Benachrichtigung wird ausgelöst.
+
+5. GESTALTETE BESTÄTIGUNGEN
+Die Eingangsbestätigung einer Rücktrittserklärung hat jetzt Logo, Farben und Fußbereich wie die übrigen LiZa-Mails.
+Bestätigung herunterladen liefert eine gestaltete, eigenständige HTML-Datei mit Logo, Bestellübersicht, Bildauswahl und vollständigen gespeicherten Vertragsangaben. Sie lässt sich im Browser öffnen und über Drucken → Als PDF speichern als PDF ablegen.
+Neue Bestellmails enthalten diesen gestalteten Anhang ebenfalls. Bereits versandte E-Mails ändern sich nicht. Ein erneuter Versand einer alten gespeicherten Bestätigung behält deren ursprünglichen E-Mail-Snapshot; der Download im Portal wird im neuen Design angezeigt.
+Der gespeicherte Vertragstext und bestehende Einwilligungen wurden nicht umgeschrieben.
+
+6. VORSCHAU OHNE VERSAND
+LiZa-Portal-Mail-Vorschau.html per Doppelklick öffnen. Oben eine der zehn Vorlagen und Handy oder Desktop auswählen. Enthalten sind Einladungen, Zugang/Passwort, Bestell- und Downloadmails, Rücktrittsmails und die vollständige Bestätigung.
+Die Vorschau verwendet erfundene Testdaten. Sie verschickt keine E-Mails und legt keine Bestellung an. Links sind deaktiviert. E-Mail-Programme können das Design leicht unterschiedlich darstellen.
+Die automatische Browser-Sicherheitsprüfung erlaubte hier keine lokale Dateivorschau; eine visuelle Browserabnahme wurde daher nicht bestätigt. Die funktionalen und strukturellen Tests sowie Build-Prüfungen sind im Prüfbericht dokumentiert.
+
+Nachtrag: Die automatische Kleinschreibung der Dokumentüberschriften wurde entfernt. Die Datenbankdatei vom 12.10.2026 ist unverändert; da sie noch nicht eingespielt wurde, vor dieser ZIP einmal ausführen. Es wurden keine zusätzlichen Bildschutzfunktionen oder neuen Schutzvorgaben aktiviert.

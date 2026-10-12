@@ -6,7 +6,7 @@ import { LocalD1 } from '../dev/adapters.mjs';
 
 const NOW = Date.UTC(2026, 9, 8, 3, 17);
 const DAY = 86_400_000;
-const TEMPORARY = new Set(['sessions', 'auth_tokens', 'rate_limits']);
+const TEMPORARY = new Set(['sessions', 'auth_tokens', 'rate_limits', 'customer_activity']);
 
 async function fixture(t) {
   const DB = new LocalD1();
@@ -30,11 +30,16 @@ async function fixture(t) {
     INSERT INTO manual_releases(user_id,image_id,released_at,released_by) VALUES('customer','image',1,'admin');
     INSERT INTO payment_events(id,provider,order_id,created_at) VALUES('payment','test','order',1);
     INSERT INTO audit_events(id,user_id,action,target_id,created_at) VALUES('audit','admin','test','gallery',1);
+    INSERT INTO gallery_invoices(id,gallery_id,user_id,r2_key,filename,size,uploaded_at,uploaded_by)
+      VALUES('invoice','gallery','customer','test/invoice.pdf','Rechnung.pdf',100,1,'admin');
+    UPDATE orders SET receipt_email_json='{"message":{"to":"customer@example.test"},"files":[{"key":"test/confirmation.html"}]}' WHERE id='order';
+    INSERT INTO download_notifications(id,user_id,gallery_id,order_id,image_ids_json,created_at)
+      VALUES('notice','customer','gallery','order','["image"]',1);
   `);
   const statements = [];
   for (const [label, expires] of [['past', NOW - 1], ['boundary', NOW], ['future', NOW + DAY]]) {
     statements.push(DB.prepare('INSERT INTO sessions VALUES(?,?,?,?,?)').bind(`session-${label}`, 'customer', 'test-csrf', expires, 1));
-    statements.push(DB.prepare('INSERT INTO auth_tokens VALUES(?,?,?,?,?)').bind(`auth-${label}`, 'customer', 'reset', expires, 1));
+    statements.push(DB.prepare('INSERT INTO auth_tokens(token_hash,user_id,purpose,expires_at,created_at) VALUES(?,?,?,?,?)').bind(`auth-${label}`, 'customer', 'reset', expires, 1));
   }
   for (const [label, reset] of [['old', NOW - DAY - 1], ['boundary', NOW - DAY], ['recent', NOW - 1], ['future', NOW + DAY]]) {
     statements.push(DB.prepare('INSERT INTO rate_limits VALUES(?,?,?)').bind(`rate-${label}`, 2, reset));
@@ -63,7 +68,7 @@ test('cron removes only expired credentials and rate limits older than one day',
   assert.deepEqual((await DB.prepare('SELECT key FROM rate_limits ORDER BY key').all()).results, [
     { key: 'rate-boundary' }, { key: 'rate-future' }, { key: 'rate-recent' },
   ]);
-  assert.deepEqual(await snapshot(DB, true), permanent, 'expired galleries, users, orders, image keys and all related rows are retained');
+  assert.deepEqual(await snapshot(DB, true), permanent, 'expired galleries, users, orders, invoice keys, immutable confirmations, queued mail and all related rows are retained');
   const afterFirstRun = await snapshot(DB);
   await cleanupWorker.scheduled({}, { DB });
   assert.deepEqual(await snapshot(DB), afterFirstRun, 'repeating cleanup is harmless');
@@ -83,6 +88,20 @@ test('public requests always return 404 without accessing or changing the databa
   }
   assert.deepEqual(await snapshot(DB), before);
   assert.equal((await cleanupWorker.fetch(new Request('https://cleanup.example.test/'), {})).status, 404);
+});
+
+test('activity retention removes only entries older than 90 days and accepts pre-upgrade databases', async t => {
+  const DB = await fixture(t);
+  t.mock.method(Date, 'now', () => NOW);
+  for (const [id, created] of [['old', NOW - 90 * DAY - 1], ['boundary', NOW - 90 * DAY], ['recent', NOW - DAY]]) {
+    await DB.prepare("INSERT INTO customer_activity(id,kind,user_id,gallery_id,image_id,created_at) VALUES(?,'download','customer','gallery','image',?)").bind(id, created).run();
+  }
+  const permanent = await snapshot(DB, true);
+  await cleanupWorker.scheduled({}, { DB });
+  assert.deepEqual((await DB.prepare('SELECT id FROM customer_activity ORDER BY id').all()).results, [{ id: 'boundary' }, { id: 'recent' }]);
+  assert.deepEqual(await snapshot(DB, true), permanent);
+  await DB.exec('DROP TABLE customer_activity');
+  await cleanupWorker.scheduled({}, { DB });
 });
 
 test('scheduled execution fails visibly if the D1 binding is missing', async () => {

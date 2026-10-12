@@ -15,10 +15,14 @@ export default {
   async scheduled(controller, env) {
     if (!env?.DB) throw new Error('Portal cleanup requires the DB D1 binding.');
     const now = Date.now();
-    await env.DB.batch([
+    const statements = [
       env.DB.prepare('DELETE FROM sessions WHERE expires_at<=?').bind(now),
       env.DB.prepare('DELETE FROM auth_tokens WHERE expires_at<=?').bind(now),
       env.DB.prepare('DELETE FROM rate_limits WHERE reset_at<?').bind(now - DAY),
-    ]);
+    ];
+    // Older installations do not have the activity table yet.
+    const activityTable = await env.DB.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='customer_activity'").first();
+    if (activityTable) statements.push(env.DB.prepare('DELETE FROM customer_activity WHERE created_at<?').bind(now - 90 * DAY));
+    await env.DB.batch(statements);
   },
 };

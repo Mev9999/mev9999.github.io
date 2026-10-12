@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHmac } from 'node:crypto';
+import { JSDOM } from 'jsdom';
 import { createHarness, cookieValue, tokenFromMail, fixtureIds, ORIGIN } from './harness.mjs';
 
 async function login(harness, admin = false) {
@@ -13,6 +14,13 @@ async function login(harness, admin = false) {
   return { cookie, csrf: session.data.csrf, user: session.data.user };
 }
 async function withHarness(callback) { const harness = await createHarness(); try { await callback(harness); } finally { await harness.close(); } }
+function attachedContract(message) {
+  const attachment = message.attachments.find(item => item.content_type.startsWith('text/html'));
+  const document = new JSDOM(Buffer.from(attachment.content, 'base64').toString('utf8'));
+  const text = document.window.document.querySelector('[data-contract-text]').textContent;
+  document.window.close();
+  return text;
+}
 
 test('anonymous access reveals no gallery records or private image bytes', () => withHarness(async h => {
   const session = await h.request('/api/session');
@@ -375,7 +383,9 @@ test('single-photo and three-photo packs calculate quantities from the actual se
   assert.equal(six.status, 201);
   assert.equal(six.data.order.amountCents, 5000);
   assert.equal(six.data.order.packageQuantity, 2);
-  assert.equal((await h.request('/api/orders', { ...client, method: 'POST', body: { ...base, packageId: fixtureIds.threePackage, imageIds: ['local-image-3', 'local-image-4', 'local-image-5', 'local-image-6'] } })).status, 400);
+  const four = await h.request('/api/orders', { ...client, method: 'POST', body: { ...base, packageId: fixtureIds.threePackage, imageIds: ['local-image-3', 'local-image-4', 'local-image-5', 'local-image-6'] } });
+  assert.equal(four.status, 201);
+  assert.equal(four.data.order.amountCents, 3500, 'three-photo pack plus one single-photo price');
 }));
 
 test('personal galleries use a custom total, hide per-image packs, and allow manual release', () => withHarness(async h => {
@@ -482,11 +492,14 @@ test('600-photo galleries can be ordered and released as a whole without accepti
   assert.equal((await h.request('/api/images/local-image-3?kind=original', client)).status, 403);
   const receipt = h.mail.messages.find(message => (message.text || '').includes(ordered.data.order.id));
   assert.ok(receipt);
-  assert.ok(receipt.text.includes('Hochzeitsmoment 591'));
-  assert.ok(receipt.text.includes('Gesamtbetrag: 599.00 EUR'));
-  assert.ok(receipt.text.includes('IBAN: DE71110220330123456789'));
-  assert.ok(receipt.text.includes('BIC: BHBLDEHHXXX'));
-  assert.ok(receipt.text.includes(`Zahlungsreferenz: ${ordered.data.order.id}`));
+  const contractText = attachedContract(receipt);
+  assert.ok(contractText.includes('Hochzeitsmoment 591'));
+  assert.ok(contractText.includes('Gesamtbetrag: 599.00 EUR'));
+  assert.ok(contractText.includes('IBAN: DE71110220330123456789'));
+  assert.ok(contractText.includes('BIC: BHBLDEHHXXX'));
+  assert.ok(contractText.includes(`Zahlungsreferenz: ${ordered.data.order.reference}`));
+  assert.ok(receipt.text.length < 3000, 'large selections retain a concise readable email body');
+  assert.ok(receipt.html.includes('DE71110220330123456789'), 'actual bank data appears in the short email');
   const releaseRoute = `/api/admin/galleries/${fixtureIds.gallery}/release`;
   assert.equal((await h.request(releaseRoute, { ...client, method: 'POST', body: { userId: fixtureIds.customer, all: true } })).status, 403);
   assert.equal((await h.request(releaseRoute, { ...admin, method: 'POST', body: { userId: fixtureIds.secondCustomer, all: true } })).status, 400);
@@ -502,8 +515,13 @@ test('600-photo galleries can be ordered and released as a whole without accepti
   h.env.BANK_RECIPIENT = 'Später geänderter Empfänger';
   const savedReceipt = await h.request(`/api/orders/${ordered.data.order.id}/receipt`, client);
   assert.equal(savedReceipt.status, 200);
-  assert.equal(await savedReceipt.text(), receipt.text, 'stored contract and bank details are immutable');
+  const savedDocument = new JSDOM(await savedReceipt.text());
+  assert.equal(savedDocument.window.document.querySelector('[data-contract-text]').textContent, contractText, 'stored contract and bank details are immutable');
+  assert.equal(savedReceipt.response.headers.get('content-type'), 'text/html; charset=utf-8');
+  savedDocument.window.close();
   const resent = await h.request(`/api/admin/orders/${ordered.data.order.id}/receipt`, { ...admin, method: 'POST', body: {} });
   assert.equal(resent.status, 200);
-  assert.equal(h.mail.messages.at(-1).text, receipt.text, 'resending uses the stored contract');
+  assert.equal(attachedContract(h.mail.messages.at(-1)), contractText, 'resending preserves the complete immutable contract');
+  assert.equal(h.mail.messages.at(-1).attachments[0].content, receipt.attachments[0].content, 'resend attachment bytes are unchanged');
+  assert.ok(!h.mail.messages.at(-1).html.includes('Später geänderter Empfänger'), 'email summary retains the original bank snapshot');
 }));

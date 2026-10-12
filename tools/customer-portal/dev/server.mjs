@@ -6,6 +6,7 @@ import { randomBytes } from 'node:crypto';
 import { Readable } from 'node:stream';
 import { LocalD1, LocalR2, LocalMailSink } from './adapters.mjs';
 import { seedLocalDemo } from './fixtures.mjs';
+import { initializeLocalPortalDatabase } from './migrations.mjs';
 import worker from '../backend/worker.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -20,7 +21,7 @@ await fs.mkdir(stateDirectory, { recursive: true });
 await fs.writeFile(path.join(stateDirectory, '.local-only'), 'Local development data. Never deploy or commit.\n');
 
 const DB = new LocalD1(path.join(stateDirectory, 'portal.sqlite'));
-await DB.exec(await fs.readFile(path.resolve(here, '../backend/schema.sql'), 'utf8'));
+await initializeLocalPortalDatabase(DB);
 const PHOTOS = new LocalR2(path.join(stateDirectory, 'private-r2'));
 const mail = new LocalMailSink();
 let pepper;
