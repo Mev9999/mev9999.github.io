@@ -147,15 +147,18 @@ export function refreshSite(d,file){
   }
  }
  const portraitLabel=['Porträt- und Produktfotografie','Portrait & product photography','Fotografisanje portreta i proizvoda'][i];
- for(const a of d.querySelectorAll('header a[href]')){
+ for(const a of d.querySelectorAll('header a[href]:not(.lang-option)')){
   const url=new URL(a.getAttribute('href'),SITE_ORIGIN+'/'+file);
   const target=url.pathname.split('/').pop().replace(/-(en|bs)\.html$/,'.html');
   if(target==='portraitfotografie-graz.html'&&url.hash!=='#gallery-showcase')a.textContent=portraitLabel;
   if(target==='preise.html'&&url.hash==='#portrait')a.textContent=['Porträt und Produkt','Portrait & product','Portreti i proizvodi'][i];
  }
+ d.querySelectorAll('header .lang-option[data-lang]').forEach(a=>{a.textContent=a.dataset.lang.toUpperCase();});
  d.body.classList.toggle('home-refreshed',isHome);d.body.classList.toggle('compact-mobile-hero',['babybauch-shooting-graz.html','newborn-fotografie-graz.html','babybauch-und-neugeborenen-shooting-graz.html','familienfotografie-graz.html','portraitfotografie-graz.html'].includes(base));if(d.querySelector('.hero-visual'))d.body.classList.add('service-refreshed');
  if(!d.querySelector('link[href^="scripts/site-refresh.css"]')){const css=el('link');css.rel='stylesheet';css.href='scripts/site-refresh.css?v=20260917-language-flags';d.head.append(css);}
- d.querySelector('link[href^="scripts/site-refresh.css"]') .href='scripts/site-refresh.css?v=20260917-language-flags';
+ d.querySelector('link[href^="scripts/site-refresh.css"]') .href='scripts/site-refresh.css?v=20261012-header-parity';
+ const serviceStyles=d.querySelector('link[href^="service-page.css"]');
+ if(serviceStyles)serviceStyles.href='service-page.css?v=20261012-gallery-sizing';
  d.head.append(d.querySelector('link[href^="scripts/site-refresh.css"]'));
  if(isHome){
   for(const [key,values] of Object.entries(home))d.querySelectorAll(`[data-i18n="${key}"],[data-refresh-key="${key}"]`).forEach(e=>{e.textContent=values[i];e.dataset.refreshKey=key;e.removeAttribute('data-i18n');});
@@ -257,5 +260,22 @@ export function refreshSite(d,file){
  }
  if(isHome){localizeHomepageLinks(d,file);addReviewCarousel(d,lang);}
  updateHomeAboutLayout(d,file);
+ // Cormorant's hyphen is angled. Keep text and links intact while using the
+ // existing straight glyph for compound words in display headings, in all languages.
+ d.querySelectorAll('h1,h2,h3,h4,h5,h6,.aside-heading').forEach(heading=>{
+  const walker=d.createTreeWalker(heading,4);
+  const textNodes=[];
+  while(walker.nextNode()){
+   const node=walker.currentNode;
+   if(/[-\u2010\u2011]/.test(node.nodeValue)&&!node.parentElement.closest('.straight-hyphen'))textNodes.push(node);
+  }
+  for(const node of textNodes){
+   const fragment=d.createDocumentFragment();
+   node.nodeValue.split(/([-\u2010\u2011])/).forEach(part=>{
+    fragment.append(/^[-\u2010\u2011]$/.test(part)?el('span','straight-hyphen',part):d.createTextNode(part));
+   });
+   node.replaceWith(fragment);
+  }
+ });
  if(isHome&&!d.querySelector('script[src^="scripts/site-refresh.js"]')){const script=el('script');script.src='scripts/site-refresh.js?v=20260912k';script.defer=true;d.head.append(script);}
 }

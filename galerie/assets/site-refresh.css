@@ -218,20 +218,30 @@ html body a.btn.media-cta:hover{background:linear-gradient(135deg,#fff,rgba(238,
  .home-refreshed .hero .art img,.service-refreshed .hero .hero-visual img,.service-refreshed.compact-mobile-hero .hero .hero-visual img{height:100%!important;max-height:none!important;width:100%!important;object-fit:cover!important;object-position:center 35%}
 }
 
-/* Larger header social controls */
+/* Shared header controls: home and subpages use the same geometry. */
 
-header.site .header-social-links .nav-icon-link,header.site .header-social-links .header-social-badge{width:44px!important;height:44px!important;min-width:44px!important;padding:0!important;display:inline-flex;align-items:center;justify-content:center}
-header.site .header-social-links svg{width:24px!important;height:24px!important}
+header.compact-site-header .header-social-links .nav-icon-link,header.compact-site-header .header-social-links .header-social-badge{width:44px!important;height:44px!important;min-width:44px!important;padding:0!important;display:inline-flex;align-items:center;justify-content:center}
+header.compact-site-header .header-social-links svg{width:24px!important;height:24px!important}
+header.compact-site-header #langBtn{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:46px;min-width:0;height:46px;padding:0;gap:.18rem;border:1px solid rgba(217,152,130,.18);border-radius:10px;background-color:#fffaf7;box-shadow:var(--shadow);font:700 .92rem Arial,sans-serif;cursor:pointer}
+header.compact-site-header #langBtn:hover{border-color:rgba(201,146,131,.35)}
+header.compact-site-header #langBtn:focus-visible{outline:none;box-shadow:0 0 0 4px rgba(232,183,167,.18)}
+header.compact-site-header .lang-caret{font-size:.72rem;line-height:1;color:var(--muted)}
+header.compact-site-header .lang-menu{top:calc(100% + .5rem);min-width:44px;background:var(--surface);border:1px solid rgba(217,152,130,.2);border-radius:14px;padding:.35rem;display:flex;flex-direction:column;gap:.2rem}
+header.compact-site-header .lang-option{border:0;background-color:transparent;color:var(--ink);font:700 1rem/1.6 var(--font-body);border-radius:10px;padding:.7rem .6rem;text-align:center}
+header.compact-site-header .lang-option:hover{background-color:#fffaf7}
+header.compact-site-header .lang-option.active{background-color:#d9a79a}
 @media(max-width:900px){
 header.compact-site-header .nav{grid-template-columns:34px minmax(0,1fr) 120px 36px!important;column-gap:8px!important}
 header.compact-site-header .header-social-links{width:120px!important;min-width:120px!important;gap:6px!important}
-header.site .header-social-links .nav-icon-link,header.site .header-social-links .header-social-badge{width:36px!important;height:36px!important;min-width:36px!important}
-header.site .header-social-links svg{width:21px!important;height:21px!important}
+header.compact-site-header .header-social-links .nav-icon-link,header.compact-site-header .header-social-links .header-social-badge{width:36px!important;height:36px!important;min-width:36px!important}
+header.compact-site-header .header-social-links svg{width:21px!important;height:21px!important}
+header.compact-site-header #langBtn{height:38px;font-size:.72rem}
+header.compact-site-header .lang-option{font-size:.9rem;padding:.65rem .6rem}
 
 }
 
 @media(max-width:360px){header.compact-site-header .nav{width:calc(100% - 16px)!important}}
-@media(min-width:901px){header.site .header-social-links .nav-icon-link,header.site .header-social-links .header-social-badge{width:48px!important;height:48px!important;min-width:48px!important}header.site .header-social-links .header-social-badge{border-radius:12px}header.site .header-social-links .header-social-badge--whatsapp{border-radius:50%}header.site .header-social-links svg{width:26px!important;height:26px!important}}
+@media(min-width:901px){header.compact-site-header .nav-actions{gap:.7rem}header.compact-site-header .header-social-links .nav-icon-link,header.compact-site-header .header-social-links .header-social-badge{width:48px!important;height:48px!important;min-width:48px!important}header.compact-site-header .header-social-links .header-social-badge{border-radius:12px}header.compact-site-header .header-social-links .header-social-badge--whatsapp{border-radius:50%}header.compact-site-header .header-social-links svg{width:26px!important;height:26px!important}}
 
 /* Subtle flag backgrounds; keep existing control geometry. */
 html[lang="de"] header #langBtn,header .lang-option[data-lang="de"]{background-image:linear-gradient(rgba(255,255,255,.76),rgba(255,255,255,.76)),url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2060%2040%22%3E%3Cpath%20fill%3D%22%23ed2939%22%20d%3D%22M0%200h60v40H0z%22%2F%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%2013.33h60v13.34H0z%22%2F%3E%3C%2Fsvg%3E")!important;background-size:100% 100%!important;background-position:center!important;background-repeat:no-repeat!important;color:#302721!important}

@@ -850,7 +850,8 @@ section{padding:3.4rem 0}
 
 .gallery-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  /* Keep small galleries at the same tile size as full rows and responsive image slots. */
+  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
   gap:1rem;
 }
 

@@ -53,6 +53,6 @@ export function updateHomeAboutLayout(d,file){
   else{note.append(d.createTextNode(['Ihr habt einen Partnercode? ','Have a partner code? ','Imate partnerski kod? '][i]));a.textContent=['Entdeckt euren 10-%-Partnervorteil.','Discover your 10% partner benefit.','Otkrijte svoju partnersku pogodnost od 10%.'][i];note.append(a);d.querySelector('.price-note-grid')?.after(note);}
  }
  if(d.querySelector('.studio-route-card')||home||about||base==='preise.html'||base==='familienfotografie-graz.html'||base==='babybauch-shooting-graz.html'){
-  let css=d.querySelector('link[data-home-layout]');if(!css){css=el('link','');css.rel='stylesheet';css.dataset.homeLayout='';d.head.append(css);}css.href='scripts/home-about-layout.css?v=20260917-all-contact-routes';d.head.append(css);
+  let css=d.querySelector('link[data-home-layout]');if(!css){css=el('link','');css.rel='stylesheet';css.dataset.homeLayout='';d.head.append(css);}css.href='scripts/home-about-layout.css?v=20261012-six-services';d.head.append(css);
  }
 }
