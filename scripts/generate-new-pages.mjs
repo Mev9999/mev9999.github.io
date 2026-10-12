@@ -18,9 +18,9 @@ const serviceLinks = [
 const copy = {
   de: {
     pageTitle: 'Pakete & Preise | LiZa Memories Photography',
-    metaDescription: 'Alle Pakete und Preise für Porträt-, Babybauch-, Neugeborenen-, Familien- und Hochzeitsfotografie in Graz transparent im Überblick.',
+    metaDescription: 'Alle Pakete und Preise für Porträt- und Produktfotografie sowie Babybauch-, Neugeborenen-, Familien- und Hochzeitsfotografie in Graz im Überblick.',
     navServices: {
-      portrait: 'Porträt',
+      portrait: 'Porträt- und Produktfotografie',
       maternity: 'Babybauch',
       newborn: 'Neugeborene',
       family: 'Familie',
@@ -44,18 +44,19 @@ const copy = {
     extraTitle: 'Zusatzpreise & wichtige Hinweise',
     extraCards: [
       { title: 'Zusätzliche Bilder', text: 'Ein zusätzlich bearbeitetes Bild kostet 15 €. Vorteilspakete: 5 Bilder für 60 € oder 10 Bilder für 100 €.' },
+      { title: 'Shootingzeit verlängern', text: 'Mehr Zeit gewünscht? 30 Minuten zusätzlich kosten 40 €, 60 Minuten zusätzlich 70 €. Die Verlängerung gilt nur für die Shootingzeit; die im Paket enthaltene Bildanzahl bleibt gleich. Bitte bei der Buchung mit mir abstimmen.' },
       { title: 'Individuelle Wünsche', text: 'Weitere Bilder, längere Begleitungen und individuell zusammengestellte Pakete sind nach Absprache jederzeit möglich.' },
       { title: 'Preishinweis', text: 'Alle Preise sind umsatzsteuerfrei gemäß § 6 Abs. 1 Z 27 UStG. Anfahrtskosten außerhalb von Graz werden individuell berechnet.' }
     ],
     finalTitle: 'Noch unsicher, welches Paket passt?',
-    finalText: 'Schreibt mir kurz, was ihr euch wünscht. Ich helfe euch gerne dabei, das passende Paket für eure Erinnerungen auszuwählen.',
+    finalText: 'Schreibt mir kurz, was ihr euch wünscht. Ich helfe euch gerne dabei, das passende Paket für eure Bilder auszuwählen.',
     finalButton: 'Persönlich beraten lassen'
   },
   en: {
     pageTitle: 'Packages & Pricing | LiZa Memories Photography',
-    metaDescription: 'Transparent packages and pricing for portrait, maternity, newborn, family and wedding photography in Graz.',
+    metaDescription: 'Transparent packages and pricing for portrait and product photography, maternity, newborn, family and wedding photography in Graz.',
     navServices: {
-      portrait: 'Portrait',
+      portrait: 'Portrait & product photography',
       maternity: 'Maternity',
       newborn: 'Newborn',
       family: 'Family',
@@ -79,18 +80,19 @@ const copy = {
     extraTitle: 'Additional pricing & important notes',
     extraCards: [
       { title: 'Additional images', text: 'One additional edited image costs €15. Bundle options: 5 images for €60 or 10 images for €100.' },
+      { title: 'Extend your session', text: 'Need more time? Add 30 minutes for €40 or 60 minutes for €70. This extends the session only; the number of images included in your package stays the same. Please arrange the extra time when booking.' },
       { title: 'Individual requests', text: 'Additional images, longer coverage and individually tailored packages are always possible by arrangement.' },
       { title: 'Pricing note', text: 'All prices are VAT-exempt under § 6 para. 1 no. 27 UStG. Travel costs outside Graz are calculated individually.' }
     ],
     finalTitle: 'Not sure which package suits you?',
-    finalText: 'Send me a short message about what you have in mind. I will gladly help you choose the right package for your memories.',
+    finalText: 'Send me a short message about what you have in mind. I will gladly help you choose the right package for your images.',
     finalButton: 'Get personal guidance'
   },
   bs: {
     pageTitle: 'Paketi & cijene | LiZa Memories Photography',
-    metaDescription: 'Pregledni paketi i cijene za portretno, trudničko, fotografisanje novorođenčadi, porodica i vjenčanja u Grazu.',
+    metaDescription: 'Pregledni paketi i cijene za portrete i proizvode, trudnice, novorođenčad, porodice i vjenčanja u Grazu.',
     navServices: {
-      portrait: 'Portret',
+      portrait: 'Fotografisanje portreta i proizvoda',
       maternity: 'Trudničko',
       newborn: 'Novorođenčad',
       family: 'Porodica',
@@ -114,11 +116,12 @@ const copy = {
     extraTitle: 'Dodatne cijene & važne napomene',
     extraCards: [
       { title: 'Dodatne fotografije', text: 'Jedna dodatno obrađena fotografija košta 15 €. Paket ponude: 5 fotografija za 60 € ili 10 fotografija za 100 €.' },
+      { title: 'Produžite fotografisanje', text: 'Treba vam više vremena? Dodatnih 30 minuta košta 40 €, a dodatnih 60 minuta 70 €. Produžava se samo vrijeme fotografisanja; broj fotografija uključenih u paket ostaje isti. Produženje dogovorite pri rezervaciji.' },
       { title: 'Individualne želje', text: 'Dodatne fotografije, duža pratnja i individualno prilagođeni paketi uvijek su mogući po dogovoru.' },
       { title: 'Napomena o cijenama', text: 'Sve cijene su oslobođene PDV-a prema § 6 st. 1 br. 27 UStG. Putni troškovi izvan Graza obračunavaju se individualno.' }
     ],
     finalTitle: 'Niste sigurni koji paket vam odgovara?',
-    finalText: 'Napišite mi ukratko šta želite. Rado ću vam pomoći da odaberete odgovarajući paket za vaše uspomene.',
+    finalText: 'Napišite mi ukratko šta želite. Rado ću vam pomoći da odaberete odgovarajući paket za vaše fotografije.',
     finalButton: 'Zatraži lični savjet'
   }
 };
@@ -128,11 +131,11 @@ const categories = [
     id: 'portrait',
     serviceKey: 'portrait',
     start: 99,
-    title: { de: 'Porträtshooting', en: 'Portrait Session', bs: 'Portretno fotografisanje' },
+    title: { de: 'Porträt- und Produktfotografie', en: 'Portrait & Product Photography', bs: 'Fotografisanje portreta i proizvoda' },
     intro: {
-      de: 'Persönliche Porträts mit ruhiger Anleitung und unterschiedlichen Bildlooks.',
-      en: 'Personal portraits with calm guidance and a choice of image looks.',
-      bs: 'Lični portreti uz mirno vođenje i različite izglede fotografija.'
+      de: 'Persönliche Porträts oder stimmige Produktbilder: Die Pakete gelten für beide Bereiche. Produktanzahl, Hintergründe, Bildvarianten und Verwendungszweck stimmen wir vor der Buchung ab; die enthaltene Bildanzahl ist keine feste Produktanzahl.',
+      en: 'Personal portraits or considered product images: these packages apply to both. We agree on the products, backgrounds, image variations and intended use before booking; the number of included images is not a fixed number of products.',
+      bs: 'Lični portreti ili pažljivo osmišljene fotografije proizvoda: paketi važe za oba područja. Broj proizvoda, pozadine, varijante fotografija i namjenu dogovaramo prije rezervacije; broj uključenih fotografija nije fiksni broj proizvoda.'
     },
     packages: [
       {
@@ -140,9 +143,9 @@ const categories = [
         price: 99,
         name: { de: 'Kleine Erinnerung', en: 'Small Memory', bs: 'Mala uspomena' },
         details: {
-          de: ['20 Minuten', '3 bearbeitete Bilder', '1 Outfit', '1 Bildlook'],
-          en: ['20 minutes', '3 edited images', '1 outfit', '1 image look'],
-          bs: ['20 minuta', '3 obrađene fotografije', '1 outfit', '1 izgled fotografije']
+          de: ['20 Minuten', '3 bearbeitete Bilder', '1 Outfit bei Porträts', '1 Bildlook', 'Produktgestaltung nach Absprache'],
+          en: ['20 minutes', '3 edited images', '1 outfit for portraits', '1 image look', 'Product styling by arrangement'],
+          bs: ['20 minuta', '3 obrađene fotografije', '1 outfit za portrete', '1 izgled fotografije', 'Postavka proizvoda po dogovoru']
         }
       },
       {
@@ -150,9 +153,9 @@ const categories = [
         price: 119,
         name: { de: 'Lieblingsmomente', en: 'Favorite Moments', bs: 'Omiljeni trenuci' },
         details: {
-          de: ['20 Minuten', '5 bearbeitete Bilder', '1 Outfit', '1 Bildlook'],
-          en: ['20 minutes', '5 edited images', '1 outfit', '1 image look'],
-          bs: ['20 minuta', '5 obrađenih fotografija', '1 outfit', '1 izgled fotografije']
+          de: ['20 Minuten', '5 bearbeitete Bilder', '1 Outfit bei Porträts', '1 Bildlook', 'Produktgestaltung nach Absprache'],
+          en: ['20 minutes', '5 edited images', '1 outfit for portraits', '1 image look', 'Product styling by arrangement'],
+          bs: ['20 minuta', '5 obrađenih fotografija', '1 outfit za portrete', '1 izgled fotografije', 'Postavka proizvoda po dogovoru']
         },
         benefits: {
   "de": [
@@ -172,27 +175,27 @@ const categories = [
       {
         tier: 'gold',
         price: 154,
-        name: { de: 'Porträt Vielfalt', en: 'Portrait Variety', bs: 'Raznolikost portreta' },
+        name: { de: 'Porträt- & Produktvielfalt', en: 'Portrait & Product Variety', bs: 'Raznolikost portreta i proizvoda' },
         details: {
-          de: ['30 Minuten', '8 bearbeitete Bilder', 'Bis zu 2 Outfits', 'Verschiedene Bildvarianten'],
-          en: ['30 minutes', '8 edited images', 'Up to 2 outfits', 'Different image variations'],
-          bs: ['30 minuta', '8 obrađenih fotografija', 'Do 2 outfita', 'Različite varijante fotografija']
+          de: ['30 Minuten', '8 bearbeitete Bilder', 'Bis zu 2 Outfits bei Porträts', 'Verschiedene Bildvarianten', 'Produktgestaltung nach Absprache'],
+          en: ['30 minutes', '8 edited images', 'Up to 2 outfits for portraits', 'Different image variations', 'Product styling by arrangement'],
+          bs: ['30 minuta', '8 obrađenih fotografija', 'Do 2 outfita za portrete', 'Različite varijante fotografija', 'Postavka proizvoda po dogovoru']
         },
         benefits: {
   "de": [
     "3 Bilder mehr",
     "10 Minuten mehr",
-    "Bis zu 2 Outfits"
+    "Bis zu 2 Outfits bei Porträts"
   ],
   "en": [
     "3 more images",
     "10 more minutes",
-    "Up to 2 outfits"
+    "Up to 2 outfits for portraits"
   ],
   "bs": [
     "3 fotografije više",
     "10 minuta više",
-    "Do 2 outfita"
+    "Do 2 outfita za portrete"
   ]
 }
       }
@@ -763,6 +766,196 @@ async function createHomeTemplates() {
   )));
 }
 
+
+// The portrait URL remains stable; both photography services share these packages.
+const portraitCopy = {
+  de: {
+    name: 'Porträt- und Produktfotografie',
+    title: 'Porträt- und Produktfotografie in Graz | LiZa Memories Photography',
+    description: 'Natürliche Porträts und sorgfältig gestaltete Produktfotos in Graz. Bildstil, Hintergründe und Verwendungszweck stimmen wir persönlich ab. Pakete ab 99 €.',
+    heroTitle: 'Porträt- und Produktfotografie in Graz – persönlich und passend zu deinem Stil.',
+    lead: 'Ob natürliche Porträts oder Bilder für deine Produkte: Gemeinsam stimmen wir Bildstil, Hintergrund und Verwendungszweck ab. Beim Porträtshooting begleite ich dich mit ruhiger Anleitung; bei Produktaufnahmen achten wir auf Form, Details und eine passende Präsentation. So entstehen Bilder, die zu dir oder deinem Angebot passen.',
+    points: [
+      ['Dauer', 'Je nach Paket 20 oder 30 Minuten; Verlängerung nach Absprache'],
+      ['Bildgestaltung', 'Outfits bei Porträts; Produkte, Hintergründe und Bildvarianten nach Absprache'],
+      ['Deine Bilder', 'Sorgfältig ausgewählt und bearbeitet in deiner persönlichen Online-Galerie']
+    ],
+    detailsTitle: 'Porträts mit Persönlichkeit. Produkte mit klarer Bildsprache.',
+    detailsLead: 'Wir bereiten dein Shooting passend zum Motiv vor – mit einem klaren Plan für die Bilder, die du brauchst.',
+    cardTitle: 'Dein Motiv im Mittelpunkt',
+    items: [
+      'Natürliche Porträts mit ruhiger Anleitung, passenden Posen und persönlichen Bildlooks.',
+      'Produktfotos für die Präsentation deines Angebots, etwa auf deiner Website oder in sozialen Medien.',
+      'Produktanzahl, Perspektiven, Hintergründe und Bildgestaltung besprechen wir vor der Buchung.',
+      'Deine ausgewählten Bilder werden sorgfältig und professionell bearbeitet.'
+    ],
+    flowTitle: 'Einfach vorbereitet',
+    steps: [
+      'Schreib mir dein Wunschdatum und ob du Porträts oder Produktfotos möchtest. Nenne auch den geplanten Verwendungszweck.',
+      'Wir stimmen Kleidung oder Produkte, gewünschte Ansichten, Hintergründe und das passende Paket ab.',
+      'Beim Shooting setzen wir den vereinbarten Bildstil um. Anschließend wählst du deine Bilder für die Bearbeitung aus.'
+    ],
+    faqTitle: 'Häufige Fragen zur Porträt- und Produktfotografie',
+    faqLead: 'Alles Wichtige zu Vorbereitung, Bildauswahl und der passenden Gestaltung für Menschen und Produkte.',
+    faqs: [
+      ['Brauche ich Erfahrung vor der Kamera?', 'Nein. Beim Porträtshooting erkläre ich dir in Ruhe, was gut funktioniert, und leite dich so an, dass Haltung und Ausdruck natürlich bleiben.'],
+      ['Wie bereiten wir das Shooting vor?', 'Erzähl mir, ob du Porträts oder Produktfotos möchtest, wofür du die Bilder brauchst und welche Wirkung du dir wünschst. Danach stimmen wir Kleidung oder Produkte, Hintergrund, Perspektiven und Bildstil ab.'],
+      ['Wie lange dauert das Shooting und kann ich Zeit dazubuchen?', 'Je nach Paket sind 20 oder 30 Minuten vorgesehen. Du kannst nach Absprache 30 Minuten für 40 € oder 60 Minuten für 70 € ergänzen. Damit verlängert sich nur die Shootingzeit; die im Paket enthaltene Bildanzahl bleibt gleich.'],
+      ['Wie viele bearbeitete Bilder sind enthalten?', 'Je nach Paket bekommst du 3, 5 oder 8 professionell bearbeitete Bilder. Ein zusätzliches Bild kostet 15 €, 5 zusätzliche Bilder kosten 60 € und 10 zusätzliche Bilder 100 €.'],
+      ['Wie viele Outfits oder Bildvarianten sind möglich?', 'Für Porträts sind im Bronze- und Silber-Paket ein Outfit und ein Bildlook vorgesehen; im Gold-Paket bis zu zwei Outfits und verschiedene Bildvarianten. Bei Produktfotos stimmen wir Gestaltung, Hintergründe und Ansichten vorab passend zur verfügbaren Shootingzeit ab.'],
+      ['Was soll ich mitbringen?', 'Für Porträts bring bitte passende Kleidung und bei Bedarf kleine Accessoires mit. Produkte sollten sauber und vollständig sein; gewünschte Verpackungen oder passende Requisiten besprechen wir vorher. Fotos deiner Auswahl helfen bei der Vorbereitung.'],
+      ['Wie viele Produkte können fotografiert werden?', 'Das hängt von Größe, Material, Aufbau und den gewünschten Perspektiven ab. Schick mir vor der Buchung die Produktanzahl und nach Möglichkeit Fotos der Produkte. Wir klären gemeinsam, was im gewählten Zeitrahmen möglich ist. Die Paket-Bildanzahl ist keine feste Produktanzahl.'],
+      ['Welche Angaben brauchst du für Produktfotos?', 'Hilfreich sind Fotos und Maße der Produkte, gewünschte Ansichten und Hintergründe sowie der geplante Einsatz, zum Beispiel Website, Onlineshop oder soziale Medien. Formatvorgaben und besondere Wünsche klären wir vor der Buchung; die geschäftliche Nutzung und den Umfang der Nutzungsrechte vereinbaren wir vorab schriftlich.'],
+      ['Kann ich Beispielbilder oder eine gewünschte Bildstimmung schicken?', 'Sehr gerne. Beispiele helfen mir zu verstehen, welche Stimmung und Gestaltung du magst. Gemeinsam entwickeln wir daraus eine passende Bildserie für dich oder deine Produkte.'],
+      ['Was, wenn ich mich beim Porträtshooting unsicher fühle?', 'Wir starten ruhig, probieren kleine Veränderungen und schauen, was sich für dich gut anfühlt. Du musst nichts vorspielen – mein Ziel sind persönliche Porträts, auf denen du dich wiedererkennst.']
+    ],
+    ctaTitle: 'Porträt- und Produktfotografie in Graz anfragen',
+    ctaText: 'Die Pakete starten bei <strong data-promo-price>99 €</strong> für 20 Minuten Shooting und 3 bearbeitete Bilder. Bei Porträts sind ein Outfit und ein Bildlook vorgesehen; den Umfang deiner Produktaufnahmen stimmen wir vorher gemeinsam ab.',
+    cta: 'Porträt- oder Produktshooting anfragen'
+  },
+  en: {
+    name: 'Portrait & product photography',
+    title: 'Portrait & Product Photography in Graz | LiZa Memories Photography',
+    description: 'Natural portraits and thoughtfully styled product photographs in Graz. We agree on the image style, backgrounds and intended use together. Packages from €99.',
+    heroTitle: 'Portrait & product photography in Graz – personal and true to your style.',
+    lead: 'Whether you want natural portraits or photographs of your products, we agree on the image style, background and intended use together. I offer calm guidance for portraits and focus on shape, detail and suitable presentation for product photographs. The result is a set of images that fits you or your offering.',
+    points: [
+      ['Duration', '20 or 30 minutes, depending on the package; extra time by arrangement'],
+      ['Image styling', 'Outfits for portraits; products, backgrounds and image variations by arrangement'],
+      ['Your images', 'Carefully selected and edited in your private online gallery']
+    ],
+    detailsTitle: 'Portraits with personality. Products with a clear visual style.',
+    detailsLead: 'We prepare your session around the subject, with a clear plan for the images you need.',
+    cardTitle: 'Your subject takes centre stage',
+    items: [
+      'Natural portraits with calm guidance, comfortable poses and a personal visual style.',
+      'Product photographs to present your offering, for example on your website or social media.',
+      'We discuss the number of products, angles, backgrounds and styling before booking.',
+      'Your selected images are carefully and professionally edited.'
+    ],
+    flowTitle: 'Easy preparation',
+    steps: [
+      'Tell me your preferred date, whether you need portraits or product photographs, and how you plan to use the images.',
+      'Together we agree on clothing or products, desired views, backgrounds and a suitable package.',
+      'During the session we create the agreed visual style. You then choose your images for editing.'
+    ],
+    faqTitle: 'Portrait & product photography FAQs',
+    faqLead: 'What to know about preparation, image selection and styling for people and products.',
+    faqs: [
+      ['Do I need experience in front of the camera?', 'No. During a portrait session I calmly explain what works and guide you towards natural posture and expression.'],
+      ['How do we prepare for the session?', 'Tell me whether you need portraits or product photographs, how you will use them and the impression you want to create. We then agree on clothing or products, backgrounds, angles and image style.'],
+      ['How long is the session and can I book extra time?', 'Packages include 20 or 30 minutes. By arrangement, you can add 30 minutes for €40 or 60 minutes for €70. This only extends the session time; the number of images included in the package stays the same.'],
+      ['How many edited images are included?', 'Depending on the package, you receive 3, 5 or 8 professionally edited images. One extra image costs €15, 5 extra images cost €60 and 10 extra images cost €100.'],
+      ['How many outfits or image variations are possible?', 'For portraits, Bronze and Silver include one outfit and one image look; Gold allows up to two outfits and different image variations. For product photographs, we agree on styling, backgrounds and views to suit the available session time.'],
+      ['What should I bring?', 'For portraits, bring suitable clothes and small accessories if needed. Products should be clean and complete; we discuss packaging or props beforehand. Photos of your choices help with preparation.'],
+      ['How many products can be photographed?', 'This depends on their size, materials, setup and the views you want. Before booking, send me the number of products and, if possible, photos of them. We agree on what is possible in the chosen time. The package image count is not a fixed product count.'],
+      ['What information do you need for product photographs?', 'Photos and dimensions of the products, desired views and backgrounds, and their intended use are helpful, for example a website, online shop or social media. We discuss format requirements and special requests before booking; commercial use and the scope of usage rights must be agreed in writing beforehand.'],
+      ['Can I send examples or a preferred image mood?', 'Absolutely. Examples help me understand the atmosphere and styling you like. Together we use them as a starting point for a suitable series for you or your products.'],
+      ['What if I feel unsure during my portrait session?', 'We start calmly, try small changes and see what feels comfortable. You do not need to act a part – I aim for personal portraits in which you recognise yourself.']
+    ],
+    ctaTitle: 'Enquire about portrait & product photography in Graz',
+    ctaText: 'Packages start at <strong data-promo-price>€99</strong> for a 20-minute session and 3 edited images. Portrait sessions include one outfit and one image look; we agree on the scope of product photographs together beforehand.',
+    cta: 'Enquire about portraits or products'
+  },
+  bs: {
+    name: 'Fotografisanje portreta i proizvoda',
+    title: 'Fotografisanje portreta i proizvoda u Grazu | LiZa Memories Photography',
+    description: 'Prirodni portreti i pažljivo oblikovane fotografije proizvoda u Grazu. Stil, pozadine i namjenu fotografija dogovaramo zajedno. Paketi od 99 €.',
+    heroTitle: 'Fotografisanje portreta i proizvoda u Grazu – lično i u tvom stilu.',
+    lead: 'Želiš prirodne portrete ili fotografije svojih proizvoda? Zajedno dogovaramo stil, pozadinu i namjenu fotografija. Pri portretnom fotografisanju pružam mirno vođenje, a kod proizvoda pažnju posvećujemo obliku, detaljima i odgovarajućoj prezentaciji. Tako nastaju fotografije koje odgovaraju tebi ili tvojoj ponudi.',
+    points: [
+      ['Trajanje', '20 ili 30 minuta, zavisno od paketa; produženje po dogovoru'],
+      ['Stil fotografija', 'Odjeća za portrete; proizvodi, pozadine i varijante po dogovoru'],
+      ['Tvoje fotografije', 'Pažljivo odabrane i obrađene u tvojoj privatnoj online galeriji']
+    ],
+    detailsTitle: 'Portreti s ličnošću. Proizvodi s jasnim vizuelnim stilom.',
+    detailsLead: 'Fotografisanje pripremamo prema motivu, uz jasan plan za fotografije koje su ti potrebne.',
+    cardTitle: 'Tvoj motiv u centru pažnje',
+    items: [
+      'Prirodni portreti uz mirno vođenje, ugodne poze i lični stil fotografija.',
+      'Fotografije proizvoda za predstavljanje tvoje ponude, naprimjer na web-stranici ili društvenim mrežama.',
+      'Broj proizvoda, uglove, pozadine i stil dogovaramo prije rezervacije.',
+      'Tvoje odabrane fotografije se pažljivo i profesionalno obrađuju.'
+    ],
+    flowTitle: 'Jednostavna priprema',
+    steps: [
+      'Napiši željeni datum, da li želiš portrete ili fotografije proizvoda i kako planiraš koristiti fotografije.',
+      'Zajedno dogovaramo odjeću ili proizvode, željene prikaze, pozadine i odgovarajući paket.',
+      'Tokom fotografisanja ostvarujemo dogovoreni stil. Nakon toga biraš fotografije za obradu.'
+    ],
+    faqTitle: 'Česta pitanja o fotografisanju portreta i proizvoda',
+    faqLead: 'Priprema, odabir fotografija i odgovarajući stil za ljude i proizvode.',
+    faqs: [
+      ['Treba li mi iskustvo pred kamerom?', 'Ne. Tokom portretnog fotografisanja mirno objašnjavam šta dobro funkcioniše i vodim te prema prirodnom držanju i izrazu lica.'],
+      ['Kako pripremamo fotografisanje?', 'Reci mi da li želiš portrete ili fotografije proizvoda, za šta ćeš ih koristiti i kakav utisak želiš postići. Zatim dogovaramo odjeću ili proizvode, pozadine, uglove i stil fotografija.'],
+      ['Koliko traje fotografisanje i mogu li rezervisati dodatno vrijeme?', 'Paketi uključuju 20 ili 30 minuta. Po dogovoru možeš dodati 30 minuta za 40 € ili 60 minuta za 70 €. Produžava se samo vrijeme fotografisanja; broj fotografija uključenih u paket ostaje isti.'],
+      ['Koliko obrađenih fotografija je uključeno?', 'Zavisno od paketa dobijaš 3, 5 ili 8 profesionalno obrađenih fotografija. Jedna dodatna fotografija košta 15 €, 5 dodatnih fotografija 60 €, a 10 dodatnih fotografija 100 €.'],
+      ['Koliko outfita ili varijanti fotografija je moguće?', 'Za portrete bronzani i srebrni paket uključuju jedan outfit i jedan izgled fotografija; zlatni omogućava do dva outfita i različite varijante. Za proizvode unaprijed dogovaramo stil, pozadine i prikaze prema raspoloživom vremenu.'],
+      ['Šta trebam ponijeti?', 'Za portrete ponesi odgovarajuću odjeću i po potrebi manje dodatke. Proizvodi trebaju biti čisti i potpuni; ambalažu ili rekvizite dogovaramo unaprijed. Fotografije tvojih opcija olakšavaju pripremu.'],
+      ['Koliko proizvoda se može fotografisati?', 'To zavisi od veličine, materijala, postavke i željenih prikaza. Prije rezervacije pošalji broj proizvoda i, ako je moguće, njihove fotografije. Zajedno dogovaramo šta je moguće u odabranom vremenu. Broj fotografija u paketu nije fiksni broj proizvoda.'],
+      ['Koje informacije trebaju za fotografije proizvoda?', 'Korisne su fotografije i dimenzije proizvoda, željeni prikazi i pozadine te namjena, naprimjer web-stranica, online prodavnica ili društvene mreže. Formate i posebne želje dogovaramo prije rezervacije; poslovnu upotrebu i obim prava korištenja unaprijed dogovaramo pisanim putem.'],
+      ['Mogu li poslati primjere ili željenu atmosferu fotografija?', 'Naravno. Primjeri mi pomažu da razumijem atmosferu i stil koji ti se sviđaju. Zajedno ih koristimo kao polazište za seriju koja odgovara tebi ili tvojim proizvodima.'],
+      ['Šta ako se osjećam nesigurno tokom portretnog fotografisanja?', 'Počinjemo mirno, isprobavamo male promjene i gledamo šta ti odgovara. Ne moraš glumiti – cilj su lični portreti na kojima prepoznaješ sebe.']
+    ],
+    ctaTitle: 'Pošalji upit za fotografisanje portreta i proizvoda u Grazu',
+    ctaText: 'Paketi počinju od <strong data-promo-price>99 €</strong> za 20 minuta fotografisanja i 3 obrađene fotografije. Za portrete su predviđeni jedan outfit i jedan izgled fotografija; obim fotografisanja proizvoda dogovaramo unaprijed.',
+    cta: 'Upit za portrete ili proizvode'
+  }
+};
+
+function applyPortraitContent(document, lang) {
+  const text = portraitCopy[lang];
+  const setText = (selector, value) => {
+    const node = document.querySelector(selector);
+    if (node) node.textContent = value;
+  };
+  document.title = text.title;
+  setMeta(document, 'meta[name="description"]', text.description);
+  setMeta(document, 'meta[property="og:title"]', text.title);
+  setMeta(document, 'meta[property="og:description"]', text.description);
+  setText('.breadcrumbs [aria-current="page"]', `${text.name} ${lang === 'de' ? 'in Graz' : lang === 'en' ? 'in Graz' : 'u Grazu'}`);
+  setText('.hero .eyebrow', text.name);
+  setText('.hero h1', text.heroTitle);
+  setText('.hero .lead', text.lead);
+  document.querySelectorAll('.hero-points > div').forEach((node, index) => {
+    const point = text.points[index];
+    if (point) node.innerHTML = `<strong>${escapeHtml(point[0])}</strong><span>${escapeHtml(point[1])}</span>`;
+  });
+  setText('#shooting-details .section-head h2', text.detailsTitle);
+  setText('#shooting-details .section-head p', text.detailsLead);
+  const cards = document.querySelectorAll('#shooting-details .card');
+  if (cards[0]) {
+    cards[0].querySelector('h3').textContent = text.cardTitle;
+    cards[0].querySelector('.list').innerHTML = text.items.map(item => `<li>${escapeHtml(item)}</li>`).join('');
+  }
+  if (cards[1]) {
+    cards[1].querySelector('h3').textContent = text.flowTitle;
+    cards[1].querySelector('.timeline').innerHTML = text.steps.map((step, i) => `<div class="step"><span class="num">${i + 1}</span><div>${escapeHtml(step)}</div></div>`).join('');
+  }
+  setText('#faq h2', text.faqTitle);
+  setText('#faq .hd p', text.faqLead);
+  const faqList = document.querySelector('#faq .faq-list');
+  if (faqList) faqList.innerHTML = text.faqs.map(([question, answer], i) => `<article class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="portrait-faq-answer-${i + 1}"><span>${escapeHtml(question)}</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="portrait-faq-answer-${i + 1}"><p>${escapeHtml(answer)}</p></div></article>`).join('');
+  setText('.cta-band h2', text.ctaTitle);
+  const ctaText = document.querySelector('.cta-band p');
+  if (ctaText) ctaText.innerHTML = text.ctaText;
+  document.querySelectorAll('.hero .hero-actions > a.primary, .cta-band .hero-actions > a.primary').forEach(link => { link.textContent = text.cta; });
+  document.querySelectorAll('script[type="application/ld+json"]').forEach(script => {
+    const schema = JSON.parse(script.textContent);
+    if (schema['@type'] === 'Service') {
+      schema.name = `${text.name} ${lang === 'bs' ? 'u Grazu' : 'in Graz'}`;
+      schema.serviceType = text.name;
+      schema.description = text.description;
+    } else if (schema['@type'] === 'FAQPage') {
+      schema.mainEntity = text.faqs.map(([question, answer]) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } }));
+    } else if (schema['@type'] === 'BreadcrumbList') {
+      const current = schema.itemListElement.at(-1);
+      if (current) current.name = `${text.name} ${lang === 'bs' ? 'u Grazu' : 'in Graz'}`;
+    }
+    script.textContent = JSON.stringify(schema);
+  });
+}
+
 async function createPortraitTemplates() {
   await Promise.all(LANGUAGES.map(async (lang) => {
     const currentFile = localizedFile('portraitfotografie-graz.html', lang);
@@ -771,7 +964,29 @@ async function createPortraitTemplates() {
     const { document } = dom.window;
 
     document.body.className = 'portrait-page';
-    document.querySelector('#gallery-showcase')?.remove();
+    applyPortraitContent(document, lang);
+    // Start the portfolio with existing, already-public portraits. Preserve any
+    // gallery added later so new portrait or product work can be included here.
+    if (!document.querySelector('#gallery-showcase')) {
+      const familyHtml = await fs.readFile(path.join(ROOT, localizedFile('familienfotografie-graz.html', lang)), 'utf8');
+      const familyDom = new JSDOM(familyHtml);
+      const gallery = document.createElement('section');
+      gallery.id = 'gallery-showcase';
+      gallery.className = 'gallery-showcase';
+      const labels = {
+        de: ['Porträt- & Produktgalerie', 'Einblicke in meine Porträtfotografie. Für eure Produktaufnahmen stimmen wir Bildstil, Hintergrund und Perspektiven persönlich ab.'],
+        en: ['Portrait & product gallery', 'A glimpse of my portrait photography. For your product images, we discuss style, backgrounds and perspectives together.'],
+        bs: ['Galerija portreta i proizvoda', 'Uvid u moje portretne fotografije. Za fotografije vaših proizvoda zajedno dogovaramo stil, pozadine i perspektive.']
+      }[lang];
+      gallery.innerHTML = `<div class="container section-head"><h2 data-gallery-title>${escapeHtml(labels[0])}</h2><p data-gallery-sub>${escapeHtml(labels[1])}</p></div><div class="container gallery-grid"></div>`;
+      for (const src of ['galerie-familie-dsc02524.webp', 'galerie-familie-dsc02410-2.webp', 'galerie-familie-dsc02504.webp']) {
+        const figure = familyDom.window.document.querySelector(`#gallery-showcase img[src="${src}"]`)?.closest('figure');
+        if (!figure) throw new Error(`Missing public portrait for gallery: ${src}`);
+        gallery.querySelector('.gallery-grid').append(document.importNode(figure, true));
+      }
+      document.querySelector('#faq').before(gallery);
+      familyDom.window.close();
+    }
     document.querySelectorAll('.lang-option').forEach((link) => {
       link.setAttribute('href', localizedFile('portraitfotografie-graz.html', link.dataset.lang || 'de'));
     });

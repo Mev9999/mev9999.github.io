@@ -41,9 +41,8 @@ const pages={
 'familienfotografie-graz.html':{
  lead:['Bei eurem Familienshooting in Graz steht eure gemeinsame Zeit im Mittelpunkt. Mit viel Ruhe und einem Blick für die kleinen Momente begleite ich euch durch das Shooting und gebe euch dabei die nötige Orientierung vor der Kamera. Die Kinder dürfen lachen, spielen, neugierig sein oder zwischendurch eine Pause brauchen. So entstehen natürliche und liebevolle Familienfotos, die euch noch viele Jahre an diese besondere Zeit erinnern.','Your family session in Graz is all about spending time together. With patience and an eye for the little moments, I guide you through the session and help you feel at ease in front of the camera. Children are free to laugh, play, be curious or take a break. Together we create natural, heartfelt family photographs that will remind you of this special time for years to come.','Tokom porodičnog fotografisanja u Grazu u središtu je vaše zajedničko vrijeme. Mirno vas vodim kroz fotografisanje, primjećujem male trenutke i pružam vam potrebnu podršku pred objektivom. Djeca se mogu smijati, igrati, biti radoznala ili napraviti pauzu. Tako nastaju prirodne i nježne porodične fotografije koje će vas još godinama podsjećati na ovo posebno vrijeme.'],
  points:[[['Für wen','For whom','Za koga'],['Für Eltern, Kinder und Geschwister – ganz egal, ob zu dritt oder als größere Familie.','For parents, children and siblings – whether there are three of you or a larger family.','Za roditelje, djecu i braću i sestre – bilo da vas je troje ili ste veća porodica.']],[['Mit Kindern','With children','S djecom'],['Pausen, Spielen und kleine Bedürfnisse gehören einfach dazu – wir richten uns ganz nach euren Kindern.','Breaks, play and little needs are all part of the session – we follow your children’s pace.','Pauze, igra i male potrebe sastavni su dio fotografisanja – prilagođavamo se vašoj djeci.']],[['Eure Erinnerungen','Your memories','Vaše uspomene'],delivery]]},
-'portraitfotografie-graz.html':{
- title:['Porträtfotografie in Graz – persönlich, natürlich und ganz du.','Portrait photography in Graz – personal, natural and truly you.','Portretno fotografisanje u Grazu – lično, prirodno i baš ti.'],
- lead:['Bei deinem Porträtshooting in Graz begleite ich dich mit ruhiger Anleitung und einem Blick dafür, was zu dir passt. Du musst keine Erfahrung vor der Kamera mitbringen – gemeinsam finden wir Posen und Perspektiven, in denen du dich wohlfühlst. So entstehen natürliche, ausdrucksstarke Porträts, in denen du dich wiedererkennst und gerne siehst.','During your portrait session in Graz, I offer calm guidance and an eye for what suits you. You do not need any experience in front of the camera – together we find poses and perspectives that feel comfortable. The result is natural, expressive portraits in which you recognise yourself and enjoy what you see.','Tokom tvog portretnog fotografisanja u Grazu pružam ti mirno vođenje i pažnju usmjerenu na ono što ti odgovara. Ne treba ti iskustvo pred objektivom – zajedno pronalazimo poze i perspektive u kojima se osjećaš ugodno. Tako nastaju prirodni, izražajni portreti na kojima prepoznaješ sebe i rado se vidiš.']}
+// Portrait and product copy is maintained together with its packages and FAQs
+// in generate-new-pages.mjs, so this refresh must not restore portrait-only copy.
 };
 // Existing service copy only: retain headings and body structure while clarifying the image galleries.
 const coreServiceCopy = {
@@ -124,6 +123,36 @@ export function refreshSite(d,file){
  const lang=file.match(/-(en|bs)\.html$/)?.[1]||'de',i=['de','en','bs'].indexOf(lang),base=file.replace(/-(en|bs)\.html$/,'.html'),isHome=base==='index.html';
  const local=f=>lang==='de'?f:f.replace('.html',`-${lang}.html`);
  const el=(tag,cls,text)=>{const e=d.createElement(tag);e.className=cls||'';if(text)e.textContent=text;return e;};
+ // Keep both desktop and mobile portfolio menus complete on every language page.
+ const portfolio=d.querySelector('header .portfolio-dropdown');
+ if(portfolio){
+  const galleries=[
+   ['babybauch-shooting-graz.html','nav_gallery_1',['Babybauchfotos Galerie','Maternity gallery','Galerija trudničkih fotografija']],
+   ['newborn-fotografie-graz.html','nav_gallery_2',['Neugeborenenfotos Galerie','Newborn gallery','Galerija novorođenčadi']],
+   ['babybauch-und-neugeborenen-shooting-graz.html','nav_gallery_combo',['Babybauch & Neugeborene Galerie','Maternity & newborn gallery','Galerija trudničkih fotografija i novorođenčadi']],
+   ['familienfotografie-graz.html','nav_gallery_3',['Familienfotos Galerie','Family gallery','Porodična galerija']],
+   ['hochzeitsfotograf-graz.html','nav_gallery_4',['Hochzeitsfotos Galerie','Wedding gallery','Galerija vjenčanja']],
+   ['portraitfotografie-graz.html','nav_gallery_portrait',['Porträt & Produkt Galerie','Portrait & product gallery','Galerija portreta i proizvoda']]
+  ];
+  const menu=portfolio.querySelector('.nav-dropdown-menu');
+  if(menu){
+   menu.replaceChildren();
+   d.querySelectorAll('header .portfolio-page-link').forEach(a=>a.remove());
+   let previous=portfolio;
+   galleries.forEach(([target,key,labels],n)=>{
+    const a=el('a','',labels[i]);a.href=local(target)+'#gallery-showcase';a.dataset.i18n=key;menu.append(a);
+    const mobile=a.cloneNode(true);mobile.className='portfolio-page-link mobile-group-link';mobile.id='mobile-portfolio-'+n;previous.after(mobile);previous=mobile;
+   });
+   portfolio.querySelector('.mobile-submenu-toggle')?.setAttribute('aria-controls',galleries.map((_,n)=>'mobile-portfolio-'+n).join(' '));
+  }
+ }
+ const portraitLabel=['Porträt- und Produktfotografie','Portrait & product photography','Fotografisanje portreta i proizvoda'][i];
+ for(const a of d.querySelectorAll('header a[href]')){
+  const url=new URL(a.getAttribute('href'),SITE_ORIGIN+'/'+file);
+  const target=url.pathname.split('/').pop().replace(/-(en|bs)\.html$/,'.html');
+  if(target==='portraitfotografie-graz.html'&&url.hash!=='#gallery-showcase')a.textContent=portraitLabel;
+  if(target==='preise.html'&&url.hash==='#portrait')a.textContent=['Porträt und Produkt','Portrait & product','Portreti i proizvodi'][i];
+ }
  d.body.classList.toggle('home-refreshed',isHome);d.body.classList.toggle('compact-mobile-hero',['babybauch-shooting-graz.html','newborn-fotografie-graz.html','babybauch-und-neugeborenen-shooting-graz.html','familienfotografie-graz.html','portraitfotografie-graz.html'].includes(base));if(d.querySelector('.hero-visual'))d.body.classList.add('service-refreshed');
  if(!d.querySelector('link[href^="scripts/site-refresh.css"]')){const css=el('link');css.rel='stylesheet';css.href='scripts/site-refresh.css?v=20260917-language-flags';d.head.append(css);}
  d.querySelector('link[href^="scripts/site-refresh.css"]') .href='scripts/site-refresh.css?v=20260917-language-flags';
@@ -141,7 +170,7 @@ export function refreshSite(d,file){
   if(!grid.classList.contains('early-photo')){const copy=grid.firstElementChild,photo=grid.querySelector('.hero-visual'),intro=el('div','hero-intro'),body=el('div','hero-details');if(copy&&photo){[...copy.children].forEach(e=>(e.matches('h1,.eyebrow')?intro:body).append(e));copy.remove();grid.prepend(intro,photo,body);grid.classList.add('early-photo');}}
   d.querySelectorAll('.hero-emotion').forEach(e=>e.remove());
   const content=pages[base];if(content){if(content.title)d.querySelector('.hero h1').textContent=content.title[i];if(content.lead)d.querySelector('.hero .lead').textContent=content.lead[i];if(content.points)content.points.forEach((p,n)=>{const c=d.querySelectorAll('.hero-points>div')[n];c.querySelector('strong').textContent=p[0][i];c.querySelector('span').textContent=p[1][i];});}
-  if(['babybauch-shooting-graz.html','portraitfotografie-graz.html'].includes(base)){const c=[...d.querySelectorAll('.hero-points>div')].find(e=>/Bildlieferung|Delivery|Isporuka|EURE BILDER|Your images|Vaše fotografije|Erinnerungen|memories|uspomene/i.test(e.querySelector('strong')?.textContent));if(c){c.querySelector('strong').textContent=(base.startsWith('babybauch')?['Eure Bilder','Your images','Vaše fotografije']:['Eure Erinnerungen','Your memories','Vaše uspomene'])[i];c.querySelector('span').textContent=delivery[i];}}
+  if(base==='babybauch-shooting-graz.html'){const c=[...d.querySelectorAll('.hero-points>div')].find(e=>/Bildlieferung|Delivery|Isporuka|EURE BILDER|Your images|Vaše fotografije|Erinnerungen|memories|uspomene/i.test(e.querySelector('strong')?.textContent));if(c){c.querySelector('strong').textContent=['Eure Bilder','Your images','Vaše fotografije'][i];c.querySelector('span').textContent=delivery[i];}}
   if(base==='newborn-fotografie-graz.html'){const c=[...d.querySelectorAll('.hero-points>div')].find(e=>/Familie|Family|Porodica/i.test(e.querySelector('strong')?.textContent));if(c){const span=c.querySelector('span');span.textContent=span.textContent.replace(/natürlich/gi,'auch').replace(/naturally/gi,'also').replace(/naravno/gi,'također');}}
   // Put navigation paths below the complete hero row, not inside the image-height reference.
   const paths=grid.querySelector('.service-quick-links');if(paths)grid.after(paths);
@@ -149,7 +178,7 @@ export function refreshSite(d,file){
  }
  d.querySelectorAll('a.btn').forEach(a=>{const href=a.getAttribute('href')||'',video=/#shooting-video$/.test(href),photo=/#(?:portfolio|gallery-showcase)$/.test(href);if(video||photo){a.classList.remove('ghost');a.classList.add('video-cta','media-cta',video?'media-cta-video':'media-cta-photo');}});
  d.querySelectorAll('.hero-actions,.hero .cta').forEach(actions=>{const photo=actions.querySelector('a.media-cta-photo'),video=actions.querySelector('a.media-cta-video');if(photo&&video&&!actions.querySelector('.media-action-pair')){const pair=el('span','media-action-pair');photo.before(pair);pair.append(photo,video);}});
- const contact=d.querySelector('.contact-grid');if(contact){const cards=contact.querySelectorAll('.contact-detail');if(cards[2])cards[2].querySelector('span').textContent=home.aside_location_value[i];if(cards[3]){cards[3].querySelector('strong').textContent=(base==='ueber-mich.html'?['Leistungen','Services','Usluge']:['Weitere Leistungen','More services','Ostale usluge'])[i];const span=cards[3].querySelector('span');span.replaceChildren();[['portraitfotografie-graz.html',['Porträt','Portrait','Portreti']],['babybauch-shooting-graz.html',['Babybauch','Maternity','Trudnoća']],['newborn-fotografie-graz.html',['Neugeborene','Newborn','Novorođenčad']],['familienfotografie-graz.html',['Familie','Family','Porodica']],['babybauch-und-neugeborenen-shooting-graz.html',['Babybauch & Neugeborene','Maternity & newborn','Trudnoća i novorođenče']],['hochzeitsfotograf-graz.html',['Hochzeit','Wedding','Vjenčanje']]].forEach(([f,n],idx)=>{if(f===base)return;if(span.children.length)span.append(d.createTextNode(' · '));const a=el('a','',n[i]);a.href=local(f);span.append(a);});}}
+ const contact=d.querySelector('.contact-grid');if(contact){const cards=contact.querySelectorAll('.contact-detail');if(cards[2])cards[2].querySelector('span').textContent=home.aside_location_value[i];if(cards[3]){cards[3].querySelector('strong').textContent=(base==='ueber-mich.html'?['Leistungen','Services','Usluge']:['Weitere Leistungen','More services','Ostale usluge'])[i];const span=cards[3].querySelector('span');span.replaceChildren();[['portraitfotografie-graz.html',['Porträt- und Produktfotografie','Portrait & product photography','Fotografisanje portreta i proizvoda']],['babybauch-shooting-graz.html',['Babybauch','Maternity','Trudnoća']],['newborn-fotografie-graz.html',['Neugeborene','Newborn','Novorođenčad']],['familienfotografie-graz.html',['Familie','Family','Porodica']],['babybauch-und-neugeborenen-shooting-graz.html',['Babybauch & Neugeborene','Maternity & newborn','Trudnoća i novorođenče']],['hochzeitsfotograf-graz.html',['Hochzeit','Wedding','Vjenčanje']]].forEach(([f,n],idx)=>{if(f===base)return;if(span.children.length)span.append(d.createTextNode(' · '));const a=el('a','',n[i]);a.href=local(f);span.append(a);});}}
  if(base==='babybauch-und-neugeborenen-shooting-graz.html'){
   const gallery=d.querySelector('#gallery-showcase .gallery-grid');if(gallery)for(const src of ['galerie-neugeborene-dsc03433.webp','DSC02081.webp'])if(!d.querySelector(`#gallery-showcase img[src="${src}"]`)){const figure=el('figure','gallery-item');figure.tabIndex=0;figure.setAttribute('role','button');const img=el('img');img.src=src;img.alt=(src.startsWith('galerie')?['Neugeborenenfoto aus dem Kombishooting','Newborn portrait from the combined session','Fotografija novorođenčeta iz kombinovanog fotografisanja']:['Babybauchfoto aus dem Kombishooting','Maternity portrait from the combined session','Trudnička fotografija iz kombinovanog fotografisanja'])[i];img.width=src.startsWith('galerie')?1600:1000;img.height=src.startsWith('galerie')?1510:667;img.loading='lazy';img.decoding='async';figure.append(img);gallery.append(figure);}
   d.querySelectorAll('#faq h2').forEach(e=>{if(i===0)e.textContent='Häufige Fragen zur Babybauch- und Neugeborenen-Kombi';});
@@ -168,7 +197,7 @@ export function refreshSite(d,file){
  if(base==='newborn-fotografie-graz.html'){const img=d.querySelector('.hero-visual img');img.src='newborn-hero-dsc03309.webp';img.width=1600;img.height=1632;}
  if(base==='babybauch-und-neugeborenen-shooting-graz.html'&&i===0){const h=d.querySelector('#faq h2');h.replaceChildren();for(const [n,t] of ['Häufige Fragen zur Babybauch','-',' und Neugeborenen','-','Kombi'].entries())h.append(n===1||n===3?el('span','straight-hyphen',t):d.createTextNode(t));}
  if(base==='preise.html'){
-  const names=[['Porträt','Babybauch','Neugeborene & Baby','Familie','Babybauch & Baby','Hochzeit & Feiern'],['Portrait','Maternity','Newborn & baby','Family','Maternity & baby','Wedding & events'],['Portreti','Trudnoća','Novorođenčad i bebe','Porodica','Trudnoća i beba','Vjenčanja i proslave']][i];
+  const names=[['Porträt & Produkt','Babybauch','Neugeborene & Baby','Familie','Babybauch & Baby','Hochzeit & Feiern'],['Portrait & product','Maternity','Newborn & baby','Family','Maternity & baby','Wedding & events'],['Portreti i proizvodi','Trudnoća','Novorođenčad i bebe','Porodica','Trudnoća i beba','Vjenčanja i proslave']][i];
   d.querySelectorAll('.price-overview-card').forEach((card,n)=>{const h=card.querySelector('h3');if(!h.querySelector('.overview-short')){const full=el('span','overview-full',h.textContent),short=el('span','overview-short',names[n]);h.replaceChildren(full,short);}const a=card.querySelector('a');a.textContent=a.textContent.replace(/\s*→$/,'');});
  }
 
@@ -178,11 +207,11 @@ export function refreshSite(d,file){
   const nav=d.querySelector('.faq-topic-links');if(nav){const combo=nav.querySelector('a[href*="babybauch-und-neugeborenen"]');if(combo)nav.children[2].before(combo);}
   const terms=d.querySelector('.home-price-notes');if(terms){
    const copy=[{
-    title:'Gut zu wissen',groups:[['Preise & Umsatzsteuer','Alle Preise sind umsatzsteuerfrei gemäß § 6 Abs. 1 Z 27 UStG (Kleinunternehmerregelung).'],['Reisekosten','Reisekosten außerhalb von Graz auf Anfrage.'],['Individuelle Pakete','Individuelle Pakete für weitere, hier nicht aufgeführte Leistungen sind jederzeit möglich.']],extra:'Zusätzliche Bilder',single:'Zusätzliche bearbeitete Bilder',rate:'15 € pro Bild',bundles:'Vorteilspakete',offers:['5 Bilder für 60 €','10 Bilder für 100 €']
+    title:'Gut zu wissen',groups:[['Preise & Umsatzsteuer','Alle Preise sind umsatzsteuerfrei gemäß § 6 Abs. 1 Z 27 UStG (Kleinunternehmerregelung).'],['Reisekosten','Reisekosten außerhalb von Graz auf Anfrage.'],['Shootingzeit verlängern','Mehr Zeit für euer Shooting: 30 Minuten zusätzlich kosten 40 €, eine Stunde 70 €. Die Verlängerung betrifft nur die Shootingzeit; die Anzahl der im Paket enthaltenen Bilder bleibt gleich. Bitte stimmt die zusätzliche Zeit vorab mit mir ab.'],['Individuelle Pakete','Individuelle Pakete für weitere, hier nicht aufgeführte Leistungen sind jederzeit möglich.']],extra:'Zusätzliche Bilder',single:'Zusätzliche bearbeitete Bilder',rate:'15 € pro Bild',bundles:'Vorteilspakete',offers:['5 Bilder für 60 €','10 Bilder für 100 €']
    },{
-    title:'Good to know',groups:[['Prices & VAT','All prices are exempt from VAT under § 6 para. 1 no. 27 UStG (small business regulation).'],['Travel costs','Travel costs outside Graz on request.'],['Custom packages','Custom packages for other services not listed here are always available.']],extra:'Additional images',single:'Additional edited images',rate:'€15 per image',bundles:'Image bundles',offers:['5 images for €60','10 images for €100']
+    title:'Good to know',groups:[['Prices & VAT','All prices are exempt from VAT under § 6 para. 1 no. 27 UStG (small business regulation).'],['Travel costs','Travel costs outside Graz on request.'],['Extend your session','Extra time for your session: an additional 30 minutes costs €40, one hour costs €70. This extends the session time only; the number of images included in your package stays the same. Please arrange the extra time with me in advance.'],['Custom packages','Custom packages for other services not listed here are always available.']],extra:'Additional images',single:'Additional edited images',rate:'€15 per image',bundles:'Image bundles',offers:['5 images for €60','10 images for €100']
    },{
-    title:'Dobro je znati',groups:[['Cijene i PDV','Sve cijene su oslobođene PDV-a prema § 6 st. 1 br. 27 UStG (pravilo za male poduzetnike).'],['Putni troškovi','Putni troškovi van Graza na upit.'],['Individualni paketi','Individualni paketi za druge usluge koje ovdje nisu navedene uvijek su mogući.']],extra:'Dodatne fotografije',single:'Dodatne obrađene fotografije',rate:'15 € po fotografiji',bundles:'Povoljniji paketi',offers:['5 fotografija za 60 €','10 fotografija za 100 €']
+    title:'Dobro je znati',groups:[['Cijene i PDV','Sve cijene su oslobođene PDV-a prema § 6 st. 1 br. 27 UStG (pravilo za male poduzetnike).'],['Putni troškovi','Putni troškovi van Graza na upit.'],['Produženje fotografisanja','Više vremena za fotografisanje: dodatnih 30 minuta košta 40 €, a jedan sat 70 €. Produženje se odnosi samo na trajanje; broj fotografija uključenih u paket ostaje isti. Dodatno vrijeme dogovorite sa mnom unaprijed.'],['Individualni paketi','Individualni paketi za druge usluge koje ovdje nisu navedene uvijek su mogući.']],extra:'Dodatne fotografije',single:'Dodatne obrađene fotografije',rate:'15 € po fotografiji',bundles:'Povoljniji paketi',offers:['5 fotografija za 60 €','10 fotografija za 100 €']
    }][i];
    terms.replaceChildren();const info=el('section','price-terms'),extras=el('section','price-extras');
    info.append(el('h3','',copy.title));
@@ -199,11 +228,19 @@ export function refreshSite(d,file){
   if(!links)links=el('nav','service-paths');
   d.querySelector('.hero-grid').after(links);
   links.classList.add('shooting-service-links');links.setAttribute('aria-label',['Shootings in Graz','Photography sessions in Graz','Fotografisanja u Grazu'][i]);links.replaceChildren();
-  const names=[['Babybauchshooting in Graz','Neugeborenenshooting in Graz','Familienshooting in Graz','Hochzeitsshooting in Graz'],['Maternity photography in Graz','Newborn photography in Graz','Family photography in Graz','Wedding photography in Graz'],['Trudničko fotografisanje u Grazu','Fotografisanje novorođenčadi u Grazu','Porodično fotografisanje u Grazu','Fotografisanje vjenčanja u Grazu']][i];
-  ['babybauch-shooting-graz.html','newborn-fotografie-graz.html','familienfotografie-graz.html','hochzeitsfotograf-graz.html'].forEach((file,n)=>{const a=el('a','',names[n]);a.href=local(file);links.append(a);});
+  const names=[['Babybauchshooting in Graz','Neugeborenenshooting in Graz','Familienshooting in Graz','Hochzeitsshooting in Graz','Porträt- und Produktfotografie in Graz'],['Maternity photography in Graz','Newborn photography in Graz','Family photography in Graz','Wedding photography in Graz','Portrait & product photography in Graz'],['Trudničko fotografisanje u Grazu','Fotografisanje novorođenčadi u Grazu','Porodično fotografisanje u Grazu','Fotografisanje vjenčanja u Grazu','Fotografisanje portreta i proizvoda u Grazu']][i];
+  ['babybauch-shooting-graz.html','newborn-fotografie-graz.html','familienfotografie-graz.html','hochzeitsfotograf-graz.html','portraitfotografie-graz.html'].forEach((file,n)=>{const a=el('a','',names[n]);a.href=local(file);links.append(a);});
  }
 
- if(base==='ueber-mich.html'){const button=d.querySelector('.hero .hero-actions>a.btn[href*="#contact-form-card"]');if(button)button.textContent=['Shooting buchen','Book your session','Rezerviši termin'][i];}
+ if(base==='ueber-mich.html'){
+  const button=d.querySelector('.hero .hero-actions>a.btn[href*="#contact-form-card"]');if(button)button.textContent=['Shooting buchen','Book your session','Rezerviši termin'][i];
+  const answer=d.querySelector('.faq-grid .faq-item p');
+  if(answer)answer.textContent=[
+   'Mein Schwerpunkt liegt auf Babybauch-, Neugeborenen- und Familienfotografie. Auch Porträt- und Produktfotografie gehören zu meinem Angebot. Zusätzlich begleite ich standesamtliche Trauungen, Hochzeiten und Feiern. Immobilien-, Mitarbeiter-, Krippen- und Kindergartenfotografie biete ich ebenfalls auf Anfrage an; passende Portfolios schicke ich euch gerne persönlich.',
+   'My focus is on maternity, newborn and family photography. I also offer portrait and product photography, and cover civil ceremonies, weddings and celebrations. Property, staff, nursery and kindergarten photography is available on request; I am happy to send you the relevant portfolios personally.',
+   'Moj fokus je na trudničkoj fotografiji, fotografisanju novorođenčadi i porodica. Nudim i fotografisanje portreta i proizvoda te pratim građanska vjenčanja, svadbe i proslave. Fotografisanje nekretnina, zaposlenika, jaslica i vrtića dostupno je na upit; odgovarajuće portfolije rado ću vam poslati lično.'
+  ][i];
+ }
  if(base==='babybauch-shooting-graz.html')d.querySelectorAll('.hero-points>div>span').forEach(e=>{e.textContent=e.textContent.replace(/28\.?\s+(?:und|and|i)\s+34\.?/g,range=>range.replace(/\s+/g,'\u00a0'));});
  const actionNames={
  'babybauch-shooting-graz.html':['Babybauch-Shooting anfragen','Enquire about a maternity session','Upit za trudničko fotografisanje'],
@@ -211,7 +248,7 @@ export function refreshSite(d,file){
  'babybauch-und-neugeborenen-shooting-graz.html':['Kombi-Shooting anfragen','Enquire about a combined session','Upit za kombinovano fotografisanje'],
  'familienfotografie-graz.html':['Familien-Shooting anfragen','Enquire about a family session','Upit za porodično fotografisanje'],
  'hochzeitsfotograf-graz.html':['Hochzeits-Shooting anfragen','Enquire about wedding photography','Upit za fotografisanje vjenčanja'],
- 'portraitfotografie-graz.html':['Porträt-Shooting anfragen','Enquire about a portrait session','Upit za portretno fotografisanje']};
+ 'portraitfotografie-graz.html':['Porträt- oder Produktshooting anfragen','Enquire about portrait or product photography','Upit za fotografisanje portreta ili proizvoda']};
  if(actionNames[base])d.querySelectorAll('main a.btn[href*="#contact-form-card"],.hero a.btn[href*="#contact-form-card"]').forEach(a=>{a.textContent=actionNames[base][i];});
 
  for (const [selector, values] of Object.entries(coreServiceCopy[base] || {})) {

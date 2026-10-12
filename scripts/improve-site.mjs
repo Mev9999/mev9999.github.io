@@ -45,7 +45,8 @@ export function improveSite(document,file){
   const paths=node('nav','service-paths core-service-links');paths.setAttribute('aria-label',({de:'Shootings in Graz',en:'Photo sessions in Graz',bs:'Fotografisanje u Grazu'})[lang]);
   ['babybauch-shooting-graz.html','newborn-fotografie-graz.html','familienfotografie-graz.html'].forEach((f,i)=>paths.append(link(local(f),t.core[i])));
   document.querySelector('.hero-details')?.append(paths);
- }else if(home){document.querySelectorAll('.core-service-links a').forEach((a,i)=>{a.textContent=t.core[i];a.href=local(Object.keys(services)[i]);});}
+ }
+ // The complete home service list is rebuilt by refreshSite after this pass.
  if(service){
   const index=['maternity','newborn','family'].indexOf(service),h1=document.querySelector('.hero h1');
   if(index>=0&&h1){let emotion=document.querySelector('.hero-emotion');if(!emotion){emotion=node('p','hero-emotion',h1.textContent);document.querySelector('.hero-details')?.prepend(emotion);}h1.textContent=t.titles[index];}

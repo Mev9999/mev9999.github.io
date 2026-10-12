@@ -326,7 +326,7 @@ function setCanonical(document, fileName) {
 }
 
 function collectVisibleFaqEntities(document) {
-  return Array.from(document.querySelectorAll('#faq .faq-item'))
+  return Array.from(document.querySelectorAll('#faq .faq-item, .faq-grid .faq-item'))
     .map((item) => {
       const question = item.querySelector('.faq-question > span:first-child, summary, h3')?.textContent.trim();
       const answer = item.querySelector('.faq-answer p, p')?.textContent.trim();
@@ -701,13 +701,14 @@ function applyStaticPagePostProcessing(dom, fileName, variantMap) {
   setCanonical(document, fileName);
   upsertAlternateLinks(document, fileName);
   updateSocialMeta(document, fileName);
-  updateJsonLd(document, fileName);
   improveSite(document, fileName);
   refreshSite(document, fileName);
   applyCoreImageContent(document, fileName);
   applyVideoSeo(document, fileName);
   if(coreImageScope(fileName)) updateSocialMeta(document, fileName);
   applyPrivacy(document, fileName);
+  // FAQ schema must describe the final visible copy, including refresh overrides.
+  updateJsonLd(document, fileName);
   applyResponsiveImages(document, variantMap, fileName);
 }
 

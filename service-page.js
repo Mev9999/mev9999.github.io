@@ -203,8 +203,8 @@
   const common = {
     de: {
       languageLabel: 'Sprache wählen',
-      nav: { home: 'Home', about: 'Über mich', services: 'Leistungen', portfolio: 'Portfolio', gallery1: 'Babybauch Galerie', gallery2: 'Neugeborenen Galerie', gallery3: 'Familien Galerie', gallery4: 'Hochzeits Galerie', pricing: 'Preise', faq: 'Häufige Fragen', contact: 'Kontakt' },
-      services: { portrait: 'Porträt', maternity: 'Babybauch', newborn: 'Neugeborene', family: 'Familie', combo: 'Babybauch & Neugeborene', wedding: 'Hochzeit' },
+      nav: { home: 'Home', about: 'Über mich', services: 'Leistungen', portfolio: 'Portfolio', gallery1: 'Babybauch Galerie', gallery2: 'Neugeborenen Galerie', gallery3: 'Familien Galerie', gallery4: 'Hochzeits Galerie', galleryCombo: 'Babybauch & Neugeborene Galerie', galleryPortrait: 'Porträt & Produkt Galerie', pricing: 'Preise', faq: 'Häufige Fragen', contact: 'Kontakt' },
+      services: { portrait: 'Porträt- und Produktfotografie', maternity: 'Babybauch', newborn: 'Neugeborene', family: 'Familie', combo: 'Babybauch & Neugeborene', wedding: 'Hochzeit' },
       breadcrumbs: { aria: 'Breadcrumb', home: 'Startseite', services: 'Leistungen' },
       contact: { email: 'E-Mail', phone: 'Telefon', location: 'Standort', more: 'Weitere Leistungen', locationValue: '8054 Graz' },
       footer: {
@@ -223,8 +223,8 @@
     },
     en: {
       languageLabel: 'Choose language',
-      nav: { home: 'Home', about: 'About', services: 'Services', portfolio: 'Portfolio', gallery1: 'Maternity Gallery', gallery2: 'Newborn Gallery', gallery3: 'Family Gallery', gallery4: 'Wedding Gallery', pricing: 'Pricing', faq: 'FAQs', contact: 'Contact' },
-      services: { portrait: 'Portrait', maternity: 'Maternity', newborn: 'Newborn', family: 'Family', combo: 'Maternity & Newborn', wedding: 'Wedding' },
+      nav: { home: 'Home', about: 'About', services: 'Services', portfolio: 'Portfolio', gallery1: 'Maternity Gallery', gallery2: 'Newborn Gallery', gallery3: 'Family Gallery', gallery4: 'Wedding Gallery', galleryCombo: 'Maternity & Newborn Gallery', galleryPortrait: 'Portrait & Product Gallery', pricing: 'Pricing', faq: 'FAQs', contact: 'Contact' },
+      services: { portrait: 'Portrait & product photography', maternity: 'Maternity', newborn: 'Newborn', family: 'Family', combo: 'Maternity & Newborn', wedding: 'Wedding' },
       breadcrumbs: { aria: 'Breadcrumb', home: 'Home', services: 'Services' },
       contact: { email: 'Email', phone: 'Phone', location: 'Location', more: 'More services', locationValue: '8054 Graz' },
       footer: {
@@ -243,8 +243,8 @@
     },
     bs: {
       languageLabel: 'Odaberi jezik',
-      nav: { home: 'Početna', about: 'O meni', services: 'Usluge', portfolio: 'Portfolio', gallery1: 'Trudnička galerija', gallery2: 'Galerija novorođenčadi', gallery3: 'Porodična galerija', gallery4: 'Galerija vjenčanja', pricing: 'Cijene', faq: 'Česta pitanja', contact: 'Kontakt' },
-      services: { portrait: 'Portret', maternity: 'Trudničko', newborn: 'Novorođenčad', family: 'Porodica', combo: 'Trudničko & novorođenče', wedding: 'Vjenčanje' },
+      nav: { home: 'Početna', about: 'O meni', services: 'Usluge', portfolio: 'Portfolio', gallery1: 'Trudnička galerija', gallery2: 'Galerija novorođenčadi', gallery3: 'Porodična galerija', gallery4: 'Galerija vjenčanja', galleryCombo: 'Trudnička i novorođenačka galerija', galleryPortrait: 'Galerija portreta i proizvoda', pricing: 'Cijene', faq: 'Česta pitanja', contact: 'Kontakt' },
+      services: { portrait: 'Fotografisanje portreta i proizvoda', maternity: 'Trudničko', newborn: 'Novorođenčad', family: 'Porodica', combo: 'Trudničko & novorođenče', wedding: 'Vjenčanje' },
       breadcrumbs: { aria: 'Breadcrumb', home: 'Početna', services: 'Usluge' },
       contact: { email: 'E-mail', phone: 'Telefon', location: 'Lokacija', more: 'Ostale usluge', locationValue: '8054 Graz' },
       footer: {
@@ -581,19 +581,18 @@
       setText(link, commonStrings.services[link.dataset.serviceKey] || '');
     });
 
-    if(refs.portfolioMenuLinks.length >= 4){
-      setText(refs.portfolioMenuLinks[0], commonStrings.nav.gallery1);
-      setText(refs.portfolioMenuLinks[1], commonStrings.nav.gallery2);
-      setText(refs.portfolioMenuLinks[2], commonStrings.nav.gallery3);
-      setText(refs.portfolioMenuLinks[3], commonStrings.nav.gallery4);
-    }
-
-    if(refs.mobilePortfolioLinks.length >= 4){
-      setText(refs.mobilePortfolioLinks[0], commonStrings.nav.gallery1);
-      setText(refs.mobilePortfolioLinks[1], commonStrings.nav.gallery2);
-      setText(refs.mobilePortfolioLinks[2], commonStrings.nav.gallery3);
-      setText(refs.mobilePortfolioLinks[3], commonStrings.nav.gallery4);
-    }
+    const galleryLabelsByFile = {
+      'babybauch-shooting-graz.html': commonStrings.nav.gallery1,
+      'newborn-fotografie-graz.html': commonStrings.nav.gallery2,
+      'babybauch-und-neugeborenen-shooting-graz.html': commonStrings.nav.galleryCombo,
+      'familienfotografie-graz.html': commonStrings.nav.gallery3,
+      'hochzeitsfotograf-graz.html': commonStrings.nav.gallery4,
+      'portraitfotografie-graz.html': commonStrings.nav.galleryPortrait
+    };
+    [...refs.portfolioMenuLinks, ...refs.mobilePortfolioLinks].forEach((link) => {
+      const file = stripLanguageSuffix(new URL(link.href, window.location.href).pathname.split('/').pop());
+      setText(link, galleryLabelsByFile[file]);
+    });
 
     setText(refs.breadcrumbLinks[0], commonStrings.breadcrumbs.home);
     setText(refs.breadcrumbLinks[1], commonStrings.breadcrumbs.services);
