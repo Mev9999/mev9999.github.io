@@ -17,7 +17,7 @@ function emailKey_(value) {
 }
 function nameKey_(value) { return value.normalize('NFKC').trim().toLocaleLowerCase('de').replace(/\s+/g, ' '); }
 function safeCell_(value) { return /^[=+@\-]/.test(value) ? "'" + value : value; }
-function doPost(e) { return processEntry_(e, new Date(), 'Teilnahmen'); }
+function doPost(e) { return reply_(e && e.parameter || {}, false, 'Das Gewinnspiel ist beendet. Vielen Dank fürs Mitmachen!'); }
 function processEntry_(e, now, sheetName) {
   const p = e && e.parameter || {};
   if (+now < START || +now > END) return reply_(p, false, 'Die Teilnahme ist vom 1. Oktober bis 14. Oktober 2026 möglich.');

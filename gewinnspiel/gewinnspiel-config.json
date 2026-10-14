@@ -1,5 +1,5 @@
 {
-  "status": "ready",
+  "status": "closed",
   "startsAt": "2026-10-01T10:00:00+02:00",
   "endsAt": "2026-10-14T23:59:59+02:00",
   "timeZone": "Europe/Vienna",
@@ -13,7 +13,7 @@
   "consentDesignApproved": true,
   "submissionEndpoint": "https://script.google.com/macros/s/AKfycbyf8SE-GJXMWFuu_j4BXeTCsIRPhtmzTrHFTwunGMK08d8lEem-c35z_fsX7fAU2Dy1vA/exec",
   "newsletterProvider": null,
-  "winnerAnnouncement": null,
+  "winnerAnnouncement": "arnelagerry",
   "marketingRequired": false,
   "photoPublicationRequired": false,
   "textVersion": "2026-09-25-v3",

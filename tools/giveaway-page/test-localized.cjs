@@ -1,5 +1,6 @@
 const fs=require('fs'),path=require('path'),assert=require('node:assert/strict'),{JSDOM}=require('jsdom');
 const root=path.resolve(__dirname,'../..'),out=path.join(root,'gewinnspiel');
+function formClosed(d){return d.querySelector('#giveaway-form').dataset.closed==='true'&&[...d.querySelectorAll('#giveaway-form input,#giveaway-form button')].every(e=>e.disabled);}
 (async()=>{
 for(const [lang,file] of Object.entries({de:'index.html',en:'en.html',bs:'bs.html'})){
  const dom=new JSDOM(fs.readFileSync(path.join(out,file),'utf8'),{url:'https://liza-memories-photography.com/gewinnspiel/'+(lang==='de'?'':file),runScripts:'outside-only'}),w=dom.window,d=w.document;
@@ -13,6 +14,12 @@ for(const [lang,file] of Object.entries({de:'index.html',en:'en.html',bs:'bs.htm
  w.fetch=async(url,opts)=>opts?.method==='POST'?{ok:true,json:async()=>{posted=opts.body;return {type:'liza-giveaway-result',requestId:opts.body.get('request_id'),ok:true,message:'Deine Teilnahme wurde bestätigt.'};}}:{ok:true,json:async()=>config};
  w.AbortController=AbortController;w.HTMLDialogElement.prototype.showModal=function(){this.open=true};w.HTMLDialogElement.prototype.close=function(){this.open=false};Object.defineProperty(w.navigator,'share',{value:async data=>{shared=data}});
  w.eval(fs.readFileSync(path.join(out,'gewinnspiel.js'),'utf8'));const tick=()=>new Promise(r=>setTimeout(r,10));await tick();
+ if(config.status==='closed'){
+  assert.equal(formClosed(d),true);
+  assert.match(d.querySelector('.winner').textContent,/@arnelagerry/);
+  d.querySelector('form').dispatchEvent(new w.Event('submit',{cancelable:true}));await tick();
+  assert.equal(posted,undefined);assert.equal(d.querySelector('#success-dialog').open,false);dom.window.close();continue;
+ }
  d.querySelector('[data-share]').click();await tick();assert.equal(shared.url,d.querySelector('link[rel=canonical]').href+'#mitmachen');
  d.querySelector('a[href="#bildnutzung"]').click();assert.equal(d.querySelector('#bedingungen').open,true);
  const form=d.querySelector('form');form.elements.name.value='Test Person';form.elements.instagram.value='@test.person';form.elements.email.value='test@example.invalid';form.elements.terms.checked=true;

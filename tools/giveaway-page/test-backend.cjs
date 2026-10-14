@@ -9,6 +9,10 @@ LockService:{getScriptLock:()=>({tryLock:()=>true,releaseLock(){}})},CacheServic
 Utilities:{getUuid:()=>`id-${rows.length+1}`},SpreadsheetApp:{flush(){},openById(){if(fail)throw Error('storage unavailable');return {getSheetByName:()=>({getLastRow:()=>rows.length+1,getRange:()=>({getValues:()=>rows,setValues(){}}),appendRow:r=>rows.push(r)})};}}};
 vm.createContext(context);
 vm.runInContext(code, context);
+assert.equal(JSON.parse(context.doPost({parameter:{}}).html).ok,false);
+assert.equal(rows.length,0);
+// Retain historical validation checks without reopening the public endpoint.
+context.doPost=e=>context.processEntry_(e,new Clock(),'Teilnahmen');
 function submit(overrides={}){const p={name:'Test Person',email:'test.person@gmail.com',instagram:'test.person',eligibility:'on',terms:'on',parent_origin:'http://127.0.0.1:8771',request_id:'a'.repeat(32),text_version:'2026-09-25-v3',...overrides};const html=context.doPost({parameter:p}).html;return JSON.parse(html);}
 assert.equal(submit().ok,true);assert.equal(rows.length,1);assert.equal(rows[0][6],false);assert.equal(rows[0][7],false);
 assert.equal(submit({email:'t.e.s.t.person+promo@googlemail.com'}).ok,true);assert.equal(rows.length,1);

@@ -8,6 +8,7 @@ const status = document.querySelector('#form-status');
 const dialog = document.querySelector('#success-dialog');
 let config, pending = null, timeout;
 function availability() {
+  if (form.dataset.closed === 'true' || config?.status === 'closed') return t("Das Gewinnspiel ist beendet. Vielen Dank fürs Mitmachen!");
   if (!config || !config.submissionEndpoint || config.status !== 'ready') return t("Die Teilnahme wird gerade vorbereitet. Bitte schau später noch einmal vorbei.");
   if (Date.now() < Date.parse(config.startsAt)) return t("Die Teilnahme startet am 1. Oktober 2026 um 10:00 Uhr (österreichische Zeit).");
   if (Date.now() > Date.parse(config.endsAt)) return t("Das Gewinnspiel ist beendet. Vielen Dank fürs Mitmachen!");
@@ -16,6 +17,9 @@ function availability() {
 function refresh() {
   const note = availability();
   button.disabled = !!note || !!pending;
+  if (form.dataset.closed === 'true' || config?.status === 'closed') {
+    form.querySelectorAll('input,select,textarea,button').forEach(control => control.disabled = true);
+  }
   button.textContent = pending ? t("Wird gesendet …") : note ? t("Teilnahme derzeit geschlossen") : t("Jetzt teilnehmen ♡");
   document.querySelector('#campaign-status').textContent = note || t("Jetzt teilnehmen · bis 14. Oktober 2026");
 }

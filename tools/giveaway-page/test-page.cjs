@@ -11,7 +11,7 @@ for(const file of ['index.html','en.html','bs.html']){
 console.log('PASS: Partner shell DE/EN/BS, language destinations and local assets/links.');
 (async()=>{
  const dom=new JSDOM(fs.readFileSync(path.join(__dirname,'source/index.html'),'utf8'),{url:'https://liza-memories-photography.com/gewinnspiel/',runScripts:'outside-only'}),w=dom.window,d=w.document;
- const config=JSON.parse(fs.readFileSync(path.join(__dirname,'source/gewinnspiel-config.json'),'utf8'));config.startsAt='2020-01-01';config.endsAt='2099-01-01';
+ const config=JSON.parse(fs.readFileSync(path.join(__dirname,'source/gewinnspiel-config.json'),'utf8'));config.status='ready';config.startsAt='2020-01-01';config.endsAt='2099-01-01';
  let outcome=true,copied='';
  w.fetch=async(url,opts)=>opts?.method==='POST'?{ok:true,json:async()=>{assert.equal(opts.body.get('terms'),'on');assert.equal(opts.body.get('eligibility'),'on');assert.equal(opts.body.has('marketing'),false);return {type:'liza-giveaway-result',requestId:opts.body.get('request_id'),ok:outcome,message:outcome?'Danke':'Testfehler'};}}:{ok:true,json:async()=>config};
  w.AbortController=AbortController;w.HTMLDialogElement.prototype.showModal=function(){this.setAttribute('open','')};w.HTMLDialogElement.prototype.close=function(){this.removeAttribute('open')};Object.defineProperty(w.navigator,'clipboard',{value:{writeText:async text=>{copied=text}}});
