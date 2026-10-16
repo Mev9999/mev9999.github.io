@@ -46,7 +46,7 @@ const copy = {
       { title: 'Zusätzliche Bilder', text: 'Ein zusätzlich bearbeitetes Bild kostet 15 €. Vorteilspakete: 5 Bilder für 60 € oder 10 Bilder für 100 €.' },
       { title: 'Shootingzeit verlängern', text: 'Mehr Zeit gewünscht? 30 Minuten zusätzlich kosten 40 €, 60 Minuten zusätzlich 70 €. Die Verlängerung gilt nur für die Shootingzeit; die im Paket enthaltene Bildanzahl bleibt gleich. Bitte bei der Buchung mit mir abstimmen.' },
       { title: 'Individuelle Wünsche', text: 'Weitere Bilder, längere Begleitungen und individuell zusammengestellte Pakete sind nach Absprache jederzeit möglich.' },
-      { title: 'Preishinweis', text: 'Alle Preise sind umsatzsteuerfrei gemäß § 6 Abs. 1 Z 27 UStG. Pro Paket sind insgesamt 20 km für Hin- und Rückfahrt ab Graz zusammen inkludiert; jeder weitere gefahrene Kilometer kostet 0,50 €. Die Fahrtkosten werden vor der Buchung mitgeteilt.' }
+      { title: 'Preishinweis', text: 'Alle Preise sind umsatzsteuerfrei gemäß § 6 Abs. 1 Z 27 UStG. Die Fahrtstrecke wird ab der Studioadresse Mela-Spira-Straße 32b, 8054 Graz bis zum Shooting-Ort und zurück zum Studio berechnet. Von dieser Gesamtstrecke werden pro Paket 20 inkludierte Kilometer abgezogen. Nur die darüber hinausgehenden Kilometer kosten jeweils 0,50 €. Die Fahrtkosten werden vor der Buchung mitgeteilt.' }
     ],
     finalTitle: 'Noch unsicher, welches Paket passt?',
     finalText: 'Schreibt mir kurz, was ihr euch wünscht. Ich helfe euch gerne dabei, das passende Paket für eure Bilder auszuwählen.',
@@ -82,7 +82,7 @@ const copy = {
       { title: 'Additional images', text: 'One additional edited image costs €15. Bundle options: 5 images for €60 or 10 images for €100.' },
       { title: 'Extend your session', text: 'Need more time? Add 30 minutes for €40 or 60 minutes for €70. This extends the session only; the number of images included in your package stays the same. Please arrange the extra time when booking.' },
       { title: 'Individual requests', text: 'Additional images, longer coverage and individually tailored packages are always possible by arrangement.' },
-      { title: 'Pricing note', text: 'All prices are VAT-exempt under § 6 para. 1 no. 27 UStG. Each package includes a total of 20 km for the outward and return journey from Graz combined; each additional kilometre travelled costs €0.50. Travel costs are communicated before booking.' }
+      { title: 'Pricing note', text: 'All prices are VAT-exempt under § 6 para. 1 no. 27 UStG. Travel distance is calculated from the studio at Mela-Spira-Straße 32b, 8054 Graz to the session location and back to the studio. The 20 kilometres included per package are deducted from this total distance. Only kilometres beyond this allowance are charged at €0.50 each. Travel costs are communicated before booking.' }
     ],
     finalTitle: 'Not sure which package suits you?',
     finalText: 'Send me a short message about what you have in mind. I will gladly help you choose the right package for your images.',
@@ -118,7 +118,7 @@ const copy = {
       { title: 'Dodatne fotografije', text: 'Jedna dodatno obrađena fotografija košta 15 €. Paket ponude: 5 fotografija za 60 € ili 10 fotografija za 100 €.' },
       { title: 'Produžite fotografisanje', text: 'Treba vam više vremena? Dodatnih 30 minuta košta 40 €, a dodatnih 60 minuta 70 €. Produžava se samo vrijeme fotografisanja; broj fotografija uključenih u paket ostaje isti. Produženje dogovorite pri rezervaciji.' },
       { title: 'Individualne želje', text: 'Dodatne fotografije, duža pratnja i individualno prilagođeni paketi uvijek su mogući po dogovoru.' },
-      { title: 'Napomena o cijenama', text: 'Sve cijene su oslobođene PDV-a prema § 6 st. 1 br. 27 UStG. Svaki paket uključuje ukupno 20 km za odlazak i povratak iz Graza zajedno; svaki dodatni pređeni kilometar košta 0,50 €. Putni troškovi saopštavaju se prije rezervacije.' }
+      { title: 'Napomena o cijenama', text: 'Sve cijene su oslobođene PDV-a prema § 6 st. 1 br. 27 UStG. Put se računa od adrese studija Mela-Spira-Straße 32b, 8054 Graz do lokacije fotografisanja i nazad do studija. Od ukupne udaljenosti oduzima se 20 kilometara uključenih u svaki paket. Samo kilometri preko tog iznosa naplaćuju se po 0,50 €. Putni troškovi saopštavaju se prije rezervacije.' }
     ],
     finalTitle: 'Niste sigurni koji paket vam odgovara?',
     finalText: 'Napišite mi ukratko šta želite. Rado ću vam pomoći da odaberete odgovarajući paket za vaše fotografije.',
