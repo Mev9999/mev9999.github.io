@@ -979,7 +979,7 @@ async function createPortraitTemplates() {
         bs: ['Galerija portreta i proizvoda', 'Uvid u moje portretne fotografije. Za fotografije vaših proizvoda zajedno dogovaramo stil, pozadine i perspektive.']
       }[lang];
       gallery.innerHTML = `<div class="container section-head"><h2 data-gallery-title>${escapeHtml(labels[0])}</h2><p data-gallery-sub>${escapeHtml(labels[1])}</p></div><div class="container gallery-grid"></div>`;
-      for (const src of ['galerie-familie-dsc02524.webp', 'galerie-familie-dsc02410-2.webp', 'galerie-familie-dsc02504.webp']) {
+      for (const src of ['galerie-familie-dsc02524.webp', 'galerie-familie-dsc02410-2.webp']) {
         const figure = familyDom.window.document.querySelector(`#gallery-showcase img[src="${src}"]`)?.closest('figure');
         if (!figure) throw new Error(`Missing public portrait for gallery: ${src}`);
         gallery.querySelector('.gallery-grid').append(document.importNode(figure, true));
