@@ -1,3 +1,4 @@
+import { ORDER_CONSENT_VERSION, orderConsent } from '../frontend/order-consent.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -59,7 +60,8 @@ function harness({lang='de',url='https://portal.test/galerie/',user={id:'admin',
     return{ok:true,status:200,json:async()=>structuredClone(data)};
   };
   window.eval(translationSource.replace('export const translations =','window.portalTranslations ='));
-  window.eval(portalSource.replace("import { translations } from './translations.js';",'const translations=window.portalTranslations;').replace(/initialise\(\);\s*$/,'window.ui={state,loadSession,loadAdmin,renderAdmin,renderGallery,openGallery,onAction,onChange,onSubmit,adminOrderDirty,acceptAdminDetail,ordersHtml,initialise,openCheckout,showBank,makePreview,paintWatermark,previewFormData,updateDesignPreview,pollStudioActivity};'));
+  window.orderConsent=orderConsent;window.ORDER_CONSENT_VERSION=ORDER_CONSENT_VERSION;
+  window.eval(portalSource.replace("import { ORDER_CONSENT_VERSION, orderConsent } from './order-consent.js';",'const {ORDER_CONSENT_VERSION,orderConsent}=window;').replace("import { translations } from './translations.js';",'const translations=window.portalTranslations;').replace(/initialise\(\);\s*$/,'window.ui={state,loadSession,loadAdmin,renderAdmin,renderGallery,openGallery,onAction,onChange,onSubmit,adminOrderDirty,acceptAdminDetail,ordersHtml,initialise,openCheckout,showBank,makePreview,paintWatermark,previewFormData,updateDesignPreview,pollStudioActivity};'));
   const ui=window.ui;
   const action=async(name,attrs={})=>{const button=[...window.document.querySelectorAll(`[data-action="${name}"]`)].find(node=>Object.entries(attrs).every(([key,value])=>node.dataset[key]===value));assert.ok(button,`Missing action ${name}`);await ui.onAction({target:button,preventDefault(){}});};
   const change=(selector,value)=>{const input=window.document.querySelector(selector);assert.ok(input,selector);input.value=value;ui.onChange({target:input});};
@@ -463,7 +465,7 @@ function chooseCheckoutPackage(h,id){
   input.checked=true;h.ui.onChange({target:input});return input;
 }
 function checkoutTotal(h){return Number(checkoutForm(h).querySelector('[data-checkout-total]')?.dataset.checkoutTotal);}
-function acceptCheckout(h){const form=checkoutForm(h);form.elements.termsAccepted.checked=true;form.elements.digitalConsent.checked=true;return form;}
+function acceptCheckout(h){const form=checkoutForm(h);form.elements.termsAccepted.checked=true;form.elements.earlyStartConsent.checked=true;form.elements.digitalConsent.checked=true;return form;}
 
 test('checkout keeps every active package visible and defaults to the cheapest exact combination at each selection size',async t=>{
   for(const [count,preferred,total] of [[0,null,null],[4,'single',6000],[6,'five',7500],[9,'five',12000],[10,'ten',10000],[12,'ten',13000],[15,'ten',16000],[17,'ten',19000]]){
@@ -516,12 +518,12 @@ test('checkout posts the displayed total and original selection without acceptin
   form.insertAdjacentHTML('beforeend','<input name="amountCents" value="1"><input name="packageQuantity" value="900"><input name="singlePriceCents" value="0">');
   await h.ui.onSubmit({target:form,preventDefault(){}});
   const posted=h.requests.filter(request=>request.path==='/api/orders'&&request.method==='POST');assert.equal(posted.length,1);
-  assert.deepEqual(posted[0].body,{galleryId:'g',imageIds:h.detail.images.slice(0,17).map(image=>image.id),packageId:'ten',expectedAmountCents:19000,paymentMethod:'transfer',termsAccepted:true,digitalConsent:true});
+  assert.deepEqual(posted[0].body,{galleryId:'g',imageIds:h.detail.images.slice(0,17).map(image=>image.id),packageId:'ten',expectedAmountCents:19000,paymentMethod:'transfer',termsAccepted:true,digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de'});
 });
 
 test('whole-gallery checkout posts all only after all photos are selected and never falls back to a partial order',async t=>{
   const h=await checkoutHarness(t,{count:8,total:8,pricingMode:'gallery'});await h.action('buy-gallery');const form=acceptCheckout(h);await h.ui.onSubmit({target:form,preventDefault(){}});
-  const posted=h.requests.find(request=>request.path==='/api/orders'&&request.method==='POST');assert.deepEqual(posted.body,{galleryId:'g',all:true,packageId:'all',expectedAmountCents:25000,paymentMethod:'transfer',termsAccepted:true,digitalConsent:true});
+  const posted=h.requests.find(request=>request.path==='/api/orders'&&request.method==='POST');assert.deepEqual(posted.body,{galleryId:'g',all:true,packageId:'all',expectedAmountCents:25000,paymentMethod:'transfer',termsAccepted:true,digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de'});
   const incomplete=await checkoutHarness(t,{count:7,total:8,pricingMode:'gallery'});await incomplete.action('buy-gallery');const badForm=acceptCheckout(incomplete);badForm.elements.packageId.disabled=false;badForm.elements.packageId.checked=true;await incomplete.ui.onSubmit({target:badForm,preventDefault(){}});
   assert.equal(incomplete.requests.filter(request=>request.path==='/api/orders'&&request.method==='POST').length,0);assert.equal(badForm.querySelector('button[type="submit"]').disabled,true);
 });
@@ -589,7 +591,7 @@ test('all-photo required booking remains unavailable until the entire actual gal
   assert.equal(checkoutForm(h).querySelector('[name="packageId"]:checked').value,'all');assert.equal(checkoutTotal(h),25000);
   assert.equal(checkoutForm(h).querySelectorAll('[name="packageId"]:not(:disabled)').length,1);
   await h.ui.onSubmit({target:acceptCheckout(h),preventDefault(){}});
-  assert.deepEqual(h.requests.find(request=>request.path==='/api/orders'&&request.method==='POST').body,{galleryId:'g',all:true,packageId:'all',expectedAmountCents:25000,paymentMethod:'transfer',termsAccepted:true,digitalConsent:true});
+  assert.deepEqual(h.requests.find(request=>request.path==='/api/orders'&&request.method==='POST').body,{galleryId:'g',all:true,packageId:'all',expectedAmountCents:25000,paymentMethod:'transfer',termsAccepted:true,digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de'});
 });
 
 test('after the booking is paid additional orders use only the cheapest extra packages without charging the base again',async t=>{
@@ -848,7 +850,7 @@ const finishedFile=(h,name)=>new h.window.File(['edited-original'],name,{type:'i
 test('finished delivery is opt-in, saves explicitly and separates proof uploads from final files',async t=>{
   const h=await adminHarness();t.after(()=>h.dom.window.close());let form=h.window.document.querySelector('#portal-gallery-settings');assert.equal(form.elements.requireFinalDelivery.checked,false);assert.equal(h.window.document.querySelector('[data-action="upload-final-batch"]'),null);await h.action('final-mode-settings');assert.equal(h.ui.state.adminPanel,'settings');assert.equal(h.window.document.activeElement,form.elements.requireFinalDelivery);
   form.elements.requireFinalDelivery.checked=true;await h.ui.onSubmit({target:form,preventDefault(){}});assert.equal(h.requests.find(r=>r.path==='/api/admin/galleries/g'&&r.method==='PATCH').body.requireFinalDelivery,true);
-  h.detail.gallery.requireFinalDelivery=true;await h.ui.loadAdmin('g');assert.match(h.window.document.querySelector('#portal-upload-form button[type=submit]').textContent,/Auswahlbilder hochladen/);assert.match(h.window.document.querySelector('[data-action="upload-final-batch"]').textContent,/Fertige Bilder hochladen/);
+  h.detail.gallery.requireFinalDelivery=true;await h.ui.loadAdmin('g');assert.match(h.window.document.querySelector('#portal-upload-form button[type=submit]').textContent,/Auswahlbilder hochladen/);assert.match(h.window.document.querySelector('[data-action="upload-final-batch"]').textContent,/Fertige Dateien zuordnen/);
   h.detail.finalDeliveryReady=false;await h.ui.loadAdmin('g');assert.equal(h.window.document.querySelector('[name="requireFinalDelivery"]').disabled,true);assert.equal(h.window.document.querySelector('[data-action="upload-final-batch"]').disabled,true);
 });
 
@@ -936,4 +938,44 @@ test('marking existing finals retains the selection on failure and blocks duplic
   const h=await finalDeliveryHarness(t);selectAdminPhoto(h,'a');let release,attempts=0;h.requestHandler=path=>path.endsWith('/finalize')&&++attempts===1?new Promise(resolve=>{release=()=>resolve(uiResponse({error:'image_changed'},409));}):null;
   const pending=h.action('admin-finalize-images');await new Promise(resolve=>setImmediate(resolve));assert.equal(h.ui.state.adminBusy,true);assert.equal(h.window.document.querySelector('[data-action="admin-finalize-images"]').disabled,true);await h.action('admin-finalize-images');assert.equal(attempts,1);release();await pending;
   assert.equal(h.ui.state.adminBusy,false);assert.deepEqual([...h.ui.state.adminSelection],['a']);assert.equal(h.window.document.querySelector('[data-action="admin-finalize-images"]').disabled,false);await h.action('admin-finalize-images');assert.equal(attempts,2);assert.equal(h.detail.images[0].finalReady,true);
+});
+
+
+test('existing order details show all nine ordered images independent of favourites and highlight the missing final',async t=>{
+ const h=await finalDeliveryHarness(t);h.detail.images=Array.from({length:10},(_,i)=>({id:'p'+i,title:'DSC'+i,finalReady:i<8,previewUrl:'/proof/'+i,originalUrl:'/original/'+i,watermarkEnabled:true,protectedPreviewReady:true}));h.orders=[testOrderFixture({galleryId:'g',requireFinalDelivery:true,imageIds:h.detail.images.slice(0,9).map(i=>i.id)})];await h.action('admin-tab',{tab:'orders'});await h.action('admin-order-details',{id:'test-o'});
+ const cards=h.window.document.querySelectorAll('.portal-ordered-image');assert.equal(cards.length,9);assert.equal(h.window.document.querySelectorAll('.needs-final').length,1);assert.match(h.window.document.querySelector('.needs-final').textContent,/DSC8/);assert.equal(cards[0].querySelector('img').getAttribute('src'),'/proof/0');assert.equal(cards[8].querySelector('img').getAttribute('src'),'/proof/8?watermark=1');assert.ok(h.window.document.querySelector('a[href="/api/orders/test-o/receipt"]'));assert.equal(h.requests.some(r=>r.method!=='GET'),false);
+});
+test('bulk final matching ignores extension and case and also accepts a unique visible image title',async t=>{
+ const h=await finalDeliveryHarness(t);h.detail.images[0].sourceFilename='old.jpg';h.detail.images[0].title='DSC123';await h.ui.loadAdmin('g');await h.action('upload-final-batch');selectFinalFiles(h,[finishedFile(h,'dsc123.JPG')]);assert.equal(h.ui.state.finalBatch.rows[0].imageId,'a');assert.equal(h.window.document.querySelector('#portal-final-batch button[type=submit]').disabled,false);
+});
+test('email history uses sandboxed snapshots and checks provider state without sending emails',async t=>{
+ const h=await adminHarness();t.after(()=>h.dom.window.close());h.orders=[testOrderFixture()];h.requestHandler=async path=>path.includes('/emails')?{ok:true,status:200,json:async()=>path.includes('?check=')?{status:'delivered'}:{ready:true,messages:[{id:'m',subject:'<script>bad</script>',html:'<b>Snapshot</b>',status:'sent',createdAt:Date.now(),canCheck:true}]}}:null;await h.action('admin-tab',{tab:'orders'});await h.action('admin-order-emails',{id:'test-o'});const frame=h.window.document.querySelector('iframe');assert.equal(frame.getAttribute('sandbox'),'');assert.match(frame.srcdoc,/default-src/);assert.equal(h.window.document.querySelector('dialog script'),null);await h.action('mail-check');assert.match(h.window.document.querySelector('[data-mail-status]').textContent,/Mailserver/);assert.equal(h.requests.some(r=>r.method!=='GET'),false);
+});
+test('order photo failure remains an error and does not invent a ready status',async t=>{
+ const h=await adminHarness();t.after(()=>h.dom.window.close());h.orders=[testOrderFixture({galleryId:'g'})];await h.action('admin-tab',{tab:'orders'});h.requestHandler=async path=>path==='/api/galleries/g'?{ok:false,status:503,json:async()=>({})}:null;await h.action('admin-order-details',{id:'test-o'});assert.equal(h.window.document.querySelectorAll('.portal-ordered-image').length,0);assert.ok(h.window.document.querySelector('[data-order-photos]').textContent.length>3);
+});
+
+
+test('finished admin tiles and opened images use previews; originals are download-only',async t=>{
+ const h=await finalDeliveryHarness(t);h.detail.images[0]={...h.detail.images[0],finalReady:true,previewUrl:'/api/images/a?kind=preview',originalUrl:'/api/images/a?kind=original',watermarkEnabled:true,protectedPreviewReady:true};await h.ui.loadAdmin('g');
+ assert.equal(h.window.document.querySelector('[data-admin-thumb="a"] img').getAttribute('src'),'/api/images/a?kind=preview');
+ assert.equal(h.window.document.querySelectorAll('img[src*="kind=original"]').length,0);
+ await h.action('admin-image',{id:'a'});assert.equal(h.window.document.querySelector('.portal-admin-detail-photo').getAttribute('src'),'/api/images/a?kind=preview');
+ assert.equal(h.window.document.querySelector('[data-admin-thumb="a"] img').getAttribute('src'),'/api/images/a?kind=preview');
+});
+
+
+test('batch replacement prefers the unique unfinished proof over an accidentally added finished duplicate',async t=>{
+ const h=await finalDeliveryHarness(t);h.detail.images[0].sourceFilename='DSC123.jpg';h.detail.images[0].finalReady=false;h.detail.images[1].sourceFilename='DSC123.jpg';h.detail.images[1].finalReady=true;await h.ui.loadAdmin('g');await h.action('upload-final-batch');selectFinalFiles(h,[finishedFile(h,'DSC123.jpg')]);assert.equal(h.ui.state.finalBatch.rows[0].imageId,'a');assert.equal(h.ui.state.finalBatch.rows[0].ambiguous,false);
+});
+test('admin access filters distinguish customer grants from administrator original access and select only visible photos',async t=>{
+ const h=await adminHarness();t.after(()=>h.dom.window.close());h.detail.images.forEach(i=>i.downloadAllowed=true);h.detail.downloadAccess={releases:[{userId:'u1',imageId:'a'},{userId:'u2',imageId:'b'}]};h.orders=[testOrderFixture({userId:'u1',status:'paid',imageIds:['c']})];await h.ui.loadAdmin('g');h.change('#p-admin-access-user','u1');h.change('#p-admin-access-filter','downloads');assert.deepEqual([...h.window.document.querySelectorAll('[data-admin-thumb]')].map(n=>n.dataset.adminThumb),['a']);await h.action('admin-select-all');assert.deepEqual([...h.ui.state.adminSelection],['a']);h.change('#p-admin-access-filter','paid');assert.deepEqual([...h.window.document.querySelectorAll('[data-admin-thumb]')].map(n=>n.dataset.adminThumb),['c']);assert.ok(h.window.document.querySelector('[data-action="delete-image"][data-id="c"]'));
+});
+test('customer paid and downloadable filters are independent of favourites',async t=>{
+ const h=harness({user:{id:'u1',name:'Anna',role:'customer'}});t.after(()=>h.dom.window.close());h.detail.images[0].downloadAllowed=true;h.orders=[testOrderFixture({status:'paid',imageIds:['b']})];await h.ui.loadSession();await h.ui.openGallery('g');await h.action('filter',{filter:'downloads'});assert.deepEqual([...h.window.document.querySelectorAll('[data-photo-id]')].map(n=>n.dataset.photoId),['a']);await h.action('filter',{filter:'paid'});assert.deepEqual([...h.window.document.querySelectorAll('[data-photo-id]')].map(n=>n.dataset.photoId),['b']);assert.ok(h.window.document.querySelector('.portal-access-badge.pending'));
+});
+
+
+test('checkout requires two explicit unselected declarations in every language',async t=>{
+ for(const lang of ['de','en','bs']){const h=await checkoutHarness(t,{count:5,lang});await h.action('checkout');const form=checkoutForm(h);for(const name of ['termsAccepted','earlyStartConsent','digitalConsent']){assert.equal(form.elements[name].checked,false);assert.equal(form.elements[name].required,true);}assert.equal(form.checkValidity(),false);form.elements.termsAccepted.checked=true;form.elements.digitalConsent.checked=true;assert.equal(form.checkValidity(),false);form.elements.earlyStartConsent.checked=true;assert.equal(form.checkValidity(),true);assert.ok(form.textContent.includes(orderConsent[lang].compensation));assert.ok(form.textContent.includes(orderConsent[lang].start));assert.ok(form.textContent.includes(orderConsent[lang].loss));}
 });

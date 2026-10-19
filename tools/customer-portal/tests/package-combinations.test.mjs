@@ -31,7 +31,7 @@ async function withPrices(callback) {
   } finally { await h.close(); }
 }
 function buy(h, client, packageId, count, extra = {}) {
-  return h.request('/api/orders', { ...client, method: 'POST', body: { galleryId: fixtureIds.gallery, packageId, imageIds: images(count), paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true, ...extra } });
+  return h.request('/api/orders', { ...client, method: 'POST', body: { galleryId: fixtureIds.gallery, packageId, imageIds: images(count), paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de', ...extra } });
 }
 
 test('every selection uses the cheapest exact combination containing the selected package and ignores forged prices', () => withPrices(async (h, client) => {

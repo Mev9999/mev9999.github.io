@@ -59,7 +59,7 @@ test('payment releases exactly eight purchased originals without watermarks; lat
   await h.request('/api/admin/settings', { ...h.admin, method:'PATCH', body:{watermark:{enabled:true}} });
   await h.protect(selected[0]); await h.mode(selected[0], 'on');
   await h.access('DELETE', selected);
-  const created = await h.request('/api/orders', { ...h.customer, method:'POST', body:{galleryId:fixtureIds.gallery,imageIds:selected,packageId:fixtureIds.singlePackage,paymentMethod:'transfer',termsAccepted:true,digitalConsent:true} });
+  const created = await h.request('/api/orders', { ...h.customer, method:'POST', body:{galleryId:fixtureIds.gallery,imageIds:selected,packageId:fixtureIds.singlePackage,paymentMethod:'transfer',termsAccepted:true,digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de'} });
   assert.equal(created.status, 201);
   const orderId = created.data.order.id; const paid = () => h.request(`/api/admin/orders/${orderId}/paid`, { ...h.admin, method:'POST', body:{} });
   assert.equal((await paid()).status, 200);

@@ -6,7 +6,7 @@ const path = require('node:path');
 function bundleWorker(backend = path.join(__dirname, 'backend')) {
   const root = path.resolve(backend);
   const included = new Set(), pending = new Set(), chunks = [];
-  const importPattern = /^[ \t]*import\s*\{([^}]+)\}\s*from\s*['"]\.\/([A-Za-z0-9_-]+\.mjs)['"];?[ \t]*\r?$/gm;
+  const importPattern = /^[ \t]*import\s*\{([^}]+)\}\s*from\s*['"](\.\/[A-Za-z0-9_-]+\.mjs|\.\.\/frontend\/order-consent\.js)['"];?[ \t]*\r?$/gm;
   function visit(filename, entry = false) {
     if (pending.has(filename)) throw new Error('Cyclic local worker dependency: ' + filename);
     if (included.has(filename)) return;

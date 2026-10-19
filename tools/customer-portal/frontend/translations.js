@@ -1,4 +1,27 @@
 const rows = {
+orderedPhotos:["Bestellte Bilder ansehen","View ordered photos","Pogledaj naručene fotografije"],
+orderConfirmation:["Bestellbestätigung herunterladen","Download order confirmation","Preuzmi potvrdu narudžbe"],
+orderPhotoHint:["Dies sind die Bilder dieser Bestellung. Favoriten sind davon unabhängig. Fehlende fertige Dateien sind hervorgehoben.","These are the photos in this order, independent of favourites. Missing final files are highlighted.","Ovo su naručene fotografije, nezavisno od favorita. Nedostajuće gotove datoteke su označene."],
+orderedImageMissing:["Bild nicht mehr verfügbar","Image no longer available","Fotografija više nije dostupna"],
+orderedOriginal:["Hochgeladene Datei vorhanden","Uploaded file available","Učitana datoteka dostupna"],
+adminFinalOriginal:["Fertige Originaldatei bereit · Admin-Vorschau ohne Wasserzeichen","Final original · Admin preview without watermark","Gotov original · Admin prikaz bez vodenog žiga"],
+customerEmails:["E-Mails an diesen Kunden","Emails to this customer","E-mailovi ovom klijentu"],
+mailHistoryHint:["Gespeicherte E-Mails an diese Person, auch aus anderen Galerien. Versendet bedeutet: vom Versanddienst angenommen. Zustellung prüfen fragt den aktuellen Anbieterstatus ab; dies bestätigt nicht, dass die Person die Nachricht gelesen hat. Ältere Nachrichten sind nur verfügbar, soweit sie gespeichert wurden. Anmeldelinks sind geschützt.","Stored emails to this person across galleries. Sent means accepted by the mail provider. Check delivery retrieves the provider status, not proof that the person read it. Older messages are available only where stored. Login links are protected.","Sačuvani e-mailovi ovoj osobi iz svih galerija. Poslano znači prihvaćeno od servisa. Provjera dostave nije dokaz čitanja. Starije poruke dostupne su samo ako su sačuvane. Linkovi za prijavu su zaštićeni."],
+mailHistoryMigration:["Für das Protokoll neuer E-Mails bitte das Datenbank-Update mail-history.sql ausführen.","Run mail-history.sql to log new emails.","Pokreni mail-history.sql za evidenciju novih poruka."],
+mailHistoryEmpty:["Keine gespeicherten Nachrichten vorhanden.","No stored messages available.","Nema sačuvanih poruka."],
+mailCheck:["Zustellung prüfen","Check delivery","Provjeri dostavu"],
+mailContent:["E-Mail ansehen","View email","Pogledaj e-mail"],
+mailState_sent:["Versendet · Zustellung noch nicht bestätigt","Sent · Delivery not yet confirmed","Poslano · Dostava još nije potvrđena"],
+mailState_delivered:["Vom Empfänger-Mailserver angenommen","Accepted by recipient mail server","Prihvaćeno na serveru primaoca"],
+mailState_pending:["Versand ausstehend","Pending send","Slanje na čekanju"],
+mailState_cancelled:["Versand aufgehoben","Sending cancelled","Slanje otkazano"],
+mailState_failed:["Versand fehlgeschlagen","Sending failed","Slanje nije uspjelo"],
+mailState_unavailable:["Zustellstatus nicht abrufbar – gegebenenfalls direkt bei Resend prüfen.","Delivery status unavailable – check Resend directly if needed.","Status dostave nije dostupan – provjeri u Resendu."],
+mailState_bounced:["Nicht zugestellt · zurückgewiesen","Not delivered · Bounced","Nije dostavljeno · Odbijeno"],
+mailState_complained:["Als Spam gemeldet","Reported as spam","Prijavljeno kao neželjena pošta"],
+mailState_delivery_delayed:["Zustellung verzögert","Delivery delayed","Dostava kasni"],
+mailState_opened:["Öffnung vom Anbieter registriert · kein sicherer Lesenachweis","Provider registered an open · Not proof of reading","Servis je zabilježio otvaranje · Nije dokaz čitanja"],
+mailState_clicked:["Link-Aufruf vom Anbieter registriert","Provider registered a link click","Servis je zabilježio klik"],
   themeCream:['Creme','Cream','Krem'],themeRose:['Rosé','Rose','Ružičasta'],themeBlush:['Blütenrosa','Blush','Nježna ružičasta'],themeSand:['Sand','Sand','Pijesak'],themeClay:['Terrakotta','Terracotta','Terakota'],themeSage:['Salbei','Sage','Kadulja'],themeOlive:['Olive','Olive','Maslina'],themeForest:['Waldgrün','Forest','Šumska zelena'],themeSea:['Meeresgrün','Sea green','Morska zelena'],themeSky:['Himmelblau','Sky blue','Nebesko plava'],themeLavender:['Lavendel','Lavender','Lavanda'],themeSlate:['Schieferblau','Slate blue','Škriljac plava'],
   coverSplitReverse:['Titel links · Foto rechts','Title left · Photo right','Naslov lijevo · Fotografija desno'],coverCard:['Titelkarte auf dem Foto','Title card on photo','Kartica s naslovom na fotografiji'],coverArch:['Foto mit Bogen','Arched photo','Fotografija s lukom'],coverPolaroid:['Fotodruck mit Rand','Framed photo print','Fotografija s obrubom'],coverMinimal:['Titel oben · Foto darunter','Title above · Photo below','Naslov iznad · Fotografija ispod'],
   coverHeightDesktop:['Coverhöhe · Desktop','Cover height · Desktop','Visina naslovnice · Računar'],coverHeightMobile:['Coverhöhe · Handy','Cover height · Mobile','Visina naslovnice · Mobitel'],coverFitDesktop:['Bilddarstellung · Desktop','Image fit · Desktop','Prikaz fotografije · Računar'],coverFitMobile:['Bilddarstellung · Handy','Image fit · Mobile','Prikaz fotografije · Mobitel'],coverFitContain:['Ganzes Foto · ohne Beschnitt','Entire photo · No crop','Cijela fotografija · Bez rezanja'],coverFitCover:['Fläche füllen · mit Beschnitt','Fill area · Cropped','Popuni prostor · Izrezano'],
@@ -525,7 +548,7 @@ Object.assign(rows, {
   finalFilePending:['Auswahlbild · fertige Datei fehlt','Proof image · finished file missing','Fotografija za izbor · nedostaje gotova datoteka'],
   finalFilesCount:['{n} von {total} fertigen Dateien zugeordnet','{n} of {total} finished files assigned','Pridruženo {n} od {total} gotovih datoteka'],
   finalProofUploadTitle:['Auswahlbilder hochladen','Upload proof images','Učitaj fotografije za izbor'],
-  finalBatchTitle:['Fertige Bilder hochladen','Upload finished images','Učitaj gotove fotografije'],
+  finalBatchTitle:['Fertige Bilder hochladen · automatisch ersetzen','Upload finished images','Učitaj gotove fotografije'],
   finalBatchIntro:['Exportiere die fertig bearbeiteten Fotos mit den ursprünglichen Dateinamen, z. B. DSC04378.jpg. Wähle alle Dateien gemeinsam oder ziehe sie in das Upload-Feld. Gleiche Namen werden automatisch zugeordnet; du prüfst die Zuordnung und bestätigst einmal.','Export edited photos using their original filenames, e.g. DSC04378.jpg. Select all files together or drop them into the upload area. Matching names are assigned automatically; review the assignments and confirm once.','Izvezi obrađene fotografije s izvornim nazivima, npr. DSC04378.jpg. Odaberi sve datoteke zajedno ili ih povuci u polje za učitavanje. Isti nazivi se automatski povezuju; provjeri podudaranja i potvrdi jednom.'],
   finalProofUploadHint:['Das normale Feld darunter fügt neue Auswahlbilder hinzu. Für fertige Dateien verwende den Button oben, damit Auswahl, Favoriten und Bestellungen erhalten bleiben.','The regular upload below adds new proof images. Use the button above for finished files to preserve selections, favourites and orders.','Uobičajeno polje ispod dodaje nove fotografije za izbor. Za gotove datoteke koristi dugme iznad kako bi izbori, favoriti i narudžbe ostali sačuvani.'],
   finalDropHint:['Alle fertigen Dateien hierher ziehen oder auswählen','Drop all finished files here or select files','Povuci sve gotove datoteke ovdje ili ih odaberi'],
@@ -552,5 +575,122 @@ Object.assign(rows, {
   transferFinalInstruction:['Bitte überweise den Betrag mit der Bestellnummer als Verwendungszweck. Sobald die Zahlung bestätigt ist und deine bestellten Bilder fertig bearbeitet sind, erhältst du eine E-Mail zum Download.','Transfer the amount using your order number as the reference. Once payment is confirmed and your ordered images are finished, you will receive a download email.','Uplati iznos uz broj narudžbe kao poziv na broj. Kada je uplata potvrđena i naručene fotografije obrađene, dobit ćeš e-mail za preuzimanje.'],
   finalFileChanged:['Das Bild wurde zwischenzeitlich geändert. Lade die Galerie neu und ordne die Datei erneut zu.','The image changed in the meantime. Refresh the gallery and assign the file again.','Fotografija je u međuvremenu promijenjena. Osvježi galeriju i ponovo pridruži datoteku.'],
   finalWatermarkChanged:['Die Wasserzeichen-Einstellung wurde geändert. Lade die Galerie neu und starte den Upload erneut.','The watermark setting changed. Refresh the gallery and upload again.','Postavka vodenog žiga je promijenjena. Osvježi galeriju i ponovo učitaj datoteke.']
+});
+Object.assign(rows,{
+  "finalBatchTitle": [
+    "Auswahlbilder durch fertige Fotos ersetzen",
+    "Replace proofs with finished photos",
+    "Zamijeni probne fotografije gotovim"
+  ],
+  "replacePhotosButton": [
+    "Fertige Dateien zuordnen",
+    "Assign finished files",
+    "Poveži gotove datoteke"
+  ],
+  "finalBatchIntro": [
+    "Wähle die bearbeiteten Dateien gemeinsam aus. Gleiche Dateinamen werden zugeordnet. Prüfe die Zuordnung und bestätige einmal.",
+    "Select the edited files together. Matching filenames are assigned automatically. Review and confirm once.",
+    "Odaberi obrađene datoteke zajedno. Isti nazivi se automatski povezuju. Provjeri i potvrdi jednom."
+  ],
+  "replaceResultHint": [
+    "Die bisherigen Dateien werden ersetzt und als fertig markiert. Deine Admin-Vorschau ist dann ohne Wasserzeichen. Für Kunden erfolgt die Freigabe samt E-Mail, sobald die Bestellung bezahlt und alle bestellten Bilder fertig sind.",
+    "Files are replaced and marked finished. Your admin preview has no watermark. Customers receive access and an email once payment is confirmed and every ordered photo is finished.",
+    "Datoteke se zamjenjuju i označavaju gotovim. Admin prikaz je bez vodenog žiga. Klijent dobija pristup i e-mail kada je narudžba plaćena i sve naručene fotografije gotove."
+  ],
+  "finalExistingHint": [
+    "Fotos schon fertig? Unten markieren und „Als fertig bearbeitet markieren“ wählen.",
+    "Already finished? Select the photos below and choose “Mark as finished”.",
+    "Već gotove? Označi fotografije ispod i izaberi „Označi kao obrađeno“."
+  ],
+  "uploadIntro": [
+    "Für eine schnelle Anzeige erstellen wir kleine Vorschauen – auch beim Öffnen eines Bildes. Nur beim Download wird die Originaldatei geliefert.",
+    "Small previews keep the gallery and opened images fast. Only downloads use the original file.",
+    "Mali pregledi ubrzavaju galeriju i otvaranje fotografija. Samo preuzimanje koristi original."
+  ],
+  "newPhotosTitle": [
+    "Neue Bilder hinzufügen",
+    "Add new photos",
+    "Dodaj nove fotografije"
+  ],
+  "finalAlreadyFinished": [
+    "Diese neuen Bilder sind bereits fertig bearbeitet",
+    "These new photos are already finished",
+    "Ove nove fotografije su već obrađene"
+  ],
+  "finalAlreadyFinishedHint": [
+    "Legt neue Bilder an und markiert sie als fertig. Ersetzt keine vorhandenen Bilder – auch nicht bei gleichem Dateinamen.",
+    "Adds new photos and marks them finished. Does not replace existing photos, even with the same filename.",
+    "Dodaje nove fotografije i označava ih gotovim. Ne zamjenjuje postojeće, čak ni s istim nazivom."
+  ],
+  "finalModeHint": [
+    "An: Kunden wählen zuerst aus. Downloads erst nach Zahlung und Fertigstellung aller bestellten Bilder. Aus: Hochgeladene Dateien können nach Zahlung direkt ausgeliefert werden. In beiden Fällen ist auch eine manuelle Freigabe möglich; Hochladen allein gibt keinen Download frei.",
+    "On: customers choose proofs; download follows payment and completion of all ordered photos. Off: uploaded files can be delivered after payment. Manual release works in either mode; uploading alone does not unlock downloads.",
+    "Uključeno: klijenti biraju probne fotografije; preuzimanje nakon plaćanja i završetka svih naručenih fotografija. Isključeno: učitane datoteke mogu se isporučiti nakon plaćanja. Ručno odobrenje je moguće u oba slučaja; samo učitavanje ne otključava preuzimanje."
+  ],
+  "directDeliveryTitle": [
+    "Direkte Auslieferung nach Zahlung",
+    "Direct delivery after payment",
+    "Direktna isporuka nakon plaćanja"
+  ],
+  "directDeliveryHint": [
+    "Lade hier nur fertige Fotos hoch. Nach bezahlter Bestellung oder manueller Freigabe können Kunden sie herunterladen. Hochladen allein schaltet keine Downloads frei.",
+    "Upload finished photos here. Customers can download after payment or manual release. Uploading alone does not grant access.",
+    "Ovdje učitaj samo gotove fotografije. Klijenti preuzimaju nakon plaćanja ili ručnog odobrenja. Samo učitavanje ne daje pristup."
+  ],
+  "revokeDownloadsHint": [
+    "„Freigeben“ erlaubt dem gewählten Kunden den Download. „Sperren“ entzieht ihn – auch bei bezahlten Bildern. Die Bestellung bleibt bestehen. Schon heruntergeladene Dateien bleiben beim Kunden.",
+    "Release allows the selected customer to download. Block removes access, even for paid photos. The order remains. Files already downloaded remain with the customer.",
+    "Odobrenje omogućava preuzimanje odabranom klijentu. Blokiranje ukida pristup, i za plaćene fotografije. Narudžba ostaje. Već preuzete datoteke ostaju kod klijenta."
+  ],
+  "alreadyPaidHint": [
+    "Schon bezahlt, zum Beispiel bar? Bitte nicht nochmals überweisen. Emina prüft die Zahlung. Sobald die Zahlung bestätigt ist und die bestellten Dateien bereit sind, erhältst du die Download-E-Mail.",
+    "Already paid, for example in cash? Please do not pay again. Emina checks the payment. You receive the download email once payment is confirmed and the ordered files are ready.",
+    "Već plaćeno, npr. gotovinom? Nemoj ponovo uplatiti. Emina provjerava uplatu. E-mail za preuzimanje stiže kada je uplata potvrđena i naručene datoteke spremne."
+  ],
+  "deleteImage": [
+    "Bild löschen",
+    "Delete photo",
+    "Obriši fotografiju"
+  ],
+  "imageOrderedError": [
+    "Dieses Bild gehört zu einer Bestellung und kann nicht gelöscht werden. Ein zusätzlich hochgeladenes Duplikat ohne Bestellung kannst du löschen.",
+    "This photo belongs to an order and cannot be deleted. An extra duplicate without an order can be deleted.",
+    "Fotografija pripada narudžbi i ne može se obrisati. Dodatni duplikat bez narudžbe može se obrisati."
+  ],
+  "paidPhoto": [
+    "Bezahlt",
+    "Paid",
+    "Plaćeno"
+  ],
+  "paidAwaitingDownload": [
+    "Bezahlt · Download noch gesperrt",
+    "Paid · Download not yet available",
+    "Plaćeno · Preuzimanje još zaključano"
+  ],
+  "accessCustomer": [
+    "Freigaben für",
+    "Access for",
+    "Pristup za"
+  ],
+  "allCustomers": [
+    "Alle Kunden",
+    "All customers",
+    "Svi klijenti"
+  ],
+  "accessFilter": [
+    "Bildstatus filtern",
+    "Filter photo status",
+    "Filtriraj status fotografija"
+  ],
+  "noAccessMatches": [
+    "Keine passenden Bilder",
+    "No matching photos",
+    "Nema odgovarajućih fotografija"
+  ],
+  "accessFilterHint": [
+    "Wähle „Alle Bilder“, um zur vollständigen Galerie zurückzukehren.",
+    "Choose All photos to return to the full gallery.",
+    "Odaberi Sve fotografije za cijelu galeriju."
+  ]
 });
 export const translations = Object.fromEntries(['de','en','bs'].map((lang,index)=>[lang,Object.fromEntries(Object.entries(rows).map(([key,values])=>[key,values[index]]))]));

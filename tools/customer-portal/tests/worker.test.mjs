@@ -115,7 +115,7 @@ test('download release is enforced server-side and limited to selected paid pict
   assert.equal((await h.request('/api/images/local-image-1?kind=original', client)).status, 200, 'manually released sample is downloadable');
   assert.equal((await h.request('/api/images/local-image-3?kind=preview', client)).status, 200);
   assert.equal((await h.request('/api/images/local-image-3?kind=original', client)).status, 403);
-  const created = await h.request('/api/orders', { ...client, method: 'POST', body: { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true } });
+  const created = await h.request('/api/orders', { ...client, method: 'POST', body: { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de' } });
   assert.ok([200, 201].includes(created.status));
   const order = await h.DB.prepare('SELECT * FROM orders WHERE user_id=? ORDER BY created_at DESC LIMIT 1').bind(fixtureIds.customer).first();
   assert.equal(order.status, 'pending');
@@ -127,7 +127,7 @@ test('download release is enforced server-side and limited to selected paid pict
 
 test('order totals are determined by the server and reject invalid count, duplicates, and cross-gallery images', () => withHarness(async h => {
   const client = await login(h);
-  const base = { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true };
+  const base = { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de' };
   const created = await h.request('/api/orders', { ...client, method: 'POST', body: { ...base, amountCents: 1, priceCents: 1, currency: 'USD' } });
   assert.ok([200, 201].includes(created.status));
   const order = await h.DB.prepare('SELECT amount_cents,currency FROM orders WHERE user_id=?').bind(fixtureIds.customer).first();
@@ -138,6 +138,11 @@ test('order totals are determined by the server and reject invalid count, duplic
     { ...base, imageIds: ['local-foreign-image'] },
     { ...base, termsAccepted: false },
     { ...base, digitalConsent: false },
+    { ...base, earlyStartConsent: false },
+    { ...base, earlyStartConsent: undefined },
+    { ...base, earlyStartConsent: 'true' },
+    { ...base, consentVersion: 'old-version' },
+    { ...base, consentLanguage: 'unknown' },
   ]) assert.ok([400, 403, 404, 422].includes((await h.request('/api/orders', { ...client, method: 'POST', body })).status));
   assert.equal((await h.DB.prepare('SELECT COUNT(*) AS count FROM orders').first()).count, 1);
 }));
@@ -179,7 +184,7 @@ test('production never permits local mail interception or insecure session cooki
 
 test('verified Stripe events require matching amount, persist once, and send a durable order receipt', () => withHarness(async h => {
   const client = await login(h);
-  const result = await h.request('/api/orders', { ...client, method: 'POST', body: { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true } });
+  const result = await h.request('/api/orders', { ...client, method: 'POST', body: { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de' } });
   assert.equal(result.status, 201);
   const order = await h.DB.prepare('SELECT * FROM orders LIMIT 1').first();
   await h.DB.prepare("UPDATE orders SET payment_method='stripe', provider_reference=? WHERE id=?").bind('cs_local_test_only', order.id).run();
@@ -262,7 +267,7 @@ test('one setup token permits exactly one concurrent password setup', () => with
 
 test('simultaneous duplicate order submissions are idempotent', () => withHarness(async h => {
   const client = await login(h);
-  const body = { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true };
+  const body = { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de' };
   // Hold both deduplication reads at the same point to reproduce separate Worker
   // requests seeing an empty pending-order list before either transaction commits.
   const prepare = h.DB.prepare.bind(h.DB); let readers = 0; let release;
@@ -297,7 +302,7 @@ test('request host must match the configured portal, even with a matching Origin
 
 test('paid status alone does not allow original downloads without durable contract confirmation', () => withHarness(async h => {
   const client = await login(h);
-  const body = { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true };
+  const body = { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de' };
   assert.equal((await h.request('/api/orders', { ...client, method: 'POST', body })).status, 201);
   await h.DB.prepare("UPDATE orders SET status='paid',receipt_sent_at=NULL").run();
   assert.equal((await h.request('/api/images/local-image-3?kind=original', client)).status, 403);
@@ -305,7 +310,7 @@ test('paid status alone does not allow original downloads without durable contra
 
 test('PayPal verification rejects foreign orders, wrong amounts, and wrong currencies', () => withHarness(async h => {
   const client = await login(h);
-  const body = { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true };
+  const body = { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de' };
   assert.equal((await h.request('/api/orders', { ...client, method: 'POST', body })).status, 201);
   const order = await h.DB.prepare('SELECT * FROM orders LIMIT 1').first();
   await h.DB.prepare("UPDATE orders SET payment_method='paypal',provider_reference=? WHERE id=?").bind('LOCAL_PAYPAL_ONLY', order.id).run();
@@ -367,14 +372,14 @@ test('large photo selections stay within D1 Free query and parameter limits', ()
   assert.equal(favorite.status, 200, '120 favorite selections must work on the deployed D1 Free tier');
   assert.ok(queryCount <= 50);
   queryCount = 0;
-  const ordered = await h.request('/api/orders', { ...client, method: 'POST', body: { galleryId: fixtureIds.gallery, imageIds, packageId: 'bulk-package', paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true } });
+  const ordered = await h.request('/api/orders', { ...client, method: 'POST', body: { galleryId: fixtureIds.gallery, imageIds, packageId: 'bulk-package', paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de' } });
   assert.equal(ordered.status, 201, '120 image order must work on the deployed D1 Free tier');
   assert.ok(queryCount <= 50);
 }));
 
 test('single-photo and three-photo packs calculate quantities from the actual selection', () => withHarness(async h => {
   const client = await login(h);
-  const base = { galleryId: fixtureIds.gallery, paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true, packageQuantity: 1, amountCents: 1 };
+  const base = { galleryId: fixtureIds.gallery, paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de', packageQuantity: 1, amountCents: 1 };
   const two = await h.request('/api/orders', { ...client, method: 'POST', body: { ...base, packageId: fixtureIds.singlePackage, imageIds: ['local-image-3', 'local-image-4'] } });
   assert.equal(two.status, 201);
   assert.equal(two.data.order.amountCents, 2000);
@@ -412,7 +417,7 @@ test('personal galleries use a custom total, hide per-image packs, and allow man
   const detail = await h.request(`/api/galleries/${galleryId}`, client);
   assert.equal(detail.data.packages.length, 1);
   assert.equal(detail.data.packages[0].imageCount, 0);
-  const base = { galleryId, imageIds, paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true, amountCents: 1000 };
+  const base = { galleryId, imageIds, paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de', amountCents: 1000 };
   assert.equal((await h.request('/api/orders', { ...client, method: 'POST', body: { ...base, packageId: schoolPrice.data.package.id } })).status, 400, 'stored school prices cannot bypass personal-gallery mode');
   assert.equal((await h.request('/api/orders', { ...client, method: 'POST', body: { ...base, packageId: total.data.package.id, imageIds: [imageIds[0]] } })).status, 400, 'complete-gallery package requires all images');
   const ordered = await h.request('/api/orders', { ...client, method: 'POST', body: { ...base, packageId: total.data.package.id } });
@@ -449,7 +454,7 @@ test('transfer remains the default even when card and PayPal credentials are con
   const client = await login(h);
   const caps = (await h.request('/api/session', client)).data.capabilities;
   assert.equal(caps.transferConfigured, true); assert.equal(caps.stripe, false); assert.equal(caps.paypal, false);
-  const base = { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, termsAccepted: true, digitalConsent: true };
+  const base = { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de' };
   for (const paymentMethod of ['stripe', 'paypal']) assert.equal((await h.request('/api/orders', { ...client, method: 'POST', body: { ...base, paymentMethod } })).status, 503);
   assert.equal((await h.DB.prepare('SELECT COUNT(*) AS count FROM orders').first()).count, 0);
   assert.equal((await h.request('/api/orders', { ...client, method: 'POST', body: { ...base, paymentMethod: 'transfer' } })).status, 201);
@@ -467,7 +472,7 @@ test('invalid bank details disable transfer on the server before any payable ord
   ]) {
     Object.assign(h.env, { BANK_RECIPIENT: correct.recipient, BANK_IBAN: correct.iban, BANK_BIC: correct.bic }, changes);
     assert.equal((await h.request('/api/session', client)).data.capabilities.transferConfigured, false);
-    const ordered = await h.request('/api/orders', { ...client, method: 'POST', body: { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true } });
+    const ordered = await h.request('/api/orders', { ...client, method: 'POST', body: { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de' } });
     assert.equal(ordered.status, 503);
   }
   assert.equal((await h.DB.prepare('SELECT COUNT(*) AS count FROM orders').first()).count, 0);
@@ -481,7 +486,7 @@ test('600-photo galleries can be ordered and released as a whole without accepti
       .bind(`full-local-image-${index}`, fixtureIds.gallery, `Hochzeitsmoment ${index}`, `full/preview/${index}`, `full/original/${index}`, 'image/webp', 'image/webp', 100, 100, index + 10, Date.now()).run();
   }
   await h.DB.prepare('INSERT INTO packages (id,gallery_id,name,image_count,price_cents,currency) VALUES (?,?,?,?,?,?)').bind('full-gallery-package', fixtureIds.gallery, 'Vereinbartes Hochzeitspaket', 0, 59900, 'EUR').run();
-  const body = { galleryId: fixtureIds.gallery, packageId: 'full-gallery-package', all: true, imageIds: ['local-foreign-image'], paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true, amountCents: 1 };
+  const body = { galleryId: fixtureIds.gallery, packageId: 'full-gallery-package', all: true, imageIds: ['local-foreign-image'], paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de', amountCents: 1 };
   const ordered = await h.request('/api/orders', { ...client, method: 'POST', body });
   assert.equal(ordered.status, 201);
   assert.equal(ordered.data.order.amountCents, 59900);

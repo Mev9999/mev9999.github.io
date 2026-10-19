@@ -30,7 +30,7 @@ async function raceFixture(t) {
   assert.equal(enabled.status, 200, JSON.stringify(enabled.data));
   const created = await h.request('/api/orders', { ...h.customer, method: 'POST', body: {
     galleryId: fixtureIds.gallery, imageIds: [imageId], packageId: fixtureIds.singlePackage,
-    paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true,
+    paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de',
   } });
   assert.equal(created.status, 201, JSON.stringify(created.data));
   h.orderId = created.data.order.id;

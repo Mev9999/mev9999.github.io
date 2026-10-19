@@ -49,7 +49,7 @@ test('deleted galleries vanish from customer/admin lists and library, and all ph
   assert.equal((await h.request(`${galleryRoute}/members`,{...h.admin,method:'POST',body:{name:'New client',email:'new-client@example.test'}})).status,404);
   assert.equal((await h.request(galleryRoute,{...h.admin,method:'PATCH',body:{published:true}})).status,404);
   assert.equal((await h.request(`/api/galleries/${fixtureIds.gallery}/favorites`,{...h.customer,method:'PUT',body:{imageIds:['local-image-1']}})).status,404);
-  const order = await h.request('/api/orders',{...h.customer,method:'POST',body:{galleryId:fixtureIds.gallery,imageIds:['local-image-1'],packageId:fixtureIds.singlePackage,paymentMethod:'transfer',termsAccepted:true,digitalConsent:true}});
+  const order = await h.request('/api/orders',{...h.customer,method:'POST',body:{galleryId:fixtureIds.gallery,imageIds:['local-image-1'],packageId:fixtureIds.singlePackage,paymentMethod:'transfer',termsAccepted:true,digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de'}});
   assert.equal(order.status,404);
 });
 
@@ -57,7 +57,7 @@ test('deletion retains order receipts and invoice snapshots but cannot grant or 
   const h = await deletionApiFixture(t);
   const invoice = new FormData(); invoice.set('userId',fixtureIds.customer); invoice.set('file',new Blob(['%PDF-1.4\nINVOICE-RETAINED'],{type:'application/pdf'}),'Rechnung.pdf');
   assert.equal((await h.request(`${galleryRoute}/invoice`,{...h.admin,method:'POST',body:invoice})).status,201);
-  const created = await h.request('/api/orders',{...h.customer,method:'POST',body:{galleryId:fixtureIds.gallery,imageIds:['local-image-3'],packageId:fixtureIds.singlePackage,paymentMethod:'transfer',termsAccepted:true,digitalConsent:true}});
+  const created = await h.request('/api/orders',{...h.customer,method:'POST',body:{galleryId:fixtureIds.gallery,imageIds:['local-image-3'],packageId:fixtureIds.singlePackage,paymentMethod:'transfer',termsAccepted:true,digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de'}});
   assert.equal(created.status,201); const orderId = created.data.order.id;
   const before = await h.DB.prepare('SELECT * FROM orders WHERE id=?').bind(orderId).first();
   h.mail.clear(); assert.equal((await h.remove()).status,200);
@@ -118,7 +118,7 @@ test('an upload or preview generation already in flight cannot recreate media af
 
 test('deletion between the manual-payment access check and transaction cannot mark a transfer paid', async t => {
   const h = await deletionApiFixture(t);
-  const created = await h.request('/api/orders',{...h.customer,method:'POST',body:{galleryId:fixtureIds.gallery,imageIds:['local-image-3'],packageId:fixtureIds.singlePackage,paymentMethod:'transfer',termsAccepted:true,digitalConsent:true}});
+  const created = await h.request('/api/orders',{...h.customer,method:'POST',body:{galleryId:fixtureIds.gallery,imageIds:['local-image-3'],packageId:fixtureIds.singlePackage,paymentMethod:'transfer',termsAccepted:true,digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de'}});
   assert.equal(created.status,201); const orderId = created.data.order.id; h.mail.clear();
   const actualBatch = h.DB.batch.bind(h.DB); let removed = false;
   h.DB.batch = async statements => {

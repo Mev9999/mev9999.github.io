@@ -128,7 +128,7 @@ test('order invoices require actual order ownership even for another member of t
   const admin = await login(h, 'admin'); const customer = await login(h); const other = await login(h, 'other');
   const form = new FormData(); form.set('userId', fixtureIds.customer); form.set('file', new Blob(['%PDF-1.4\nOWNER INVOICE\n%%EOF'], { type: 'application/pdf' }), 'Rechnung.pdf');
   assert.equal((await h.request(`${gallery}/invoice`, { ...admin, method: 'POST', body: form })).status, 201);
-  const created = await h.request('/api/orders', { ...customer, method: 'POST', body: { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true } });
+  const created = await h.request('/api/orders', { ...customer, method: 'POST', body: { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de' } });
   assert.equal(created.status, 201);
   await h.DB.prepare('INSERT INTO gallery_members(gallery_id,user_id) VALUES(?,?)').bind(fixtureIds.gallery, fixtureIds.secondCustomer).run();
   const url = created.data.order.invoiceUrl;

@@ -6,7 +6,7 @@ async function login(h, role = 'admin') {
  assert.equal(r.status,200); const cookie=cookieValue(r); return {cookie,csrf:(await h.request('/api/session',{cookie})).data.csrf};
 }
 async function use(fn) { const h=await createHarness();try {await fn(h,await login(h),await login(h,'customer'));}finally{await h.close();} }
-const buy=(h,c)=>h.request('/api/orders',{...c,method:'POST',body:{galleryId:fixtureIds.gallery,packageId:fixtureIds.singlePackage,imageIds:['local-image-3'],paymentMethod:'transfer',termsAccepted:true,digitalConsent:true}});
+const buy=(h,c)=>h.request('/api/orders',{...c,method:'POST',body:{galleryId:fixtureIds.gallery,packageId:fixtureIds.singlePackage,imageIds:['local-image-3'],paymentMethod:'transfer',termsAccepted:true,digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de'}});
 const deletion=(h,a,o,extra={})=>h.request(`/api/admin/orders/${o.id}`,{...a,method:'DELETE',body:{confirmed:true,testOrder:true,confirmReference:o.reference,...extra}});
 const query=(h,sql,...params)=>h.DB.prepare(sql).bind(...params);
 

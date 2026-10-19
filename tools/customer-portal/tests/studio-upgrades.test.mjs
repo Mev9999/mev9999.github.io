@@ -11,7 +11,7 @@ async function login(h, admin = false) {
 const galleryRoute = `/api/admin/galleries/${fixtureIds.gallery}`;
 const imageRoute = `${galleryRoute}/images/local-image-3`;
 const setSettings = (h, admin, body) => h.request('/api/admin/settings', { ...admin, method: 'PATCH', body });
-const order = (h, customer, imageId = 'local-image-3') => h.request('/api/orders', { ...customer, method: 'POST', body: { galleryId: fixtureIds.gallery, imageIds: [imageId], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true } });
+const order = (h, customer, imageId = 'local-image-3') => h.request('/api/orders', { ...customer, method: 'POST', body: { galleryId: fixtureIds.gallery, imageIds: [imageId], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de' } });
 function imageBlob(text) { return new Blob([new Uint8Array([0xff, 0xd8, 0xff]), text], { type: 'image/jpeg' }); }
 function previews(fingerprint, withProtected = true, original = false) {
   const form = new FormData(); form.set('preview', imageBlob('CLEAN-REDUCED'), 'preview.jpg');

@@ -18,7 +18,7 @@ async function uploadInvoice(h, admin, content = '%PDF-1.4\nLOCAL INVOICE A\n%%E
   return h.request(`${galleryRoute}/invoice`, { ...admin, method: 'POST', body: form });
 }
 async function order(h, customer) {
-  return h.request('/api/orders', { ...customer, method: 'POST', body: { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true } });
+  return h.request('/api/orders', { ...customer, method: 'POST', body: { galleryId: fixtureIds.gallery, imageIds: ['local-image-3'], packageId: fixtureIds.singlePackage, paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de' } });
 }
 
 test('customer favorite summaries include only active current customer members and never leak in customer or preview responses', () => withHarness(async h => {

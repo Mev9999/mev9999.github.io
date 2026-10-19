@@ -27,7 +27,7 @@ async function withBooking(callback) {
     await callback(h, await login(h), await login(h, 'admin'));
   } finally { await h.close(); }
 }
-const buy = (h, client, count, extra = {}) => h.request('/api/orders', { ...client, method: 'POST', body: { galleryId: fixtureIds.gallery, packageId: BASE, imageIds: images(count), paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true, ...extra } });
+const buy = (h, client, count, extra = {}) => h.request('/api/orders', { ...client, method: 'POST', body: { galleryId: fixtureIds.gallery, packageId: BASE, imageIds: images(count), paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de', ...extra } });
 const update = (h, admin, packageId, extra = {}) => h.request(`${route}/${packageId}`, { ...admin, method: 'PATCH', body: { name: 'Buchung', imageCount: 5, priceCents: 20000, active: true, ...extra } });
 
 test('required booking is charged once and only extra photos use the cheapest exact additional packages', () => withBooking(async (h, client) => {

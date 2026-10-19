@@ -1,3 +1,4 @@
+import { ORDER_CONSENT_VERSION, orderConsent } from '../frontend/order-consent.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { JSDOM } from 'jsdom';
@@ -9,7 +10,7 @@ async function login(h, email = 'customer@example.test', password = 'Testgalerie
   return { cookie: cookieValue(response), csrf: response.data.csrf };
 }
 async function ordered(h, customer) {
-  const response = await h.request('/api/orders', { ...customer, method: 'POST', body: { galleryId: fixtureIds.gallery, packageId: fixtureIds.threePackage, imageIds: ['local-image-1', 'local-image-2', 'local-image-3'], paymentMethod: 'transfer', termsAccepted: true, digitalConsent: true } });
+  const response = await h.request('/api/orders', { ...customer, method: 'POST', body: { galleryId: fixtureIds.gallery, packageId: fixtureIds.threePackage, imageIds: ['local-image-1', 'local-image-2', 'local-image-3'], paymentMethod: 'transfer', termsAccepted: true, digitalConsent:true,earlyStartConsent:true,consentVersion:'portal-digital-2026-10-19-consent-v4',consentLanguage:'de' } });
   assert.equal(response.status, 201);
   return response.data.order;
 }
@@ -83,4 +84,11 @@ test('withdrawal sends branded customer and admin acknowledgements once without 
     assert.equal(h.mail.messages.length, 2);
     assert.equal((await h.DB.prepare('SELECT status FROM orders WHERE id=?').bind(order.id).first()).status, 'pending');
   } finally { await h.close(); }
+});
+
+
+test('new orders store the exact declarations and language in the durable receipt, with no retroactive additions',async()=>{
+ for(const lang of ['de','en','bs']){const h=await createHarness();try{const c=await login(h);const result=await h.request('/api/orders',{...c,method:'POST',body:{galleryId:fixtureIds.gallery,packageId:fixtureIds.singlePackage,imageIds:['local-image-3'],paymentMethod:'transfer',termsAccepted:true,earlyStartConsent:true,digitalConsent:true,consentVersion:ORDER_CONSENT_VERSION,consentLanguage:lang}});assert.equal(result.status,201);const saved=await h.DB.prepare('SELECT terms_version,consent_at,receipt_text,receipt_email_json FROM orders WHERE id=?').bind(result.data.order.id).first();assert.equal(saved.terms_version,ORDER_CONSENT_VERSION+':'+lang);assert.ok(saved.consent_at>0);assert.ok(saved.receipt_text.includes(orderConsent[lang].compensation));assert.ok(saved.receipt_text.includes(orderConsent[lang].start));assert.ok(saved.receipt_text.includes(orderConsent[lang].loss));const message=h.mail.messages.find(m=>m.idempotencyKey==='order-receipt/'+result.data.order.id);assert.ok(message);const attachment=message.attachments.find(f=>f.content_type.startsWith('text/html'));assert.equal(document(Buffer.from(attachment.content,'base64').toString('utf8')).querySelector('[data-contract-text]').textContent,saved.receipt_text);
+ await h.DB.prepare('UPDATE orders SET terms_version=?,receipt_text=? WHERE id=?').bind('portal-digital-2026-10-07','BESTELLBESTÄTIGUNG\nAlte Erklärung.',result.data.order.id).run();const historical=await h.request('/api/orders/'+result.data.order.id+'/receipt',c);assert.equal(document(await historical.text()).querySelector('[data-contract-text]').textContent,'BESTELLBESTÄTIGUNG\nAlte Erklärung.');
+ }finally{await h.close();}}
 });
