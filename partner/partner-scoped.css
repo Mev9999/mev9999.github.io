@@ -84,4 +84,5 @@
 .partner-content .partner-name-row{display: flex; align-items: center; gap: 12px; width: 100%; margin-bottom: 20px;}
 .partner-content .partner-name-row h3{flex: 1; min-width: 0; margin: 0; font-size: 26px;}
 .partner-content .partner-name-logo{display: block; width: 45%; height: auto; flex-shrink: 0; object-fit: contain;}
+.partner-content .partner-name-logo[src="studio-collage-logo.jpg"]{aspect-ratio: 3/1; height: auto; object-fit: cover; object-position: center 51%;}
 .partner-content main{padding:0}.partner-content .section-head{display:block}.partner-content{--ink:#3a2e2a;--muted:#76645a;--rose:#d9a79a;--line:#e8d4c9;--cream:#fcf8f5}.partner-content main>section{scroll-margin-top:100px}.partner-content .intro{padding:78px 0 70px}.partner-content .partners{padding:0}.partner-content .invitation{padding:75px 0}.partner-content .flyer-section{padding:50px}.partner-content dialog{margin:auto}.partner-content .section-head h2{max-width:none}@media(max-width:700px){.partner-content .intro{padding:45px 0}.partner-content .flyer-section{padding:30px 22px}.partner-content .invitation{padding:50px 0}}
