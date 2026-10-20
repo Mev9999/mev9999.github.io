@@ -979,3 +979,21 @@ test('customer paid and downloadable filters are independent of favourites',asyn
 test('checkout requires two explicit unselected declarations in every language',async t=>{
  for(const lang of ['de','en','bs']){const h=await checkoutHarness(t,{count:5,lang});await h.action('checkout');const form=checkoutForm(h);for(const name of ['termsAccepted','earlyStartConsent','digitalConsent']){assert.equal(form.elements[name].checked,false);assert.equal(form.elements[name].required,true);}assert.equal(form.checkValidity(),false);form.elements.termsAccepted.checked=true;form.elements.digitalConsent.checked=true;assert.equal(form.checkValidity(),false);form.elements.earlyStartConsent.checked=true;assert.equal(form.checkValidity(),true);assert.ok(form.textContent.includes(orderConsent[lang].compensation));assert.ok(form.textContent.includes(orderConsent[lang].start));assert.ok(form.textContent.includes(orderConsent[lang].loss));}
 });
+test('download refreshes stale permissions and respects newly revoked or removed images',async t=>{
+  for(const mode of ['released','revoked','removed']){
+    const h=harness({user:{id:'u1',name:'Anna',role:'customer'}});t.after(()=>h.dom.window.close());
+    h.detail.images[0].downloadAllowed=mode!=='released';
+    h.detail.images[0].originalUrl='/api/images/a?kind=original';
+    await h.ui.loadSession();await h.ui.openGallery('g');
+    h.ui.state.selected.add('a');h.ui.renderGallery();
+    if(mode==='removed')h.detail.images=h.detail.images.filter(image=>image.id!=='a');
+    else h.detail.images[0].downloadAllowed=mode==='released';
+    h.requestHandler=async path=>path==='/api/images/a?kind=original'?{ok:false,status:403}:null;
+    const before=h.requests.length;
+    await h.action('download');
+    const requests=h.requests.slice(before);
+    assert.equal(requests[0].path,'/api/galleries/g');
+    assert.equal(requests.some(request=>request.path==='/api/images/a?kind=original'),mode==='released');
+    if(mode!=='released')assert.match(h.window.document.querySelector('#portal-toast').textContent,/freigegeben|Download/i);
+  }
+});

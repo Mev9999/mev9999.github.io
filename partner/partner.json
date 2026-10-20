@@ -72,7 +72,11 @@
         "de": "ZWEI & MEHR ist das Familienangebot des Landes Steiermark mit Informationen und Vorteilen für Familien. Bei LiZa Memories Photography erhaltet ihr mit einem gültigen Familienpass aus jedem österreichischen Bundesland 10 % Rabatt auf jedes Paket – vom Babybauch über Neugeborenen- und Familienfotos bis zu Hochzeit und Kombi. Bitte gebt euren Familienpass bei der Anfrage an und zeigt ihn beim Shooting vor.",
         "en": "ZWEI & MEHR is the Province of Styria’s family programme, offering information and benefits for families. At LiZa Memories Photography, a valid family pass from any Austrian federal state gives you 10% off every package, including maternity, newborn, family, wedding and combined packages. Please mention your family pass when enquiring and present it at your session.",
         "bs": "ZWEI & MEHR je porodični program Pokrajine Štajerske s informacijama i pogodnostima za porodice. U LiZa Memories Photography uz važeću porodičnu karticu iz bilo koje austrijske savezne pokrajine ostvarujete 10% popusta na svaki paket – za trudnice, novorođenčad, porodice, vjenčanja i kombinovane pakete. Pri slanju upita navedite da imate porodičnu karticu i pokažite je na fotografisanju."
-      }
+      },
+      "logo": "zwei-und-mehr-banner.jpg",
+      "logoPosition": "beside-name",
+      "logoWidth": 1950,
+      "logoHeight": 500
     },
     {
       "name": "CB Makeup Artist · Celina Brandner",
@@ -140,6 +144,20 @@
         "en": "Praxis Maby in Graz supports mothers and babies with physiotherapy and osteopathy. A place to turn to during pregnancy and the early baby days – special chapters I capture through maternity and newborn photography.",
         "bs": "Praxis Maby u Grazu pruža podršku mamama i bebama kroz fizioterapiju i osteopatiju. Mjesto za podršku tokom trudnoće i prvih dana s bebom – posebnih životnih razdoblja koja bilježim fotografijama trudnica i novorođenčadi."
       }
+    },
+    {
+      "name": "Studio Collage | Yoga, Kids & Mehr, Freizeitzentrum in Seiersberg",
+      "website": "https://studiocollage.info/",
+      "logo": "studio-collage-logo.jpg",
+      "description": {
+        "de": "Studio Collage in Seiersberg bietet Yoga und Freizeitangebote für Kinder und Erwachsene. Als Kundin oder Kunde von LiZa Memories Photography erhaltet ihr dort einen Partnerrabatt. Fragt die Details bitte direkt bei Studio Collage an und erwähnt unsere Zusammenarbeit.",
+        "en": "Studio Collage in Seiersberg offers yoga and leisure activities for children and adults. Customers of LiZa Memories Photography receive a partner discount there. Please ask Studio Collage directly for the details and mention our partnership.",
+        "bs": "Studio Collage u Seiersbergu nudi jogu i aktivnosti u slobodno vrijeme za djecu i odrasle. Klijenti LiZa Memories Photography tamo ostvaruju partnerski popust. Za detalje se obratite direktno studiju i spomenite našu saradnju."
+      },
+      "editorNote": "Partnership and logo use confirmed in Emma’s email supplied by owner on 2026-10-20. Discount amount not specified.",
+      "logoPosition": "beside-name",
+      "logoWidth": 1001,
+      "logoHeight": 1001
     }
   ]
 }
