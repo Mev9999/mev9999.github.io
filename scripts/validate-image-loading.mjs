@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 export function validateImageLoading(cache) {
   let heroes = 0;
   for (const [file, { document }] of cache) {
-    const hero = document.querySelector('.hero-visual img, .hero .art img');
+    const hero = document.querySelector('.hero-visual img, .hero .art img, .kita-hero-photo img');
     if (!hero) continue;
     heroes++;
     const preloads = document.querySelectorAll('link[rel="preload"][as="image"]');
@@ -29,6 +29,6 @@ export function validateImageLoading(cache) {
       assert(image.srcset && image.sizes, file + ': keep responsive gallery sources');
     }
   }
-  assert.equal(heroes, 24, 'Validate every homepage, about and service hero in all languages');
-  console.log('Image loading checks passed: 24 heroes, matching single preloads, intrinsic geometry, bounded desktop hints and original sources.');
+  assert.equal(heroes, 27, 'Validate every homepage, about and service hero in all languages');
+  console.log('Image loading checks passed: 27 heroes, matching single preloads, intrinsic geometry, bounded desktop hints and original sources.');
 }

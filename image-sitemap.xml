@@ -152,6 +152,10 @@
       <image:title>Schwarz-Weiß-Ganzkörperbild eines Paares, das sein Baby zwischen sich hält und anschaut</image:title>
     </image:image>
     <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02410-2.webp</image:loc>
+      <image:title>Schwarz-Weiß-Porträt eines kleinen Jungen, der nach einer Seifenblase greift</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://liza-memories-photography.com/homepage-welcome-20260906.webp</image:loc>
       <image:title>Neugeborenenfoto von LiZa Memories Photography</image:title>
     </image:image>
@@ -309,6 +313,10 @@
     <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-familie-dsc03416-2.webp</image:loc>
       <image:title>Black-and-white full-length portrait of a couple holding and looking at their baby between them</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02410-2.webp</image:loc>
+      <image:title>Black-and-white portrait of a little boy reaching for a soap bubble</image:title>
     </image:image>
     <image:image>
       <image:loc>https://liza-memories-photography.com/homepage-welcome-20260906.webp</image:loc>
@@ -470,6 +478,10 @@
       <image:title>Crno-bijeli portret para u punoj dužini koji između sebe drži i gleda bebu</image:title>
     </image:image>
     <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02410-2.webp</image:loc>
+      <image:title>Crno-bijeli portret dječaka koji poseže za mjehurićem sapunice</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://liza-memories-photography.com/homepage-welcome-20260906.webp</image:loc>
       <image:title>Neugeborenenfoto von LiZa Memories Photography</image:title>
     </image:image>
@@ -502,8 +514,12 @@
   <url>
     <loc>https://liza-memories-photography.com/portraitfotografie-graz.html</loc>
     <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04168.webp</image:loc>
+      <image:title>Sportliches Porträt einer Frau mit Hanteln im Wald</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02524.webp</image:loc>
-      <image:title>Natürliches Porträt bei einem Fotoshooting in Graz</image:title>
+      <image:title>Schwarz-Weiß-Nahaufnahme eines Mädchens, das eine kleine Blüte vor ein Auge hält</image:title>
     </image:image>
     <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02410-2.webp</image:loc>
@@ -542,10 +558,6 @@
       <image:title>Sportliches Porträt beim Outdoor-Fotoshooting</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04168.webp</image:loc>
-      <image:title>Sportliches Porträt beim Outdoor-Fotoshooting</image:title>
-    </image:image>
-    <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04178.webp</image:loc>
       <image:title>Sportliches Porträt beim Outdoor-Fotoshooting</image:title>
     </image:image>
@@ -577,8 +589,12 @@
   <url>
     <loc>https://liza-memories-photography.com/portraitfotografie-graz-en.html</loc>
     <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04168.webp</image:loc>
+      <image:title>Outdoor fitness portrait of a woman holding dumbbells in the woods</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02524.webp</image:loc>
-      <image:title>Natural portrait from a portrait session in Graz</image:title>
+      <image:title>Black-and-white close-up of a girl holding a small flower over one eye</image:title>
     </image:image>
     <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02410-2.webp</image:loc>
@@ -617,10 +633,6 @@
       <image:title>Fitness portrait during an outdoor photo session</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04168.webp</image:loc>
-      <image:title>Fitness portrait during an outdoor photo session</image:title>
-    </image:image>
-    <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04178.webp</image:loc>
       <image:title>Fitness portrait during an outdoor photo session</image:title>
     </image:image>
@@ -652,8 +664,12 @@
   <url>
     <loc>https://liza-memories-photography.com/portraitfotografie-graz-bs.html</loc>
     <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04168.webp</image:loc>
+      <image:title>Sportski portret žene s bučicama u šumi</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02524.webp</image:loc>
-      <image:title>Prirodan portret sa fotografisanja u Grazu</image:title>
+      <image:title>Crno-bijeli krupni plan djevojčice koja drži mali cvijet ispred jednog oka</image:title>
     </image:image>
     <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02410-2.webp</image:loc>
@@ -689,10 +705,6 @@
     </image:image>
     <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04108.webp</image:loc>
-      <image:title>Sportski portret tokom fotografisanja na otvorenom</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04168.webp</image:loc>
       <image:title>Sportski portret tokom fotografisanja na otvorenom</image:title>
     </image:image>
     <image:image>
@@ -2999,6 +3011,63 @@
     <image:image>
       <image:loc>https://liza-memories-photography.com/DSC02081.webp</image:loc>
       <image:title>Trudnička fotografija iz kombinovanog fotografisanja</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://liza-memories-photography.com/kindergartenfotografie-graz.html</loc>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02524.webp</image:loc>
+      <image:title>Ein Mädchen hält eine kleine Blume vor ein Auge und blickt in die Kamera</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/baby-maedchen-kuss.webp</image:loc>
+      <image:title>Ein kleines Mädchen gibt einem Baby einen Kuss</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02484.webp</image:loc>
+      <image:title>Zwei Kinder spielen draußen mit Seifenblasen</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/about.webp</image:loc>
+      <image:title>Emina von LiZa Memories Photography</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://liza-memories-photography.com/kindergartenfotografie-graz-en.html</loc>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02524.webp</image:loc>
+      <image:title>A girl holds a little flower over one eye and looks at the camera</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/baby-maedchen-kuss.webp</image:loc>
+      <image:title>A little girl gives a baby a kiss</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02484.webp</image:loc>
+      <image:title>Two children play with soap bubbles outdoors</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/about.webp</image:loc>
+      <image:title>Emina of LiZa Memories Photography</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://liza-memories-photography.com/kindergartenfotografie-graz-bs.html</loc>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02524.webp</image:loc>
+      <image:title>Djevojčica drži cvjetić preko jednog oka i gleda u kameru</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/baby-maedchen-kuss.webp</image:loc>
+      <image:title>Mala djevojčica ljubi bebu</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02484.webp</image:loc>
+      <image:title>Dvoje djece se vani igra mjehurićima od sapunice</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/about.webp</image:loc>
+      <image:title>Emina iz LiZa Memories Photography</image:title>
     </image:image>
   </url>
   <url>

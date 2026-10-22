@@ -198,6 +198,13 @@ export function refreshSite(d,file){
  if(base==='babybauch-shooting-graz.html'){const img=d.querySelector('.hero-visual img');img.src='babybauch-hero-dsc03641.webp';img.width=1600;img.height=1143;}
  if(base==='familienfotografie-graz.html'){const img=d.querySelector('.hero-visual img');img.src='familien-hero-dsc02431.webp';img.width=1600;img.height=1723;}
  if(base==='newborn-fotografie-graz.html'){const img=d.querySelector('.hero-visual img');img.src='newborn-hero-dsc03309.webp';img.width=1600;img.height=1632;}
+ if(base==='portraitfotografie-graz.html'){
+  const img=d.querySelector('.hero-visual img');
+  img.src='galerie-portrait-dsc04168.webp';img.width=1267;img.height=1900;
+  img.alt=['Sportliches Porträt einer Frau mit Hanteln im Wald','Outdoor fitness portrait of a woman holding dumbbells in the woods','Sportski portret žene s bučicama u šumi'][i];
+  img.style.objectPosition='center 8%';
+  img.closest('.hero-visual').setAttribute('aria-label', ['Bild vergrößern: ','Enlarge image: ','Povećaj fotografiju: '][i]+img.alt);
+ }
  if(base==='babybauch-und-neugeborenen-shooting-graz.html'&&i===0){const h=d.querySelector('#faq h2');h.replaceChildren();for(const [n,t] of ['Häufige Fragen zur Babybauch','-',' und Neugeborenen','-','Kombi'].entries())h.append(n===1||n===3?el('span','straight-hyphen',t):d.createTextNode(t));}
  if(base==='preise.html'){
   const names=[['Porträt & Produkt','Babybauch','Neugeborene & Baby','Familie','Babybauch & Baby','Hochzeit & Feiern'],['Portrait & product','Maternity','Newborn & baby','Family','Maternity & baby','Wedding & events'],['Portreti i proizvodi','Trudnoća','Novorođenčad i bebe','Porodica','Trudnoća i beba','Vjenčanja i proslave']][i];

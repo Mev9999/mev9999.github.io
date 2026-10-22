@@ -16,7 +16,8 @@ const SERVICE_PAGES = [
   'newborn-fotografie-graz.html',
   'familienfotografie-graz.html',
   'babybauch-und-neugeborenen-shooting-graz.html',
-  'hochzeitsfotograf-graz.html'
+  'hochzeitsfotograf-graz.html',
+  'kindergartenfotografie-graz.html'
 ];
 const LANGUAGES = ['', '-en', '-bs'];
 const errors = [];
@@ -145,9 +146,11 @@ for (const fileName of PRICE_PAGES) {
   const packageCount = document?.querySelectorAll('.package-card').length;
   const overviewCount = document?.querySelectorAll('.price-overview-card').length;
 
-  if (sectionCount !== 6 || packageCount !== 18 || overviewCount !== 6) {
-    report(fileName, `expected 6 sections, 18 packages and 6 overview cards; found ${sectionCount}, ${packageCount}, ${overviewCount}`);
+  if (sectionCount !== 7 || packageCount !== 20 || overviewCount !== 7) {
+    report(fileName, `expected 7 sections, 20 packages and 7 overview cards; found ${sectionCount}, ${packageCount}, ${overviewCount}`);
   }
+  const kindergartenPrices = [...(document?.querySelectorAll('#kindergarten .package-card .num') || [])].map(node => node.textContent.trim());
+  if (JSON.stringify(kindergartenPrices) !== JSON.stringify(['10 €', '25 €'])) report(fileName, 'unexpected kindergarten image prices');
 }
 
 await validateImprovements(htmlCache, report);

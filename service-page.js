@@ -44,7 +44,8 @@
     { key: 'combo', href: 'babybauch-und-neugeborenen-shooting-graz.html' },
     { key: 'family', href: 'familienfotografie-graz.html' },
     { key: 'wedding', href: 'hochzeitsfotograf-graz.html' },
-    { key: 'portrait', href: 'portraitfotografie-graz.html' }
+    { key: 'portrait', href: 'portraitfotografie-graz.html' },
+    { key: 'kindergarten', href: 'kindergartenfotografie-graz.html' }
   ];
   const priceAnchorByPage = {
     portrait: 'portrait',
@@ -133,11 +134,12 @@
 
   function ensureServiceLinks(){
     const lang = supportedLangs.includes(staticLang) ? staticLang : urlLanguage || DEFAULT_LANG;
+    const kindergartenHref = document.querySelector('a[data-service-key="kindergarten"]')?.getAttribute('href');
     const menu = mobileNav?.querySelector('.services-dropdown .nav-dropdown-menu');
     if(menu){
       menu.replaceChildren(...serviceLinks.map((service) => {
         const link = document.createElement('a');
-        link.href = buildLocalizedHref(service.href, lang);
+        link.href = service.key === 'kindergarten' && kindergartenHref ? kindergartenHref : buildLocalizedHref(service.href, lang);
         link.textContent = common[lang].services[service.key];
         link.dataset.serviceKey = service.key;
         return link;
@@ -149,7 +151,7 @@
       const portfolio = footerLinks.querySelector('a');
       const links = serviceLinks.map((service) => {
         const link = document.createElement('a');
-        link.href = buildLocalizedHref(service.href, lang);
+        link.href = service.key === 'kindergarten' && kindergartenHref ? kindergartenHref : buildLocalizedHref(service.href, lang);
         link.textContent = common[lang].services[service.key];
         link.dataset.serviceKey = service.key;
         return link;
@@ -204,7 +206,7 @@
     de: {
       languageLabel: 'Sprache wählen',
       nav: { home: 'Home', about: 'Über mich', services: 'Leistungen', portfolio: 'Portfolio', gallery1: 'Babybauch Galerie', gallery2: 'Neugeborenen Galerie', gallery3: 'Familien Galerie', gallery4: 'Hochzeits Galerie', galleryCombo: 'Babybauch & Neugeborene Galerie', galleryPortrait: 'Porträt & Produkt Galerie', pricing: 'Preise', faq: 'Häufige Fragen', contact: 'Kontakt' },
-      services: { portrait: 'Porträt- und Produktfotografie', maternity: 'Babybauch', newborn: 'Neugeborene', family: 'Familie', combo: 'Babybauch & Neugeborene', wedding: 'Hochzeit' },
+      services: { portrait: 'Porträt- und Produktfotografie', maternity: 'Babybauch', newborn: 'Neugeborene', family: 'Familie', combo: 'Babybauch & Neugeborene', wedding: 'Hochzeit', kindergarten: 'Krippen- & Kindergartenfotografie' },
       breadcrumbs: { aria: 'Breadcrumb', home: 'Startseite', services: 'Leistungen' },
       contact: { email: 'E-Mail', phone: 'Telefon', location: 'Standort', more: 'Weitere Leistungen', locationValue: '8054 Graz' },
       footer: {
@@ -224,7 +226,7 @@
     en: {
       languageLabel: 'Choose language',
       nav: { home: 'Home', about: 'About', services: 'Services', portfolio: 'Portfolio', gallery1: 'Maternity Gallery', gallery2: 'Newborn Gallery', gallery3: 'Family Gallery', gallery4: 'Wedding Gallery', galleryCombo: 'Maternity & Newborn Gallery', galleryPortrait: 'Portrait & Product Gallery', pricing: 'Pricing', faq: 'FAQs', contact: 'Contact' },
-      services: { portrait: 'Portrait & product photography', maternity: 'Maternity', newborn: 'Newborn', family: 'Family', combo: 'Maternity & Newborn', wedding: 'Wedding' },
+      services: { portrait: 'Portrait & product photography', maternity: 'Maternity', newborn: 'Newborn', family: 'Family', combo: 'Maternity & Newborn', wedding: 'Wedding', kindergarten: 'Nursery & kindergarten photography' },
       breadcrumbs: { aria: 'Breadcrumb', home: 'Home', services: 'Services' },
       contact: { email: 'Email', phone: 'Phone', location: 'Location', more: 'More services', locationValue: '8054 Graz' },
       footer: {
@@ -244,7 +246,7 @@
     bs: {
       languageLabel: 'Odaberi jezik',
       nav: { home: 'Početna', about: 'O meni', services: 'Usluge', portfolio: 'Portfolio', gallery1: 'Trudnička galerija', gallery2: 'Galerija novorođenčadi', gallery3: 'Porodična galerija', gallery4: 'Galerija vjenčanja', galleryCombo: 'Trudnička i novorođenačka galerija', galleryPortrait: 'Galerija portreta i proizvoda', pricing: 'Cijene', faq: 'Česta pitanja', contact: 'Kontakt' },
-      services: { portrait: 'Fotografisanje portreta i proizvoda', maternity: 'Trudničko', newborn: 'Novorođenčad', family: 'Porodica', combo: 'Trudničko & novorođenče', wedding: 'Vjenčanje' },
+      services: { portrait: 'Fotografisanje portreta i proizvoda', maternity: 'Trudničko', newborn: 'Novorođenčad', family: 'Porodica', combo: 'Trudničko & novorođenče', wedding: 'Vjenčanje', kindergarten: 'Fotografisanje u jaslicama i vrtiću' },
       breadcrumbs: { aria: 'Breadcrumb', home: 'Početna', services: 'Usluge' },
       contact: { email: 'E-mail', phone: 'Telefon', location: 'Lokacija', more: 'Ostale usluge', locationValue: '8054 Graz' },
       footer: {

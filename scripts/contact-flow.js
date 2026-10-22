@@ -1,15 +1,15 @@
 (() => {
   if (window.lizaContactFlowReady) return;
   window.lizaContactFlowReady = true;
-  const services = {portrait:'Portrait',maternity:'Babybauch',newborn:'Newborn',family:'Familie',combo:'Babybauch + Newborn Kombi',wedding:'Standesamt / kleine Feier'};
-  const files = ['index','preise','ueber-mich','portraitfotografie-graz','babybauch-shooting-graz','newborn-fotografie-graz','familienfotografie-graz','hochzeitsfotograf-graz','babybauch-und-neugeborenen-shooting-graz'];
+  const services = {portrait:'Portrait',maternity:'Babybauch',newborn:'Newborn',family:'Familie',combo:'Babybauch + Newborn Kombi',wedding:'Standesamt / kleine Feier',kindergarten:'Krippe / Kindergarten'};
+  const files = ['index','preise','ueber-mich','portraitfotografie-graz','babybauch-shooting-graz','newborn-fotografie-graz','familienfotografie-graz','hochzeitsfotograf-graz','babybauch-und-neugeborenen-shooting-graz','kindergartenfotografie-graz'];
   const validSource = value => files.some(file => ['.html','-en.html','-bs.html'].some(suffix => value === file+suffix));
   const lang = ['de','en','bs'].includes(document.documentElement.lang) ? document.documentElement.lang : 'de';
   const params = new URLSearchParams(location.search);
-  const pageServices = {'portraitfotografie-graz.html':'portrait','babybauch-shooting-graz.html':'maternity','newborn-fotografie-graz.html':'newborn','familienfotografie-graz.html':'family','hochzeitsfotograf-graz.html':'wedding','babybauch-und-neugeborenen-shooting-graz.html':'combo'};
+  const pageServices = {'portraitfotografie-graz.html':'portrait','babybauch-shooting-graz.html':'maternity','newborn-fotografie-graz.html':'newborn','familienfotografie-graz.html':'family','hochzeitsfotograf-graz.html':'wedding','babybauch-und-neugeborenen-shooting-graz.html':'combo','kindergartenfotografie-graz.html':'kindergarten'};
   const baseFile=(location.pathname.split('/').pop()||'index.html').replace(/-(en|bs)\.html$/,'.html');
   const service = Object.hasOwn(services, params.get('service')) ? params.get('service') : (pageServices[baseFile] || '');
-  const tier = service && ['bronze','silver','gold'].includes(params.get('package')) ? params.get('package') : '';
+  const tier = service && service !== 'kindergarten' && ['bronze','silver','gold'].includes(params.get('package')) ? params.get('package') : '';
   const file = location.pathname.split('/').pop() || 'index.html';
   const source = validSource(params.get('source')) ? params.get('source') : (validSource(file) ? file : 'index.html');
   const copy = {

@@ -1140,3 +1140,6 @@ await createComboTemplates();
 for (const lang of LANGUAGES) {
   await createPricingPage(lang);
 }
+// Preserve the separate institutional photo-day offer after rebuilding packages.
+const { applyKindergartenIntegrations } = await import('./kindergarten-integrations.mjs');
+await applyKindergartenIntegrations(ROOT);

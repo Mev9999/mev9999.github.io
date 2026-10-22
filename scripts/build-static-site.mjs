@@ -37,6 +37,9 @@ const RENDER_PAGES = [
   'babybauch-und-neugeborenen-shooting-graz.html',
   'babybauch-und-neugeborenen-shooting-graz-en.html',
   'babybauch-und-neugeborenen-shooting-graz-bs.html',
+  'kindergartenfotografie-graz.html',
+  'kindergartenfotografie-graz-en.html',
+  'kindergartenfotografie-graz-bs.html',
   'preise.html',
   'preise-en.html',
   'preise-bs.html'
@@ -346,7 +349,7 @@ function collectVisibleFaqEntities(document) {
 }
 
 function updateJsonLd(document, fileName) {
-  const heroImage = document.querySelector('.hero-visual img, .hero .art img');
+  const heroImage = document.querySelector('.hero-visual img, .hero .art img, .kita-hero-photo img');
   const heroImageUrl = heroImage && isLocalImage(heroImage.getAttribute('src'))
     ? absoluteUrl(heroImage.getAttribute('src'))
     : absoluteUrl('hero-bild.webp');
@@ -409,7 +412,7 @@ function updateJsonLd(document, fileName) {
 }
 
 function updateSocialMeta(document, fileName) {
-  const heroImage = document.querySelector('.hero-visual img, .hero .art img');
+  const heroImage = document.querySelector('.hero-visual img, .hero .art img, .kita-hero-photo img');
   const heroImageSrc = heroImage && isLocalImage(heroImage.getAttribute('src'))
     ? absoluteUrl(heroImage.getAttribute('src'))
     : absoluteUrl('hero-bild.webp');
@@ -470,7 +473,7 @@ function applyResponsiveImages(document, variantMap, fileName) {
   });
 
   // Select the final visible hero after all content refreshes, not a stale preload URL.
-  const heroImg = document.querySelector('.hero-visual img, .hero .art img');
+  const heroImg = document.querySelector('.hero-visual img, .hero .art img, .kita-hero-photo img');
   if (heroImg && isContentImage(heroImg.getAttribute('src'))) {
     let link = document.querySelector('link[rel="preload"][as="image"]');
     if (!link) {
@@ -816,3 +819,6 @@ async function main() {
 }
 
 await main();
+// Apply new service links and cards after the legacy navigation refresh.
+const { applyKindergartenIntegrations } = await import('./kindergarten-integrations.mjs');
+await applyKindergartenIntegrations(ROOT);

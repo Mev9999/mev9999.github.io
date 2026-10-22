@@ -18,7 +18,7 @@ Nach Änderungen `npm run site:build` und `npm run site:check` ausführen. Ferti
 
 Beispiel: `index.html?service=newborn&package=bronze&source=preise.html#contact-form-card`.
 
-Erlaubte Leistungen: `portrait`, `maternity`, `newborn`, `family`, `combo`, `wedding`. Erlaubte Paket-IDs: `bronze`, `silver`, `gold`. Herkunftsseiten sind auf bekannte eigene Seiten in DE/EN/BS beschränkt. Die Sprache wird aus der geöffneten Sprachseite übernommen. Beim Wechsel der Leistung wird das vorherige Paket entfernt; beim Sprachwechsel bleibt die gültige Auswahl erhalten.
+Erlaubte Leistungen: `portrait`, `maternity`, `newborn`, `family`, `combo`, `wedding`, `kindergarten`. Erlaubte Paket-IDs für reguläre Shootings: `bronze`, `silver`, `gold`; Kindergarten-Anfragen verwenden keine dieser Paket-IDs. Herkunftsseiten sind auf bekannte eigene Seiten in DE/EN/BS beschränkt. Die Sprache wird aus der geöffneten Sprachseite übernommen. Beim Wechsel der Leistung wird das vorherige Paket entfernt; beim Sprachwechsel bleibt die gültige Auswahl erhalten.
 
 Name, E-Mail, Telefon und Leistung bleiben Pflichtfelder. Die Nachricht ist optional. Der tatsächliche Versand erfolgt weiterhin ausschließlich an den vorhandenen Formspree-Endpunkt.
 
@@ -65,3 +65,11 @@ Details und Testbericht: `PRIVACY-AUDIT.md`. Die Datenschutztexte werden aus `sc
 Media-Buttons erhalten ihre gemeinsamen Klassen im Build über `improve-site.mjs`; dekorative Foto-/Video-Icons und gedämpfte Metallfarben liegen in `site-improvements.css`. Header-Ausblendung: nach Abwärtsscrollen 900 ms, nach Aufwärtsscrollen 4500 ms; Interaktion im Header schützt weiterhin vor Ausblendung. Impressumslinks verwenden #704331 mit Unterstreichung/Fokusrahmen.
 
 Hero und Preload verwenden identische, auf 468 CSS-Pixel begrenzte Desktop-Größenangaben. Browsermessung bei 2560 × 1440: dargestellte Breite 465,875 Pixel, ausgewählte 480w-WebP-Datei; der lokale HTTP-Server lieferte 16.982 Bildbytes. Größere Varianten bis 1600w bleiben für hochauflösende Displays erhalten. Keine erneute Bildkomprimierung. `validate-interface.mjs` prüft Header-Zeiten, Kontrast einschließlich Hover, Hero-Preload und Media-Buttons.
+
+## Krippen- und Kindergartenfotografie (22. Oktober 2026)
+
+Die neue Leistung wird durch `scripts/kindergarten-integrations.mjs` in Navigation, Footer, Kontakt, Startseite, Über-mich-Karten und Preise eingebunden. Der Schritt ist wiederholbar und läuft nach den bisherigen Generatoren sowie am Ende von `site:build`. Einzeln: `npm run site:integrate-kindergarten`. Die breiten Zusatzkarten liegen in `scripts/kindergarten-integrations.css`.
+
+Preisregel für diesen Fototag: jedes Dreierpaket 25 EUR, übrige einzelne Dateien jeweils 10 EUR. Einzelporträts und freigegebene Gruppenbilder können kombiniert werden. Keine Bronze-, Silber- oder Gold-Paket-ID an institutionelle Anfragen übergeben. `contact-flow.js` kennt dafür die Leistungs-ID `kindergarten`.
+
+Die drei Landingpages sind eigenständige HTML-Quellen und Bestandteil von `RENDER_PAGES` in `build-static-site.mjs`. Der Build aktualisiert Canonical, Sprachverweise, Hero-Vorschaubild und beide Sitemaps. `kindergarten-page.css` und `kindergarten-page.js` enthalten Gestaltung und Verhalten. Interne Ablaufpläne, Zuordnungslisten und ausgefüllte Elternformulare gehören nicht in das öffentliche Repository. Die frühere separate Vorschau bleibt außerhalb dieses Repositories.
