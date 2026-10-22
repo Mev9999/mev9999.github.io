@@ -152,10 +152,6 @@
       <image:title>Schwarz-Weiß-Ganzkörperbild eines Paares, das sein Baby zwischen sich hält und anschaut</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02410-2.webp</image:loc>
-      <image:title>Schwarz-Weiß-Porträt eines kleinen Jungen, der nach einer Seifenblase greift</image:title>
-    </image:image>
-    <image:image>
       <image:loc>https://liza-memories-photography.com/homepage-welcome-20260906.webp</image:loc>
       <image:title>Neugeborenenfoto von LiZa Memories Photography</image:title>
     </image:image>
@@ -313,10 +309,6 @@
     <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-familie-dsc03416-2.webp</image:loc>
       <image:title>Black-and-white full-length portrait of a couple holding and looking at their baby between them</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02410-2.webp</image:loc>
-      <image:title>Black-and-white portrait of a little boy reaching for a soap bubble</image:title>
     </image:image>
     <image:image>
       <image:loc>https://liza-memories-photography.com/homepage-welcome-20260906.webp</image:loc>
@@ -478,10 +470,6 @@
       <image:title>Crno-bijeli portret para u punoj dužini koji između sebe drži i gleda bebu</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02410-2.webp</image:loc>
-      <image:title>Crno-bijeli portret dječaka koji poseže za mjehurićem sapunice</image:title>
-    </image:image>
-    <image:image>
       <image:loc>https://liza-memories-photography.com/homepage-welcome-20260906.webp</image:loc>
       <image:title>Neugeborenenfoto von LiZa Memories Photography</image:title>
     </image:image>
@@ -514,8 +502,8 @@
   <url>
     <loc>https://liza-memories-photography.com/portraitfotografie-graz.html</loc>
     <image:image>
-      <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04168.webp</image:loc>
-      <image:title>Sportliches Porträt einer Frau mit Hanteln im Wald</image:title>
+      <image:loc>https://liza-memories-photography.com/portrait-hero-dsc04104.webp</image:loc>
+      <image:title>Sportporträt einer Frau beim Dehnen auf einem Waldweg</image:title>
     </image:image>
     <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02524.webp</image:loc>
@@ -558,6 +546,10 @@
       <image:title>Sportliches Porträt beim Outdoor-Fotoshooting</image:title>
     </image:image>
     <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04168.webp</image:loc>
+      <image:title>Sportliches Porträt beim Outdoor-Fotoshooting</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04178.webp</image:loc>
       <image:title>Sportliches Porträt beim Outdoor-Fotoshooting</image:title>
     </image:image>
@@ -589,8 +581,8 @@
   <url>
     <loc>https://liza-memories-photography.com/portraitfotografie-graz-en.html</loc>
     <image:image>
-      <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04168.webp</image:loc>
-      <image:title>Outdoor fitness portrait of a woman holding dumbbells in the woods</image:title>
+      <image:loc>https://liza-memories-photography.com/portrait-hero-dsc04104.webp</image:loc>
+      <image:title>Fitness portrait of a woman stretching on a woodland path</image:title>
     </image:image>
     <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02524.webp</image:loc>
@@ -633,6 +625,10 @@
       <image:title>Fitness portrait during an outdoor photo session</image:title>
     </image:image>
     <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04168.webp</image:loc>
+      <image:title>Fitness portrait during an outdoor photo session</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04178.webp</image:loc>
       <image:title>Fitness portrait during an outdoor photo session</image:title>
     </image:image>
@@ -664,8 +660,8 @@
   <url>
     <loc>https://liza-memories-photography.com/portraitfotografie-graz-bs.html</loc>
     <image:image>
-      <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04168.webp</image:loc>
-      <image:title>Sportski portret žene s bučicama u šumi</image:title>
+      <image:loc>https://liza-memories-photography.com/portrait-hero-dsc04104.webp</image:loc>
+      <image:title>Sportski portret žene tokom istezanja na šumskoj stazi</image:title>
     </image:image>
     <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02524.webp</image:loc>
@@ -705,6 +701,10 @@
     </image:image>
     <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04108.webp</image:loc>
+      <image:title>Sportski portret tokom fotografisanja na otvorenom</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/galerie-portrait-dsc04168.webp</image:loc>
       <image:title>Sportski portret tokom fotografisanja na otvorenom</image:title>
     </image:image>
     <image:image>
@@ -3028,6 +3028,18 @@
       <image:title>Zwei Kinder spielen draußen mit Seifenblasen</image:title>
     </image:image>
     <image:image>
+      <image:loc>https://liza-memories-photography.com/kinder-portrait-dsc02637.webp</image:loc>
+      <image:title>Ein kleiner Junge im braunen Outfit schaut neugierig nach oben</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/kinder-spiel-dsc00067.webp</image:loc>
+      <image:title>Ein lachendes Mädchen zwischen bunten Bällen</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/kinder-seifenblasen-dsc02410.webp</image:loc>
+      <image:title>Ein kleiner Junge entdeckt draußen Seifenblasen</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://liza-memories-photography.com/about.webp</image:loc>
       <image:title>Emina von LiZa Memories Photography</image:title>
     </image:image>
@@ -3047,6 +3059,18 @@
       <image:title>Two children play with soap bubbles outdoors</image:title>
     </image:image>
     <image:image>
+      <image:loc>https://liza-memories-photography.com/kinder-portrait-dsc02637.webp</image:loc>
+      <image:title>A little boy in a brown outfit looks up with curiosity</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/kinder-spiel-dsc00067.webp</image:loc>
+      <image:title>A smiling girl among colourful balls</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/kinder-seifenblasen-dsc02410.webp</image:loc>
+      <image:title>A little boy discovers soap bubbles outdoors</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://liza-memories-photography.com/about.webp</image:loc>
       <image:title>Emina of LiZa Memories Photography</image:title>
     </image:image>
@@ -3064,6 +3088,18 @@
     <image:image>
       <image:loc>https://liza-memories-photography.com/galerie-familie-dsc02484.webp</image:loc>
       <image:title>Dvoje djece se vani igra mjehurićima od sapunice</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/kinder-portrait-dsc02637.webp</image:loc>
+      <image:title>Dječak u smeđoj odjeći radoznalo gleda prema gore</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/kinder-spiel-dsc00067.webp</image:loc>
+      <image:title>Nasmijana djevojčica među šarenim lopticama</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://liza-memories-photography.com/kinder-seifenblasen-dsc02410.webp</image:loc>
+      <image:title>Mali dječak vani otkriva mjehuriće od sapunice</image:title>
     </image:image>
     <image:image>
       <image:loc>https://liza-memories-photography.com/about.webp</image:loc>

@@ -156,7 +156,7 @@ export function refreshSite(d,file){
  d.querySelectorAll('header .lang-option[data-lang]').forEach(a=>{a.textContent=a.dataset.lang.toUpperCase();});
  d.body.classList.toggle('home-refreshed',isHome);d.body.classList.toggle('compact-mobile-hero',['babybauch-shooting-graz.html','newborn-fotografie-graz.html','babybauch-und-neugeborenen-shooting-graz.html','familienfotografie-graz.html','portraitfotografie-graz.html'].includes(base));if(d.querySelector('.hero-visual'))d.body.classList.add('service-refreshed');
  if(!d.querySelector('link[href^="scripts/site-refresh.css"]')){const css=el('link');css.rel='stylesheet';css.href='scripts/site-refresh.css?v=20260917-language-flags';d.head.append(css);}
- d.querySelector('link[href^="scripts/site-refresh.css"]') .href='scripts/site-refresh.css?v=20261012-header-parity';
+ d.querySelector('link[href^="scripts/site-refresh.css"]') .href='scripts/site-refresh.css?v=20261022-mobile-refinements';
  const serviceStyles=d.querySelector('link[href^="service-page.css"]');
  if(serviceStyles)serviceStyles.href='service-page.css?v=20261012-gallery-sizing';
  d.head.append(d.querySelector('link[href^="scripts/site-refresh.css"]'));
@@ -200,10 +200,13 @@ export function refreshSite(d,file){
  if(base==='newborn-fotografie-graz.html'){const img=d.querySelector('.hero-visual img');img.src='newborn-hero-dsc03309.webp';img.width=1600;img.height=1632;}
  if(base==='portraitfotografie-graz.html'){
   const img=d.querySelector('.hero-visual img');
-  img.src='galerie-portrait-dsc04168.webp';img.width=1267;img.height=1900;
-  img.alt=['Sportliches Porträt einer Frau mit Hanteln im Wald','Outdoor fitness portrait of a woman holding dumbbells in the woods','Sportski portret žene s bučicama u šumi'][i];
+  img.src='portrait-hero-dsc04104.webp';img.width=1267;img.height=1900;
+  img.alt=['Sportporträt einer Frau beim Dehnen auf einem Waldweg','Fitness portrait of a woman stretching on a woodland path','Sportski portret žene tokom istezanja na šumskoj stazi'][i];
   img.style.objectPosition='center 8%';
   img.closest('.hero-visual').setAttribute('aria-label', ['Bild vergrößern: ','Enlarge image: ','Povećaj fotografiju: '][i]+img.alt);
+  let portraitStyle=d.getElementById('portrait-cta-layout');
+  if(!portraitStyle){portraitStyle=el('style');portraitStyle.id='portrait-cta-layout';d.head.append(portraitStyle);}
+  portraitStyle.textContent='@media(max-width:900px){.portrait-page .cta-band .hero-actions{align-items:center}.portrait-page .cta-band .hero-actions>.btn.secondary{align-self:center;margin-inline:auto}}';
  }
  if(base==='babybauch-und-neugeborenen-shooting-graz.html'&&i===0){const h=d.querySelector('#faq h2');h.replaceChildren();for(const [n,t] of ['Häufige Fragen zur Babybauch','-',' und Neugeborenen','-','Kombi'].entries())h.append(n===1||n===3?el('span','straight-hyphen',t):d.createTextNode(t));}
  if(base==='preise.html'){

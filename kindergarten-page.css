@@ -1,11 +1,11 @@
-/* Local review page. All component styles stay scoped to the new service. */
+/* Components for the nursery and kindergarten service. Shared navigation keeps its site-wide styles. */
 .kita-page{--kita-border:#e4cabc;--kita-ink:#3a2e2a;--kita-muted:#73615a;background:#fcf8f5}
 .kita-page .kita-wrap{width:min(1200px,calc(100% - 64px));margin-inline:auto}
 .kita-page main{overflow:clip}
-.kita-page h1,.kita-page h2,.kita-page h3{font-family:var(--font-display);font-weight:600;line-height:1.1;color:var(--kita-ink);letter-spacing:-.025em;margin:0}
-.kita-page h2{font-size:clamp(2.25rem,4vw,3.65rem)}
-.kita-page h3{font-size:clamp(1.6rem,2.35vw,2.25rem)}
-.kita-page p{color:var(--kita-muted);line-height:1.8;margin:1rem 0}
+.kita-page main h1,.kita-page main h2,.kita-page main h3{font-family:var(--font-display);font-weight:600;line-height:1.1;color:var(--kita-ink);letter-spacing:-.025em;margin:0}
+.kita-page main h2{font-size:clamp(2.25rem,4vw,3.65rem)}
+.kita-page main h3{font-size:clamp(1.6rem,2.35vw,2.25rem)}
+.kita-page main p{color:var(--kita-muted);line-height:1.8;margin:1rem 0}
 .kita-preview{background:#4d3b34;color:#fff9f3;font-size:.79rem;text-align:center;padding:10px 20px;letter-spacing:.015em}
 .kita-preview span{font-weight:800;margin-right:12px;color:#f2d2bf}
 .kita-crumbs{display:flex;flex-wrap:wrap;gap:12px;font-size:.74rem;color:var(--kita-muted);padding-block:24px 12px}
@@ -13,20 +13,20 @@
 .kita-hero{display:grid;grid-template-columns:1.05fr 1fr;gap:70px;align-items:center;padding:20px 0 68px}
 .kita-page .kita-eyebrow{font-family:var(--font-body);font-size:.74rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#8e5b46;margin:0 0 19px;line-height:1.6}
 .kita-hero h1{font-size:clamp(2.55rem,4vw,3.65rem);overflow-wrap:normal;line-height:1.08}
-.kita-hero h1>span:not(.straight-hyphen){display:block;font-style:italic;color:#976f5d;font-weight:500;margin-top:8px}
+.kita-hero h1{max-width:100%;text-wrap:balance}.kita-hero h1>span:not(.straight-hyphen){display:inline;font-style:italic;color:#976f5d;font-weight:500;white-space:nowrap}
 .kita-page .kita-lead{font-size:1.13rem;color:#4d3b34;margin-top:25px;max-width:45ch}
 .kita-hero-copy>p:not(.kita-eyebrow){max-width:50ch}
 .kita-actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px 24px;margin-top:30px}
-.kita-page .btn{font-size:.88rem;line-height:1.4;padding:17px 23px;min-height:48px;text-decoration:none;border-color:#dcc1b1;gap:13px;white-space:normal;text-align:center}
-.kita-page .btn.primary{background:#d8a391;color:#382921}
-.kita-page .btn.primary:hover{background:#cd9581}
+.kita-page main .btn{font-size:.88rem;line-height:1.4;padding:17px 23px;min-height:48px;text-decoration:none;border-color:#dcc1b1;gap:13px;white-space:normal;text-align:center}
+.kita-page main .btn.primary{background:#d8a391;color:#382921}
+.kita-page main .btn.primary:hover{background:#cd9581}
 .kita-text-link{font-weight:700;font-size:.88rem;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;line-height:1.8;color:#654c40}
 .kita-text-link span{margin-left:8px}
 .kita-hero-details{display:flex;flex-wrap:wrap;gap:7px 18px;margin-top:28px;font-size:.72rem;color:#775f53}
 .kita-hero-details span+span::before{content:'·';margin-right:16px;color:#b3836c}
 .kita-hero-photo{margin:0;position:relative;padding-bottom:28px}
 .kita-hero-photo>img{width:100%;height:590px;object-fit:cover;border-radius:190px 190px 28px 28px;object-position:center 35%}
-.kita-hero-photo figcaption{position:absolute;bottom:0;left:-28px;right:35px;display:flex;align-items:center;gap:17px;background:#fffdfb;border:1px solid #edddd2;border-radius:20px;padding:18px 24px;box-shadow:0 12px 28px #543a2310;font-family:var(--font-display);font-size:1.6rem;line-height:1.2}
+.kita-hero-photo figcaption{position:absolute;bottom:0;left:16px;right:16px;display:flex;align-items:center;gap:17px;background:#fffdfb;border:1px solid #edddd2;border-radius:20px;padding:18px 24px;box-shadow:0 12px 28px #543a2310;font-family:var(--font-display);font-size:1.6rem;line-height:1.2}
 .kita-hero-photo figcaption small{display:block;font-family:var(--font-body);font-size:.69rem;color:#806b5d;margin-top:6px;line-height:1.5}
 .kita-photo-mark{font-size:2.5rem;color:#a7765c}
 .kita-trust{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--kita-border);border-bottom:1px solid var(--kita-border);padding:26px 0;gap:20px}
@@ -48,9 +48,9 @@
 .kita-gallery-section{padding:74px 0 66px;background:#f1e7df}
 .kita-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .kita-gallery figure{margin:0}
-.kita-gallery img{width:100%;height:330px;object-fit:cover;border-radius:90px 90px 16px 16px}
-.kita-gallery figure:nth-child(2n){padding-top:28px}
-.kita-gallery figure:nth-child(2n) img{border-radius:16px 16px 90px 16px}
+.kita-gallery img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:18px}
+
+
 .kita-gallery figcaption{color:#6c584b;font-size:.76rem;text-align:center;padding:16px 8px}
 .kita-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:26px;list-style:none;padding:8px 0;margin:0}
 .kita-step-no{display:inline-flex;width:47px;height:47px;align-items:center;justify-content:center;background:#efddd0;border-radius:50%;font-family:var(--font-display);font-size:1.5rem;color:#7d5841;margin:0 0 21px}
@@ -141,10 +141,34 @@
 .kita-page .kita-form-status{font-size:.85rem;color:#476041;border-left:3px solid #899e7f;padding-left:14px;margin-bottom:0}
 .kita-page a:focus-visible,.kita-page summary:focus-visible,.kita-page button:focus-visible{outline:2px solid #85583d;outline-offset:5px}
 .kita-page [id]{scroll-margin-top:95px}
-@media(min-width:1100px){.kita-page .site-header .nav{grid-template-columns:auto 1fr auto;gap:20px}.kita-page .site-header .nav-links{gap:15px;justify-content:center}.kita-page .site-header .nav-links>a,.kita-page .site-header .nav-dropdown>a{font-size:.84rem}}
-@media(max-width:1100px){.kita-hero{gap:40px}.kita-hero h1{font-size:2.8rem}.kita-hero-photo>img{height:530px}.kita-trust{grid-template-columns:1fr 1fr;gap:18px}.kita-steps{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:20px}.kita-steps h3{min-height:0}.kita-gallery img{height:270px}.kita-inquiry{gap:35px}.kita-docs{grid-template-columns:1fr}.kita-about{gap:40px}.kita-faq-layout{gap:40px}}
-@media(max-width:760px){.kita-page .kita-wrap{width:calc(100% - 36px)}.kita-hero{grid-template-columns:1fr;gap:30px;padding-top:10px;padding-bottom:35px}.kita-hero-copy{order:1}.kita-hero-photo{order:0;max-width:540px;width:100%;margin-inline:auto;padding-bottom:20px}.kita-hero-photo>img{height:350px;border-radius:130px 130px 20px 20px;object-position:center 31%}.kita-hero-photo figcaption{left:12px;right:12px;padding:12px 18px;border-radius:16px;font-size:1.25rem}.kita-hero-photo figcaption small{font-size:.63rem}.kita-photo-mark{font-size:1.9rem}.kita-crumbs{padding-top:18px;font-size:.65rem;gap:8px}.kita-hero h1{font-size:clamp(2.1rem,6vw,3.1rem)}.kita-page .kita-lead{font-size:1.03rem}.kita-hero-copy>p:not(.kita-eyebrow){max-width:none;font-size:.91rem}.kita-page .kita-eyebrow{font-size:.66rem;letter-spacing:.12em;margin-bottom:15px}.kita-hero-details{font-size:.65rem;gap:7px 12px}.kita-hero-details span+span::before{margin-right:10px}.kita-trust{padding:22px 0;gap:18px 10px}.kita-trust>div{gap:7px;font-size:.67rem}.kita-trust strong{font-size:.71rem}.kita-trust-symbol{width:25px;font-size:1.5rem}.kita-section{padding-block:58px}.kita-section-heading{margin-bottom:30px}.kita-section-heading>p:last-child{font-size:.88rem}.kita-audience-grid{grid-template-columns:1fr;gap:18px}.kita-audience-card{padding:27px;border-radius:22px}.kita-audience-card h3{font-size:2rem}.kita-gallery-section{padding:52px 0 35px}.kita-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.kita-gallery img{height:250px;border-radius:55px 55px 13px 13px}.kita-gallery figure:nth-child(2n){padding-top:22px}.kita-gallery figcaption{font-size:.68rem;padding:12px 2px}.kita-steps{grid-template-columns:1fr;gap:0}.kita-steps>li{position:relative;padding:0 0 22px 67px;min-height:110px}.kita-step-no{position:absolute;left:0;top:0;width:43px;height:43px;font-size:1.4rem}.kita-steps>li:not(:last-child)::after{content:'';position:absolute;left:21px;top:49px;bottom:6px;width:1px;background:#dfc7b6}.kita-steps h3{font-size:1.65rem;padding-top:5px}.kita-steps p{margin-top:10px;font-size:.85rem}.kita-page .kita-note{font-size:.8rem;margin-top:10px}.kita-price-section{padding:53px 0}.kita-price-grid{gap:18px}.kita-price-card{padding:27px 24px}.kita-price-card h3{font-size:2rem}.kita-price-card .kita-small-label{font-size:.65rem}.kita-page .kita-price{font-size:4.3rem}.kita-price-card>p:not(.kita-price),.kita-price-card .kita-check-list{font-size:.79rem}.kita-price-calculator{padding:25px;grid-template-columns:1fr;gap:18px}.kita-calculator-control{border-left:0;border-top:1px solid var(--kita-border);padding:17px 0 0;display:grid;grid-template-columns:1fr 1fr;column-gap:20px;align-items:center}.kita-calculator-control label{grid-column:1;grid-row:1;margin:0}.kita-calculator-control select{grid-column:1;grid-row:2}.kita-calculator-control output{grid-column:2;grid-row:1/3;margin:0}.kita-calculator-control p{grid-column:2;margin:0}.kita-portal-demo{grid-template-columns:1fr;gap:28px}.kita-portal-demo>article{display:grid;grid-template-columns:1fr 1fr;column-gap:25px}.kita-demo-window{grid-column:1;grid-row:1/4}.kita-portal-demo .kita-small-label{margin-top:0;align-self:end;font-size:.65rem}.kita-portal-demo h3{font-size:1.7rem}.kita-portal-demo>article>p{font-size:.8rem;margin-bottom:0}.kita-about{grid-template-columns:1fr;gap:30px;max-width:540px!important}.kita-about img{height:320px;max-width:390px;margin:auto}.kita-about h2{font-size:2.6rem}.kita-about-section{padding:45px 0}.kita-faq-section{padding:52px 0}.kita-faq-layout{grid-template-columns:1fr;gap:30px}.kita-faq summary{font-size:.85rem}.kita-faq details p{font-size:.82rem}.kita-inquiry{grid-template-columns:1fr;gap:25px}.kita-inquiry-copy h2{font-size:2.8rem}.kita-form{padding:25px}.kita-preview{font-size:.68rem;padding:9px 18px}.kita-preview span{margin-right:7px}.kita-actions{gap:18px;margin-top:24px}.kita-page .btn{font-size:.82rem;padding:15px 20px}}
-@media(max-width:450px){.kita-hero-photo>img{height:310px}.kita-hero h1{font-size:clamp(1.9rem,6.9vw,2.6rem)}.kita-page h2{font-size:2.25rem}.kita-hero-details span+span::before{display:none}.kita-hero-details{display:grid;grid-template-columns:1fr;gap:3px}.kita-hero-details span::before{content:'✓';margin-right:7px;color:#947356}.kita-trust{gap:18px 5px}.kita-trust strong{font-size:.65rem}.kita-trust>div{font-size:.63rem}.kita-gallery img{height:215px}.kita-price-grid{grid-template-columns:1fr}.kita-price-card{padding:28px}.kita-package-label{top:-12px}.kita-portal-demo>article{display:block}.kita-demo-window{max-width:350px;margin:auto}.kita-portal-demo .kita-small-label{margin-top:20px}.kita-portal-demo h3{font-size:1.85rem}.kita-portal-demo>article>p{font-size:.88rem}.kita-form-grid{grid-template-columns:1fr}.kita-form{padding:23px 20px}.kita-audience-card{padding:25px}.kita-price-calculator{padding:22px}.kita-price-calculator h3{font-size:1.65rem}.kita-calculator-control{column-gap:12px}}
+
+@media(max-width:1100px){.kita-hero{gap:40px}.kita-hero h1{font-size:2.8rem}.kita-hero-photo>img{height:530px}.kita-trust{grid-template-columns:1fr 1fr;gap:18px}.kita-steps{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:20px}.kita-steps h3{min-height:0}.kita-inquiry{gap:35px}.kita-docs{grid-template-columns:1fr}.kita-about{gap:40px}.kita-faq-layout{gap:40px}}
+@media(max-width:760px){.kita-page .kita-wrap{width:calc(100% - 36px)}.kita-hero{grid-template-columns:1fr;gap:30px;padding-top:10px;padding-bottom:35px}.kita-hero-copy{order:1}.kita-hero-photo{order:0;max-width:540px;width:100%;margin-inline:auto;padding-bottom:20px}.kita-hero-photo>img{height:350px;border-radius:130px 130px 20px 20px;object-position:center 31%}.kita-hero-photo figcaption{left:12px;right:12px;padding:12px 18px;border-radius:16px;font-size:1.25rem}.kita-hero-photo figcaption small{font-size:.63rem}.kita-photo-mark{font-size:1.9rem}.kita-crumbs{padding-top:18px;font-size:.65rem;gap:8px}.kita-hero h1{font-size:clamp(2.1rem,6vw,3.1rem)}.kita-page .kita-lead{font-size:1.03rem}.kita-hero-copy>p:not(.kita-eyebrow){max-width:none;font-size:.91rem}.kita-page .kita-eyebrow{font-size:.66rem;letter-spacing:.12em;margin-bottom:15px}.kita-hero-details{font-size:.65rem;gap:7px 12px}.kita-hero-details span+span::before{margin-right:10px}.kita-trust{padding:22px 0;gap:18px 10px}.kita-trust>div{gap:7px;font-size:.67rem}.kita-trust strong{font-size:.71rem}.kita-trust-symbol{width:25px;font-size:1.5rem}.kita-section{padding-block:58px}.kita-section-heading{margin-bottom:30px}.kita-section-heading>p:last-child{font-size:.88rem}.kita-audience-grid{grid-template-columns:1fr;gap:18px}.kita-audience-card{padding:27px;border-radius:22px}.kita-audience-card h3{font-size:2rem}.kita-gallery-section{padding:52px 0 35px}.kita-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.kita-gallery figcaption{font-size:.68rem;padding:12px 2px}.kita-steps{grid-template-columns:1fr;gap:0}.kita-steps>li{position:relative;padding:0 0 22px 67px;min-height:110px}.kita-step-no{position:absolute;left:0;top:0;width:43px;height:43px;font-size:1.4rem}.kita-steps>li:not(:last-child)::after{content:'';position:absolute;left:21px;top:49px;bottom:6px;width:1px;background:#dfc7b6}.kita-steps h3{font-size:1.65rem;padding-top:5px}.kita-steps p{margin-top:10px;font-size:.85rem}.kita-page .kita-note{font-size:.8rem;margin-top:10px}.kita-price-section{padding:53px 0}.kita-price-grid{gap:18px}.kita-price-card{padding:27px 24px}.kita-price-card h3{font-size:2rem}.kita-price-card .kita-small-label{font-size:.65rem}.kita-page .kita-price{font-size:4.3rem}.kita-price-card>p:not(.kita-price),.kita-price-card .kita-check-list{font-size:.79rem}.kita-price-calculator{padding:25px;grid-template-columns:1fr;gap:18px}.kita-calculator-control{border-left:0;border-top:1px solid var(--kita-border);padding:17px 0 0;display:grid;grid-template-columns:1fr 1fr;column-gap:20px;align-items:center}.kita-calculator-control label{grid-column:1;grid-row:1;margin:0}.kita-calculator-control select{grid-column:1;grid-row:2}.kita-calculator-control output{grid-column:2;grid-row:1/3;margin:0}.kita-calculator-control p{grid-column:2;margin:0}.kita-portal-demo{grid-template-columns:1fr;gap:28px}.kita-portal-demo>article{display:grid;grid-template-columns:1fr 1fr;column-gap:25px}.kita-demo-window{grid-column:1;grid-row:1/4}.kita-portal-demo .kita-small-label{margin-top:0;align-self:end;font-size:.65rem}.kita-portal-demo h3{font-size:1.7rem}.kita-portal-demo>article>p{font-size:.8rem;margin-bottom:0}.kita-about{grid-template-columns:1fr;gap:30px;max-width:540px!important}.kita-about img{height:320px;max-width:390px;margin:auto}.kita-about h2{font-size:2.6rem}.kita-about-section{padding:45px 0}.kita-faq-section{padding:52px 0}.kita-faq-layout{grid-template-columns:1fr;gap:30px}.kita-faq summary{font-size:.85rem}.kita-faq details p{font-size:.82rem}.kita-inquiry{grid-template-columns:1fr;gap:25px}.kita-inquiry-copy h2{font-size:2.8rem}.kita-form{padding:25px}.kita-preview{font-size:.68rem;padding:9px 18px}.kita-preview span{margin-right:7px}.kita-actions{gap:18px;margin-top:24px}.kita-page main .btn{font-size:.82rem;padding:15px 20px}}
+@media(max-width:450px){.kita-hero-photo>img{height:310px}.kita-hero h1{font-size:clamp(1.9rem,6.9vw,2.6rem)}.kita-page main h2{font-size:2.25rem}.kita-hero-details span+span::before{display:none}.kita-hero-details{display:grid;grid-template-columns:1fr;gap:3px}.kita-hero-details span::before{content:'✓';margin-right:7px;color:#947356}.kita-trust{gap:18px 5px}.kita-trust strong{font-size:.65rem}.kita-trust>div{font-size:.63rem}.kita-price-grid{grid-template-columns:1fr}.kita-price-card{padding:28px}.kita-package-label{top:-12px}.kita-portal-demo>article{display:block}.kita-demo-window{max-width:350px;margin:auto}.kita-portal-demo .kita-small-label{margin-top:20px}.kita-portal-demo h3{font-size:1.85rem}.kita-portal-demo>article>p{font-size:.88rem}.kita-form-grid{grid-template-columns:1fr}.kita-form{padding:23px 20px}.kita-audience-card{padding:25px}.kita-price-calculator{padding:22px}.kita-price-calculator h3{font-size:1.65rem}.kita-calculator-control{column-gap:12px}}
 @media(prefers-reduced-motion:reduce){.kita-page *{scroll-behavior:auto!important;transition:none!important}}
-@media(max-width:760px){.kita-gallery figure:last-child:nth-child(odd){grid-column:1/-1;max-width:400px;width:100%;justify-self:center}}
-@media(max-width:450px){.kita-gallery img[src="galerie-familie-dsc02484.webp"]{height:clamp(170px,55vw,215px);object-position:65% center}}
+
+
+
+/* Keep headings and controls compact without squeezing the photographs. */
+#preise .kita-section-heading,#unterlagen .kita-section-heading{max-width:1120px}
+#preise .kita-section-heading>p:last-child,#unterlagen .kita-section-heading>p:last-child{max-width:none;text-wrap:pretty}
+.kita-docs-intro span{display:block}
+.kita-price,.kita-calculator-control output{white-space:nowrap}
+.kita-gallery img[src="galerie-familie-dsc02484.webp"]{object-position:57% center}
+@media(min-width:761px){.kita-hero h1{font-size:clamp(2rem,3.5vw,3.1rem)}}
+@media(max-width:760px){
+ .kita-hero-photo{padding-bottom:0}
+ .kita-hero-photo figcaption{position:relative;left:auto;right:auto;bottom:auto;width:calc(100% - 24px);box-sizing:border-box;margin:12px auto 0;justify-content:center;text-align:center;font-size:1.15rem;gap:12px;padding:14px}
+ .kita-hero-photo>img{height:auto;aspect-ratio:1/1;object-position:center 37%}
+ .kita-actions{justify-content:center;text-align:center}
+ .kita-hero-details{justify-content:center;text-align:center}
+ .kita-hero-details span::before,.kita-hero-details span+span::before{content:none;display:none}
+ .kita-audience-card>.kita-text-link{align-self:center;text-align:center}
+ .kita-page main #kita-euch-title{font-size:clamp(1.7rem,7.4vw,2.5rem);line-height:1.2}
+ .kita-page main .kita-audience-card h3{font-size:clamp(1.55rem,6.5vw,2rem);line-height:1.2;text-wrap:pretty}
+ .kita-gallery figcaption{padding:12px 0;line-height:1.6}
+}
+
+.kita-gallery img[src="kinder-spiel-dsc00067.webp"]{object-position:72% 45%}
+
+@media(max-width:360px){.kita-hero h1{font-size:1.6rem}}

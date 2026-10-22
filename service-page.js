@@ -134,6 +134,7 @@
 
   function ensureServiceLinks(){
     const lang = supportedLangs.includes(staticLang) ? staticLang : urlLanguage || DEFAULT_LANG;
+    const kindergartenLabel = {de: 'Krippe & Kindergarten', en: 'Nursery & kindergarten', bs: 'Jaslice i vrtić'}[lang];
     const kindergartenHref = document.querySelector('a[data-service-key="kindergarten"]')?.getAttribute('href');
     const menu = mobileNav?.querySelector('.services-dropdown .nav-dropdown-menu');
     if(menu){
@@ -152,7 +153,7 @@
       const links = serviceLinks.map((service) => {
         const link = document.createElement('a');
         link.href = service.key === 'kindergarten' && kindergartenHref ? kindergartenHref : buildLocalizedHref(service.href, lang);
-        link.textContent = common[lang].services[service.key];
+        link.textContent = service.key === 'kindergarten' ? kindergartenLabel : common[lang].services[service.key];
         link.dataset.serviceKey = service.key;
         return link;
       });
@@ -589,7 +590,8 @@
       'babybauch-und-neugeborenen-shooting-graz.html': commonStrings.nav.galleryCombo,
       'familienfotografie-graz.html': commonStrings.nav.gallery3,
       'hochzeitsfotograf-graz.html': commonStrings.nav.gallery4,
-      'portraitfotografie-graz.html': commonStrings.nav.galleryPortrait
+      'portraitfotografie-graz.html': commonStrings.nav.galleryPortrait,
+      'kindergartenfotografie-graz.html': {de: 'Krippe & Kindergarten', en: 'Nursery & kindergarten', bs: 'Jaslice i vrtić'}[lang]
     };
     [...refs.portfolioMenuLinks, ...refs.mobilePortfolioLinks].forEach((link) => {
       const file = stripLanguageSuffix(new URL(link.href, window.location.href).pathname.split('/').pop());
