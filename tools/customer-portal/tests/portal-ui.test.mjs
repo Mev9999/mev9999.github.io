@@ -997,3 +997,84 @@ test('download refreshes stale permissions and respects newly revoked or removed
     if(mode!=='released')assert.match(h.window.document.querySelector('#portal-toast').textContent,/freigegeben|Download/i);
   }
 });
+
+test('new school galleries explain automatic retention in every language and follow the shooting type independently of pricing',async t=>{
+  for(const lang of ['de','en','bs']){
+    const h=await adminHarness({lang});t.after(()=>h.dom.window.close());await h.action('create-gallery');
+    const form=h.window.document.querySelector('#portal-create-gallery'),note=form.querySelector('#p-create-retention');
+    assert.equal(note.hidden,true);h.change('#portal-create-gallery [name="shootingType"]','school');
+    assert.equal(note.hidden,false);assert.equal(note.querySelectorAll('li').length,3);for(const number of ['90','30','6'])assert.ok(note.textContent.includes(number));
+    h.change('#portal-create-gallery [name="pricingMode"]','gallery');assert.equal(note.hidden,false,'retention follows shooting type, not the sales model');
+    h.change('#portal-create-gallery [name="shootingType"]','family');assert.equal(note.hidden,true);
+    assert.equal(form.querySelector('[name="expiresAt"]'),null);
+  }
+});
+
+test('automatic gallery deadlines are read-only and settings saves never override their server dates',async t=>{
+  for(const lang of ['de','en','bs']){
+    const h=await adminHarness({lang});t.after(()=>h.dom.window.close());
+    h.detail.gallery={...h.detail.gallery,shootingType:'school',expiresAt:'2031-01-20T12:00:00.000Z',retention:{enabled:true,policy:'school-v1',galleryDays:90,unboughtGraceDays:30,purchasedMonths:6,startedAt:'2030-10-22T12:00:00.000Z',closesAt:'2031-01-20T12:00:00.000Z',unboughtDeleteAt:'2031-02-19T12:00:00.000Z'}};
+    await h.ui.loadAdmin('g');const form=h.window.document.querySelector('#portal-gallery-settings'),note=form.querySelector('[data-gallery-retention]');
+    assert.ok(note);assert.equal(form.elements.expiresAt,undefined);assert.equal(note.querySelectorAll('dd').length,2);assert.match(note.textContent,/2030/);assert.match(note.textContent,/2031/);assert.equal(note.dataset.settingPanel,'settings');
+    await h.ui.onSubmit({target:form,preventDefault(){}});let saved=h.requests.filter(r=>r.path==='/api/admin/galleries/g'&&r.method==='PATCH').at(-1);
+    assert.ok(saved);assert.equal(Object.hasOwn(saved.body,'expiresAt'),false);
+    h.change('#portal-gallery-settings [name="shootingType"]','portrait');await h.ui.onSubmit({target:h.window.document.querySelector('#portal-gallery-settings'),preventDefault(){}});
+    saved=h.requests.filter(r=>r.path==='/api/admin/galleries/g'&&r.method==='PATCH').at(-1);assert.equal(Object.hasOwn(saved.body,'expiresAt'),false,'changing the type cannot reset an existing policy');
+  }
+});
+
+test('a retained draft shows the publication trigger without inventing dates while legacy school galleries keep manual expiry',async t=>{
+  const h=await adminHarness();t.after(()=>h.dom.window.close());
+  h.detail.gallery={...h.detail.gallery,shootingType:'school',published:false,retention:{policy:'school-v1',startedAt:null,closesAt:null,unboughtDeleteAt:null}};
+  await h.ui.loadAdmin('g');let form=h.window.document.querySelector('#portal-gallery-settings'),note=form.querySelector('[data-gallery-retention]');
+  assert.match(note.textContent,/ersten Mal veröffentlichst/);assert.equal(note.querySelectorAll('dd').length,0);assert.equal(form.elements.expiresAt,undefined);
+  h.detail.gallery.retention=null;h.detail.gallery.expiresAt='2031-01-20T12:00:00.000Z';await h.ui.loadAdmin('g');form=h.window.document.querySelector('#portal-gallery-settings');
+  assert.equal(form.querySelector('[data-gallery-retention]'),null);assert.equal(form.elements.expiresAt.value,'2031-01-20');form.elements.expiresAt.value='2031-02-10';
+  await h.ui.onSubmit({target:form,preventDefault(){}});const saved=h.requests.filter(r=>r.path==='/api/admin/galleries/g'&&r.method==='PATCH').at(-1);
+  assert.equal(saved.body.expiresAt,'2031-02-10T23:59:59+01:00');
+});
+
+test('expired order files never imply a download release while payment status and documents remain available in every language',async t=>{
+  for(const lang of ['de','en','bs']){
+    const h=harness({lang});t.after(()=>h.dom.window.close());const labels=h.window.portalTranslations[lang];
+    for(const status of ['paid','completed','released']){
+      const html=h.ui.ordersHtml([testOrderFixture({status,filesExpired:true,deliveryPending:true,receiptSent:false,invoiceUrl:'/api/invoices/i/pdf'})]);
+      const container=h.window.document.createElement('div');container.innerHTML=html;
+      assert.equal(container.querySelector('.portal-badge').textContent,labels.orderPaidFilesExpired);
+      assert.ok(container.querySelector('a[href="/api/orders/test-o/receipt"]'));
+      assert.ok(container.querySelector('a[href="/api/invoices/i/pdf"]'));
+    }
+    const container=h.window.document.createElement('div');container.innerHTML=h.ui.ordersHtml([testOrderFixture({status:'refunded',filesExpired:true})]);
+    assert.equal(container.querySelector('.portal-badge').textContent,labels.refunded);assert.ok(container.textContent.includes(labels.orderFilesExpired));
+    container.innerHTML=h.ui.ordersHtml([testOrderFixture({status:'pending',filesExpired:true})]);
+    assert.equal(container.querySelector('[data-action="order-bank"]'),null,'expired images must not prompt another payment');
+  }
+});
+
+test('admin expired orders suppress download-email retries and payment release but retain receipts and an accurate photo explanation',async t=>{
+  const h=await adminHarness();t.after(()=>h.dom.window.close());
+  h.orders=[testOrderFixture({filesExpired:true,notificationStatus:{status:'pending',pendingCount:1}}),testOrderFixture({id:'unpaid',status:'pending',filesExpired:true}),testOrderFixture({id:'summary',notificationStatus:{status:'unavailable',code:'image_files_expired'}})];
+  await h.action('admin-tab',{tab:'orders'});
+  assert.equal(h.window.document.querySelector('[data-action="retry-order-notifications"]'),null);
+  assert.equal(h.window.document.querySelector('[data-action="mark-paid"]'),null);
+  assert.ok(h.window.document.querySelector('a[href="/api/orders/test-o/receipt"]'));
+  assert.ok(h.window.document.querySelector('[data-action="cancel-pending-order"][data-id="unpaid"]'));
+  const before=h.requests.length;await h.action('admin-order-details',{id:'test-o'});
+  const dialog=h.window.document.querySelector('.portal-order-details');assert.ok(dialog.textContent.includes(h.window.portalTranslations.de.orderFilesExpired));
+  assert.equal(dialog.querySelector('img'),null);assert.equal(h.requests.length,before,'removed images must not be fetched or described as awaiting editing');
+});
+
+test('a stale email retry reports file expiry rather than a failed or successful download notification',async t=>{
+  const h=await adminHarness();t.after(()=>h.dom.window.close());h.orders=[testOrderFixture({notificationStatus:{status:'pending',pendingCount:1}})];await h.action('admin-tab',{tab:'orders'});
+  h.requestHandler=path=>{if(path==='/api/admin/orders/test-o/notifications/retry'){h.orders=[testOrderFixture({filesExpired:true,notificationStatus:{status:'unavailable',code:'image_files_expired'}})];return uiResponse({ok:true,notification:{status:'unavailable',code:'image_files_expired'}});}return null;};
+  await h.action('retry-order-notifications',{id:'test-o'});
+  assert.equal(h.window.document.querySelector('#portal-toast').textContent,h.window.portalTranslations.de.orderFilesExpired);
+  assert.equal(h.window.document.querySelector('[data-action="retry-order-notifications"]'),null);
+  assert.ok(h.window.document.querySelector('.portal-admin-orders').textContent.includes(h.window.portalTranslations.de.orderPaidFilesExpired));
+});
+
+test('retention settings explain the protection of paid images awaiting their first release even after gallery closure',async t=>{
+  const h=await adminHarness();t.after(()=>h.dom.window.close());h.detail.gallery.retention={policy:'school-v1',startedAt:'2020-01-01T12:00:00Z',closesAt:'2020-03-31T12:00:00Z',unboughtDeleteAt:'2020-04-30T12:00:00Z'};
+  await h.ui.loadAdmin('g');const text=h.window.document.querySelector('[data-gallery-retention]').textContent;
+  assert.ok(text.includes(h.window.portalTranslations.de.retentionGalleryClosed));assert.ok(text.includes(h.window.portalTranslations.de.retentionPendingProtected));
+});

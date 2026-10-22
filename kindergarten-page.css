@@ -152,13 +152,16 @@
 /* Keep headings and controls compact without squeezing the photographs. */
 #preise .kita-section-heading,#unterlagen .kita-section-heading{max-width:1120px}
 #preise .kita-section-heading>p:last-child,#unterlagen .kita-section-heading>p:last-child{max-width:none;text-wrap:pretty}
-.kita-docs-intro span{display:block}
+.kita-docs-intro span+span::before{content:' '}
 .kita-price,.kita-calculator-control output{white-space:nowrap}
 .kita-gallery img[src="galerie-familie-dsc02484.webp"]{object-position:57% center}
 @media(min-width:761px){.kita-hero h1{font-size:clamp(2rem,3.5vw,3.1rem)}}
 @media(max-width:760px){
  .kita-hero-photo{padding-bottom:0}
- .kita-hero-photo figcaption{position:relative;left:auto;right:auto;bottom:auto;width:calc(100% - 24px);box-sizing:border-box;margin:12px auto 0;justify-content:center;text-align:center;font-size:1.15rem;gap:12px;padding:14px}
+ .kita-hero-photo figcaption{position:relative;left:auto;right:auto;bottom:auto;width:calc(100% - 24px);box-sizing:border-box;margin:-24px auto 0;text-align:left;font-size:clamp(.8rem,3.8vw,1.1rem);gap:9px;padding:12px;isolation:isolate}
+ .kita-hero-photo figcaption .kita-caption-title{display:block;white-space:nowrap}
+ .kita-hero-photo figcaption small{font-size:clamp(.58rem,2.7vw,.7rem);margin-top:5px}
+ .kita-hero-photo .kita-photo-mark{font-size:1.5rem;flex-shrink:0}
  .kita-hero-photo>img{height:auto;aspect-ratio:1/1;object-position:center 37%}
  .kita-actions{justify-content:center;text-align:center}
  .kita-hero-details{justify-content:center;text-align:center}
@@ -172,3 +175,24 @@
 .kita-gallery img[src="kinder-spiel-dsc00067.webp"]{object-position:72% 45%}
 
 @media(max-width:360px){.kita-hero h1{font-size:1.6rem}}
+
+/* Compact gallery and readable introductions at each screen size. */
+#fuer-euch .kita-section-heading,#gallery-showcase .kita-section-heading{max-width:none}
+#fuer-euch .kita-section-heading>p:last-child{max-width:none}
+.kita-heading-mobile{display:none}
+@media(min-width:761px){
+ .kita-gallery{max-width:960px;margin-inline:auto}
+ .kita-page main #kita-gallery-title{font-size:clamp(1.9rem,3.6vw,3.25rem)}
+}
+@media(min-width:1200px){
+ #fuer-euch .kita-section-heading>p:last-child{font-size:.92rem;white-space:nowrap}
+}
+@media(max-width:760px){
+ .kita-page main #kita-docs-title{font-size:clamp(1.5rem,7.6vw,2.25rem)}
+ html[lang="de"] .kita-page main #kita-docs-title{white-space:nowrap}
+ #unterlagen .kita-docs-intro{text-align:left;line-height:1.75}
+ #unterlagen .kita-docs-intro span{display:inline}
+ #unterlagen .kita-docs-intro span:first-child{display:block;margin-bottom:.65rem}
+ .kita-page main #kita-euch-title{font-size:clamp(1.5rem,6.5vw,2.5rem)}
+ .kita-heading-desktop{display:none}.kita-heading-mobile{display:inline}
+}

@@ -1,5 +1,7 @@
 # Privater Portal-Server
 
+Neue Schulgalerien unterstützen seit 22. Oktober 2026 automatische Speicherfristen: 90 Tage ab erster Veröffentlichung, Entfernung ungekaufter Bilder innerhalb weiterer 30 Tage, sechs Kalendermonate für fertig ausgelieferte Kaufkopien. Bestehende Galerien bleiben unverändert. Dafür sind die neue Migration, das Portalpaket und der stündliche Bereinigungs-Worker mit DB- und PHOTOS-Bindings nötig; siehe [Updateanleitung](../UPGRADE-2026-10-22-Aufbewahrung.txt). Diese Implementierung wird durch einen GitHub-Push allein nicht live aktiviert.
+
 Der Server läuft als Cloudflare-Pages-Worker unter `https://portal.liza-memories-photography.com/`. Er verwendet D1 und den privaten EU-R2-Bucket `liza-memories-gallerie`; Resend und Überweisung sind eingerichtet. Die Inhaberin hat Einrichtung, Bestellung, Zahlungsbestätigung, Freigabe und Download erfolgreich ausprobiert. Das Update vom 8. Oktober wurde angewendet. Die Studio-Erweiterung benötigt ausschließlich die darauf aufbauende Migration [2026-10-09-portal-studio.sql](migrations/2026-10-09-portal-studio.sql) und das neue Portal-Paket; die alte Migration nicht wiederholen. Weder Originalfotos, Rechnungen noch Kundenlisten gehören in GitHub Pages oder in die öffentlichen Assets.
 
 ## Verbindung einrichten

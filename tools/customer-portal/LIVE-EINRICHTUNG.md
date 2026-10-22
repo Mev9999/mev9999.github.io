@@ -29,7 +29,7 @@ Sie erstellt `tools/customer-portal/dist-pages/` mit der öffentlichen Oberfläc
 
 Unter Pages **Settings → Runtime → Fail open/closed** die Einstellung **Fail closed** verwenden. Sie verhindert, dass erschöpfte Functions-Kontingente zum Ausliefern von ungeprüften statischen API-Antworten führen. [Cloudflare: Fail open/closed](https://developers.cloudflare.com/pages/functions/routing/#fail-open--closed).
 
-Das Pages-Paket mit `_worker.js` führt keinen geplanten Cron-Aufruf aus. Für die tägliche Bereinigung ist der eigenständige, nur an dieselbe D1-Datenbank gebundene `backend/cleanup-worker.mjs` vorbereitet: [Einrichtung und Prüfung](CLEANUP-WORKER.md). Er entfernt ausschließlich abgelaufene Sitzungen, Zugangstokens und alte Rate-Limits; Kunden, Fotos, Galerien und Bestellungen bleiben erhalten. Abgelaufene Sitzungen, Tokens und Galeriezugänge werden bei jeder zugehörigen Anfrage geprüft und auch ohne laufende Bereinigung abgewiesen.
+Das Pages-Paket mit `_worker.js` führt keinen geplanten Cron-Aufruf aus. Dafür ist der eigenständige Bereinigungs-Worker vorgesehen: [Einrichtung und Prüfung](CLEANUP-WORKER.md). Seit dem Aufbewahrungsupdate benötigt er dieselben Bindings `DB` und `PHOTOS` wie das Portal. Neben abgelaufenen Zugangsdaten entfernt er fällige Bilddateien neuer School-Galerien mit aktiver Aufbewahrungsregel; bestehende Galerien und Finanzbelege bleiben erhalten. Für den Dashboard-Editor die gebündelte Datei aus dem Updatepaket verwenden. Abgelaufene Sitzungen, Tokens und Galeriezugänge werden bei jeder zugehörigen Anfrage geprüft und auch ohne laufende Bereinigung abgewiesen.
 
 [Cloudflare Pages: externe DNS und Subdomains](https://developers.cloudflare.com/pages/configuration/custom-domains/#add-a-custom-subdomain).
 

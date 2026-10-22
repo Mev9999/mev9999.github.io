@@ -6,6 +6,25 @@ import { applyLocalPortalUpgrades, initializeLocalPortalDatabase } from '../dev/
 
 const schema = await readFile(new URL('../backend/schema.sql', import.meta.url), 'utf8');
 
+test('retention upgrade preserves old school galleries and stays stable across repeated server starts', async () => {
+  const DB = new LocalD1();
+  try {
+    const previous = schema
+      .replace(/^  (?:retention_policy|retention_started_at|retention_purge_started_at|retention_purged_at|retention_checked_at|delivery_ready_at|delivery_delete_at)[^\n]*\n/gm, '')
+      .replace(/^CREATE INDEX IF NOT EXISTS (?:galleries_retention|images_retention_purge)[^\n]*\n/gm, '')
+      .replace(/CREATE TABLE IF NOT EXISTS (?:manual_delivery_retention|school_retention_uploads) \([\s\S]*?\n\);/g, '');
+    await DB.exec(previous);
+    await DB.prepare("INSERT INTO galleries(id,name,shooting_date,shooting_type,published,expires_at,created_at,updated_at) VALUES('old-school','Existing school','2026-01-01','school',1,123456789,1,1)").run();
+    await initializeLocalPortalDatabase(DB);
+    await initializeLocalPortalDatabase(DB);
+    const old = await DB.prepare("SELECT retention_policy,retention_started_at,published,expires_at FROM galleries WHERE id='old-school'").first();
+    assert.deepEqual(old, { retention_policy: null, retention_started_at: null, published: 1, expires_at: 123456789 });
+    assert.equal((await DB.prepare('PRAGMA table_info(images)').all()).results.filter(row => row.name === 'retention_purge_started_at').length, 1);
+    assert.equal((await DB.prepare('SELECT COUNT(*) AS n FROM manual_delivery_retention').first()).n, 0);
+    assert.equal((await DB.prepare('SELECT COUNT(*) AS n FROM school_retention_uploads').first()).n, 0);
+  } finally { DB.close(); }
+});
+
 test('local preview upgrade preserves existing users, galleries and passwords across repeated starts', async () => {
   const DB = new LocalD1();
   try {

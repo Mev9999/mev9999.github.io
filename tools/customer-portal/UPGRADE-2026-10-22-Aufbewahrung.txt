@@ -1,0 +1,39 @@
+LiZa-Portal – automatische Bildfristen für Krippe, Kindergarten und Schule
+
+Dieses Update ist für neue Galerien mit der Shootingart „Krippe, Kindergarten & Schule“ vorbereitet. Ein GitHub-Push allein aktiviert es im Cloudflare-Portal nicht. Die folgenden Schritte sind einmalig nötig. Danach läuft die Bereinigung ohne manuelles Löschen der einzelnen Galerien.
+
+1. DATENBANK ERWEITERN
+Cloudflare → D1 → liza-customer-portal → Console.
+Den Inhalt von 01-Datenbank-Update.sql einmal ausführen. Die Datei ergänzt nur die neuen Felder und Tabellen. Sie aktiviert keine Löschung für bestehende Galerien. Bereits ausgeführte frühere Updates nicht erneut einspielen.
+Bei einer Fehlermeldung zuerst die Meldung prüfen, bevor du weitergehst.
+
+2. PORTAL AKTUALISIEREN
+Cloudflare → Workers & Pages → dein bestehendes Kundenportal → neues Production-Deployment.
+02-Portal-Cloudflare.zip hochladen. Die bisherigen Bindings, Secrets und die Domain beibehalten.
+
+3. AUTOMATISCHE BEREINIGUNG AKTUALISIEREN
+Den bestehenden separaten Bereinigungs-Worker öffnen. Falls noch keiner eingerichtet ist, einen Worker ohne öffentliche Route anlegen, z. B. liza-portal-cleanup.
+Den gesamten Inhalt von 03-Bereinigungs-Worker.js in dessen Code-Editor übernehmen und deployen. Diese Datei enthält alle benötigten Bestandteile; die Quelldatei cleanup-worker.mjs alleine reicht zum Kopieren nicht aus.
+Unter Bindings müssen stehen:
+  DB       → D1-Datenbank liza-customer-portal
+  PHOTOS   → R2-Bucket liza-memories-gallerie, EU-Jurisdiktion
+Es muss derselbe Bildspeicher wie beim Kundenportal sein. Keine öffentliche Freigabe des Buckets einrichten. Der Bereinigungs-Worker benötigt keine E-Mail- oder Zahlungs-Secrets.
+Unter Settings → Triggers den bestehenden täglichen Cron durch einen stündlichen ersetzen: 17 * * * *.
+Der Dienst läuft damit jede Stunde zur Minute 17. Den alten täglichen Eintrag entfernen, damit nur dieser Zeitplan aktiv ist. Es genügt ein Bereinigungs-Worker; keinen zweiten zusätzlich laufen lassen.
+
+4. KONTROLLIEREN
+Nach dem nächsten geplanten Lauf in Cloudflare prüfen, dass die Ausführung erfolgreich war. Fehlende Datenbank-/Bildspeicher-Bindings und Speicherfehler werden als Fehler gemeldet. Ein Aufruf der Worker-Webadresse startet absichtlich keine Löschung.
+Eine neue Galerie mit „Krippe, Kindergarten & Schule“ zeigt in den Einstellungen die automatische Aufbewahrung. Bei einem Entwurf steht noch kein Startdatum. Nach der ersten Veröffentlichung stehen die konkreten Termine dort. Zum Testen keine bestehenden Kundengalerien löschen und deren Daten nicht rückdatieren.
+
+SO LAUFEN DIE FRISTEN
+• 90 Tage Galerie-Zugang ab der ersten Veröffentlichung. Entwürfe verbrauchen keine Galeriezeit. Erneutes Veröffentlichen startet die Frist nicht neu.
+• Ungekaufte Portalbilder und ihre Vorschauen werden innerhalb der folgenden 30 Tage automatisch aus dem privaten Bildspeicher entfernt.
+• Für bezahlte und fertig bereitgestellte Bilder gelten sechs Kalendermonate ab der ersten Downloadfreigabe. Manuell freigegebene Bilder werden entsprechend berücksichtigt. Bei einem von mehreren Familien gekauften Gruppenbild gilt die letzte noch laufende Aufbewahrungsfrist.
+• Eine bereits bezahlte, noch nicht fertiggestellte Bestellung wird nicht als „ungekauft“ gelöscht. Ihre sechs Monate beginnen erst mit der fertigen Bereitstellung.
+• Wird eine bezahlte Bestellung erst nach Ende der Galerie fertig, bleibt sie zum Schutz der noch offenen Auslieferung gespeichert. Die Auslieferung muss dann gesondert geklärt werden; die Automatik öffnet keine abgelaufene Galerie wieder.
+• Die sechs Monate betreffen die gespeicherte Auslieferungskopie. Sie verlängern nicht den 90-tägigen Galerie-Zugang. Eltern sollten ihre Downloads rechtzeitig auf dem eigenen Gerät sichern.
+• Rechnungen, Bestellbestätigungen und Zahlungsunterlagen bleiben erhalten. Bestehende Galerien und neue Galerien anderer Shootingarten bleiben beim bisherigen Ablauf.
+
+Die Automatik entfernt Dateien im Portal-Bildspeicher. Sie löscht keine Fotos auf deinem Computer, in Lightroom, OneDrive oder in getrennten Sicherungen. Bereits heruntergeladene Kopien bei Kunden bleiben ebenfalls bestehen.
+
+Bei einem ausgefallenen Bereinigungsdienst oder einem Speicherfehler wird der Vorgang beim nächsten Lauf erneut versucht. Deshalb den geplanten Lauf nach dem Einrichten prüfen und spätere Fehlermeldungen beachten. Vor der Cloudflare-Aktualisierung läuft diese neue Foto-Bereinigung noch nicht live.

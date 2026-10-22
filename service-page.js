@@ -821,7 +821,8 @@
       if(!activeImage){
         return;
       }
-      lbImg.setAttribute('src', activeImage.getAttribute('src'));
+      const mobileHero = activeImage.closest('picture')?.querySelector('source[data-mobile-hero]');
+      lbImg.setAttribute('src', mobileHero && window.matchMedia(mobileHero.media).matches ? mobileHero.dataset.fullSrc : activeImage.getAttribute('src'));
       lbImg.setAttribute('alt', activeImage.getAttribute('alt') || '');
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden', 'false');

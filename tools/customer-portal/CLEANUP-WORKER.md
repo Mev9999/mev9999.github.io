@@ -1,22 +1,29 @@
-# Tägliche Bereinigung bei Cloudflare Pages
+# Automatische Bereinigung bei Cloudflare Pages
 
-Das Portal auf Pages benötigt für die tägliche Bereinigung einen separaten Worker. `backend/cleanup-worker.mjs` ist ein vollständiges JavaScript-Modul zum Kopieren in den Dashboard-Editor. Es löscht ausschließlich abgelaufene Sessions, abgelaufene Setup-/Reset-Tokens Rate-Limits, deren Reset mehr als 24 Stunden zurückliegt, sowie Favoriten-/Download-Aktivitäten, die älter als 90 Tage sind. Die Prüfung der neuen Aktivitätstabelle ist optional; der Worker funktioniert auch vor dem Update vom 9. Oktober. Galerien, Bilder, Benutzer, Bestellungen und Freigaben bleiben erhalten, auch bei abgelaufenen Galerien.
+Das Pages-Portal benötigt einen separaten Worker für geplante Bereinigung. Der aktuelle Worker entfernt abgelaufene Sitzungen, Setup-/Reset-Tokens, alte Rate-Limits und Aktivitäten. Seit dem Update vom 22. Oktober 2026 bereinigt er außerdem die Portalbilder **neu angelegter Galerien mit der Aufbewahrungsregel `school-v1`**. Alte Galerien werden nicht rückwirkend einbezogen. Rechnungen und Vertrags-/Zahlungsunterlagen werden nicht aus dem Bildspeicher entfernt.
 
-## Einmalige Einrichtung im Dashboard
+Die vollständigen Schritte und die Bedeutung der Fristen stehen in [der Update-Anleitung](UPGRADE-2026-10-22-Aufbewahrung.txt).
 
-1. Unter **Workers & Pages** einen eigenständigen Worker erstellen, beispielsweise `liza-portal-cleanup`, im Workers-Free-Tarif. Den vollständigen Inhalt von `backend/cleanup-worker.mjs` im Code-Editor einsetzen und deployen.
-2. Unter **Bindings** eine **D1 database** mit Variablennamen **`DB`** hinzufügen. Dieselbe produktive D1-Datenbank auswählen, die das Pages-Portal als `DB` verwendet. Speichern und die Änderung deployen. Dieser Worker benötigt nur diese Bindung. [Cloudflare: D1-Bindung](https://developers.cloudflare.com/d1/get-started/#3-bind-your-worker-to-your-d1-database)
-3. Unter **Settings → Triggers → Cron Triggers** die benutzerdefinierte Cron-Zeichenfolge **`17 3 * * *`** hinzufügen. Sie läuft täglich um **03:17 UTC**; in Wien um 04:17 im Winter und 05:17 im Sommer. Änderungen können bis zu 15 Minuten benötigen. [Cloudflare: Cron Triggers](https://developers.cloudflare.com/workers/configuration/cron-triggers/)
-4. Nach dem ersten geplanten Lauf in der Worker-Ansicht die Cron-Ausführung bzw. Ereignisse prüfen. Fehlende `DB`-Bindung und Datenbankfehler lassen den geplanten Lauf fehlschlagen. Eine HTTP-Anfrage liefert immer `404` und startet keine Bereinigung.
+## Einrichtung
 
-Eine öffentliche Domain oder Portal-Route ist nicht erforderlich. Es werden keine Fotos, E-Mails oder Zahlungsanbieter angesprochen. Bei einer späteren Worker-Verwaltung mit Wrangler müssen die Cron-Einstellungen in dessen Konfigurationsdatei übernommen werden.
+1. Die Migration `backend/migrations/2026-10-22-school-retention.sql` einmal in der bestehenden D1-Datenbank ausführen und das aktualisierte Portal veröffentlichen.
+2. Den bestehenden Bereinigungs-Worker aktualisieren. Für den Dashboard-Editor die **gebündelte Datei `03-Bereinigungs-Worker.js` aus dem Updatepaket** verwenden. `backend/cleanup-worker.mjs` importiert Hilfsfunktionen und ist deshalb nicht mehr alleine kopierbar. Bei Wrangler das Projekt mit `backend/wrangler.cleanup.jsonc` verwenden und den dortigen Workernamen gegebenenfalls an den bereits eingerichteten Worker anpassen.
+3. Bindings `DB` für die bestehende Portal-Datenbank und **`PHOTOS` für denselben privaten R2-Bucket wie beim Portal** verbinden. Die R2-EU-Jurisdiktion beibehalten. Der Dienst braucht keine E-Mail-Secrets und keine öffentliche Route. [R2-Bindings](https://developers.cloudflare.com/r2/api/workers/workers-api-usage/)
+4. Den bisherigen täglichen Cron durch `17 * * * *` ersetzen. Damit läuft der Dienst jede Stunde zur Minute 17 und arbeitet fällige Dateien in begrenzten Chargen ab. Das Löschfenster beginnt nach Ende des 90-tägigen Galeriezugangs; 30 weitere Tage bilden die obere Frist, nicht den ersten Start der Bereinigung. Änderungen an Cron-Einstellungen können bis zu 15 Minuten benötigen. [Cloudflare Cron Triggers](https://developers.cloudflare.com/workers/configuration/cron-triggers/)
+5. Nach dem ersten geplanten Lauf das Ergebnis in Cloudflare prüfen. Ein HTTP-Aufruf bleibt `404` und startet keine Bereinigung. Fehlende Bindings und fehlgeschlagene Dateilöschungen müssen als Fehler sichtbar sein; der nächste geplante Lauf wiederholt offene Dateilöschungen.
+
+## Grenzen
+
+Der Beginn ist die erste Veröffentlichung, nicht die Erstellung des Entwurfs. Ein erneutes Veröffentlichen verschiebt ihn nicht. Nach 90 Tagen endet der Kundenzugang auch ohne Cron. Ungekaufte Portalbilder werden innerhalb der folgenden 30 Tage entfernt. Für bezahlte, fertig bereitgestellte Dateien und manuelle Freigaben gilt die jeweilige sechsmonatige Speicherfrist. Gemeinsame Bilddateien bleiben bis zum Ende der letzten noch laufenden Frist bestehen. Eine bezahlte, noch nicht fertige Bestellung wird nicht als ungekauft entfernt.
+
+Die Automatik betrifft den privaten Portal-Bildspeicher. Lokale Arbeitsdateien, Lightroom, OneDrive, getrennte Backups und heruntergeladene Kundendateien sind nicht Teil dieses Dienstes. Die sechs Monate verlängern den Galerie-Zugang nicht. Bei einem längeren Ausfall des Dienstes kann keine fristgerechte physische Löschung zugesichert werden; fehlgeschlagene Läufe müssen kontrolliert werden. Datenbank- und Rechnungsbelege bleiben erhalten.
 
 ## Lokal prüfen
 
-Node.js ab 22.13 mit `node:sqlite`, empfohlen Node 24. Im Repository:
+Node.js ab 22.13 mit `node:sqlite`, empfohlen Node 24:
 
 ```text
-node --test tools/customer-portal/backend/cleanup-worker.test.mjs
+node --test tools/customer-portal/tests/*.test.mjs tools/customer-portal/backend/cleanup-worker.test.mjs
 ```
 
-Die Tests verwenden die bestehende SQLite-D1-Implementierung und das produktive Schema mit ausschließlich erfundenen Daten. Sie prüfen die Ablaufgrenzen, erhalten alle übrigen Tabellen, verifizieren die Wirkungslosigkeit öffentlicher Aufrufe und prüfen sichtbare Fehler samt Transaktions-Rollback. Eine erfolgreiche lokale Prüfung bestätigt noch keinen erfolgten Cron-Lauf in Cloudflare.
+Die Tests verwenden erfundene Daten und lokalen Dateispeicher. Sie prüfen unter anderem Fristgrenzen, Schutz bestehender Galerien, bezahlte Bestellungen, Gruppenbilder, Fehler und Wiederholungen. Ein erfolgreicher lokaler Test bestätigt noch keinen ausgeführten Cloudflare-Cron.

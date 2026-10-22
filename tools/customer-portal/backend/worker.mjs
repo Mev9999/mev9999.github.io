@@ -1,3 +1,4 @@
+import { SCHOOL_RETENTION_POLICY, schoolRetentionJson, schoolRetentionSchemaReady, startSchoolRetentionStatement, recordSchoolDeliveryRetention, runSchoolRetention } from './school-retention.mjs';
 import { ORDER_CONSENT_VERSION, orderConsent, consentForVersion } from '../frontend/order-consent.js';
 /** LiZa Memories private photo portal. No customer data is stored in public assets. */
 import { renderPortalEmail, renderPortalDocument, renderWithdrawalEmail } from './mail-templates.mjs';
@@ -110,11 +111,12 @@ async function optionalSchema(env) {
   const packageColumns = new Set((await all(env, 'PRAGMA table_info(packages)')).map(row => row.name));
   const imageColumns = new Set((await all(env, 'PRAGMA table_info(images)')).map(row => row.name));
   const orderColumns = new Set((await all(env, 'PRAGMA table_info(orders)')).map(row => row.name));
-  const features = { finalDelivery: galleryColumns.has('require_final_delivery') && imageColumns.has('final_ready') && imageColumns.has('source_filename'), orderDeletion: orderColumns.has('deleted_at'), packageOrder: packageColumns.has('position'), galleryDeletion: ['deleted_at','media_deleted_at'].every(name => galleryColumns.has(name)), notifications: tables.has('download_notifications'), invoices: tables.has('gallery_invoices'), studio: tables.has('portal_settings') && tables.has('customer_activity'), imageControls: tables.has('image_download_blocks') && (await all(env, 'PRAGMA table_info(images)')).some(row => row.name === 'watermark_override'), requiredPackages: packageColumns.has('is_required') && orderColumns.has('pricing_json') };
+  const features = { schoolRetention: await schoolRetentionSchemaReady(env), finalDelivery: galleryColumns.has('require_final_delivery') && imageColumns.has('final_ready') && imageColumns.has('source_filename'), orderDeletion: orderColumns.has('deleted_at'), packageOrder: packageColumns.has('position'), galleryDeletion: ['deleted_at','media_deleted_at'].every(name => galleryColumns.has(name)), notifications: tables.has('download_notifications'), invoices: tables.has('gallery_invoices'), studio: tables.has('portal_settings') && tables.has('customer_activity'), imageControls: tables.has('image_download_blocks') && (await all(env, 'PRAGMA table_info(images)')).some(row => row.name === 'watermark_override'), requiredPackages: packageColumns.has('is_required') && orderColumns.has('pricing_json') };
   // A database upgraded while this Worker is warm must become usable without a restart.
-  if (features.notifications && features.invoices && features.studio && features.imageControls && features.requiredPackages && features.galleryDeletion && features.orderDeletion && features.packageOrder && features.finalDelivery) optionalSchemaCache.set(env.DB, features);
+  if (features.schoolRetention && features.notifications && features.invoices && features.studio && features.imageControls && features.requiredPackages && features.galleryDeletion && features.orderDeletion && features.packageOrder && features.finalDelivery) optionalSchemaCache.set(env.DB, features);
   return features;
 }
+async function liveImage(env, alias = '') { return (await optionalSchema(env)).schoolRetention ? `${alias ? alias + '.' : ''}retention_purge_started_at IS NULL` : '1=1'; }
 async function liveOrder(env, alias = '') { return (await optionalSchema(env)).orderDeletion ? `${alias ? alias + '.' : ''}deleted_at IS NULL` : '1=1'; }
 const testOrderEligible = order => order.payment_method === 'transfer' && !order.provider_reference && !order.checkout_url && !order.has_payment_events;
 function finalOrderCondition(features, alias = 'o') {
@@ -372,7 +374,7 @@ async function galleryAccess(env, galleryId, user) {
   return gallery;
 }
 function galleryJson(gallery) {
-  return { id: gallery.id, name: gallery.name, date: gallery.shooting_date, description: gallery.description, shootingType: gallery.shooting_type || 'other', pricingMode: gallery.pricing_mode || 'gallery', requireFinalDelivery: Boolean(gallery.require_final_delivery), ...effectiveGalleryDesign(gallery), gridLayout: gallery.grid_layout || 'masonry', coverPosition: gallery.cover_position ?? 50, coverHeight: gallery.cover_height || 'standard', gridDensity: gallery.grid_density || 'comfortable', gridGap: gallery.grid_gap ?? 16, showFilenames: Boolean(gallery.show_filenames ?? 0), watermarkMode: gallery.watermark_mode || 'inherit', typography: gallery.typography || 'serif', published: Boolean(gallery.published), expiresAt: gallery.expires_at ? new Date(gallery.expires_at).toISOString() : null, coverImageId: gallery.cover_image_id, coverUrl: gallery.cover_image_id ? `/api/images/${gallery.cover_image_id}?kind=preview` : null, imageCount: gallery.image_count ?? undefined };
+  return { retention: schoolRetentionJson(gallery), id: gallery.id, name: gallery.name, date: gallery.shooting_date, description: gallery.description, shootingType: gallery.shooting_type || 'other', pricingMode: gallery.pricing_mode || 'gallery', requireFinalDelivery: Boolean(gallery.require_final_delivery), ...effectiveGalleryDesign(gallery), gridLayout: gallery.grid_layout || 'masonry', coverPosition: gallery.cover_position ?? 50, coverHeight: gallery.cover_height || 'standard', gridDensity: gallery.grid_density || 'comfortable', gridGap: gallery.grid_gap ?? 16, showFilenames: Boolean(gallery.show_filenames ?? 0), watermarkMode: gallery.watermark_mode || 'inherit', typography: gallery.typography || 'serif', published: Boolean(gallery.published), expiresAt: gallery.expires_at ? new Date(gallery.expires_at).toISOString() : null, coverImageId: gallery.cover_image_id, coverUrl: gallery.cover_image_id ? `/api/images/${gallery.cover_image_id}?kind=preview` : null, imageCount: gallery.image_count ?? undefined };
 }
 function packageJson(pack) { return { id: pack.id, galleryId: pack.gallery_id, name: pack.name, imageCount: pack.image_count, priceCents: pack.price_cents, currency: pack.currency, active: Boolean(pack.active), position: pack.position ?? 0, isRequired: Boolean(pack.is_required) }; }
 async function requiredPackageState(env, galleryId, userId) {
@@ -386,7 +388,7 @@ function requiredBookingConflict(order) {
   fail(409, 'Für dein gebuchtes Paket besteht bereits eine Bestellung. Öffne sie unter „Deine Bestellungen“. Wenn du die Bildauswahl ändern möchtest, kontaktiere bitte Emina.', 'required_package_pending');
 }
 function imageJson(image, allowed = false) {
-  return { id: image.id, galleryId: image.gallery_id, finalReady: Boolean(image.final_ready), title: image.title, width: image.width, height: image.height, position: image.position, createdAt: new Date(image.created_at).toISOString(), previewUrl: `/api/images/${image.id}?kind=preview`, originalUrl: `/api/images/${image.id}?kind=original`, downloadAllowed: Boolean(allowed) };
+  return { id: image.id, galleryId: image.gallery_id, finalReady: Boolean(image.final_ready), title: image.title, width: image.width, height: image.height, position: image.position, createdAt: new Date(image.created_at).toISOString(), previewUrl: `/api/images/${image.id}?kind=preview`, originalUrl: `/api/images/${image.id}?kind=original`, downloadAllowed: Boolean(allowed && !image.retention_purge_started_at) };
 }
 function adminImageJson(image, protection) {
   protection = imageProtection(protection, image);
@@ -395,19 +397,19 @@ function adminImageJson(image, protection) {
 async function selectedImages(env, galleryId, selected) {
   ids(selected);
   if (!selected.length) return [];
-  const found = await all(env, 'SELECT i.* FROM images i JOIN json_each(?) selected ON selected.value=i.id WHERE i.gallery_id=?', JSON.stringify(selected), galleryId);
+  const found = await all(env, `SELECT i.* FROM images i JOIN json_each(?) selected ON selected.value=i.id WHERE i.gallery_id=? AND ${await liveImage(env,'i')}`, JSON.stringify(selected), galleryId);
   if (found.length !== selected.length) fail(400, 'Die Auswahl enthält Bilder außerhalb dieser Galerie.', 'invalid_selection');
   return found;
 }
 async function releasedIds(env, userId, galleryId) {
   const controls = (await optionalSchema(env)).imageControls;
   const guard = controls ? ' AND NOT EXISTS(SELECT 1 FROM image_download_blocks b WHERE b.image_id=i.id AND b.user_id=?)' : '';
-  const rows = await all(env, `SELECT i.id FROM images i WHERE i.gallery_id=? AND (EXISTS(SELECT 1 FROM manual_releases r WHERE r.image_id=i.id AND r.user_id=? AND ${await finalizedImage(env)}) OR EXISTS(SELECT 1 FROM order_images oi JOIN orders o ON o.id=oi.order_id WHERE oi.image_id=i.id AND o.user_id=? AND o.status='paid' AND o.receipt_sent_at IS NOT NULL AND ${await liveOrder(env, 'o')} AND ${await finalizedOrder(env)}))` + guard, galleryId, userId, userId, ...(controls ? [userId] : []));
+  const rows = await all(env, `SELECT i.id FROM images i WHERE i.gallery_id=? AND ${await liveImage(env,'i')} AND (EXISTS(SELECT 1 FROM manual_releases r WHERE r.image_id=i.id AND r.user_id=? AND ${await finalizedImage(env)}) OR EXISTS(SELECT 1 FROM order_images oi JOIN orders o ON o.id=oi.order_id WHERE oi.image_id=i.id AND o.user_id=? AND o.status='paid' AND o.receipt_sent_at IS NOT NULL AND ${await liveOrder(env, 'o')} AND ${await finalizedOrder(env)}))` + guard, galleryId, userId, userId, ...(controls ? [userId] : []));
   return new Set(rows.map(x => x.id));
 }
 async function imageReleased(env, userId, imageId) {
   if ((await optionalSchema(env)).imageControls && await first(env, 'SELECT 1 AS blocked FROM image_download_blocks WHERE user_id=? AND image_id=?', userId, imageId)) return false;
-  const result = await first(env, `SELECT 1 AS allowed FROM images i WHERE i.id=? AND (EXISTS(SELECT 1 FROM manual_releases r WHERE r.user_id=? AND r.image_id=i.id AND ${await finalizedImage(env)}) OR EXISTS(SELECT 1 FROM order_images oi JOIN orders o ON o.id=oi.order_id WHERE oi.image_id=i.id AND o.user_id=? AND o.status='paid' AND o.receipt_sent_at IS NOT NULL AND ${await liveOrder(env, 'o')} AND ${await finalizedOrder(env)}))`, imageId, userId, userId);
+  const result = await first(env, `SELECT 1 AS allowed FROM images i WHERE i.id=? AND ${await liveImage(env,'i')} AND (EXISTS(SELECT 1 FROM manual_releases r WHERE r.user_id=? AND r.image_id=i.id AND ${await finalizedImage(env)}) OR EXISTS(SELECT 1 FROM order_images oi JOIN orders o ON o.id=oi.order_id WHERE oi.image_id=i.id AND o.user_id=? AND o.status='paid' AND o.receipt_sent_at IS NOT NULL AND ${await liveOrder(env, 'o')} AND ${await finalizedOrder(env)}))`, imageId, userId, userId);
   return Boolean(result);
 }
 async function galleryDetail(env, galleryId, user, customerView = false) {
@@ -416,11 +418,11 @@ async function galleryDetail(env, galleryId, user, customerView = false) {
   const packageOrder = (await optionalSchema(env)).packageOrder ? 'position,image_count,price_cents,id' : 'image_count,price_cents,id';
   const required = await requiredPackageState(env, galleryId, user.role === 'admin' ? null : user.id);
   const [images, packages, favorites, released] = await Promise.all([
-    all(env, 'SELECT * FROM images WHERE gallery_id=? ORDER BY position,created_at,id', galleryId),
+    all(env, `SELECT * FROM images WHERE gallery_id=? AND ${await liveImage(env)} ORDER BY position,created_at,id`, galleryId),
     adminView
       ? all(env, `SELECT * FROM packages WHERE gallery_id=? ORDER BY ${packageOrder}`, galleryId)
       : all(env, `SELECT * FROM packages WHERE gallery_id=? AND active=1 AND (?=? OR image_count=0) ORDER BY ${packageOrder}`, galleryId, required.pack ? 'images' : gallery.pricing_mode, 'images'),
-    all(env, 'SELECT f.image_id FROM favorites f JOIN images i ON i.id=f.image_id WHERE f.user_id=? AND i.gallery_id=?', user.id, galleryId),
+    all(env, `SELECT f.image_id FROM favorites f JOIN images i ON i.id=f.image_id WHERE f.user_id=? AND i.gallery_id=? AND ${await liveImage(env,'i')}`, user.id, galleryId),
     releasedIds(env, user.id, galleryId),
   ]);
   const members = adminView ? await all(env, 'SELECT u.id,u.email,u.name FROM gallery_members m JOIN users u ON u.id=m.user_id WHERE m.gallery_id=? ORDER BY u.name', galleryId) : undefined;
@@ -437,13 +439,13 @@ async function galleryDetail(env, galleryId, user, customerView = false) {
     const grants = await all(env, `SELECT r.user_id,r.image_id FROM manual_releases r JOIN images i ON i.id=r.image_id WHERE i.gallery_id=? AND ${await finalizedImage(env)} UNION SELECT o.user_id,oi.image_id FROM orders o JOIN order_images oi ON oi.order_id=o.id WHERE o.gallery_id=? AND o.status='paid' AND o.receipt_sent_at IS NOT NULL AND ${await liveOrder(env, 'o')} AND ${await finalizedOrder(env)}`, galleryId, galleryId);
     const blocks = details.imageControlsReady ? await all(env, 'SELECT b.user_id,b.image_id FROM image_download_blocks b JOIN images i ON i.id=b.image_id WHERE i.gallery_id=?', galleryId) : [];
     const blocked = new Set(blocks.map(row => JSON.stringify([row.user_id,row.image_id])));
-    details.downloadAccess = { releases: grants.filter(row => !blocked.has(JSON.stringify([row.user_id,row.image_id]))).map(row => ({ userId: row.user_id, imageId: row.image_id })), blocks: blocks.map(row => ({ userId: row.user_id, imageId: row.image_id })) };
+    details.downloadAccess = { releases: grants.filter(row => images.some(image => image.id === row.image_id) && !blocked.has(JSON.stringify([row.user_id,row.image_id]))).map(row => ({ userId: row.user_id, imageId: row.image_id })), blocks: blocks.map(row => ({ userId: row.user_id, imageId: row.image_id })) };
     details.images = images.map(image => adminImageJson(image, details.previewSettings));
     const rows = await all(env, "SELECT u.id,u.name,u.email,f.image_id FROM gallery_members m JOIN users u ON u.id=m.user_id LEFT JOIN favorites f ON f.user_id=u.id AND f.image_id IN (SELECT id FROM images WHERE gallery_id=?) WHERE m.gallery_id=? AND u.role='customer' AND u.disabled=0 ORDER BY u.name,u.id,f.image_id", galleryId, galleryId);
     const customers = new Map(); const perImage = new Map(images.map(image => [image.id, { imageId: image.id, count: 0, customers: [] }]));
     for (const row of rows) {
       if (!customers.has(row.id)) customers.set(row.id, { id: row.id, name: row.name, email: row.email, imageIds: [], count: 0 });
-      if (row.image_id) {
+      if (row.image_id && perImage.has(row.image_id)) {
         const customer = customers.get(row.id); customer.imageIds.push(row.image_id); customer.count++;
         const image = perImage.get(row.image_id); image.customers.push({ id: row.id, name: row.name, email: row.email }); image.count++;
       }
@@ -465,13 +467,13 @@ async function galleryDetail(env, galleryId, user, customerView = false) {
 async function listGalleries(env, user) {
   const deletion = (await optionalSchema(env)).galleryDeletion;
   const rows = user.role === 'admin'
-    ? await all(env, `SELECT g.*,(SELECT COUNT(*) FROM images i WHERE i.gallery_id=g.id) AS image_count FROM galleries g ${deletion?'WHERE g.deleted_at IS NULL':''} ORDER BY g.created_at DESC`)
-    : await all(env, `SELECT g.*,(SELECT COUNT(*) FROM images i WHERE i.gallery_id=g.id) AS image_count FROM galleries g JOIN gallery_members m ON m.gallery_id=g.id WHERE m.user_id=? AND g.published=1 ${deletion?'AND g.deleted_at IS NULL':''} AND (g.expires_at IS NULL OR g.expires_at>?) ORDER BY g.shooting_date DESC`, user.id, Date.now());
+    ? await all(env, `SELECT g.*,(SELECT COUNT(*) FROM images i WHERE i.gallery_id=g.id AND ${await liveImage(env,'i')}) AS image_count FROM galleries g ${deletion?'WHERE g.deleted_at IS NULL':''} ORDER BY g.created_at DESC`)
+    : await all(env, `SELECT g.*,(SELECT COUNT(*) FROM images i WHERE i.gallery_id=g.id AND ${await liveImage(env,'i')}) AS image_count FROM galleries g JOIN gallery_members m ON m.gallery_id=g.id WHERE m.user_id=? AND g.published=1 ${deletion?'AND g.deleted_at IS NULL':''} AND (g.expires_at IS NULL OR g.expires_at>?) ORDER BY g.shooting_date DESC`, user.id, Date.now());
   return { galleries: rows.map(galleryJson), ...(user.role === 'admin' && deletion ? { pendingDeletions: await all(env, 'SELECT id,name FROM galleries WHERE deleted_at IS NOT NULL AND media_deleted_at IS NULL ORDER BY deleted_at') } : {}) };
 }
 async function serveImage(request, env, imageId, user) {
   let image = await first(env, 'SELECT * FROM images WHERE id=?', imageId);
-  if (!image) fail(404, 'Das Bild wurde nicht gefunden.');
+  if (!image || image.retention_purge_started_at) fail(404, 'Die Bilddatei ist nicht mehr verfügbar.', 'image_not_found');
   const gallery = await galleryAccess(env, image.gallery_id, user);
   const query = new URL(request.url).searchParams;
   const kind = query.get('kind') || 'preview';
@@ -480,7 +482,7 @@ async function serveImage(request, env, imageId, user) {
   // Permission can become ready while a final replaces a proof. Always fetch
   // its current committed keys after the grant check, never serve a stale proof.
   image = await first(env, 'SELECT * FROM images WHERE id=?', imageId);
-  if (!image) fail(404, 'Das Bild wurde nicht gefunden.');
+  if (!image || image.retention_purge_started_at) fail(404, 'Die Bilddatei ist nicht mehr verfügbar.', 'image_not_found');
   if (kind === 'original' && !released) fail(403, 'Dieses Bild ist noch nicht zum Download freigegeben.', 'download_not_released');
   let previewKey = image.preview_key; let previewType = image.preview_type;
   const adminProtectedPreview = user.role === 'admin' && query.get('watermark') === '1';
@@ -508,6 +510,9 @@ async function serveImage(request, env, imageId, user) {
   }
   return new Response(request.method === 'HEAD' ? null : object.body, { headers });
 }
+async function orderFilesExpired(env, orderId) {
+  return (await optionalSchema(env)).schoolRetention && Boolean(await first(env, 'SELECT 1 AS expired FROM order_images oi JOIN images i ON i.id=oi.image_id WHERE oi.order_id=? AND i.retention_purge_started_at IS NOT NULL LIMIT 1', orderId));
+}
 async function orderJson(env, order, adminView = false) {
   const features = await optionalSchema(env);
   const delivery = features.finalDelivery ? (Object.hasOwn(order, 'delivery_total') ? { require_final_delivery: order.delivery_required, total: order.delivery_total, ready: order.delivery_ready } : await first(env, 'SELECT g.require_final_delivery,(SELECT COUNT(*) FROM order_images WHERE order_id=?) AS total,(SELECT COUNT(*) FROM order_images oi JOIN images i ON i.id=oi.image_id WHERE oi.order_id=? AND i.final_ready=1) AS ready FROM galleries g WHERE g.id=?', order.id, order.id, order.gallery_id)) : null;
@@ -515,16 +520,17 @@ async function orderJson(env, order, adminView = false) {
   const imageIds = order.image_ids_json === undefined
     ? (await all(env, 'SELECT image_id FROM order_images WHERE order_id=? ORDER BY image_id', order.id)).map(x => x.image_id)
     : JSON.parse(order.image_ids_json);
-  return { id: order.id, requireFinalDelivery: Boolean(delivery?.require_final_delivery), deliveryPending: Boolean(delivery?.require_final_delivery && order.status === 'paid' && delivery.ready < delivery.total), finalReadyCount: delivery?.ready || 0, finalImageCount: delivery?.total || imageIds.length, reference: orderReference(order), invoiceUrl: orderInvoice(order) ? `/api/orders/${order.id}/invoice` : null, userId: order.user_id, galleryId: order.gallery_id, galleryName: order.gallery_name, customerName: order.customer_name, customerEmail: order.customer_email, packageId: order.package_id, packageName: order.package_name, packageQuantity: order.package_quantity || 1, imageIds, downloadBlockedCount: blockedCount, amountCents: order.amount_cents, currency: order.currency, status: order.status, paymentMethod: order.payment_method, paymentUrl: order.checkout_url || null, createdAt: new Date(order.created_at).toISOString(), paidAt: order.paid_at ? new Date(order.paid_at).toISOString() : null, receiptSent: Boolean(order.receipt_sent_at), receiptUrl: `/api/orders/${order.id}/receipt`, withdrawalRequested: Boolean(order.withdrawal_requested_at), ...(adminView ? { canDeleteTest: (await optionalSchema(env)).orderDeletion && testOrderEligible(order), notificationStatus: order.notification_status || await notificationStatus(env, { orderId: order.id }, order.status === 'paid' && !order.receipt_sent_at) } : {}) };
+  return { filesExpired: order.files_expired === undefined ? await orderFilesExpired(env, order.id) : Boolean(order.files_expired), id: order.id, requireFinalDelivery: Boolean(delivery?.require_final_delivery), deliveryPending: Boolean(delivery?.require_final_delivery && order.status === 'paid' && delivery.ready < delivery.total), finalReadyCount: delivery?.ready || 0, finalImageCount: delivery?.total || imageIds.length, reference: orderReference(order), invoiceUrl: orderInvoice(order) ? `/api/orders/${order.id}/invoice` : null, userId: order.user_id, galleryId: order.gallery_id, galleryName: order.gallery_name, customerName: order.customer_name, customerEmail: order.customer_email, packageId: order.package_id, packageName: order.package_name, packageQuantity: order.package_quantity || 1, imageIds, downloadBlockedCount: blockedCount, amountCents: order.amount_cents, currency: order.currency, status: order.status, paymentMethod: order.payment_method, paymentUrl: order.checkout_url || null, createdAt: new Date(order.created_at).toISOString(), paidAt: order.paid_at ? new Date(order.paid_at).toISOString() : null, receiptSent: Boolean(order.receipt_sent_at), receiptUrl: `/api/orders/${order.id}/receipt`, withdrawalRequested: Boolean(order.withdrawal_requested_at), ...(adminView ? { canDeleteTest: (await optionalSchema(env)).orderDeletion && testOrderEligible(order), notificationStatus: order.notification_status || await notificationStatus(env, { orderId: order.id }, order.status === 'paid' && !order.receipt_sent_at) } : {}) };
 }
 async function getOrder(env, orderId, includeDeleted = false) {
   return first(env, `SELECT o.*,g.name AS gallery_name,u.name AS customer_name,u.email AS customer_email,(SELECT COUNT(*) FROM payment_events WHERE order_id=o.id) AS has_payment_events FROM orders o JOIN galleries g ON g.id=o.gallery_id JOIN users u ON u.id=o.user_id WHERE o.id=? AND ${includeDeleted ? '1=1' : await liveOrder(env, 'o')}`, orderId);
 }
 async function listOrders(env, user, admin = false) {
   const features = await optionalSchema(env);
+  const retentionFields = features.schoolRetention ? ',EXISTS(SELECT 1 FROM order_images oi JOIN images i ON i.id=oi.image_id WHERE oi.order_id=o.id AND i.retention_purge_started_at IS NOT NULL) AS files_expired' : '';
   const deliveryFields = features.finalDelivery ? ',g.require_final_delivery AS delivery_required,(SELECT COUNT(*) FROM order_images WHERE order_id=o.id) AS delivery_total,(SELECT COUNT(*) FROM order_images oi JOIN images i ON i.id=oi.image_id WHERE oi.order_id=o.id AND i.final_ready=1) AS delivery_ready' : '';
-  const rows = admin ? await all(env, `SELECT o.*${deliveryFields},g.name AS gallery_name,u.name AS customer_name,u.email AS customer_email,(SELECT COUNT(*) FROM payment_events WHERE order_id=o.id) AS has_payment_events,(SELECT COALESCE(json_group_array(image_id),'[]') FROM order_images WHERE order_id=o.id) AS image_ids_json FROM orders o JOIN galleries g ON g.id=o.gallery_id JOIN users u ON u.id=o.user_id WHERE ${await liveOrder(env, 'o')} ORDER BY o.created_at DESC LIMIT 500`)
-    : await all(env, `SELECT o.*${deliveryFields},g.name AS gallery_name,(SELECT COALESCE(json_group_array(image_id),'[]') FROM order_images WHERE order_id=o.id) AS image_ids_json FROM orders o JOIN galleries g ON g.id=o.gallery_id WHERE o.user_id=? AND ${await liveOrder(env, 'o')} ORDER BY o.created_at DESC LIMIT 100`, user.id);
+  const rows = admin ? await all(env, `SELECT o.*${deliveryFields}${retentionFields},g.name AS gallery_name,u.name AS customer_name,u.email AS customer_email,(SELECT COUNT(*) FROM payment_events WHERE order_id=o.id) AS has_payment_events,(SELECT COALESCE(json_group_array(image_id),'[]') FROM order_images WHERE order_id=o.id) AS image_ids_json FROM orders o JOIN galleries g ON g.id=o.gallery_id JOIN users u ON u.id=o.user_id WHERE ${await liveOrder(env, 'o')} ORDER BY o.created_at DESC LIMIT 500`)
+    : await all(env, `SELECT o.*${deliveryFields}${retentionFields},g.name AS gallery_name,(SELECT COALESCE(json_group_array(image_id),'[]') FROM order_images WHERE order_id=o.id) AS image_ids_json FROM orders o JOIN galleries g ON g.id=o.gallery_id WHERE o.user_id=? AND ${await liveOrder(env, 'o')} ORDER BY o.created_at DESC LIMIT 100`, user.id);
   if (admin) {
     const ready = (await optionalSchema(env)).notifications;
     const notices = ready ? await all(env, 'SELECT order_id,COALESCE(SUM(CASE WHEN sent_at IS NOT NULL THEN 1 ELSE 0 END),0) AS sent_count,COALESCE(SUM(CASE WHEN sent_at IS NULL AND cancelled_at IS NULL THEN 1 ELSE 0 END),0) AS pending_count,MAX(CASE WHEN sent_at IS NULL AND cancelled_at IS NULL THEN error_code END) AS error_code FROM download_notifications WHERE order_id IS NOT NULL GROUP BY order_id') : [];
@@ -675,6 +681,7 @@ async function cleanupInvoiceObject(env, key) {
   if (!used) await env.PHOTOS.delete(key);
 }
 async function deliverNotifications(env, filter = {}, force = false) {
+  await recordSchoolDeliveryRetention(env, filter.galleryId || null);
   if (!(await optionalSchema(env)).notifications) return notificationStatus(env, filter);
   const [condition, value] = notificationFilter(filter); const now = Date.now();
   const rows = await all(env, `SELECT id FROM download_notifications WHERE ${condition} AND sent_at IS NULL AND cancelled_at IS NULL AND (lease_at IS NULL OR lease_at<?) ${force ? '' : 'AND next_attempt_at<=?'} ORDER BY created_at LIMIT 3`, ...(value === null ? [] : [value]), now - 5 * 60_000, ...(force ? [] : [now]));
@@ -689,7 +696,7 @@ async function deliverNotifications(env, filter = {}, force = false) {
       }
       const controls = (await optionalSchema(env)).imageControls;
       const blockGuard = controls ? ' AND NOT EXISTS(SELECT 1 FROM image_download_blocks b WHERE b.user_id=? AND b.image_id=i.id)' : '';
-      const granted = await all(env, `SELECT i.id,i.title FROM images i JOIN json_each(?) selected ON selected.value=i.id WHERE i.gallery_id=? AND (EXISTS(SELECT 1 FROM manual_releases r WHERE r.image_id=i.id AND r.user_id=? AND ${await finalizedImage(env)}) OR EXISTS(SELECT 1 FROM order_images oi JOIN orders o ON o.id=oi.order_id WHERE oi.image_id=i.id AND o.user_id=? AND o.status='paid' AND o.receipt_sent_at IS NOT NULL AND ${await liveOrder(env, 'o')} AND ${await finalizedOrder(env)}))` + blockGuard + ' ORDER BY i.position,i.id', claim.image_ids_json, claim.gallery_id, claim.user_id, claim.user_id, ...(controls ? [claim.user_id] : []));
+      const granted = await all(env, `SELECT i.id,i.title FROM images i JOIN json_each(?) selected ON selected.value=i.id WHERE i.gallery_id=? AND ${await liveImage(env,'i')} AND (EXISTS(SELECT 1 FROM manual_releases r WHERE r.image_id=i.id AND r.user_id=? AND ${await finalizedImage(env)}) OR EXISTS(SELECT 1 FROM order_images oi JOIN orders o ON o.id=oi.order_id WHERE oi.image_id=i.id AND o.user_id=? AND o.status='paid' AND o.receipt_sent_at IS NOT NULL AND ${await liveOrder(env, 'o')} AND ${await finalizedOrder(env)}))` + blockGuard + ' ORDER BY i.position,i.id', claim.image_ids_json, claim.gallery_id, claim.user_id, claim.user_id, ...(controls ? [claim.user_id] : []));
       if (!granted.length) {
         await run(env, 'UPDATE download_notifications SET cancelled_at=?,lease_at=NULL,error_code=NULL WHERE id=?', Date.now(), claim.id);
         continue;
@@ -716,6 +723,13 @@ async function completePaidNotifications(env, orderId, force = false) {
   try { await ensureReceipt(env, orderId); }
   catch (error) { receiptPending = true; }
   const features = await optionalSchema(env);
+  if (await orderFilesExpired(env, orderId)) {
+    // A real provider payment can arrive after expiry. Preserve its receipt but
+    // never announce downloads for files that have already been removed.
+    await run(env, "INSERT OR IGNORE INTO audit_events(id,action,target_id,created_at) VALUES(?,'payment_after_retention',?,?)", `payment-after-retention-${orderId}`, orderId, Date.now());
+    if (features.notifications) await run(env, 'UPDATE download_notifications SET cancelled_at=?,lease_at=NULL,error_code=? WHERE order_id=? AND sent_at IS NULL AND cancelled_at IS NULL', Date.now(), 'image_files_expired', orderId);
+    return { status: 'unavailable', pendingCount: 0, code: 'image_files_expired', receiptPending };
+  }
   if (!receiptPending && features.finalDelivery && features.notifications) {
     // Pages deployments need a manual recovery path as well as cron. A final
     // metadata write may have committed even when its response was lost.
@@ -791,7 +805,7 @@ async function createOrder(request, env, user) {
   let selected;
   if (data.all === true) {
     if (pack.image_count !== 0) fail(400, 'Die gesamte Galerie kann nur mit einem Gesamtpaket bestellt werden.', 'invalid_selection');
-    const rows = await all(env, 'SELECT id FROM images WHERE gallery_id=? ORDER BY id LIMIT 5001', gallery.id);
+    const rows = await all(env, `SELECT id FROM images WHERE gallery_id=? AND ${await liveImage(env)} ORDER BY id LIMIT 5001`, gallery.id);
     if (rows.length > 5000) fail(413, 'Bitte frage für diese sehr große Galerie direkt bei Emina an.', 'gallery_size_limit');
     selected = rows.map(x => x.id);
   } else {
@@ -799,7 +813,7 @@ async function createOrder(request, env, user) {
     await selectedImages(env, gallery.id, selected);
   }
   if (!selected.length) fail(400, 'Bitte wähle mindestens ein Bild aus.');
-  const available = await first(env, 'SELECT COUNT(*) AS count FROM images WHERE gallery_id=?', gallery.id);
+  const available = await first(env, `SELECT COUNT(*) AS count FROM images WHERE gallery_id=? AND ${await liveImage(env)}`, gallery.id);
   if (pack.image_count === 0 ? selected.length !== available.count : selected.length < pack.image_count) fail(400, `Bitte wähle ${pack.image_count ? 'mindestens ' : 'alle '}${pack.image_count || available.count} Bilder für dieses Paket aus.`, 'package_image_count');
   const offers = pack.image_count ? (await all(env, "SELECT * FROM packages WHERE gallery_id=? AND active=1 AND image_count>0 AND image_count<=? AND currency='EUR' ORDER BY image_count DESC,price_cents,id", gallery.id, selected.length)).filter(offer => !offer.is_required) : [];
   const pricing = pack.image_count ? combinePackages(pack, offers, selected.length) : { amountCents: pack.price_cents, components: [{ pack, quantity: 1 }] };
@@ -842,7 +856,7 @@ async function createOrder(request, env, user) {
       await env.DB.batch([
         // Both the pending selection and the readable reference are database-unique.
         // A rare reference collision retries, and concurrent repeat clicks reuse one order.
-        statement(env, `INSERT OR IGNORE INTO orders(id,user_id,gallery_id,package_id,package_name,package_quantity,amount_cents,currency,status,payment_method,terms_version,consent_at,created_at,pending_key${studio ? ',payment_reference' : ''}${features.requiredPackages ? ',pricing_json' : ''}) SELECT ?,?,?,?,?,?,?,?,?,?,?,?,?,?${studio ? ',?' : ''}${features.requiredPackages ? ',?' : ''}${features.galleryDeletion ? ' WHERE EXISTS(SELECT 1 FROM galleries WHERE id=? AND deleted_at IS NULL)' : ''}`, candidate.id, user.id, gallery.id, pack.id, packageName, quantity, amountCents, 'EUR', 'pending', method, `${TERMS_VERSION}:${data.consentLanguage}`, candidate.created_at, candidate.created_at, pendingKey, ...(studio ? [reference] : []), ...(features.requiredPackages ? [pricingSnapshot] : []), ...(features.galleryDeletion ? [gallery.id] : [])),
+        statement(env, `INSERT OR IGNORE INTO orders(id,user_id,gallery_id,package_id,package_name,package_quantity,amount_cents,currency,status,payment_method,terms_version,consent_at,created_at,pending_key${studio ? ',payment_reference' : ''}${features.requiredPackages ? ',pricing_json' : ''}) SELECT ?,?,?,?,?,?,?,?,?,?,?,?,?,?${studio ? ',?' : ''}${features.requiredPackages ? ',?' : ''}${features.galleryDeletion || features.schoolRetention ? ` WHERE EXISTS(SELECT 1 FROM galleries WHERE id=? ${features.galleryDeletion ? 'AND deleted_at IS NULL' : ''} ${features.schoolRetention ? 'AND (retention_policy IS NULL OR (published=1 AND expires_at>?))' : ''})` : ''}`, candidate.id, user.id, gallery.id, pack.id, packageName, quantity, amountCents, 'EUR', 'pending', method, `${TERMS_VERSION}:${data.consentLanguage}`, candidate.created_at, candidate.created_at, pendingKey, ...(studio ? [reference] : []), ...(features.requiredPackages ? [pricingSnapshot] : []), ...(features.galleryDeletion || features.schoolRetention ? [gallery.id] : []), ...(features.schoolRetention ? [Date.now()] : [])),
         statement(env, 'INSERT OR IGNORE INTO order_images(order_id,image_id) SELECT ?,selected.value FROM json_each(?) selected WHERE EXISTS(SELECT 1 FROM orders WHERE id=?)', candidate.id, JSON.stringify(selected), candidate.id),
         statement(env, 'INSERT INTO audit_events(id,user_id,action,target_id,created_at) SELECT ?,?,?,?,? WHERE EXISTS(SELECT 1 FROM orders WHERE id=?)', id(), user.id, 'order_created', candidate.id, candidate.created_at, candidate.id),
       ]);
@@ -1012,6 +1026,7 @@ async function sniffImage(file) {
   fail(415, 'Bitte lade JPEG-, PNG- oder WebP-Fotos hoch. SVG und andere ausführbare Dateien sind nicht erlaubt.', 'invalid_image_type');
 }
 async function uploadImage(request, env, user, gallery) {
+  if (gallery.retention_policy && gallery.expires_at && gallery.expires_at <= Date.now()) fail(409, 'Die Galeriezeit ist abgelaufen. Neue Auswahlbilder können nicht mehr hinzugefügt werden.', 'gallery_expired');
   const length = Number(request.headers.get('content-length') || 0);
   if (!length && !local(env)) fail(411, 'Die Dateigröße fehlt.');
   if (length > 39 * 1024 * 1024) fail(413, 'Bitte lade Fotos unter 30 MB pro Original hoch.');
@@ -1031,12 +1046,13 @@ async function uploadImage(request, env, user, gallery) {
   const imageId = id(); const base = `galleries/${gallery.id}/${imageId}`;
   const previewKey = `${base}/preview`; const originalKey = `${base}/original`;
   const protectedKey = protection.file ? `${base}/protected-preview` : null;
+  if (gallery.retention_policy === SCHOOL_RETENTION_POLICY) await run(env, 'INSERT INTO school_retention_uploads(image_id,gallery_id,created_at) VALUES(?,?,?)', imageId, gallery.id, Date.now());
   try {
     await env.PHOTOS.put(previewKey, preview.stream(), { httpMetadata: { contentType: previewType } });
     await env.PHOTOS.put(originalKey, original.stream(), { httpMetadata: { contentType: originalType } });
     if (protectedKey) await env.PHOTOS.put(protectedKey, protection.file.stream(), { httpMetadata: { contentType: protection.type } });
     const features = await optionalSchema(env);
-    const deletionGuard = features.galleryDeletion ? ' AND g.deleted_at IS NULL' : '';
+    const deletionGuard = (features.galleryDeletion ? ' AND g.deleted_at IS NULL' : '') + (features.schoolRetention ? ` AND (g.retention_policy IS NULL OR g.retention_started_at IS NULL OR g.expires_at>${Date.now()})` : '');
     await env.DB.batch([
       statement(env, `INSERT INTO images(id,gallery_id,title,preview_key,original_key,preview_type,original_type,width,height,position,created_at${features.finalDelivery ? ',source_filename,final_ready' : ''}) SELECT ?,?,?,?,?,?,?,?,?,(SELECT COALESCE(MAX(position),-1)+1 FROM images WHERE gallery_id=g.id),?${features.finalDelivery ? ',?,?' : ''} FROM galleries g WHERE g.id=?${deletionGuard}`, imageId, gallery.id, title, previewKey, originalKey, previewType, originalType, width, height, Date.now(), ...(features.finalDelivery ? [String(original.name || title).slice(0, 255), Number(finalReady === 'true')] : []), gallery.id),
       ...(protection.studio ? [statement(env, 'UPDATE images SET protected_preview_key=?,protected_preview_type=?,watermark_fingerprint=? WHERE id=?', protectedKey, protection.type, protectedKey ? protection.fingerprint : null, imageId)] : []),
@@ -1083,7 +1099,7 @@ async function regeneratePreviews(request, env, gallery, image, user) {
   try {
     await env.PHOTOS.put(cleanKey, clean.stream(), { httpMetadata: { contentType: cleanType } });
     if (protectedKey) await env.PHOTOS.put(protectedKey, protection.file.stream(), { httpMetadata: { contentType: protection.type } });
-    const changed = await first(env, `UPDATE images SET preview_key=?,preview_type=?,protected_preview_key=?,protected_preview_type=?,watermark_fingerprint=? WHERE id=? AND preview_key=? AND original_key=? ${(await optionalSchema(env)).galleryDeletion?'AND EXISTS(SELECT 1 FROM galleries g WHERE g.id=images.gallery_id AND g.deleted_at IS NULL)':''} RETURNING *`, cleanKey, cleanType, protectedKey, protection.type, protectedKey ? protection.fingerprint : null, image.id, image.preview_key, image.original_key);
+    const changed = await first(env, `UPDATE images SET preview_key=?,preview_type=?,protected_preview_key=?,protected_preview_type=?,watermark_fingerprint=? WHERE id=? AND preview_key=? AND original_key=? AND ${await liveImage(env)} ${(await optionalSchema(env)).galleryDeletion?'AND EXISTS(SELECT 1 FROM galleries g WHERE g.id=images.gallery_id AND g.deleted_at IS NULL)':''} RETURNING *`, cleanKey, cleanType, protectedKey, protection.type, protectedKey ? protection.fingerprint : null, image.id, image.preview_key, image.original_key);
     if (!changed) fail(409, 'Das Bild wurde währenddessen geändert. Bitte lade es neu.', 'image_changed');
     await audit(env, user.id, 'image_previews_updated', image.id);
     await cleanupImageKeys(env, image.id, [image.preview_key, image.protected_preview_key]);
@@ -1117,7 +1133,7 @@ async function finalizeExistingImages(request, env, user, gallery) {
   const selected = ids(data.imageIds); if (!selected.length) fail(400, 'Bitte wähle mindestens ein fertig bearbeitetes Bild.', 'invalid_selection');
   await selectedImages(env, gallery.id, selected);
   const encoded = JSON.stringify(selected);
-  const guard = `gallery_id=? AND id IN (SELECT value FROM json_each(?)) AND (SELECT COUNT(*) FROM images checked WHERE checked.gallery_id=? AND checked.id IN (SELECT value FROM json_each(?)))=json_array_length(?)${features.galleryDeletion ? ' AND EXISTS(SELECT 1 FROM galleries g WHERE g.id=images.gallery_id AND g.deleted_at IS NULL)' : ''}`;
+  const guard = `${await liveImage(env)} AND gallery_id=? AND id IN (SELECT value FROM json_each(?)) AND (SELECT COUNT(*) FROM images checked WHERE checked.gallery_id=? AND checked.id IN (SELECT value FROM json_each(?)))=json_array_length(?)${features.galleryDeletion ? ' AND EXISTS(SELECT 1 FROM galleries g WHERE g.id=images.gallery_id AND g.deleted_at IS NULL)' : ''}`;
   const params = [gallery.id, encoded, gallery.id, encoded, encoded];
   const result = await env.DB.batch([
     statement(env, `INSERT INTO audit_events(id,user_id,action,target_id,created_at) SELECT ?,?,'images_marked_final',?,? WHERE EXISTS(SELECT 1 FROM images WHERE ${guard} AND final_ready<>1)`, id(), user.id, gallery.id, Date.now(), ...params),
@@ -1152,7 +1168,7 @@ async function uploadFinalImage(request, env, user, gallery, image) {
     // ID, source filename, title, customer selections and immutable order
     // snapshots are preserved. Failed/concurrent replacement keeps prior files.
     const result = await env.DB.batch([
-      statement(env, `UPDATE images SET original_key=?,original_type=?,preview_key=?,preview_type=?,protected_preview_key=?,protected_preview_type=?,watermark_fingerprint=?,width=?,height=?,final_ready=1 WHERE id=? AND gallery_id=? AND original_key=? AND preview_key=?${features.galleryDeletion ? ' AND EXISTS(SELECT 1 FROM galleries g WHERE g.id=images.gallery_id AND g.deleted_at IS NULL)' : ''} RETURNING *`, originalKey, originalType, previewKey, previewType, protectedKey, protection.type, protectedKey ? protection.fingerprint : null, width, height, image.id, gallery.id, image.original_key, image.preview_key),
+      statement(env, `UPDATE images SET original_key=?,original_type=?,preview_key=?,preview_type=?,protected_preview_key=?,protected_preview_type=?,watermark_fingerprint=?,width=?,height=?,final_ready=1 WHERE id=? AND gallery_id=? AND original_key=? AND preview_key=? AND ${await liveImage(env)}${features.galleryDeletion ? ' AND EXISTS(SELECT 1 FROM galleries g WHERE g.id=images.gallery_id AND g.deleted_at IS NULL)' : ''} RETURNING *`, originalKey, originalType, previewKey, previewType, protectedKey, protection.type, protectedKey ? protection.fingerprint : null, width, height, image.id, gallery.id, image.original_key, image.preview_key),
       statement(env, "INSERT INTO audit_events(id,user_id,action,target_id,created_at) SELECT ?,?,'image_final_uploaded',?,? WHERE EXISTS(SELECT 1 FROM images WHERE id=? AND original_key=?)", id(), user.id, image.id, Date.now(), image.id, originalKey),
     ]);
     changed = result[0].results?.[0];
@@ -1224,7 +1240,7 @@ async function admin(request, env, path, user) {
     return json({ ok: true });
   }
   if (path === '/admin/images' && request.method === 'GET') {
-    const rows = await all(env, `SELECT i.*,g.name AS gallery_name,g.shooting_date,g.watermark_mode,(SELECT COUNT(*) FROM favorites f JOIN gallery_members m ON m.user_id=f.user_id AND m.gallery_id=i.gallery_id JOIN users u ON u.id=f.user_id WHERE f.image_id=i.id AND u.disabled=0 AND u.role='customer') AS favorite_count FROM images i JOIN galleries g ON g.id=i.gallery_id ${(await optionalSchema(env)).galleryDeletion?'WHERE g.deleted_at IS NULL':''} ORDER BY i.created_at DESC,i.id LIMIT 5001`);
+    const rows = await all(env, `SELECT i.*,g.name AS gallery_name,g.shooting_date,g.watermark_mode,(SELECT COUNT(*) FROM favorites f JOIN gallery_members m ON m.user_id=f.user_id AND m.gallery_id=i.gallery_id JOIN users u ON u.id=f.user_id WHERE f.image_id=i.id AND u.disabled=0 AND u.role='customer') AS favorite_count FROM images i JOIN galleries g ON g.id=i.gallery_id WHERE ${await liveImage(env,'i')} ${(await optionalSchema(env)).galleryDeletion?'AND g.deleted_at IS NULL':''} ORDER BY i.created_at DESC,i.id LIMIT 5001`);
     const mark = await previewSettings(env, {});
     return json({ images: rows.slice(0, 5000).map(row => ({ ...adminImageJson(row, { ...mark, enabled: watermarkEnabled(mark, row) }), galleryName: row.gallery_name, date: row.shooting_date, favoriteCount: row.favorite_count })), truncated: rows.length > 5000 });
   }
@@ -1237,7 +1253,7 @@ async function admin(request, env, path, user) {
   if (photoRoute && (photoRoute[3] || ['PATCH', 'DELETE'].includes(request.method))) {
     const gallery = await galleryAccess(env, photoRoute[1], user);
     const image = await first(env, 'SELECT * FROM images WHERE id=? AND gallery_id=?', photoRoute[2], gallery.id);
-    if (!image) fail(404, 'Das Bild wurde nicht gefunden.');
+    if (!image || image.retention_purge_started_at) fail(404, 'Die Bilddatei ist nicht mehr verfügbar.', 'image_not_found');
     if (photoRoute[3] === 'final' && request.method === 'POST') return uploadFinalImage(request, env, user, gallery, image);
     if (photoRoute[3] === 'previews' && request.method === 'POST') return regeneratePreviews(request, env, gallery, image, user);
     if (!photoRoute[3] && request.method === 'PATCH') {
@@ -1263,6 +1279,7 @@ async function admin(request, env, path, user) {
       try {
         await env.DB.batch([
           statement(env, 'DELETE FROM manual_releases WHERE image_id=?', image.id),
+          ...((await optionalSchema(env)).schoolRetention ? [statement(env, 'DELETE FROM manual_delivery_retention WHERE image_id=?', image.id)] : []),
           statement(env, 'DELETE FROM images WHERE id=?', image.id),
           statement(env, 'UPDATE galleries SET cover_image_id=NULL,updated_at=? WHERE id=? AND cover_image_id=?', Date.now(), gallery.id, image.id),
           statement(env, 'INSERT INTO audit_events(id,user_id,action,target_id,created_at) VALUES(?,?,?,?,?)', id(), user.id, 'image_deleted', image.id, Date.now()),
@@ -1345,6 +1362,8 @@ async function admin(request, env, path, user) {
   if (path === '/admin/galleries' && request.method === 'POST') {
     const data = await body(request); const galleryId = id(); const now = Date.now();
     const type = enumField(data.shootingType, SHOOTING_TYPES, 'other');
+    const retention = type === 'school';
+    if (retention && !(await optionalSchema(env)).schoolRetention) fail(503, 'Bitte spiele zuerst das Datenbank-Update für die automatische Aufbewahrung ein.', 'migration_required');
     const mode = enumField(data.pricingMode, ['images', 'gallery'], type === 'school' ? 'images' : 'gallery');
     const theme = legacyTheme(galleryDesign(data).theme);
     const grid = enumField(data.gridLayout, ['masonry', 'grid'], 'masonry');
@@ -1353,6 +1372,7 @@ async function admin(request, env, path, user) {
     await env.DB.batch([
       statement(env, 'INSERT INTO galleries(id,name,shooting_date,description,published,expires_at,created_at,updated_at,shooting_type,pricing_mode,theme,grid_layout,cover_position) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)', galleryId, textField(data.name), shootingDate(data.date), textField(data.description, 2000, false), data.published === true ? 1 : 0, data.expiresAt ? expiry(data.expiresAt) : null, now, now, type, mode, theme, grid, position),
       ...(appearance ? [appearance] : []),
+      ...(retention ? [statement(env, 'UPDATE galleries SET retention_policy=? WHERE id=?', SCHOOL_RETENTION_POLICY, galleryId), startSchoolRetentionStatement(env, galleryId, now)] : []),
       ...(type === 'school' && mode === 'images' ? [
         statement(env, 'INSERT INTO packages(id,gallery_id,name,image_count,price_cents,currency) VALUES(?,?,?,?,?,?)', id(), galleryId, 'Ein digitales Foto', 1, 1000, 'EUR'),
         statement(env, 'INSERT INTO packages(id,gallery_id,name,image_count,price_cents,currency) VALUES(?,?,?,?,?,?)', id(), galleryId, 'Drei digitale Fotos', 3, 2500, 'EUR'),
@@ -1369,7 +1389,7 @@ async function admin(request, env, path, user) {
     await galleryAccess(env, order.gallery_id, user);
     const features = await optionalSchema(env);
     const activeOrder = features.orderDeletion ? ' AND deleted_at IS NULL' : '';
-    const activeGallery = features.galleryDeletion ? ' AND EXISTS(SELECT 1 FROM galleries g WHERE g.id=orders.gallery_id AND g.deleted_at IS NULL)' : '';
+    const activeGallery = (features.galleryDeletion ? ' AND EXISTS(SELECT 1 FROM galleries g WHERE g.id=orders.gallery_id AND g.deleted_at IS NULL)' : '') + (features.schoolRetention ? ' AND NOT EXISTS(SELECT 1 FROM order_images oi JOIN images i ON i.id=oi.image_id WHERE oi.order_id=orders.id AND i.retention_purge_started_at IS NOT NULL)' : '');
     await env.DB.batch([
       ...(features.imageControls ? [clearBlocksForNewPayment(env, order, features)] : []),
       ...(features.notifications ? [queueGrantNotification(env, features, { galleryId: order.gallery_id, userId: order.user_id, orderId: order.id })] : []),
@@ -1379,7 +1399,7 @@ async function admin(request, env, path, user) {
     // A deletion may have committed after the initial access check. Do not mark
     // a pending transfer as paid or send a release notice for a deleted gallery.
     await galleryAccess(env, order.gallery_id, user);
-    if ((await getOrder(env, order.id))?.status !== 'paid') fail(409, 'Diese Bestellung ist nicht mehr offen.', 'order_changed');
+    if ((await getOrder(env, order.id))?.status !== 'paid') fail(409, 'Diese Bestellung kann nicht mehr freigegeben werden. Die Bilddateien sind möglicherweise bereits nach Ablauf der Speicherfrist entfernt worden.', 'order_changed');
     const notification = await completePaidNotifications(env, order.id);
     return json({ order: await orderJson(env, await getOrder(env, order.id), true), notification });
   }
@@ -1387,7 +1407,7 @@ async function admin(request, env, path, user) {
   if (ordering && request.method === 'POST') {
     const gallery = await galleryAccess(env, ordering[1], user);
     const data = await body(request, 450_000); const selected = ids(data.imageIds, MAX_GALLERY_IMAGES);
-    const existing = await all(env, 'SELECT id FROM images WHERE gallery_id=?', gallery.id);
+    const existing = await all(env, `SELECT id FROM images WHERE gallery_id=? AND ${await liveImage(env)}`, gallery.id);
     if (existing.length !== selected.length || existing.some(image => !selected.includes(image.id))) fail(400, 'Bitte übermittle alle Bilder dieser Galerie genau einmal.', 'invalid_image_order');
     if (selected.length) {
       const results = await env.DB.batch([
@@ -1443,6 +1463,8 @@ async function admin(request, env, path, user) {
     const description = data.description === undefined ? gallery.description : textField(data.description, 2000, false);
     const published = data.published === undefined ? gallery.published : data.published === true ? 1 : 0;
     const expiresAt = data.expiresAt === undefined ? gallery.expires_at : expiry(data.expiresAt);
+    if (gallery.retention_policy && data.expiresAt !== undefined && expiresAt !== gallery.expires_at) fail(400, 'Diese Galerie hat feste automatische Speicherfristen. Das Ablaufdatum kann nicht geändert werden.', 'retention_fixed');
+    if (gallery.retention_policy && published && gallery.expires_at && gallery.expires_at <= Date.now()) fail(409, 'Die Galeriezeit ist abgelaufen und kann nicht neu gestartet werden.', 'gallery_expired');
     const type = enumField(data.shootingType, SHOOTING_TYPES, gallery.shooting_type || 'other');
     const mode = enumField(data.pricingMode, ['images', 'gallery'], gallery.pricing_mode || 'gallery');
     const theme = legacyTheme(galleryDesign(data, gallery).theme);
@@ -1457,7 +1479,9 @@ async function admin(request, env, path, user) {
     await env.DB.batch([
       statement(env, 'UPDATE galleries SET name=?,shooting_date=?,description=?,published=?,expires_at=?,cover_image_id=?,updated_at=?,shooting_type=?,pricing_mode=?,theme=?,grid_layout=?,cover_position=? WHERE id=?', name, date, description, published, expiresAt, coverId, Date.now(), type, mode, theme, grid, position, gallery.id),
       ...(appearance ? [appearance] : []),
+      ...(gallery.retention_policy ? [startSchoolRetentionStatement(env, gallery.id, Date.now())] : []),
     ]);
+    await recordSchoolDeliveryRetention(env, gallery.id);
     await audit(env, user.id, 'gallery_updated', gallery.id);
     return json({ gallery: galleryJson(await galleryAccess(env, gallery.id, user)) });
   }
@@ -1535,14 +1559,16 @@ async function admin(request, env, path, user) {
     return json({ ok: true });
   }
   if (action === 'release' && request.method === 'POST') {
+    if (gallery.retention_policy && gallery.expires_at && gallery.expires_at <= Date.now()) fail(409, 'Die Galeriezeit ist abgelaufen. Neue Downloadfreigaben sind nicht mehr möglich.', 'gallery_expired');
     const data = await body(request); const memberId = textField(data.userId, 80);
     if (!await first(env, "SELECT 1 AS ok FROM gallery_members m JOIN users u ON u.id=m.user_id WHERE m.gallery_id=? AND m.user_id=? AND u.role='customer' AND u.disabled=0", gallery.id, memberId)) fail(400, 'Der Kunde gehört nicht zu dieser Galerie.');
     const features = await optionalSchema(env);
+    const retentionGrantGuard = features.schoolRetention ? ` AND EXISTS(SELECT 1 FROM galleries rg WHERE rg.id=i.gallery_id AND (rg.retention_policy IS NULL OR rg.expires_at IS NULL OR rg.expires_at>${Date.now()}))` : '';
     if (data.all === true) {
       await env.DB.batch([
         ...(features.notifications ? [queueGrantNotification(env, features, { galleryId: gallery.id, userId: memberId })] : []),
         ...(features.imageControls ? [statement(env, 'DELETE FROM image_download_blocks WHERE user_id=? AND image_id IN (SELECT id FROM images WHERE gallery_id=?)', memberId, gallery.id)] : []),
-        statement(env, 'INSERT OR IGNORE INTO manual_releases(user_id,image_id,released_at,released_by) SELECT ?,i.id,?,? FROM images i WHERE i.gallery_id=?', memberId, Date.now(), user.id, gallery.id),
+        statement(env, `INSERT OR IGNORE INTO manual_releases(user_id,image_id,released_at,released_by) SELECT ?,i.id,?,? FROM images i WHERE i.gallery_id=? AND ${await liveImage(env,'i')}${retentionGrantGuard}`, memberId, Date.now(), user.id, gallery.id),
       ]);
     } else {
       const selected = ids(data.imageIds);
@@ -1550,7 +1576,7 @@ async function admin(request, env, path, user) {
       if (selected.length) await env.DB.batch([
         ...(features.notifications ? [queueGrantNotification(env, features, { galleryId: gallery.id, userId: memberId, imageIds: selected })] : []),
         ...(features.imageControls ? [statement(env, 'DELETE FROM image_download_blocks WHERE user_id=? AND image_id IN (SELECT value FROM json_each(?))', memberId, JSON.stringify(selected))] : []),
-        statement(env, 'INSERT OR IGNORE INTO manual_releases(user_id,image_id,released_at,released_by) SELECT ?,selected.value,?,? FROM json_each(?) selected', memberId, Date.now(), user.id, JSON.stringify(selected)),
+        statement(env, `INSERT OR IGNORE INTO manual_releases(user_id,image_id,released_at,released_by) SELECT ?,selected.value,?,? FROM json_each(?) selected JOIN images i ON i.id=selected.value WHERE ${await liveImage(env,'i')}${retentionGrantGuard}`, memberId, Date.now(), user.id, JSON.stringify(selected)),
       ]);
     }
     await audit(env, user.id, 'downloads_released', gallery.id); return json({ ok: true, notification: await deliverNotifications(env, { galleryId: gallery.id }) });
@@ -1704,5 +1730,6 @@ export default {
       }
       await deliverNotifications(env);
     }
+    await runSchoolRetention(env, now);
   },
 };

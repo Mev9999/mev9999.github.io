@@ -3,7 +3,8 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-function bundleWorker(backend = path.join(__dirname, 'backend')) {
+function bundleWorker(backend = path.join(__dirname, 'backend'), entrypoint = 'worker.mjs') {
+  if (!['worker.mjs', 'cleanup-worker.mjs'].includes(entrypoint)) throw new Error('Unknown worker entry point.');
   const root = path.resolve(backend);
   const included = new Set(), pending = new Set(), chunks = [];
   const importPattern = /^[ \t]*import\s*\{([^}]+)\}\s*from\s*['"](\.\/[A-Za-z0-9_-]+\.mjs|\.\.\/frontend\/order-consent\.js)['"];?[ \t]*\r?$/gm;
@@ -30,8 +31,12 @@ function bundleWorker(backend = path.join(__dirname, 'backend')) {
     chunks.push('// Source: backend/' + filename + '\n' + source);
     pending.delete(filename); included.add(filename);
   }
-  visit('worker.mjs', true);
+  visit(entrypoint, true);
   return '// Generated from dependency-free backend modules.\n' + chunks.join('\n');
 }
 
-module.exports = { bundleWorker };
+function bundleCleanupWorker(backend = path.join(__dirname, 'backend')) {
+  return bundleWorker(backend, 'cleanup-worker.mjs');
+}
+
+module.exports = { bundleWorker, bundleCleanupWorker };

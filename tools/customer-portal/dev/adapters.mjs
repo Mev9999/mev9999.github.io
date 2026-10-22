@@ -97,6 +97,29 @@ export class LocalR2 {
     return { ...metadata, etag, httpEtag: `"${etag}"`, uploaded: new Date(metadata.uploaded) };
   }
   async head(key) { try { return { ...(await this.metadata(key)), key, size: (await fs.stat(this.filename(key))).size }; } catch (error) { if (error.code === 'ENOENT') return null; throw error; } }
+  async list({ prefix = '', cursor, limit = 1000 } = {}) {
+    if (typeof prefix !== 'string' || !Number.isInteger(limit) || limit < 1 || limit > 1000) throw new Error('Invalid R2 list options');
+    const after = cursor ? Buffer.from(cursor, 'base64url').toString('utf8') : '';
+    const keys = [];
+    const visit = async (directory, parent = '') => {
+      let entries;
+      try { entries = await fs.readdir(directory, { withFileTypes: true }); }
+      catch (error) { if (error.code === 'ENOENT') return; throw error; }
+      for (const entry of entries) {
+        // Never follow links outside the local fixture bucket.
+        if (entry.isSymbolicLink()) continue;
+        const key = parent + entry.name;
+        if (entry.isDirectory()) await visit(path.join(directory, entry.name), key + '/');
+        else if (entry.isFile() && !entry.name.endsWith('.r2meta') && key.startsWith(prefix) && key > after) keys.push(key);
+      }
+    };
+    await visit(this.directory);
+    keys.sort();
+    const selected = keys.slice(0, limit);
+    const objects = (await Promise.all(selected.map(key => this.head(key)))).filter(Boolean);
+    const truncated = keys.length > limit;
+    return { objects, truncated, delimitedPrefixes: [], ...(truncated ? { cursor: Buffer.from(selected.at(-1)).toString('base64url') } : {}) };
+  }
   async delete(keys) { for (const key of Array.isArray(keys) ? keys : [keys]) { const filename = this.filename(key); await fs.rm(filename, { force: true }); await fs.rm(filename + '.r2meta', { force: true }); } }
 }
 

@@ -483,7 +483,8 @@ function applyResponsiveImages(document, variantMap, fileName) {
       document.head.append(link);
     }
     link.setAttribute('href', heroImg.getAttribute('src'));
-    if (heroImg.closest('picture')?.querySelector('source[data-desktop-hero]')) link.setAttribute('media', '(max-width: 900px)');
+    if (heroImg.closest('picture')?.querySelector('source[data-mobile-hero]')) link.setAttribute('media', '(min-width: 901px)');
+    else if (heroImg.closest('picture')?.querySelector('source[data-desktop-hero]')) link.setAttribute('media', '(max-width: 900px)');
     else link.removeAttribute('media');
     link.setAttribute('fetchpriority', 'high');
     heroImg.setAttribute('loading', 'eager');

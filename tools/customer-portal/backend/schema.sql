@@ -37,6 +37,8 @@ CREATE TABLE IF NOT EXISTS galleries (
   name TEXT NOT NULL,
   shooting_date TEXT NOT NULL,
   description TEXT NOT NULL DEFAULT '',
+  retention_policy TEXT CHECK(retention_policy IS NULL OR retention_policy='school-v1'),
+  retention_started_at INTEGER,
   shooting_type TEXT NOT NULL DEFAULT 'other' CHECK(shooting_type IN ('school','maternity','newborn','family','portrait','wedding','combo','other')),
   pricing_mode TEXT NOT NULL DEFAULT 'gallery' CHECK(pricing_mode IN ('images','gallery')),
   theme TEXT NOT NULL DEFAULT 'warm' CHECK(theme IN ('warm','light','dark')),
@@ -70,6 +72,9 @@ CREATE TABLE IF NOT EXISTS images (
   gallery_id TEXT NOT NULL REFERENCES galleries(id) ON DELETE CASCADE,
   title TEXT NOT NULL,
   preview_key TEXT NOT NULL UNIQUE,
+  retention_purge_started_at INTEGER,
+  retention_purged_at INTEGER,
+  retention_checked_at INTEGER,
   final_ready INTEGER NOT NULL DEFAULT 0 CHECK(final_ready IN (0,1)),
   source_filename TEXT,
   original_key TEXT NOT NULL UNIQUE,
@@ -121,6 +126,8 @@ CREATE TABLE IF NOT EXISTS orders (
   consent_at INTEGER NOT NULL,
   created_at INTEGER NOT NULL,
   paid_at INTEGER,
+  delivery_ready_at INTEGER,
+  delivery_delete_at INTEGER,
   receipt_sent_at INTEGER,
   receipt_text TEXT,
   receipt_email_json TEXT,
@@ -214,3 +221,21 @@ CREATE TABLE IF NOT EXISTS image_download_blocks (
 
 CREATE TABLE IF NOT EXISTS mail_history (id TEXT PRIMARY KEY, recipient TEXT NOT NULL, message_json TEXT NOT NULL CHECK(json_valid(message_json)), provider_id TEXT, status TEXT NOT NULL CHECK(status IN ('sent','failed')), created_at INTEGER NOT NULL);
 CREATE INDEX IF NOT EXISTS mail_history_recipient ON mail_history(recipient,created_at);
+
+CREATE INDEX IF NOT EXISTS galleries_retention ON galleries(retention_policy,expires_at);
+CREATE INDEX IF NOT EXISTS images_retention_purge ON images(retention_purge_started_at,retention_purged_at,retention_checked_at);
+CREATE TABLE IF NOT EXISTS manual_delivery_retention (
+  user_id TEXT NOT NULL REFERENCES users(id),
+  image_id TEXT NOT NULL REFERENCES images(id),
+  ready_at INTEGER NOT NULL,
+  delete_at INTEGER NOT NULL,
+  PRIMARY KEY(user_id,image_id)
+);
+
+-- Tracks attempted school-photo uploads, including failed uploads with no image row.
+CREATE TABLE IF NOT EXISTS school_retention_uploads (
+  image_id TEXT PRIMARY KEY,
+  gallery_id TEXT NOT NULL REFERENCES galleries(id),
+  created_at INTEGER NOT NULL,
+  checked_at INTEGER
+);

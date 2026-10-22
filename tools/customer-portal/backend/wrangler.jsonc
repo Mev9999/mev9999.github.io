@@ -38,6 +38,6 @@
       "jurisdiction": "eu"
     }
   ],
-  "triggers": { "crons": ["17 3 * * *"] },
+  "triggers": { "crons": ["17 * * * *"] },
   "observability": { "enabled": false }
 }

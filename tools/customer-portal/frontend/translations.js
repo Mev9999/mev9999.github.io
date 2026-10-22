@@ -693,4 +693,19 @@ Object.assign(rows,{
     "Odaberi Sve fotografije za cijelu galeriju."
   ]
 });
+Object.assign(rows,{
+  retentionTitle:['Automatische Aufbewahrung','Automatic retention','Automatsko čuvanje'],
+  retentionCreateGallery:['90 Tage Galeriezeit ab der ersten Veröffentlichung.','90 days of gallery access from the first publication.','90 dana pristupa galeriji od prve objave.'],
+  retentionCreateUnbought:['Ungekaufte Bilddateien werden spätestens 30 Tage danach automatisch gelöscht.','Unpurchased image files are automatically deleted no later than 30 days afterwards.','Nekupljene fotografije automatski se brišu najkasnije 30 dana nakon toga.'],
+  retentionCreatePurchased:['Gekaufte Auslieferungskopien werden 6 Monate ab der ersten Downloadfreigabe gespeichert und dann automatisch gelöscht.','Purchased delivery copies are stored for 6 months from their first download release, then automatically deleted.','Kupljene kopije za isporuku čuvaju se 6 mjeseci od prvog omogućavanja preuzimanja, a zatim se automatski brišu.'],
+  retentionDraft:['Die Fristen starten erst, wenn du diese Galerie zum ersten Mal veröffentlichst.','The deadlines start when you publish this gallery for the first time.','Rokovi počinju tek kada prvi put objaviš ovu galeriju.'],
+  retentionStarted:['Erstmals veröffentlicht: {date}','First published: {date}','Prva objava: {date}'],
+  retentionGalleryCloses:['Galerie erreichbar bis','Gallery accessible until','Galerija dostupna do'],
+  retentionUnboughtDeadline:['Löschfrist für ungekaufte Dateien','Deletion deadline for unpurchased files','Rok brisanja nekupljenih datoteka'],
+  retentionGalleryClosed:['Die Galeriezeit ist abgelaufen. Kunden können die Galerie nicht mehr öffnen.','The gallery period has ended. Clients can no longer open this gallery.','Period pristupa galeriji je istekao. Klijenti više ne mogu otvoriti galeriju.'],
+  retentionStorageOnly:['Die 6 Monate betreffen nur die gespeicherten Kopien. Der Kundenzugang endet nach 90 Tagen. Ein erneutes Veröffentlichen startet die Fristen nicht neu.','The 6 months apply only to stored copies. Client access ends after 90 days. Publishing again does not restart the deadlines.','Rok od 6 mjeseci odnosi se samo na pohranjene kopije. Pristup klijenata završava nakon 90 dana. Ponovna objava ne pokreće rokove iznova.'],
+  retentionPendingProtected:['Bereits bezahlte Bilder bleiben bis zur ersten Downloadfreigabe geschützt. Erst dann beginnen ihre 6 Monate Speicherzeit.','Paid images stay protected until their first download release. Their 6 months of storage start then.','Već plaćene fotografije ostaju zaštićene do prvog odobrenja za preuzimanje. Tada počinje njihov rok čuvanja od 6 mjeseci.'],
+  orderFilesExpired:['Bilddateien nach Ablauf der Speicherfrist entfernt.','Image files removed after the storage period ended.','Fotografije su uklonjene nakon isteka roka čuvanja.'],
+  orderPaidFilesExpired:['Bezahlt · Bilddateien nach Ablauf der Speicherfrist entfernt','Paid · Image files removed after the storage period ended','Plaćeno · Fotografije su uklonjene nakon isteka roka čuvanja']
+});
 export const translations = Object.fromEntries(['de','en','bs'].map((lang,index)=>[lang,Object.fromEntries(Object.entries(rows).map(([key,values])=>[key,values[index]]))]));

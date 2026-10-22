@@ -203,10 +203,26 @@ export function refreshSite(d,file){
   img.src='portrait-hero-dsc04104.webp';img.width=1267;img.height=1900;
   img.alt=['Sportporträt einer Frau beim Dehnen auf einem Waldweg','Fitness portrait of a woman stretching on a woodland path','Sportski portret žene tokom istezanja na šumskoj stazi'][i];
   img.style.objectPosition='center 8%';
+  let portraitPicture=img.closest('picture');
+  if(!portraitPicture){portraitPicture=el('picture');img.before(portraitPicture);portraitPicture.append(img);}
+  let mobileSource=portraitPicture.querySelector('source[data-mobile-hero]');
+  if(!mobileSource){mobileSource=el('source');mobileSource.dataset.mobileHero='';portraitPicture.prepend(mobileSource);}
+  mobileSource.media='(max-width: 900px)';
+  mobileSource.type='image/webp';
+  mobileSource.setAttribute('srcset',[320,480,640,800,960,1200].map(w=>`responsive/galerie-portrait-dsc04184-${w}w.webp ${w}w`).join(', '));
+  mobileSource.setAttribute('sizes','calc(100vw - 34px)');
+  mobileSource.dataset.fullSrc='galerie-portrait-dsc04184.webp';
+  let mobilePreload=d.getElementById('portrait-mobile-hero-preload');
+  if(!mobilePreload){mobilePreload=el('link');mobilePreload.id='portrait-mobile-hero-preload';d.head.append(mobilePreload);}
+  mobilePreload.rel='preload';mobilePreload.as='image';mobilePreload.href=mobileSource.dataset.fullSrc;mobilePreload.media=mobileSource.media;
+  mobilePreload.setAttribute('imagesrcset',mobileSource.getAttribute('srcset'));mobilePreload.setAttribute('imagesizes',mobileSource.getAttribute('sizes'));mobilePreload.setAttribute('fetchpriority','high');
+  const desktopPreload=d.querySelector('link[rel="preload"][as="image"]:not(#portrait-mobile-hero-preload)');
+  if(desktopPreload)desktopPreload.media='(min-width: 901px)';
   img.closest('.hero-visual').setAttribute('aria-label', ['Bild vergrößern: ','Enlarge image: ','Povećaj fotografiju: '][i]+img.alt);
   let portraitStyle=d.getElementById('portrait-cta-layout');
   if(!portraitStyle){portraitStyle=el('style');portraitStyle.id='portrait-cta-layout';d.head.append(portraitStyle);}
-  portraitStyle.textContent='@media(max-width:900px){.portrait-page .cta-band .hero-actions{align-items:center}.portrait-page .cta-band .hero-actions>.btn.secondary{align-self:center;margin-inline:auto}}';
+  portraitStyle.textContent='.portrait-page .hero-visual picture{display:contents}@media(max-width:900px){.portrait-page .hero .hero-visual img{object-position:center 48%!important}.portrait-page .cta-band .hero-actions{align-items:center}.portrait-page .cta-band .hero-actions>.btn.secondary{align-self:center;margin-inline:auto}}';
+  const portraitScript=d.querySelector('script[src^="service-page.js"]');if(portraitScript)portraitScript.src='service-page.js?v=20261022-mobile-hero';
  }
  if(base==='babybauch-und-neugeborenen-shooting-graz.html'&&i===0){const h=d.querySelector('#faq h2');h.replaceChildren();for(const [n,t] of ['Häufige Fragen zur Babybauch','-',' und Neugeborenen','-','Kombi'].entries())h.append(n===1||n===3?el('span','straight-hyphen',t):d.createTextNode(t));}
  if(base==='preise.html'){

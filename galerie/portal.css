@@ -356,3 +356,17 @@
 .portal-studio .portal-upload-ready .portal-check{display:flex;align-items:flex-start;gap:10px;min-width:0;flex:1 1 280px;text-align:left}.portal-studio .portal-upload-ready input[type=checkbox]{width:18px;height:18px;min-width:18px;flex:0 0 18px;padding:0;margin:2px 0 0}.portal-studio .portal-upload-ready .portal-check span{flex:1;min-width:0}.portal-studio .portal-upload-ready p{text-align:left}.portal-studio .portal-upload>svg{margin-top:24px}
 
 .portal-consent{border:1px solid var(--p-line);border-radius:14px;padding:16px;margin:22px 0}.portal-consent legend{font-size:14px;font-weight:600;padding:0 8px}.portal-consent .portal-check{font-size:13px;text-align:left}.portal-consent input[type=checkbox]{flex:0 0 18px;width:18px;height:18px}.portal-consent p{margin-bottom:0}
+
+/* School-gallery deadlines are automatic and visible beside the publication controls. */
+.portal-retention-note{border:1px solid var(--p-line);border-radius:14px;padding:16px;margin:18px 0;background:var(--p-surface);min-width:0}
+.portal-retention-note[hidden]{display:none}
+.portal-retention-note>strong{font-size:14px}
+.portal-retention-note p,.portal-retention-note li,.portal-retention-note dt,.portal-retention-note dd{font-size:13px;line-height:1.6}
+.portal-retention-note p{margin:10px 0 0}
+.portal-retention-note ul{padding-left:20px;margin:10px 0 0}
+.portal-retention-note li+li{margin-top:6px}
+.portal-retention-note dl{margin:12px 0}
+.portal-retention-note dl>div{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--p-line)}
+.portal-retention-note dt{color:var(--p-muted)}
+.portal-retention-note dd{margin:0;font-weight:600;text-align:right}
+@media(max-width:500px){.portal-retention-note dl>div{display:block}.portal-retention-note dd{text-align:left}}

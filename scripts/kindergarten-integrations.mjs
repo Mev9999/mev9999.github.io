@@ -150,7 +150,6 @@ export function integrateKindergarten(document, file, available = new Set()) {
     document.querySelector('#pricing .kindergarten-price-feature')?.remove();
     document.querySelector('#pricing .pricing')?.insertAdjacentHTML('beforeend',`<article class="card price kindergarten-price-feature"><div><span class="chip">${escape(t.service)}</span><h3>${escape(t.prices)}</h3><p>${escape(t.detail)}</p><p class="kindergarten-price-examples">${escape(t.examples)}</p></div><div class="kindergarten-price-actions"><div class="kindergarten-price-pair"><span><strong>10 €</strong>${escape(t.one)}</span><span><strong>25 €</strong>${escape(t.three)}</span></div><div class="price-links"><a class="btn brand" href="${landing}#preise">${escape(t.prices)}</a><a class="price-more" href="${landing}">${escape(t.moreService)}</a></div></div></article>`);
     document.querySelector('#direct-contact-card .kindergarten-contact-link')?.remove();
-    const contact=document.querySelector('#direct-contact-card .aside-top');if(contact)contact.insertAdjacentHTML('beforeend',`<div class="aside-copy-block kindergarten-contact-link"><h4 class="contact-intro-label">${escape(t.short)}</h4><p>${escape(t.contact)}</p><a href="${landing}">${escape(t.contactAction)} →</a></div>`);
     document.querySelector('.price-extras .kindergarten-extras-note')?.remove();
     document.querySelector('.price-extras')?.insertAdjacentHTML('beforeend',`<p class="kindergarten-extras-note">${escape(t.extras)}</p>`);
   }

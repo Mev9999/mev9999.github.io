@@ -1,6 +1,7 @@
+import { runSchoolRetention } from './school-retention.mjs';
 /** Standalone scheduled cleanup for a portal hosted on Cloudflare Pages.
- * Paste this complete module into a separate Worker; bind the portal D1 as DB.
- * Cron: 17 3 * * * (03:17 UTC daily). No imports or additional bindings needed.
+ * Deploy the bundled cleanup module; bind the portal D1 as DB and its R2 as PHOTOS.
+ * Cron: 17 * * * * (hourly at minute 17). Photo retention also requires the school-retention migration.
  */
 const DAY = 86_400_000;
 
@@ -24,5 +25,6 @@ export default {
     const activityTable = await env.DB.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='customer_activity'").first();
     if (activityTable) statements.push(env.DB.prepare('DELETE FROM customer_activity WHERE created_at<?').bind(now - 90 * DAY));
     await env.DB.batch(statements);
+    await runSchoolRetention(env, now);
   },
 };
