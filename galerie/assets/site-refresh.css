@@ -245,6 +245,23 @@ header.compact-site-header .lang-option{font-size:.9rem;padding:.65rem .6rem}
 
 @media(max-width:360px){header.compact-site-header .nav{width:calc(100% - 16px)!important}}
 @media(min-width:901px){header.compact-site-header .nav-actions{gap:.7rem}header.compact-site-header .header-social-links .nav-icon-link,header.compact-site-header .header-social-links .header-social-badge{width:48px!important;height:48px!important;min-width:48px!important}header.compact-site-header .header-social-links .header-social-badge{border-radius:12px}header.compact-site-header .header-social-links .header-social-badge--whatsapp{border-radius:50%}header.compact-site-header .header-social-links svg{width:26px!important;height:26px!important}}
+/* Reserve the logo's width when the direct voucher entry joins the navigation. */
+@media(min-width:901px){
+ header.compact-site-header:has(.gift-nav-link) .nav{display:flex!important;align-items:center;gap:12px}
+ header.compact-site-header:has(.gift-nav-link) .nav>.brand{flex:0 0 150px;min-width:150px}
+ header.compact-site-header:has(.gift-nav-link) .brand-logo{width:150px!important;height:auto!important;max-width:100%}
+ header.compact-site-header:has(.gift-nav-link) nav.primary{display:flex!important;flex:1 1 auto;flex-wrap:nowrap;align-items:center;justify-content:center;gap:2px;min-width:0}
+ header.compact-site-header:has(.gift-nav-link) nav.primary>.nav-dropdown{flex:0 0 auto}
+ header.compact-site-header:has(.gift-nav-link) nav.primary>a,header.compact-site-header:has(.gift-nav-link) nav.primary>.nav-dropdown>a{font-size:clamp(.82rem,1vw,1rem);padding:.5rem .45rem;margin:0;white-space:nowrap}
+ header.compact-site-header:has(.gift-nav-link) .mobile-submenu-toggle{display:none}
+ header.compact-site-header:has(.gift-nav-link) .nav-actions{flex:0 0 auto}
+}
+@media(min-width:901px) and (max-width:1199px){
+ header.compact-site-header:has(.gift-nav-link) .nav{flex-wrap:wrap}
+ header.compact-site-header:has(.gift-nav-link) .nav>.brand{order:1}
+ header.compact-site-header:has(.gift-nav-link) .nav-actions{order:2;margin-left:auto}
+ header.compact-site-header:has(.gift-nav-link) nav.primary{order:3;flex:1 0 100%;padding-top:0}
+}
 
 /* Subtle flag backgrounds; keep existing control geometry. */
 html[lang="de"] header #langBtn,header .lang-option[data-lang="de"]{background-image:linear-gradient(rgba(255,255,255,.76),rgba(255,255,255,.76)),url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2060%2040%22%3E%3Cpath%20fill%3D%22%23ed2939%22%20d%3D%22M0%200h60v40H0z%22%2F%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M0%2013.33h60v13.34H0z%22%2F%3E%3C%2Fsvg%3E")!important;background-size:100% 100%!important;background-position:center!important;background-repeat:no-repeat!important;color:#302721!important}

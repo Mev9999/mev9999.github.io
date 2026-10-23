@@ -1,5 +1,6 @@
 import { updateHomeAboutLayout } from './home-about-layout.mjs';
 import { addReviewCarousel } from './reviews-build.mjs';
+import { addGiftInquiryField } from './gift-inquiry.mjs';
 // Requested copy and component adjustments, applied after language rendering.
 const home = {
 hero_proof_label_1:['Standort','Location','Lokacija'],
@@ -284,7 +285,7 @@ export function refreshSite(d,file){
   const target = d.querySelector(selector);
   if (target) target.textContent = values[i];
  }
- if(isHome){localizeHomepageLinks(d,file);addReviewCarousel(d,lang);}
+ if(isHome){localizeHomepageLinks(d,file);addReviewCarousel(d,lang);addGiftInquiryField(d,lang);}
  updateHomeAboutLayout(d,file);
  // Cormorant's hyphen is angled. Keep text and links intact while using the
  // existing straight glyph for compound words in display headings, in all languages.

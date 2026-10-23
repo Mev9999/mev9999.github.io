@@ -10,10 +10,17 @@ export async function validateImprovements(cache,report){
   const lang=file.match(/-(en|bs)\.html$/)?.[1]||'de';
   if(d.documentElement.lang!==lang)report(file,'incorrect document language');
   if(d.querySelectorAll('h1').length!==1)report(file,'expected exactly one main heading');
+  const isolatedVoucherFlow=/^(?:gutscheine-kaufen|gutscheinbedingungen)(?:-(?:en|bs))?\.html$/.test(file);
   const canonical=d.querySelector('link[rel="canonical"]')?.href;
-  const expected='https://liza-memories-photography.com/'+(file==='index.html'?'':file);
-  if(canonical!==expected)report(file,'unexpected canonical URL');
-  if(d.querySelectorAll('link[rel="alternate"][hreflang]').length!==4)report(file,'missing language alternates');
+  const expected=(isolatedVoucherFlow?'https://portal.liza-memories-photography.com/':'https://liza-memories-photography.com/')+(file==='index.html'?'':file);
+  // Transaction pages stay unindexed on the protected portal host and may omit SEO metadata.
+  if(isolatedVoucherFlow){
+   if(!d.querySelector('meta[name="robots"]')?.content.includes('noindex'))report(file,'voucher transaction page must be unindexed');
+   if(canonical&&canonical!==expected)report(file,'unexpected voucher canonical URL');
+  }else{
+   if(canonical!==expected)report(file,'unexpected canonical URL');
+   if(d.querySelectorAll('link[rel="alternate"][hreflang]').length!==4)report(file,'missing language alternates');
+  }
   const gallery=d.querySelector('#gallery-showcase>.container>.gallery-grid')||d.querySelector('#gallery-showcase .gallery-grid');
   if(gallery&&gallery.children.length>18)report(file,'gallery preview exceeds 18 images');
   if(d.querySelector('#gallery-showcase')&&d.querySelector('.hero-actions a[href$="#portfolio"]'))report(file,'hero portfolio link leaves the service gallery');

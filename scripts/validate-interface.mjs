@@ -26,6 +26,14 @@ export async function validateInterface(cache){
   d.querySelectorAll('.hero a.btn').forEach(a=>{if(/#(?:portfolio|gallery-showcase|shooting-video)$/.test(a.getAttribute('href')))assert(a.classList.contains('media-cta'));});
  }
  for(const [file,{document:d}] of cache){
+  if(/^(?:gutscheine-kaufen|gutscheinbedingungen)(?:-(?:en|bs))?\.html$/.test(file)){
+   assert(d.querySelector('.gv-checkout-header img'),file+' voucher checkout header');
+   assert(d.querySelector('link[href^="gutscheine.css"]'),file+' voucher styles');
+   assert.equal(d.querySelector('meta[name="referrer"]')?.content,'no-referrer',file+' private order links');
+   assert(d.querySelector('meta[name="robots"]')?.content.includes('noindex'),file+' private checkout indexing');
+   assert(!d.documentElement.textContent.includes('\uFFFD'),file+' encoding');
+   continue;
+  }
   assert(d.querySelector('link[href^="scripts/site-refresh.css"]'),file+' refresh styles');
   if(d.querySelector('header'))assert(d.querySelector('header.compact-site-header'),file+' shared header');
   assert(!d.documentElement.textContent.includes('\uFFFD'),file+' encoding');

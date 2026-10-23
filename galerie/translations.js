@@ -708,4 +708,413 @@ Object.assign(rows,{
   orderFilesExpired:['Bilddateien nach Ablauf der Speicherfrist entfernt.','Image files removed after the storage period ended.','Fotografije su uklonjene nakon isteka roka čuvanja.'],
   orderPaidFilesExpired:['Bezahlt · Bilddateien nach Ablauf der Speicherfrist entfernt','Paid · Image files removed after the storage period ended','Plaćeno · Fotografije su uklonjene nakon isteka roka čuvanja']
 });
+Object.assign(rows, {
+  "vouchers": [
+    "Gutscheine",
+    "Gift vouchers",
+    "Poklon bonovi"
+  ],
+  "voucherAdminIntro": [
+    "Zahlung bestätigen, Gutschein senden und Guthaben für ein Shooting verwalten.",
+    "Confirm payments, send gift vouchers and manage shooting credit.",
+    "Potvrdi uplatu, pošalji poklon bon i upravljaj iznosom za fotografisanje."
+  ],
+  "voucherSearch": [
+    "Code, Bestellnummer, Name oder E-Mail suchen",
+    "Search code, order number, name or email",
+    "Traži kod, broj narudžbe, ime ili e-mail"
+  ],
+  "voucherStatus": [
+    "Status",
+    "Status",
+    "Status"
+  ],
+  "voucherAll": [
+    "Alle Gutscheine",
+    "All vouchers",
+    "Svi bonovi"
+  ],
+  "voucherStatus_pending": [
+    "Zahlung offen",
+    "Awaiting payment",
+    "Čeka se uplata"
+  ],
+  "voucherStatus_active": [
+    "Aktiv",
+    "Active",
+    "Aktivan"
+  ],
+  "voucherStatus_spent": [
+    "Vollständig eingelöst",
+    "Fully redeemed",
+    "U potpunosti iskorišten"
+  ],
+  "voucherStatus_withdrawal_requested": [
+    "Rücktritt angefragt · gesperrt",
+    "Withdrawal requested · blocked",
+    "Zatražen raskid · blokiran"
+  ],
+  "voucherStatus_refunded": [
+    "Rückzahlung erfasst · gesperrt",
+    "Refund recorded · blocked",
+    "Povrat evidentiran · blokiran"
+  ],
+  "voucherOriginal": [
+    "Ursprünglicher Wert",
+    "Original value",
+    "Početna vrijednost"
+  ],
+  "voucherBalance": [
+    "Restguthaben",
+    "Remaining balance",
+    "Preostali iznos"
+  ],
+  "voucherReserved": [
+    "Davon reserviert",
+    "Reserved amount",
+    "Rezervisano"
+  ],
+  "voucherAvailable": [
+    "Frei verfügbar",
+    "Available credit",
+    "Raspoloživo"
+  ],
+  "voucherOpen": [
+    "Gutschein öffnen",
+    "Open voucher",
+    "Otvori bon"
+  ],
+  "voucherNoResults": [
+    "Keine passenden Gutscheine vorhanden.",
+    "No matching vouchers.",
+    "Nema odgovarajućih bonova."
+  ],
+  "voucherPdf": [
+    "Gutschein-PDF ansehen",
+    "View voucher PDF",
+    "Pogledaj PDF bona"
+  ],
+  "voucherDetails": [
+    "Gutschein verwalten",
+    "Manage voucher",
+    "Upravljaj bonom"
+  ],
+  "voucherGiftTo": [
+    "Für",
+    "For",
+    "Za"
+  ],
+  "voucherGiftFrom": [
+    "Von",
+    "From",
+    "Od"
+  ],
+  "voucherMarkPaid": [
+    "Zahlung erhalten",
+    "Payment received",
+    "Uplata primljena"
+  ],
+  "voucherResend": [
+    "E-Mail erneut senden",
+    "Resend email",
+    "Ponovo pošalji e-mail"
+  ],
+  "voucherReserve": [
+    "Guthaben reservieren",
+    "Reserve credit",
+    "Rezerviši iznos"
+  ],
+  "voucherRedeem": [
+    "Guthaben einlösen",
+    "Redeem credit",
+    "Iskoristi iznos"
+  ],
+  "voucherRelease": [
+    "Reservierung aufheben",
+    "Release reservation",
+    "Ukini rezervaciju"
+  ],
+  "voucherRefund": [
+    "Erfolgte Rückzahlung erfassen",
+    "Record completed refund",
+    "Evidentiraj izvršeni povrat"
+  ],
+  "voucherReservations": [
+    "Reservierungen",
+    "Reservations",
+    "Rezervacije"
+  ],
+  "voucherNoReservations": [
+    "Keine Reservierungen.",
+    "No reservations.",
+    "Nema rezervacija."
+  ],
+  "voucherReservation_active": [
+    "Reserviert",
+    "Reserved",
+    "Rezervisano"
+  ],
+  "voucherReservation_redeemed": [
+    "Eingelöst",
+    "Redeemed",
+    "Iskorišteno"
+  ],
+  "voucherReservation_released": [
+    "Freigegeben",
+    "Released",
+    "Oslobođeno"
+  ],
+  "voucherLedger": [
+    "Verlauf des Guthabens",
+    "Credit history",
+    "Historija iznosa"
+  ],
+  "voucherNoLedger": [
+    "Noch keine Guthabenbewegungen.",
+    "No credit entries yet.",
+    "Još nema promjena iznosa."
+  ],
+  "voucherLedger_paid": [
+    "Zahlung bestätigt",
+    "Payment confirmed",
+    "Uplata potvrđena"
+  ],
+  "voucherLedger_issued": [
+    "Gutschein aktiviert",
+    "Voucher activated",
+    "Bon aktiviran"
+  ],
+  "voucherLedger_reserve": [
+    "Guthaben reserviert",
+    "Credit reserved",
+    "Iznos rezervisan"
+  ],
+  "voucherLedger_reserved": [
+    "Guthaben reserviert",
+    "Credit reserved",
+    "Iznos rezervisan"
+  ],
+  "voucherLedger_redeem": [
+    "Guthaben eingelöst",
+    "Credit redeemed",
+    "Iznos iskorišten"
+  ],
+  "voucherLedger_redeemed": [
+    "Guthaben eingelöst",
+    "Credit redeemed",
+    "Iznos iskorišten"
+  ],
+  "voucherLedger_release": [
+    "Reservierung aufgehoben",
+    "Reservation released",
+    "Rezervacija ukinuta"
+  ],
+  "voucherLedger_released": [
+    "Reservierung aufgehoben",
+    "Reservation released",
+    "Rezervacija ukinuta"
+  ],
+  "voucherLedger_refund": [
+    "Rückzahlung erfasst",
+    "Refund recorded",
+    "Povrat evidentiran"
+  ],
+  "voucherLedger_refunded": [
+    "Rückzahlung erfasst",
+    "Refund recorded",
+    "Povrat evidentiran"
+  ],
+  "voucherLedger_withdrawal": [
+    "Rücktritt angefragt",
+    "Withdrawal requested",
+    "Raskid zatražen"
+  ],
+  "voucherLedger_created": [
+    "Gutschein bestellt",
+    "Voucher ordered",
+    "Bon naručen"
+  ],
+  "voucherLedger_payment": [
+    "Zahlung bestätigt",
+    "Payment confirmed",
+    "Uplata potvrđena"
+  ],
+  "voucherLedger_reservation": [
+    "Guthaben reserviert",
+    "Credit reserved",
+    "Iznos rezervisan"
+  ],
+  "voucherWithdrawalNotice": [
+    "Der Gutschein ist wegen einer Rücktrittsanfrage gesperrt. Prüfe die Anfrage und kläre eine mögliche Rückzahlung, bevor du sie hier als erfolgt erfasst.",
+    "This voucher is blocked because withdrawal was requested. Review the request and arrange any refund before recording it as completed here.",
+    "Bon je blokiran zbog zahtjeva za raskid. Provjeri zahtjev i dogovori povrat prije nego što ga ovdje evidentiraš kao izvršen."
+  ],
+  "voucherPaidHint": [
+    "Bestätige den Zahlungseingang erst nach der Kontoprüfung. Danach wird der Gutschein aktiviert und an {email} gesendet.",
+    "Check your bank account before confirming receipt. The voucher will then be activated and sent to {email}.",
+    "Prvo provjeri uplatu na računu. Bon se zatim aktivira i šalje na {email}."
+  ],
+  "voucherResendHint": [
+    "Die Bestätigung oder der aktive Gutschein wird erneut an {email} gesendet. Das Guthaben ändert sich dabei nicht.",
+    "The confirmation or active voucher will be sent again to {email}. The balance will not change.",
+    "Potvrda ili aktivni bon ponovo se šalje na {email}. Iznos se ne mijenja."
+  ],
+  "voucherReserveHint": [
+    "Reserviere den vereinbarten Betrag für eine verbindliche Buchung. Das Guthaben ist damit noch nicht eingelöst. Für unverbindliche Anfragen ist keine Reservierung nötig.",
+    "Reserve the agreed amount for a confirmed booking. This does not redeem the credit. An enquiry does not need a reservation.",
+    "Rezerviši dogovoreni iznos za potvrđenu rezervaciju. Iznos time još nije iskorišten. Za upit nije potrebna rezervacija."
+  ],
+  "voucherRedeemHint": [
+    "Dieser Betrag wird für die Abrechnung verwendet und vom Restguthaben abgezogen. Prüfe den Betrag und die zugehörige Buchung.",
+    "This amount is used for settlement and deducted from the remaining balance. Check the amount and booking.",
+    "Ovaj iznos koristi se za obračun i oduzima od preostalog iznosa. Provjeri iznos i rezervaciju."
+  ],
+  "voucherReleaseHint": [
+    "Die Reservierung über {amount} wird aufgehoben. Der Betrag ist danach wieder frei verfügbar.",
+    "The reservation of {amount} will be released. That amount will be available again.",
+    "Rezervacija od {amount} se ukida. Iznos ponovo postaje raspoloživ."
+  ],
+  "voucherRefundHint": [
+    "Hier wird eine bereits erfolgte Rückzahlung von {amount} erfasst und der Gutschein gesperrt. Das Portal überweist kein Geld. Erledige die Rückzahlung vorher über deine Bank.",
+    "Record a refund of {amount} already completed outside the portal and block the voucher. The portal does not transfer money. Complete the refund through your bank first.",
+    "Ovdje evidentiraš već izvršen povrat od {amount} i blokiraš bon. Portal ne prenosi novac. Povrat prvo obavi preko banke."
+  ],
+  "voucherAmount": [
+    "Betrag in Euro",
+    "Amount in euros",
+    "Iznos u eurima"
+  ],
+  "voucherBooking": [
+    "Buchung / Rechnungsbezug",
+    "Booking / invoice reference",
+    "Rezervacija / referenca računa"
+  ],
+  "voucherRefundReason": [
+    "Notiz zur Rückzahlung (optional)",
+    "Refund note (optional)",
+    "Napomena uz povrat (opcionalno)"
+  ],
+  "voucherPaidConfirm": [
+    "Ich habe den vollständigen Zahlungseingang auf meinem Konto geprüft.",
+    "I checked receipt of the full payment in my bank account.",
+    "Provjerila sam prijem cijelog iznosa na svom računu."
+  ],
+  "voucherRefundConfirm": [
+    "Ich habe das Geld bereits außerhalb des Portals zurückgezahlt.",
+    "I have already refunded the money outside the portal.",
+    "Novac sam već vratila izvan portala."
+  ],
+  "voucherRedeemConfirm": [
+    "Ich möchte diesen Betrag jetzt für die angegebene Buchung einlösen.",
+    "I want to redeem this amount for the specified booking now.",
+    "Želim sada iskoristiti ovaj iznos za navedenu rezervaciju."
+  ],
+  "voucherReserveConfirm": [
+    "Ich möchte diesen Betrag für die angegebene verbindliche Buchung reservieren.",
+    "I want to reserve this amount for the specified confirmed booking.",
+    "Želim rezervisati ovaj iznos za navedenu potvrđenu rezervaciju."
+  ],
+  "voucherReleaseConfirm": [
+    "Ich möchte diese Reservierung aufheben.",
+    "I want to release this reservation.",
+    "Želim ukinuti ovu rezervaciju."
+  ],
+  "voucherResendConfirm": [
+    "Ich möchte die E-Mail erneut an die gespeicherte Käuferadresse senden.",
+    "I want to resend the email to the saved buyer address.",
+    "Želim ponovo poslati e-mail na sačuvanu adresu kupca."
+  ],
+  "voucherSaved": [
+    "Gutschein aktualisiert.",
+    "Voucher updated.",
+    "Bon je ažuriran."
+  ],
+  "voucherMailPending": [
+    "Gespeichert. Die E-Mail konnte noch nicht versendet werden. Bitte später erneut senden.",
+    "Saved. The email has not been sent yet. Please resend later.",
+    "Sačuvano. E-mail još nije poslan. Pokušaj ponovo kasnije."
+  ],
+  "voucherUnavailable": [
+    "Dieser Gutschein ist nicht aktiv oder nicht mehr verfügbar. Bitte aktualisieren.",
+    "This voucher is not active or no longer available. Please refresh.",
+    "Ovaj bon nije aktivan ili više nije dostupan. Osvježi prikaz."
+  ],
+  "voucherBalanceChanged": [
+    "Das verfügbare Guthaben reicht dafür nicht mehr aus. Bitte aktualisieren und Betrag prüfen.",
+    "The available balance is insufficient. Please refresh and check the amount.",
+    "Raspoloživi iznos nije dovoljan. Osvježi prikaz i provjeri iznos."
+  ],
+  "voucherInvalidAmount": [
+    "Bitte einen gültigen Eurobetrag mit höchstens zwei Nachkommastellen eingeben.",
+    "Enter a valid euro amount with no more than two decimal places.",
+    "Unesi ispravan iznos u eurima s najviše dvije decimale."
+  ],
+  "voucherConflict": [
+    "Diese Aktion wurde mit anderen Angaben übermittelt. Bitte Gutschein neu öffnen und den Verlauf prüfen.",
+    "This action was submitted with different details. Reopen the voucher and check its history.",
+    "Ova radnja je poslana s drugim podacima. Ponovo otvori bon i provjeri historiju."
+  ],
+  "voucherReservationChanged": [
+    "Diese Reservierung ist nicht mehr aktiv. Bitte Gutschein neu öffnen.",
+    "This reservation is no longer active. Reopen the voucher.",
+    "Ova rezervacija više nije aktivna. Ponovo otvori bon."
+  ],
+  "voucherRefundBlocked": [
+    "Der Gutschein wurde bereits verwendet oder hat noch eine Reservierung. Bitte den Verlauf prüfen.",
+    "The voucher has been used or still has a reservation. Check the history.",
+    "Bon je već korišten ili još ima rezervaciju. Provjeri historiju."
+  ],
+  "voucherConfigMissing": [
+    "Die Gutscheinverwaltung ist noch nicht vollständig eingerichtet. Bitte das Gutschein-Datenbank-Update prüfen.",
+    "Voucher management is not fully configured. Check the voucher database update.",
+    "Upravljanje bonovima još nije potpuno postavljeno. Provjeri ažuriranje baze bonova."
+  ],
+  "voucherConfirmRequired": [
+    "Bitte bestätige die Aktion mit dem Häkchen.",
+    "Confirm this action using the checkbox.",
+    "Potvrdi radnju označavanjem polja."
+  ],
+  "voucherBookingRequired": [
+    "Bitte die zugehörige Buchung oder Rechnung angeben.",
+    "Enter the related booking or invoice reference.",
+    "Navedi odgovarajuću rezervaciju ili račun."
+  ]
+});
+Object.assign(rows, {
+  "voucherSearchAll": [
+    "Suchen",
+    "Search",
+    "Traži"
+  ],
+  "voucherSearchHint": [
+    "Mit „Suchen“ findest du auch ältere Gutscheine. Name, E-Mail-Adresse, Code oder Bestellnummer eingeben.",
+    "Use Search to find older vouchers too. Enter a name, email, code or order number.",
+    "Opcija Traži pronalazi i starije bonove. Unesi ime, e-mail, kod ili broj narudžbe."
+  ],
+  "voucherMoreResults": [
+    "Es gibt weitere passende Gutscheine. Bitte den Suchbegriff genauer eingeben.",
+    "More matching vouchers exist. Please narrow your search.",
+    "Postoji još odgovarajućih bonova. Suzi pretragu."
+  ],
+  "voucherGiftPending": [
+    "Gutschein-E-Mail noch nicht versendet. Über „E-Mail erneut senden“ nachholen.",
+    "Voucher email not sent yet. Use Resend email to retry.",
+    "E-mail s bonom još nije poslan. Pokušaj ponovo putem opcije za ponovno slanje."
+  ],
+  "voucherConfirmationPending": [
+    "Bestätigungs-E-Mail noch nicht versendet. Über „E-Mail erneut senden“ nachholen.",
+    "Confirmation email not sent yet. Use Resend email to retry.",
+    "E-mail s potvrdom još nije poslan. Pokušaj ponovo putem opcije za ponovno slanje."
+  ],
+  "voucherPaidBlockedHint": [
+    "Die Bestellung wurde widerrufen. Erfasse einen trotzdem eingegangenen Betrag erst nach der Kontoprüfung. Der Code bleibt gesperrt; es wird kein aktiver Gutschein verschickt. Danach kannst du eine tatsächlich erfolgte Rückzahlung erfassen.",
+    "This purchase was withdrawn. Check your bank before recording any payment that still arrived. The code stays blocked and no active voucher is sent. You can then record an actually completed refund.",
+    "Od ove narudžbe se odustalo. Prije evidentiranja naknadne uplate provjeri račun. Kod ostaje blokiran i aktivni bon se ne šalje. Zatim možeš evidentirati stvarno izvršen povrat."
+  ],
+  "voucherPaymentBlockedSaved": [
+    "Zahlung erfasst. Der Gutschein bleibt wegen des Rücktritts gesperrt.",
+    "Payment recorded. The voucher remains blocked due to withdrawal.",
+    "Uplata je evidentirana. Bon ostaje blokiran zbog odustanka."
+  ]
+});
 export const translations = Object.fromEntries(['de','en','bs'].map((lang,index)=>[lang,Object.fromEntries(Object.entries(rows).map(([key,values])=>[key,values[index]]))]));

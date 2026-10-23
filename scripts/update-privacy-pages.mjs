@@ -7,7 +7,7 @@ export async function updatePrivacyPages(){
   const file=lang==='de'?'datenschutz.html':`datenschutz-${lang}.html`;
   const dom=new JSDOM(await fs.readFile(file,'utf8'));const d=dom.window.document;
   const title={de:'Datenschutzerklärung',en:'Privacy policy',bs:'Politika privatnosti'}[lang];
-  d.body.innerHTML=`<main><h1>${title}</h1><p>${{de:'Stand: 8. Oktober 2026',en:'Updated: 8 October 2026',bs:'Ažurirano: 8. oktobra 2026.'}[lang]}</p>${privacySections[lang].map(([heading,body,id],i)=>`<section${id?` id="${id}"`:''}><h2>${i+1}. ${heading}</h2>${body}</section>`).join('')}</main>`;
+  d.body.innerHTML=`<main><h1>${title}</h1><p>${{de:'Stand: 23. Oktober 2026',en:'Updated: 23 October 2026',bs:'Ažurirano: 23. oktobra 2026.'}[lang]}</p>${privacySections[lang].map(([heading,body,id],i)=>`<section${id?` id="${id}"`:''}><h2>${i+1}. ${heading}</h2>${body}</section>`).join('')}</main>`;
   const style=d.createElement('style');style.id='privacy-policy-style';style.textContent='body a{color:#704331}body a:focus-visible,body button:focus-visible{outline:3px solid #704331;outline-offset:3px}';d.getElementById(style.id)?.remove();d.head.append(style);
   applyPrivacy(d,file);
   await fs.writeFile(file,'<!DOCTYPE html>\n'+d.documentElement.outerHTML+'\n');dom.window.close();

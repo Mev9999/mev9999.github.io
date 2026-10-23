@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Gutscheine – Handy und Desktop vergleichen</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eae3de;color:#3a2e2a;font:15px/1.5 system-ui,sans-serif}header{padding:16px 22px;background:#fffbf7;border-bottom:1px solid #d9c9bf;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}h1{font-size:18px;margin:0}header p{font-size:12px;margin:3px 0 0;color:#705d52}nav{display:flex;gap:6px;flex-wrap:wrap}button,a{font:inherit;color:inherit}button{background:white;border:1px solid #d9c9bf;padding:7px 12px;border-radius:20px;cursor:pointer}button[aria-pressed=true]{background:#d9a693;border-color:#b88773}button:focus-visible,a:focus-visible{outline:2px solid #735441;outline-offset:3px}main{display:grid;grid-template-columns:minmax(220px,390px) minmax(420px,1fr);gap:18px;padding:18px;align-items:start}body[data-mode=phone] main{display:block;max-width:426px;margin:auto}body[data-mode=web] main{display:block;max-width:1480px;margin:auto}body[data-mode=phone] #web,body[data-mode=web] #phone{display:none}.panel{min-width:0;border:1px solid #cbb9ac;border-radius:12px;overflow:hidden;background:#fffbf7;box-shadow:0 5px 20px #4b32200b}.label{display:flex;gap:12px;justify-content:space-between;align-items:center;padding:10px 13px;border-bottom:1px solid #d9c9bf;font-size:12px}.label strong{font-size:14px}.label a{font-size:12px}.viewport{position:relative;overflow:hidden;background:white}iframe{display:block;border:0;position:absolute;top:0;left:0;transform-origin:top left}.note{padding:0 22px 18px;margin:0;font-size:12px;color:#705d52}@media(max-width:760px){main{grid-template-columns:1fr}.panel{width:100%;max-width:700px;margin:auto}}
+</style>
+</head>
+<body data-mode="both">
+<header><div><h1>Gutscheine im Vergleich</h1><p>Lokale Vorschau · feste Bildschirmbreiten · keine Veröffentlichung</p></div><nav aria-label="Ansicht"><button data-mode="both" aria-pressed="true">Nebeneinander</button><button data-mode="phone" aria-pressed="false">Handy</button><button data-mode="web" aria-pressed="false">Desktop</button></nav></header>
+<main>
+<section class="panel" id="phone"><div class="label"><strong>Handy · 390 px</strong><a href="/gutscheine.html" target="_blank" rel="noopener">Seite öffnen ↗</a></div><div class="viewport"><iframe src="/gutscheine.html" title="Gutscheinseite auf einem Handy mit 390 Pixeln Breite" width="390" height="960" data-width="390" data-height="960"></iframe></div></section>
+<section class="panel" id="web"><div class="label"><strong>Desktop · 1440 px</strong><a href="/gutscheine.html" target="_blank" rel="noopener">Seite öffnen ↗</a></div><div class="viewport"><iframe src="/gutscheine.html" title="Gutscheinseite auf einem Desktop mit 1440 Pixeln Breite" width="1440" height="1100" data-width="1440" data-height="1100"></iframe></div></section>
+</main>
+<p class="note">Beide Ansichten lassen sich unabhängig scrollen. Die Desktopansicht ist verkleinert dargestellt; der Seitenaufbau berechnet sich mit echten 1440 px.</p>
+<script>
+const frames=[...document.querySelectorAll('iframe')];
+function resize(){for(const frame of frames){const box=frame.parentElement,width=Number(frame.dataset.width),height=Number(frame.dataset.height),scale=Math.min(1,box.clientWidth/width);frame.style.width=width+'px';frame.style.height=height+'px';frame.style.transform='scale('+scale+')';box.style.height=height*scale+'px';}}
+document.querySelectorAll('button[data-mode]').forEach(button=>button.addEventListener('click',()=>{document.body.dataset.mode=button.dataset.mode;document.querySelectorAll('button[data-mode]').forEach(other=>other.setAttribute('aria-pressed',String(other===button)));requestAnimationFrame(resize);}));
+new ResizeObserver(resize).observe(document.querySelector('main'));window.addEventListener('resize',resize);resize();
+</script>
+</body></html>

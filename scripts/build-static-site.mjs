@@ -56,6 +56,8 @@ const ALL_HTML = [
   'agb-en.html',
   'agb-bs.html'
 ];
+// Voucher landing pages have their own generator; transaction pages stay noindex.
+const SITEMAP_PAGES = [...RENDER_PAGES, 'gutscheine.html', 'gutscheine-en.html', 'gutscheine-bs.html'];
 const LOCAL_IMAGE_PATTERN = /\.(?:avif|gif|jpe?g|png|webp)$/i;
 const IMAGE_WIDTHS = [320, 480, 640, 800, 960, 1200];
 const RESPONSIVE_DIR = 'responsive';
@@ -741,7 +743,7 @@ function buildPageSitemap() {
   // Omit lastmod until reliable per-page content dates are maintained.
   const groupedPages = new Map();
 
-  for (const fileName of RENDER_PAGES) {
+  for (const fileName of SITEMAP_PAGES) {
     const baseFile = fileName.replace(/-(en|bs)\.html$/i, '.html');
     if (!groupedPages.has(baseFile)) {
       groupedPages.set(baseFile, new Set());
@@ -749,7 +751,7 @@ function buildPageSitemap() {
     groupedPages.get(baseFile).add(fileName);
   }
 
-  const entries = RENDER_PAGES.map((fileName) => {
+  const entries = SITEMAP_PAGES.map((fileName) => {
     const baseFile = fileName.replace(/-(en|bs)\.html$/i, '.html');
     const variants = groupedPages.get(baseFile) || new Set();
     const alternates = [

@@ -84,6 +84,11 @@ const server = http.createServer(async (request, output) => {
     const host = request.headers.host || '';
     if (host !== `127.0.0.1:${port}` && host !== `localhost:${port}`) { output.writeHead(400); output.end('Local development only'); return; }
     const url = new URL(request.url || '/', origin);
+    if (url.pathname === '/__dev/vouchers') {
+      if (request.method !== 'GET') { output.writeHead(405); output.end(); return; }
+      output.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow' });
+      output.end(await fs.readFile(path.join(repo, 'tools/gift-vouchers/preview.html'), 'utf8')); return;
+    }
     if (url.pathname === '/__dev/mail') {
       if (request.method !== 'GET') { output.writeHead(405); output.end(); return; }
       output.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });

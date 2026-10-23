@@ -1,3 +1,4 @@
+import { handleVoucherRequest } from './vouchers.mjs';
 import { SCHOOL_RETENTION_POLICY, schoolRetentionJson, schoolRetentionSchemaReady, startSchoolRetentionStatement, recordSchoolDeliveryRetention, runSchoolRetention } from './school-retention.mjs';
 import { ORDER_CONSENT_VERSION, orderConsent, consentForVersion } from '../frontend/order-consent.js';
 /** LiZa Memories private photo portal. No customer data is stored in public assets. */
@@ -1600,6 +1601,7 @@ async function api(request, env, path, context) {
     return json({ user: publicUser(user), csrf: user?.csrf || null, capabilities: capabilities(env) });
   }
   if (!configured(env)) fail(503, 'Das private Kundenportal ist noch nicht mit dem Server verbunden.', 'not_configured');
+  if (path.startsWith('/vouchers/') || path === '/admin/vouchers' || path.startsWith('/admin/vouchers/')) return handleVoucherRequest(request, env, path, { fail, body, json, sameOrigin, requireUser, sha256, hmac, safeEqual, randomToken, portalOrigin, portalPath, bankDetails, businessContact, capabilities, normalizeEmail, textField, authRate, rate, mail, escapeHtml, audit });
   if (path === '/payments/stripe/webhook' && request.method === 'POST') return stripeWebhook(request, env);
   if (['/auth/login', '/auth/request', '/auth/complete'].includes(path) && request.method === 'POST') return auth(request, env, path, context);
   const mutate = !['GET', 'HEAD'].includes(request.method);
