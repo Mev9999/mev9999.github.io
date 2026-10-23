@@ -1,0 +1,29 @@
+/* The seventh service follows the existing cards and uses their full grid width. */
+.kindergarten-service-card.signature-card{grid-column:1/-1;min-height:0}
+.kindergarten-service-card.signature-card p{max-width:95ch}
+.kindergarten-service-card .signature-meta{margin-top:16px}
+.kindergarten-service-card .signature-arrow{margin-top:18px}
+.kindergarten-price-feature.price{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(270px,.8fr);gap:clamp(24px,4vw,48px);align-items:center;padding:clamp(24px,4vw,38px)}
+.kindergarten-price-feature h3{font-size:clamp(28px,3vw,38px);line-height:1.15;margin:14px 0}
+.kindergarten-price-feature p{line-height:1.65;margin:8px 0}
+.kindergarten-price-actions{display:flex;flex-direction:column;gap:22px}
+.kindergarten-price-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.kindergarten-price-pair span{display:flex;flex-direction:column;gap:6px;font-size:.95rem}
+.kindergarten-price-pair strong{font-size:2rem;color:var(--ink,#45362f)}
+.kindergarten-price-examples{font-weight:600;color:#795343}
+.kindergarten-price-grid{margin-bottom:24px}
+.kindergarten-price-grid .package-card{min-height:0}
+.kindergarten-combination-card{display:flex;flex-direction:column;padding:1.45rem;border:1px solid rgba(147,107,91,.15);border-radius:30px;background:rgba(255,255,255,.9);box-shadow:0 18px 48px rgba(100,70,58,.09)}
+.kindergarten-combination-card h3{margin:.95rem 0 1.2rem;font-size:clamp(1.4rem,2vw,1.8rem);line-height:1.05}
+.kindergarten-combination-card p{margin:1rem 0 0;color:var(--muted);font-size:.88rem;line-height:1.55}
+.kindergarten-price-note{font-size:.92rem;color:#786258;line-height:1.7}
+.kindergarten-extras-note{max-width:85ch;color:#786258;line-height:1.55}
+.home-price-notes .price-extras .kindergarten-extras-note{margin:1.1rem 0 0!important;padding-top:.8rem;border-top:1px solid var(--line,#decac0);font-size:.77rem;line-height:1.55}
+.price-notes .section-head .kindergarten-extras-note{margin:1rem 0 0;padding:.7rem 1rem;border-left:2px solid var(--line,#decac0);font-size:.82rem;text-align:left}
+.pricing-page .price-note-grid>.price-note:last-child{grid-column:1/-1}
+.kindergarten-overview{grid-column:1/-1!important}
+.kindergarten-contact-link{grid-column:1/-1}
+@media(min-width:1000px){.about-page #services .signature-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.kindergarten-overview{display:grid;grid-template-columns:1fr 3fr 1fr 2fr;align-items:center;gap:20px}.kindergarten-overview h3,.kindergarten-overview .num{margin:0}}
+@media(max-width:900px){.footer-primary-links.kindergarten-footer-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;max-width:440px;gap:.55rem}.footer-primary-links.kindergarten-footer-links>a,.footer-primary-links.kindergarten-footer-links>a:last-child{grid-column:auto;justify-self:stretch;width:auto;min-width:0;white-space:normal;text-align:center;box-sizing:border-box}.kindergarten-price-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.kindergarten-price-feature.price{grid-template-columns:1fr;gap:24px;padding:22px}}
+@media(max-width:360px){.footer-primary-links.kindergarten-footer-links>a{padding-inline:6px;overflow-wrap:normal;word-break:normal}}

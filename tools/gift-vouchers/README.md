@@ -28,13 +28,20 @@ Ein Online-Rücktritt sperrt weitere Einlösungen sofort. **Rückzahlung erfasse
 
 Gutscheine gelten für persönliche Shootings und vereinbarte zusätzliche Bilder. Organisierte Krippen-, Kindergarten- und Schulfototage sind ausgenommen. Es gibt keine kurze vertragliche Befristung. Auftragsbestätigung und Gutscheinbedingungen werden bei der Bestellung gespeichert. Die Geschenk-PDF enthält keine Rechnungsadresse; sie ist keine Rechnung. Finanzbelege werden weiterhin im bestehenden Buchhaltungsablauf erstellt.
 
+Testbestellungen ohne tatsächliche Kundenzahlung lassen sich in den Gutschein-Details über **Testgutschein löschen** entfernen – auch wenn ihr Zahlungseingang zu Testzwecken bereits bestätigt wurde. Dafür müssen die genaue Bestellreferenz und eine ausdrückliche Testbestätigung eingegeben werden. Code, Bestelllink und PDF-Download werden anschließend ungültig. Aktive Reservierungen, bereits erfolgte Einlösungen oder ein laufender E-Mail-Versand verhindern das Löschen. Der Vorgang wird im Verwaltungsprotokoll festgehalten und verschickt keine E-Mail. Für echte bezahlte Kundenbestellungen bleibt der Rücktritts-/Erstattungsablauf vorgesehen.
+
+Gutschein-Mails verwenden dieselbe Gestaltungsvorlage wie die übrigen Portal-Mails. Die Geschenk-PDF wird direkt im Worker ohne Personenfoto erzeugt: mit eingebetteten Website-Schriften, Logo, persönlicher Widmung und einem grafischen Blendenmotiv. Die zweite Seite ist als Rückseite gestaltet und zeigt die Leistungen mit Symbolen sowie Hinweise zu Einlösung, Restguthaben, Gültigkeit und Kontakt. Beide Seiten nennen das ursprüngliche Ausstellungsdatum (Bestätigung des Zahlungseingangs); die Gültigkeitsangabe entspricht den bestehenden Bedingungen ohne vertragliche Befristung. Auch erneut heruntergeladene oder versandte bestehende Gutscheine verwenden die aktuelle Gestaltung bei unverändertem Code, Guthaben und Ausstellungsdatum.
+
+Bestellseite und Gutscheinbedingungen übernehmen den gemeinsamen Header und Footer. Website-Links führen vom Portal zur Hauptwebsite; der Sprachwechsel bleibt auf der jeweiligen Bestellseite und erhält einen vorhandenen geschützten Zugang. Der Startseiten-Link **Gutschein-FAQ** führt direkt zu den Gutscheinfragen. Für dieses Design- und Navigationsupdate ist keine weitere Datenbankmigration erforderlich.
+
 ## Quellen und lokale Prüfungen
 
 - `build.cjs`, `copy.cjs`, `page.css`, `public-page.js`: Gutscheinseite, Bestellung und Bedingungen in DE/EN/BS. Generierte Dateien im Website-Stamm und die benötigten Transaktionsdateien unter `galerie/`.
-- `integration.mjs`: direkter Header-Link zwischen Häufige Fragen und Kontakt, Footer-Link und separater Hinweis auf der Startseite.
+- `integration.mjs`: direkter Header-Link zwischen Häufige Fragen und Kontakt, Footer-Link, Gutschein-FAQ-Link und separater Hinweis auf der Startseite.
 - `scripts/gift-inquiry.mjs`: eigenes Gutscheincode-Feld im Anfrageformular; keine automatische Einlösung.
 - `tools/customer-portal/backend/vouchers.mjs`: Bestellung, Zahlungsfreigabe, Guthaben, Reservierungen, Rücktritt und E-Mail-Versand.
-- `tools/customer-portal/backend/voucher-pdf.mjs`: einseitige Geschenk-PDF mit eingebetteter Schrift für DE/EN/BS.
+- `tools/customer-portal/backend/voucher-pdf.mjs`: zweiseitige Geschenk-PDF mit eingebetteter Schrift für DE/EN/BS.
+- `tools/customer-portal/backend/voucher-service-icons.mjs`: Vektorsymbole für die Leistungen auf der Gutscheinrückseite.
 - `tools/customer-portal/backend/migrations/2026-10-23-vouchers.sql`: drei zusätzliche Tabellen mit Indizes; bestehende Galerien und Bestellungen werden nicht verändert.
 
 Lokales Bauen: `npm run portal:build` (oder bei vorhandenen Portal-Hinweisen `npm run vouchers:build`). Prüfen: `npm run portal:test`, `npm run portal:check`, `npm run site:check` und `node --test tools/gift-vouchers/tests/public.test.cjs`.

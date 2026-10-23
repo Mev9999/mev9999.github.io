@@ -10,7 +10,7 @@ export async function validatePrivacy(cache, report) {
     if(/^(?:gutscheine-kaufen|gutscheinbedingungen)(?:-(?:en|bs))?\.html$/.test(file)){
       if(document.querySelector('#cloudflare-analytics-config')||document.querySelector('script[src*="analytics"]'))report(file,'Tracking must not be enabled on the private voucher flow');
       if(document.querySelector('meta[name="referrer"]')?.content!=='no-referrer')report(file,'Voucher links require no-referrer');
-      if(!document.querySelector('.gv-checkout-footer a[href*="datenschutz"]'))report(file,'Missing voucher privacy information');
+      if(!document.querySelector('footer a[href*="datenschutz"]'))report(file,'Missing voucher privacy information');
       continue;
     }
     if(!document.querySelector('footer [data-privacy-settings]')||!document.querySelector('script[src^="scripts/privacy-consent.js"]'))report(file,'Missing privacy controls');

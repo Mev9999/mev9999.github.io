@@ -9,6 +9,15 @@ function fixture({url='http://127.0.0.1:8791/gutscheine-kaufen.html',fetch}={}){
 function fill(w){for(const [name,value] of Object.entries({buyerName:'Gutschein Test',buyerEmail:'buyer@example.test',street:'Testweg 1',postal:'8054',city:'Graz',country:'Österreich'}))w.document.querySelector('[name="'+name+'"]').value=value;w.document.querySelector('#termsAccepted').checked=true;}
 const next=()=>new Promise(resolve=>setTimeout(resolve,30));
 const order={id:'test-order',reference:'LZ-G-TEST',status:'pending',paymentStatus:'unpaid',amountCents:10000,withdrawUntil:new Date(Date.now()+86400000).toISOString(),giftTo:'Someone',giftFrom:'Test',message:'Hello'};
+test('shared language switch keeps buyer access local and never adds it to website navigation',async()=>{
+ const dom=fixture({url:'https://portal.liza-memories-photography.com/gutscheine-kaufen.html#order=test-order&token=buyer-secret',fetch:async()=>({ok:true,json:async()=>({order})})}),w=dom.window;
+ await next();
+ const links=[...w.document.querySelectorAll('header .lang-option[data-lang]')];assert.equal(links.length,3);
+ for(const link of links){const url=new URL(link.href);assert.equal(url.origin,w.location.origin);assert.equal(new URLSearchParams(url.hash.slice(1)).get('token'),'buyer-secret');}
+ for(const link of w.document.querySelectorAll('header a:not(.lang-option),footer a'))assert.ok(!link.href.includes('buyer-secret'),link.href);
+ assert.equal(w.document.querySelector('header a[data-gift-nav]').href,'https://liza-memories-photography.com/gutscheine.html');
+ dom.window.close();
+});
 test('decimal-comma amounts update all totals and reject an amount above the agreed maximum',()=>{
  const dom=fixture(),w=dom.window,input=w.document.querySelector('#amount');input.value='123,45';input.dispatchEvent(new w.Event('input',{bubbles:true}));
  assert.match(w.document.querySelector('[data-total]').textContent,/123,45/);assert.equal(input.validationMessage,'');

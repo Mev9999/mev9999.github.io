@@ -41,7 +41,9 @@
  const input=name=>form.elements.namedItem(name);
  function updatePreview(){
   const cents=amountCents(input('amount').value),amount=cents===null?'—':money(cents);
-  document.querySelectorAll('[data-total],[data-preview-amount]').forEach(n=>{n.textContent=amount;});
+  document.querySelectorAll('[data-total]').forEach(n=>{n.textContent=amount;});
+  const previewAmount=cents===null?'—':new Intl.NumberFormat(lang==='en'?'en-IE':lang==='bs'?'bs-BA':'de-AT',{style:'currency',currency:'EUR',minimumFractionDigits:cents%100?2:0,maximumFractionDigits:2}).format(cents/100);
+  document.querySelectorAll('[data-preview-amount]').forEach(n=>{n.textContent=previewAmount;n.dataset.compact=String(previewAmount.length>7);});
   for(const [name,selector,fallback] of [['giftTo','[data-preview-to]',t.previewTo],['giftFrom','[data-preview-from]',t.previewFrom],['message','[data-preview-message]',t.previewMessage]])document.querySelectorAll(selector).forEach(n=>{n.textContent=input(name).value.trim()||fallback;});
   document.querySelectorAll('[data-gift-amount]').forEach(button=>button.setAttribute('aria-pressed',String(cents===Number(button.dataset.giftAmount)*100)));
   input('amount').setCustomValidity(cents===null?t.amountError:'');
@@ -62,7 +64,11 @@
   const id=data.order?.id,token=data.accessToken||access?.token;
   if(typeof id!=='string'||typeof token!=='string'||!token)throw new Error(t.genericError);
   access={id,token};history.replaceState(null,'',secureLink());
-  document.querySelectorAll('.gv-languages a').forEach(a=>{const u=new URL(a.href);u.hash=new URLSearchParams({order:id,token}).toString();a.href=u.href;});
+  document.querySelectorAll('header .lang-option[data-lang]').forEach(a=>{
+   const u=new URL(a.href);
+   if(u.origin!==location.origin||!u.pathname.endsWith('/'+filename('gutscheine-kaufen',a.dataset.lang)))return;
+   u.search='';u.hash=new URLSearchParams({order:id,token}).toString();a.href=u.href;
+  });
  }
  function withdrawalDeadline(order){
   if(order.withdrawUntil){const n=typeof order.withdrawUntil==='number'?order.withdrawUntil:Date.parse(order.withdrawUntil);return n<1e12?n*1000:n;}

@@ -1,0 +1,76 @@
+.mobile-link-label,.mobile-address{display:none!important}
+.contact-intro-panels{display:grid;gap:1rem;margin:0 0 1.4rem}
+.contact-intro-panels .aside-copy-block{margin:0;padding:1rem 1.15rem;border-left:3px solid #d9a79a;background:rgba(243,228,220,.38);border-radius:0 14px 14px 0}
+.contact-intro-panels .contact-intro-label{font-family:inherit;font-size:.95rem;font-weight:700;color:#3a2e2a;margin:0 0 .55rem}
+.contact-intro-panels p{margin:0 0 .6rem!important;line-height:1.6}.contact-intro-panels p:last-child{margin-bottom:0!important}
+.about-moved-section .hd{display:block;margin-bottom:1.5rem}.about-moved-section .hd h2{margin:0;font-size:clamp(2rem,3.2vw,3rem)}.about-moved-section .hd p{max-width:none;color:var(--muted);margin:.7rem 0 0}
+.about-moved-section .process-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.about-moved-section .signature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.about-moved-section .process-card,.about-moved-section .signature-card{padding:1.4rem;border:1px solid #e6cfc3;border-radius:24px;background:linear-gradient(145deg,#fffaf7,#f3e4dc);color:#3a2e2a;min-width:0}
+.about-moved-section .signature-card{display:flex;flex-direction:column;text-decoration:none}
+.about-moved-section h3{font-size:1.65rem;line-height:1.2;margin:.5rem 0}.about-moved-section p{line-height:1.65}
+.about-moved-section .process-step{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#d9a79a;font-weight:700}
+.about-moved-section .signature-kicker{font-size:.8rem;font-weight:700;color:#755044}.about-moved-section .signature-meta{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:auto;font-size:.8rem}.about-moved-section .signature-meta span{padding:.3rem .5rem;border:1px solid #e6cfc3;border-radius:14px}.about-moved-section .signature-arrow{margin-top:1rem;font-weight:700;text-decoration:underline}.about-moved-section .signature-card:hover{border-color:#ad8070}
+.extra-image-sentence,.extra-image-bundles{display:block}.extra-image-bundles{margin-top:.65rem}
+@media(max-width:900px){
+ .desktop-link-label,.desktop-address{display:none!important}.mobile-link-label,.mobile-address{display:inline!important}
+ .home-refreshed .mobile-address{white-space:pre-line!important;font-size:inherit;letter-spacing:normal}
+ .home-refreshed .hero>.shooting-service-links.compact-home-links{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:.2rem .5rem!important;grid-auto-flow:column;grid-template-rows:repeat(2,auto);font-size:.95rem!important}
+ .home-refreshed .compact-home-links a{min-height:36px!important;padding:.2rem 0!important;line-height:1.2!important;white-space:nowrap!important;display:block!important}
+ .about-moved-section .hd{display:block}.about-moved-section .hd p{max-width:none;margin-top:.7rem}.about-moved-section .process-grid,.about-moved-section .signature-grid{grid-template-columns:1fr}
+ .family-mobile-focus.service-refreshed .hero .hero-visual img{object-position:center 50%!important}
+ .price-note .extra-image-sentence{white-space:normal;font-size:inherit}
+}
+@media(max-width:374px){.home-refreshed .hero>.shooting-service-links.compact-home-links{grid-template-columns:1fr!important;grid-template-rows:none;grid-auto-flow:row}.home-refreshed .compact-home-links a{min-height:30px!important}.home-refreshed .mobile-address{white-space:normal!important}}
+
+.about-moved-section h2,.about-moved-section h3{font-family:'Cormorant Garamond',serif}
+
+/* Quiet contact introduction, using the surrounding typography. */
+.contact-intro-panels{display:block;text-align:center;margin-bottom:1.8rem}
+.contact-intro-panels .aside-copy-block{padding:0;border:0;background:none;border-radius:0;margin:0 auto 1.2rem;max-width:48ch}
+.contact-intro-panels .contact-intro-label{display:none}
+.contact-intro-panels p{line-height:1.6}
+@media(max-width:900px){.home-refreshed .hero{padding-bottom:1rem!important}.home-refreshed #portfolio{padding-top:1.5rem!important}.home-refreshed .compact-home-links{margin-bottom:0!important}}
+@media(min-width:375px) and (max-width:900px){html[lang=bs] .home-refreshed .hero>.shooting-service-links.compact-home-links{grid-template-columns:1fr!important;grid-template-rows:none;grid-auto-flow:row}}
+
+
+@media(min-width:901px){.contact-intro-panels .aside-copy-block{max-width:none;width:100%}.contact-intro-panels p{max-width:none!important;width:100%;text-wrap:initial!important}}
+
+@media(min-width:901px){.contact-intro-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;margin-bottom:.6rem!important}.contact-intro-panels .aside-copy-block{margin:0!important;text-align:center}.contact-intro-panels p{margin-bottom:.7rem!important}.contact-intro-panels p:last-child{margin-bottom:0!important}.home-refreshed .aside:has(.contact-intro-panels){gap:1rem!important}.home-refreshed .contact-intro-panels+.contact-list{margin-top:0!important}}
+
+.mobile-contact-sentence{display:none}@media(max-width:900px){.desktop-contact-sentence{display:none}.mobile-contact-sentence{display:inline}}
+
+.desktop-proof-copy{display:none!important}.mobile-proof-copy{display:inline!important}
+@media(min-width:901px){.desktop-proof-copy{display:inline!important}.mobile-proof-copy{display:none!important}.home-refreshed .hero-grid.early-photo>.hero-proof{margin-top:2.5rem!important}.home-refreshed .hero-proof{grid-auto-rows:1fr}.home-refreshed .hero-proof .proof{min-height:0!important}.home-refreshed .hero-proof .proof>span{margin-bottom:0!important}}
+
+.home-refreshed .story-card-cta{align-self:center;margin-inline:auto}
+
+/* Center all review content beneath the section heading. */
+#testimonials .google-review-panel{text-align:center}
+#testimonials .google-review-identity{justify-self:stretch}
+#testimonials .google-review-copy{text-align:center;width:100%}
+#testimonials .google-review-copy .btn{margin-inline:auto}
+#testimonials .customer-reviews .review-slide,#testimonials .customer-reviews .review-slide blockquote,#testimonials .customer-reviews .review-slide blockquote p{text-align:center}
+#testimonials .review-stars,#testimonials .review-author,#testimonials .review-source{text-align:center}
+@media(min-width:901px){.home-refreshed #pricing .hd p{max-width:none;width:100%;text-wrap:pretty}}
+
+
+
+@media(min-width:901px){.home-refreshed .contact-intro-panels{column-gap:.75rem;text-align:left}.home-refreshed .contact-intro-panels .aside-copy-block{box-sizing:border-box;padding-inline:calc(.8rem + 1px);text-align:left}.home-refreshed .contact-intro-panels p{text-align:left}}
+
+.partner-context-link{margin-top:24px;margin-bottom:0;font-size:inherit;line-height:1.6}.partner-context-link a{text-decoration:underline;text-underline-offset:4px}
+
+
+.studio-route-card{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:18px;align-items:center}
+.studio-route-card strong{grid-column:1 / -1;grid-row:1}
+.studio-route-card [data-refresh-key="aside_location_value"]{grid-column:1;grid-row:2;font-size:inherit;line-height:1.45;min-width:0}
+.studio-route-card .studio-route-link{position:static;grid-column:2;grid-row:2;width:auto;margin:0 10px 0 0;font-size:inherit;font-weight:600;line-height:1.45;white-space:nowrap;color:#854f40;text-decoration:underline;text-underline-offset:4px}
+.studio-route-card .studio-route-link:hover{color:#5c352b}
+.studio-route-link:focus-visible{outline:2px solid #854f40;outline-offset:4px}
+@media(max-width:1100px){.studio-route-card{grid-template-columns:minmax(0,1fr)}.studio-route-card .studio-route-link{grid-column:1;grid-row:3;margin:16px 0 0;justify-self:start}}
+
+@media(max-width:900px){.studio-route-card .contact-address-separator{display:none}.studio-route-card .contact-postal{display:block;white-space:nowrap}}
+.studio-route-card [data-refresh-key="aside_location_value"]{font-size:.95rem;line-height:1.42}@media(max-width:900px){.studio-route-card [data-refresh-key="aside_location_value"]{font-size:.88rem;line-height:1.34}}
+@media(max-width:900px){.studio-route-card [data-refresh-key="aside_location_value"]{display:flex!important;flex-direction:column!important;gap:0!important}.studio-route-card .contact-street,.studio-route-card .contact-postal{display:block!important;white-space:nowrap!important}.studio-route-card .contact-address-separator{display:none!important}}
+
+.contact-detail.studio-route-card [data-refresh-key="aside_location_value"]{font-size:inherit;line-height:inherit}

@@ -1,4 +1,5 @@
 import { renderGiftVoucherPdf, voucherPdfTextSupported } from './voucher-pdf.mjs';
+import { renderVoucherEmail, renderPortalDocument } from './mail-templates.mjs';
 
 // Stored balances and reservations are money. Each operation is claimed, applied
 // and journaled in one D1 transaction; a retried key can never spend twice.
@@ -57,7 +58,6 @@ function voucherContract(data, reference, contact) {
   return common + terms[data.language] + `\n\n${VOUCHER_TERMS_VERSION}`;
 }
 function voucherBase64(bytes) { let binary=''; for (let offset=0;offset<bytes.length;offset+=16384) binary+=String.fromCharCode(...bytes.subarray(offset,offset+16384)); return btoa(binary); }
-function voucherMailMarkup(text, helpers) { return `<!doctype html><html><body style="background:#fbf7f3;color:#3d302b;font-family:Arial,sans-serif;padding:28px"><h1 style="font-family:Georgia,serif">LiZa Memories Photography</h1><div style="white-space:pre-wrap;line-height:1.7">${helpers.escapeHtml(text)}</div></body></html>`; }
 async function voucherPdf(row) { return renderGiftVoucherPdf({code:row.code,amountCents:row.amount_cents,giftTo:row.gift_to,giftFrom:row.gift_from,message:row.gift_message,issuedAt:row.paid_at,language:row.language}); }
 async function voucherSendMail(env,row,kind,helpers,force=false) {
   const gift = kind==='gift'; const sentColumn = gift?'gift_sent_at':'confirmation_sent_at'; const leaseColumn = gift?'gift_lease_at':'confirmation_lease_at';
@@ -67,14 +67,13 @@ async function voucherSendMail(env,row,kind,helpers,force=false) {
   const claim=await voucherFirst(env, `UPDATE gift_vouchers SET ${leaseColumn}=? WHERE id=? ${force?'':`AND ${sentColumn} IS NULL`} AND (${leaseColumn} IS NULL OR ${leaseColumn}<?) RETURNING id`,now,row.id,now-10*60000);
   if (!claim) return Boolean((await voucherFirst(env,'SELECT * FROM gift_vouchers WHERE id=?',row.id))[sentColumn]);
   try {
-    const statusUrl=await voucherStatusUrl(row,env,helpers); const bank=helpers.bankDetails(env); const amount=voucherMoney(row.amount_cents,row.language);
-    const labels={de:{subject:gift?'Dein Geschenkgutschein ist bereit':'Deine Gutscheinbestellung',hello:`Hallo ${row.buyer_name},`,gift:`dein Gutschein über ${amount} ist bezahlt und liegt als PDF bei. Du kannst ihn ausdrucken oder selbst weiterschicken.`,pending:`vielen Dank für deine Gutscheinbestellung über ${amount}. Bitte überweise den Betrag mit diesem Verwendungszweck: ${row.reference}.`,link:'Bestellung, Überweisungs-QR-Code und Rücktritt:',closing:'Alles Liebe\nEmina'},en:{subject:gift?'Your gift voucher is ready':'Your gift voucher order',hello:`Hello ${row.buyer_name},`,gift:`your voucher for ${amount} is paid. The PDF is attached for printing or forwarding.`,pending:`thank you for ordering a voucher for ${amount}. Please transfer the amount using reference ${row.reference}.`,link:'Order, bank transfer QR code and withdrawal:',closing:'Warm wishes\nEmina'},bs:{subject:gift?'Vaš poklon-bon je spreman':'Vaša narudžba poklon-bona',hello:`Zdravo ${row.buyer_name},`,gift:`vaš bon od ${amount} je plaćen. PDF je u prilogu za štampanje ili prosljeđivanje.`,pending:`hvala na narudžbi bona od ${amount}. Molimo uplatite iznos s pozivom na broj ${row.reference}.`,link:'Narudžba, QR kod za uplatu i odustanak:',closing:'Srdačan pozdrav\nEmina'}}[row.language];
-    const transfer=gift?'':`\n\n${bank?.recipient || ''}\nIBAN: ${bank?.iban || ''}\nBIC: ${bank?.bic || ''}\n${row.reference} · ${amount}`;
-    const text=`${labels.hello}\n\n${gift?labels.gift:labels.pending}${transfer}\n\n${voucherWithdrawalNotice(row.language)}\n\n${labels.link}\n${statusUrl}\n\n${labels.closing}`;
-    const contract=voucherMailMarkup(row.contract_text,helpers);
-    const attachments=[{filename:`Bestellbestaetigung-${row.reference}.html`,content_type:'text/html; charset=utf-8',content:voucherBase64(voucherEncoding.encode(contract))}];
+    const statusUrl=await voucherStatusUrl(row,env,helpers);
+    const message=renderVoucherEmail({kind,language:row.language,customerName:row.buyer_name,reference:row.reference,amountCents:row.amount_cents,giftTo:row.gift_to,code:row.code,actionUrl:statusUrl,bank:helpers.bankDetails(env),withdrawalNotice:voucherWithdrawalNotice(row.language)});
+    // Only presentation changes: the attachment always uses the saved contract.
+    const contract=renderPortalDocument({receiptText:row.contract_text,orderId:row.reference,language:row.language});
+    const attachments=[{filename:`Bestellbestaetigung-${row.reference}.html`,content_type:contract.contentType,content:voucherBase64(voucherEncoding.encode(contract.html))}];
     if (gift) attachments.unshift({filename:`Gutschein-${row.reference}.pdf`,content_type:'application/pdf',content:voucherBase64(await voucherPdf(row))});
-    await helpers.mail(env,{to:row.buyer_email,subject:labels.subject+' · '+row.reference,text,html:voucherMailMarkup(text,helpers),attachments,idempotencyKey:`voucher-${kind}/${row.id}${force?'/'+now:''}`});
+    await helpers.mail(env,{to:row.buyer_email,...message,attachments,idempotencyKey:`voucher-${kind}/${row.id}${force?'/'+now:''}`});
     await voucherStatement(env,`UPDATE gift_vouchers SET ${sentColumn}=COALESCE(${sentColumn},?),${leaseColumn}=NULL WHERE id=? AND ${leaseColumn}=?`,Date.now(),row.id,now).run();
     return true;
   } catch { await voucherStatement(env,`UPDATE gift_vouchers SET ${leaseColumn}=NULL WHERE id=? AND ${leaseColumn}=?`,row.id,now).run(); return false; }
@@ -130,7 +129,11 @@ async function voucherWithdraw(request,env,voucherId,helpers) {
   const text=`${receipt.text}\n\n${helpers.businessContact(env).email}`;
   let emailSent=true;
   for (const recipient of [row.buyer_email,helpers.businessContact(env).email]) {
-    try {await helpers.mail(env,{to:recipient,subject:`${receipt.subject} · ${row.reference}`,text,html:voucherMailMarkup(text,helpers),idempotencyKey:`voucher-withdrawal/${row.id}/${recipient===row.buyer_email?'buyer':'studio'}`});} catch {emailSent=false;}
+    const admin=recipient!==row.buyer_email;
+    try {
+      const message=renderVoucherEmail({kind:'withdrawal',subject:receipt.subject,language:row.language,customerName:row.buyer_name,customerEmail:row.buyer_email,reference:row.reference,notice:text,admin,actionUrl:admin?`${helpers.portalOrigin(env)}${helpers.portalPath(env)}`:await voucherStatusUrl(row,env,helpers)});
+      await helpers.mail(env,{to:recipient,...message,idempotencyKey:`voucher-withdrawal/${row.id}/${admin?'studio':'buyer'}`});
+    } catch {emailSent=false;}
   }
   return helpers.json({ok:true,message:text,emailSent,...await voucherEnvelope(env,updated,helpers)});
 }
@@ -167,6 +170,27 @@ async function voucherAtomicOperation(env,row,user,kind,data,helpers) {
   if (!helpers.safeEqual(applied.payload_hash,payload)) helpers.fail(409,'Der Vorgang wurde bereits mit anderen Angaben gespeichert.','idempotency_conflict');
   return {operationId:applied.id,reservationId:applied.reservation_id};
 }
+async function voucherDeleteTest(request,env,row,user,helpers) {
+  const data=await helpers.body(request);
+  if(data.confirmed!==true || data.testOnly!==true || data.reference!==row.reference) helpers.fail(400,'Bitte bestätige die Testbestellung ohne tatsächliche Kundenzahlung und gib ihre Bestellreferenz genau ein.','confirmation_required');
+  // Check inside the same D1 transaction as deletion: a concurrent reservation
+  // or redemption must never be removed after a stale details view was opened.
+  const eligible=`reserved_cents=0 AND (balance_cents=amount_cents OR status='refunded')
+    AND NOT EXISTS(SELECT 1 FROM voucher_reservations vr WHERE vr.voucher_id=gift_vouchers.id AND vr.status IN ('active','redeemed'))
+    AND NOT EXISTS(SELECT 1 FROM voucher_operations vo WHERE vo.voucher_id=gift_vouchers.id AND vo.kind='redeem' AND vo.applied=1)
+    AND (confirmation_lease_at IS NULL OR confirmation_lease_at<?)
+    AND (gift_lease_at IS NULL OR gift_lease_at<?)`;
+  const now=Date.now(),leaseBefore=now-10*60000;
+  const selection=`SELECT id FROM gift_vouchers WHERE id=? AND ${eligible}`;
+  const result=await env.DB.batch([
+    voucherStatement(env,`INSERT INTO audit_events(id,user_id,action,target_id,created_at) SELECT ?,?,'voucher_test_deleted',id,? FROM gift_vouchers WHERE id=? AND ${eligible}`,crypto.randomUUID(),user.id,now,row.id,leaseBefore,leaseBefore),
+    voucherStatement(env,`DELETE FROM voucher_reservations WHERE voucher_id IN (${selection})`,row.id,leaseBefore,leaseBefore),
+    voucherStatement(env,`DELETE FROM voucher_operations WHERE voucher_id IN (${selection})`,row.id,leaseBefore,leaseBefore),
+    voucherStatement(env,`DELETE FROM gift_vouchers WHERE id=? AND ${eligible} RETURNING id`,row.id,leaseBefore,leaseBefore)
+  ]);
+  if(!result[3].results?.length) helpers.fail(409,'Der Gutschein wurde bereits eingelöst, ist noch reserviert oder wird gerade per E-Mail verschickt. Bitte lade die Ansicht neu und gib gegebenenfalls die Reservierung frei.','voucher_in_use');
+  return helpers.json({ok:true,deleted:true});
+}
 async function voucherAdmin(request,env,path,helpers) {
   const mutate=!['GET','HEAD'].includes(request.method); const user=await helpers.requireUser(request,env,mutate,true);
   if (path==='/admin/vouchers' && request.method==='GET') {
@@ -192,6 +216,7 @@ async function voucherAdmin(request,env,path,helpers) {
   if (!row) helpers.fail(404,'Der Gutschein wurde nicht gefunden.','voucher_not_found');
   const action=match[2];
   if (!action && request.method==='GET') return helpers.json({voucher:await voucherObject(env,row,true)});
+  if (!action && request.method==='DELETE') return voucherDeleteTest(request,env,row,user,helpers);
   if (action==='pdf' && request.method==='GET') return voucherPdfResponse(row,helpers);
   if (request.method!=='POST') helpers.fail(405,'Diese Aktion ist nicht verfügbar.');
   const data=await helpers.body(request);

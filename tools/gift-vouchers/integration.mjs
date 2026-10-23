@@ -12,7 +12,8 @@ const text={
 export function integrateGiftVouchers(doc,relative){
  integrateVoucherLegal(doc,relative);
  const lang=/(?:-en|\/en)\.html$/.test(relative)?'en':/(?:-bs|\/bs)\.html$/.test(relative)?'bs':'de',t=text[lang],suffix=lang==='de'?'':'-'+lang,prefix=relative.includes('/')?'../':'';
- const landing=prefix+'gutscheine'+suffix+'.html';
+ const privateVoucher=/^(?:gutscheine-kaufen|gutscheinbedingungen)(?:-(?:en|bs))?\.html$/.test(relative);
+ const landing=(privateVoucher?'https://liza-memories-photography.com/':prefix)+'gutscheine'+suffix+'.html';
  if(doc.body.classList.contains('client-portal')||relative.startsWith('galerie/')||relative.startsWith('tools/'))return;
  // Keep one direct entry between the FAQ group and Contact on desktop and mobile.
  doc.querySelectorAll('header .price-dropdown [data-gift-nav],header #mobile-price-gift').forEach(n=>n.remove());
@@ -29,10 +30,18 @@ export function integrateGiftVouchers(doc,relative){
  if(foot&&!foot.querySelector('[data-gift-nav]')){const a=doc.createElement('a');a.href=landing;a.textContent=t.label;a.dataset.giftNav='';const contact=foot.querySelector('[data-i18n="footer_contact"]');if(contact)contact.before(a);else foot.prepend(a);}
  // An independent gift section is not a seventh shooting/service card.
  if(/^index(?:-(?:en|bs))?\.html$/.test(relative)){
+  const faqTopics=doc.querySelector('#faq .faq-topic-links');
+  if(faqTopics){
+   const existing=[...faqTopics.querySelectorAll('[data-gift-faq],a[href^="gutscheine"]')];
+   let faqLink=existing.shift();existing.forEach(n=>n.remove());
+   if(!faqLink){faqLink=doc.createElement('a');faqTopics.append(faqLink);}
+   faqLink.href=landing+'#faq';faqLink.dataset.giftFaq='';
+   faqLink.textContent={de:'Gutschein-FAQ',en:'Gift voucher FAQ',bs:'FAQ o poklon-bonovima'}[lang];
+  }
   let block=doc.querySelector('[data-gift-home-section]');
   if(!block){block=doc.createElement('section');block.className='gv-home-gift';block.dataset.giftHomeSection='';block.setAttribute('aria-labelledby','gift-home-title');block.innerHTML='<div><p class="gv-home-gift-kicker"></p><h2 id="gift-home-title"></h2><p class="gv-home-gift-text"></p></div><a></a>';const target=doc.querySelector('#direct-contact-card')?.closest('section')||doc.querySelector('#contact')||doc.querySelector('main')?.lastElementChild;if(target)target.before(block);}
   if(block){block.querySelector('.gv-home-gift-kicker').textContent=t.kicker;block.querySelector('h2').textContent=t.title;block.querySelector('.gv-home-gift-text').textContent=t.copy;const a=block.querySelector('a');a.href=landing;a.textContent=t.button+' ↗';}
-  if(!doc.querySelector('link[data-gift-styles]')){const css=doc.createElement('link');css.rel='stylesheet';css.href='gutscheine.css?v=20261023';css.dataset.giftStyles='';doc.head.append(css);}
+  if(!doc.querySelector('link[data-gift-styles]')){const css=doc.createElement('link');css.rel='stylesheet';css.href='gutscheine.css?v=20261023-refinement';css.dataset.giftStyles='';doc.head.append(css);}
  }
 }
 export async function applyGiftVoucherIntegrations(root){

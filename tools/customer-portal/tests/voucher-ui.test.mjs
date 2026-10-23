@@ -12,7 +12,7 @@ function harness({lang='de',vouchers=[voucherFixture()]}={}){
  window.fetch=async(path,options={})=>{const body=options.body?JSON.parse(options.body):undefined;requests.push({path,method:options.method||'GET',headers:options.headers,body});let data;
   if(path==='/api/session')data={user:{id:'admin',name:'Emina',role:'admin'},csrf:'test-csrf',capabilities:{transferConfigured:true}};
   else if(path==='/api/admin/vouchers')data={vouchers};
-  else if(/^\/api\/admin\/vouchers\/[^/]+$/.test(path))data={voucher:vouchers.find(item=>item.id===path.split('/').at(-1))};
+  else if(/^\/api\/admin\/vouchers\/[^/]+$/.test(path)){if(options.method==='DELETE'){if(mutation)return mutation(path,options,body);vouchers=vouchers.filter(item=>item.id!==path.split('/').at(-1));data={ok:true,deleted:true};}else data={voucher:vouchers.find(item=>item.id===path.split('/').at(-1))};}
   else if(/^\/api\/admin\/vouchers\/[^/]+\//.test(path)){if(mutation)return mutation(path,options,body);data={ok:true,voucher:vouchers.find(item=>item.id===path.split('/').at(-2)),emailSent:true};}
   else if(path==='/api/admin/galleries')data={galleries:[]};else if(path==='/api/admin/orders')data={orders:[]};else if(path==='/api/admin/settings')data={settings:{}};else if(path==='/api/admin/activity')data={activities:[]};else data={ok:true};
   return {ok:true,status:200,json:async()=>structuredClone(data)};
@@ -20,7 +20,7 @@ function harness({lang='de',vouchers=[voucherFixture()]}={}){
  window.eval(translationSource.replace('export const translations =','window.portalTranslations ='));window.orderConsent=orderConsent;window.ORDER_CONSENT_VERSION=ORDER_CONSENT_VERSION;
  window.eval(portalSource.replace("import { ORDER_CONSENT_VERSION, orderConsent } from './order-consent.js';",'const {ORDER_CONSENT_VERSION,orderConsent}=window;').replace("import { translations } from './translations.js';",'const translations=window.portalTranslations;').replace(/initialise\(\);\s*$/,'window.ui={state,loadSession,loadAdmin,onAction,onSubmit,onChange,showVoucherDetails,voucherOperationDialog,voucherAmountCents};'));
  const ui=window.ui,action=async(name,attrs={})=>{const target=[...window.document.querySelectorAll(`[data-action="${name}"]`)].find(node=>Object.entries(attrs).every(([key,value])=>node.dataset[key]===value));assert.ok(target,'Missing action '+name);await ui.onAction({target,preventDefault(){}});};
- return {dom,window,ui,requests,action,get vouchers(){return vouchers;},set mutation(value){mutation=value;},async start(){await ui.loadSession();ui.state.adminTab='vouchers';await ui.loadAdmin();},async submit(values={}){const form=window.document.querySelector('#portal-voucher-operation');for(const[name,value]of Object.entries(values)){const field=form.elements.namedItem(name);if(field.type==='checkbox')field.checked=value;else field.value=value;}await ui.onSubmit({target:form,preventDefault(){}});return form;}};
+ return {dom,window,ui,requests,action,get vouchers(){return vouchers;},set mutation(value){mutation=value;},async start(){await ui.loadSession();ui.state.adminTab='vouchers';await ui.loadAdmin();},async submit(values={}){const form=window.document.querySelector('#portal-voucher-operation, #portal-voucher-delete');for(const[name,value]of Object.entries(values)){const field=form.elements.namedItem(name);if(field.type==='checkbox')field.checked=value;else field.value=value;}await ui.onSubmit({target:form,preventDefault(){}});return form;}};
 }
 function response(data,status=200){return {ok:status<400,status,json:async()=>structuredClone(data)};}
 
@@ -79,3 +79,36 @@ test('withdrawal keeps a reservation releasable so an unused gift can subsequent
 test('admin search queries the server for older vouchers without posting or changing credit',async t=>{const h=harness();t.after(()=>h.dom.window.close());await h.start();const search=h.window.document.querySelector('[name="voucherSearch"]');search.value='Ältere Käuferin';h.ui.onChange({target:search});const form=h.window.document.querySelector('#portal-voucher-search');await h.ui.onSubmit({target:form,preventDefault(){}});assert.ok(h.requests.some(row=>row.path==='/api/admin/vouchers?q='+encodeURIComponent('Ältere Käuferin')&&row.method==='GET'));assert.equal(h.requests.some(row=>row.method==='POST'),false);});
 
 test('late payment for a withdrawn order is recorded without claiming an active voucher was sent',async t=>{const h=harness({vouchers:[voucherFixture({status:'withdrawal_requested',paymentStatus:'unpaid',code:null,availableCents:0})]});t.after(()=>h.dom.window.close());await h.start();await h.action('voucher-open',{id:'v1'});await h.action('voucher-operation',{operation:'paid'});assert.match(h.window.document.querySelector('dialog').textContent,/Code bleibt gesperrt/);h.mutation=()=>response({ok:true,voucher:voucherFixture({status:'withdrawal_requested',availableCents:0}),emailSent:false});await h.submit({confirmed:true});assert.match(h.window.document.querySelector('#portal-toast').textContent,/bleibt wegen des Rücktritts gesperrt/);assert.equal(h.window.document.querySelector('[data-operation="redeem"]'),null);});
+
+
+test('test voucher deletion can be cancelled without making a mutation',async t=>{
+ const h=harness();t.after(()=>h.dom.window.close());await h.start();await h.action('voucher-open',{id:'v1'});await h.action('voucher-delete',{id:'v1'});
+ const dialog=h.window.document.querySelector('dialog');assert.match(dialog.textContent,/ohne tatsächliche Kundenzahlung/);assert.match(dialog.textContent,/nicht rückgängig/);
+ await h.action('voucher-back',{id:'v1'});assert.equal(h.requests.some(row=>row.method==='DELETE'),false);assert.ok(h.window.document.querySelector('[data-action="voucher-delete"]'));assert.equal(h.ui.state.adminVouchers.length,1);
+});
+
+test('deletion requires the test acknowledgement and an exact reference then removes only that voucher',async t=>{
+ for(const paid of [false,true]){
+  const h=harness({vouchers:[voucherFixture({status:paid?'active':'pending',paymentStatus:paid?'paid':'unpaid'}),voucherFixture({id:'v2',reference:'LZ-G-2222'})]});t.after(()=>h.dom.window.close());await h.start();await h.action('voucher-open',{id:'v1'});await h.action('voucher-delete',{id:'v1'});
+  await h.submit({reference:'LZ-G-1234'});assert.equal(h.requests.some(row=>row.method==='DELETE'),false);
+  await h.submit({reference:'LZ-G-wrong',testOnly:true});assert.equal(h.requests.some(row=>row.method==='DELETE'),false);assert.match(h.window.document.querySelector('.portal-form-message').textContent,/Bestellnummer genau/);
+  await h.submit({reference:'LZ-G-1234'});const request=h.requests.find(row=>row.method==='DELETE');assert.equal(request.path,'/api/admin/vouchers/v1');assert.equal(request.headers['X-CSRF-Token'],'test-csrf');assert.deepEqual(request.body,{confirmed:true,testOnly:true,reference:'LZ-G-1234'});
+  assert.equal(h.window.document.querySelector('dialog'),null);assert.deepEqual([...h.window.document.querySelectorAll('[data-voucher-id]')].map(row=>row.dataset.voucherId),['v2']);assert.equal(h.ui.state.adminVouchers.length,1);assert.match(h.window.document.querySelector('#portal-toast').textContent,/Testgutschein gelöscht/);
+ }
+});
+
+test('server refusal of a reserved or redeemed voucher leaves the voucher and confirmation visible',async t=>{
+ const h=harness();t.after(()=>h.dom.window.close());await h.start();await h.action('voucher-open',{id:'v1'});await h.action('voucher-delete',{id:'v1'});
+ h.mutation=()=>response({error:'voucher_in_use'},409);await h.submit({reference:'LZ-G-1234',testOnly:true});assert.ok(h.window.document.querySelector('#portal-voucher-delete'));assert.ok(h.window.document.querySelector('[data-voucher-id="v1"]'));assert.match(h.window.document.querySelector('.portal-form-message').textContent,/bereits eingelöst oder hat eine aktive Reservierung/);assert.equal(h.ui.state.adminBusy,false);
+});
+
+test('deletion prevents repeat submission and cancellation while awaiting the server',async t=>{
+ const h=harness();t.after(()=>h.dom.window.close());await h.start();await h.action('voucher-open',{id:'v1'});await h.action('voucher-delete',{id:'v1'});let finish;
+ h.mutation=()=>new Promise(resolve=>{finish=()=>resolve(response({ok:true,deleted:true}));});const submission=h.submit({reference:'LZ-G-1234',testOnly:true});await new Promise(resolve=>setTimeout(resolve,0));await h.submit();await h.action('voucher-back');await h.action('close-dialog');assert.ok(h.window.document.querySelector('#portal-voucher-delete'));assert.equal(h.requests.filter(row=>row.method==='DELETE').length,1);finish();await submission;assert.equal(h.ui.state.adminBusy,false);assert.equal(h.window.document.querySelector('dialog'),null);
+});
+
+test('test deletion controls and safety wording are translated in DE, EN and BS',async t=>{
+ for(const [lang,label,phrase] of [['de','Testgutschein löschen','ohne tatsächliche Kundenzahlung'],['en','Delete test voucher','without an actual customer payment'],['bs','Obriši testni bon','bez stvarne uplate kupca']]){
+  const h=harness({lang});t.after(()=>h.dom.window.close());await h.start();await h.action('voucher-open',{id:'v1'});await h.action('voucher-delete',{id:'v1'});const dialog=h.window.document.querySelector('dialog');assert.ok(dialog.textContent.includes(label));assert.ok(dialog.textContent.includes(phrase));assert.doesNotMatch(dialog.textContent,/voucherDelete/);
+ }
+});

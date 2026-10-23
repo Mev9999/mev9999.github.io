@@ -27,7 +27,8 @@ export async function validateInterface(cache){
  }
  for(const [file,{document:d}] of cache){
   if(/^(?:gutscheine-kaufen|gutscheinbedingungen)(?:-(?:en|bs))?\.html$/.test(file)){
-   assert(d.querySelector('.gv-checkout-header img'),file+' voucher checkout header');
+   assert(d.querySelector('header.compact-site-header nav.primary'),file+' shared voucher checkout header');
+   assert(d.querySelector('footer .footer-shell'),file+' shared voucher checkout footer');
    assert(d.querySelector('link[href^="gutscheine.css"]'),file+' voucher styles');
    assert.equal(d.querySelector('meta[name="referrer"]')?.content,'no-referrer',file+' private order links');
    assert(d.querySelector('meta[name="robots"]')?.content.includes('noindex'),file+' private checkout indexing');

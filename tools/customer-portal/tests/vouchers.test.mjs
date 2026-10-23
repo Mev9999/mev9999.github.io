@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { JSDOM } from 'jsdom';
 import { createHarness, cookieValue, ORIGIN } from './harness.mjs';
 
 const orderInput = (overrides={}) => ({amountCents:10000,buyerName:'Lokale Testkäuferin',buyerEmail:'gift@example.test',buyerAddress:'Teststraße 1\n8010 Graz',giftTo:'Željka',giftFrom:'Emina',message:'Viel Freude mit deinen Erinnerungen!',language:'de',termsAccepted:true,idempotencyKey:crypto.randomUUID(),...overrides});
@@ -124,7 +125,7 @@ test('delayed payment starts the online period at the first successful gift mail
   const gift=h.mail.messages.find(message=>message.attachments?.some(file=>file.content_type==='application/pdf'));
   assert.match(gift.text,/ersten erfolgreichen Versand/);assert.match(gift.text,/erneute Zusendung startet die Frist nicht neu/);
   const confirmation=gift.attachments.find(file=>file.filename.startsWith('Bestellbestaetigung-'));
-  assert.ok(Buffer.from(confirmation.content,'base64').toString().includes(original.contract_text));
+  assert.equal(new JSDOM(Buffer.from(confirmation.content,'base64').toString()).window.document.querySelector('[data-contract-text]').textContent,original.contract_text);
   const withdrawn=await h.request(`/api/vouchers/orders/${purchase.order.id}/withdraw`,{method:'POST',body:{token:purchase.accessToken,confirmed:true}});assert.equal(withdrawn.status,200);
 }));
 
@@ -177,10 +178,12 @@ test('a late bank payment is recorded after withdrawal without reactivating the 
 }));
 
 test('gift text is validated before storing an order or accepting payment',()=>withVoucher(async h=>{
-  for(const values of [{giftTo:'Name 👋'},{message:'🌸 Schöne Fotos'},{giftTo:'A'.repeat(81)},{message:'A'.repeat(301)},{message:'W'.repeat(300)}]) {
+  for(const values of [{giftTo:'Name 👋'},{message:'🌸 Schöne Fotos'},{giftTo:'A'.repeat(81)},{message:'A'.repeat(301)}]) {
     const result=await h.request('/api/vouchers/orders',{method:'POST',body:orderInput(values)});assert.equal(result.status,400,result.data?.error);
   }
   assert.equal((await h.DB.prepare('SELECT COUNT(*) AS n FROM gift_vouchers').first()).n,0);
+  const longest=await h.request('/api/vouchers/orders',{method:'POST',body:orderInput({giftTo:'W'.repeat(80),giftFrom:'W'.repeat(80),message:'W'.repeat(300)})});
+  assert.equal(longest.status,201,longest.data?.error);
 }));
 
 test('large admin voucher list batches details within D1 query limits',()=>withVoucher(async h=>{

@@ -1117,4 +1117,14 @@ Object.assign(rows, {
     "Uplata je evidentirana. Bon ostaje blokiran zbog odustanka."
   ]
 });
+Object.assign(rows, {
+  voucherDeleteTest: ['Testgutschein löschen', 'Delete test voucher', 'Obriši testni bon'],
+  voucherDeleteHint: ['Nur für Testbestellungen ohne tatsächliche Kundenzahlung. Die Bestellung und der Gutschein werden endgültig gelöscht. Das lässt sich nicht rückgängig machen. Bereits eingelöste Gutscheine oder aktive Reservierungen können nicht gelöscht werden.', 'Only for test orders without an actual customer payment. The order and voucher will be permanently deleted. This cannot be undone. Vouchers with redemptions or active reservations cannot be deleted.', 'Samo za testne narudžbe bez stvarne uplate kupca. Narudžba i bon će biti trajno obrisani. Ova radnja se ne može poništiti. Bonovi koji su iskorišteni ili imaju aktivne rezervacije ne mogu se obrisati.'],
+  voucherDeleteReference: ['Bestellnummer zur Bestätigung eingeben', 'Enter the order reference to confirm', 'Unesi broj narudžbe za potvrdu'],
+  voucherDeleteConfirm: ['Dies ist eine Testbestellung ohne tatsächliche Kundenzahlung. Gutschein und Bestelllink werden endgültig ungültig.', 'This is a test order without an actual customer payment. The voucher and order link will become permanently invalid.', 'Ovo je testna narudžba bez stvarne uplate kupca. Bon i poveznica narudžbe trajno će prestati važiti.'],
+  voucherDeleteFinal: ['Testgutschein endgültig löschen', 'Permanently delete test voucher', 'Trajno obriši testni bon'],
+  voucherDeleteReferenceRequired: ['Bitte die angezeigte Bestellnummer genau eingeben.', 'Enter the displayed order reference exactly.', 'Unesi prikazani broj narudžbe tačno kako je naveden.'],
+  voucherDeleteBlocked: ['Der Gutschein wurde bereits eingelöst oder hat eine aktive Reservierung. Er kann nicht gelöscht werden. Bitte den Verlauf prüfen.', 'The voucher has already been redeemed or has an active reservation. It cannot be deleted. Check its history.', 'Bon je već iskorišten ili ima aktivnu rezervaciju. Ne može se obrisati. Provjeri historiju.'],
+  voucherDeleted: ['Testgutschein gelöscht. Code und Bestelllink sind ungültig.', 'Test voucher deleted. The code and order link are invalid.', 'Testni bon je obrisan. Kod i poveznica narudžbe više ne važe.']
+});
 export const translations = Object.fromEntries(['de','en','bs'].map((lang,index)=>[lang,Object.fromEntries(Object.entries(rows).map(([key,values])=>[key,values[index]]))]));
