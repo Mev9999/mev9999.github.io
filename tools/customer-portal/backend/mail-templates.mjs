@@ -69,7 +69,7 @@ function mailBase64(content) {
 
 /** Voucher messages use the same presentation components as gallery emails. */
 export function renderVoucherEmail(data) {
-  if (!['confirmation', 'gift', 'withdrawal'].includes(data?.kind)) throw new TypeError('Unbekannte Gutschein-E-Mail.');
+  if (!['confirmation', 'gift', 'withdrawal', 'shipped', 'adminOrder'].includes(data?.kind)) throw new TypeError('Unbekannte Gutschein-E-Mail.');
   const language = ['de', 'en', 'bs'].includes(data.language) ? data.language : 'de';
   const copy = {
     de: {
@@ -121,6 +121,26 @@ export function renderVoucherEmail(data) {
   const url = mailUrl(data.actionUrl, 'actionUrl');
   if (!url) throw new TypeError('Für diese E-Mail ist eine passende HTTP(S)-URL erforderlich.');
   const reference = mailLine(data.reference);
+  if (data.kind === 'adminOrder') {
+    const title='Neue Gutscheinbestellung eingegangen',subject=`${title} · ${reference}`;
+    const intro='Hallo Emina, eine neue Gutscheinbestellung ist eingegangen. Schau dir die Bestellung in deiner Portalverwaltung an. Den Zahlungseingang bestätigst du dort, sobald die Überweisung angekommen ist.';
+    const rows=[['Bestellung',reference],['Käufer',mailLine(data.customerName)],['E-Mail',mailLine(data.customerEmail)],['Gutscheinwert',mailMoney(data.amountCents,'EUR')],['Zustellung',data.deliveryMethod==='post'?'PDF per E-Mail und Gutschein mit Umschlag per Post':'PDF per E-Mail'],['Gesamtbetrag',mailMoney(data.totalCents??data.amountCents,'EUR')]];
+    const label='Portalverwaltung öffnen';
+    return {subject,text:[intro,'',...rows.map(([label,value])=>`${label}: ${value}`),'',`${label}: ${url}`].join('\n'),html:mailShell(subject,title,mailParagraph(mailEscape(intro))+mailRows(rows)+mailButton(label,url),'de')};
+  }
+  if (data.kind === 'shipped') {
+    const shippingCopy = {
+      de: ['Dein Gutschein ist per Post unterwegs', 'Dein gedruckter Gutschein im passenden LiZa-Memories-Umschlag ist jetzt auf dem Weg zur angegebenen Lieferadresse. So kommt dein Geschenk auch in physischer Form bei dir oder deinem Lieblingsmenschen an.', 'Üblicherweise trifft die Sendung innerhalb von zwei bis drei Werktagen nach Versand ein.', 'Die bereits erhaltene PDF und der gedruckte Gutschein verwenden denselben Code und teilen sich das Guthaben. Viel Freude beim Verschenken!'],
+      en: ['Your voucher is on its way by post', 'Your printed voucher in its matching LiZa Memories envelope is now on its way to the shipping address you provided. Your gift will soon arrive in physical form for you or your favourite person.', 'Delivery usually takes two to three working days after dispatch.', 'Your PDF and the printed voucher use the same code and share the same credit. Enjoy giving your gift!'],
+      bs: ['Tvoj poklon-bon je na putu poštom', 'Tvoj štampani bon u odgovarajućoj LiZa Memories koverti sada je na putu na navedenu adresu dostave. Poklon tako stiže i u fizičkom obliku tebi ili tvojoj dragoj osobi.', 'Pošiljka obično stiže u roku od dva do tri radna dana nakon slanja.', 'PDF i štampani bon imaju isti kod i zajednički kredit. Uživaj u darivanju!'],
+    }[language];
+    const greeting = `${copy.hello}${data.customerName ? ' '+mailLine(data.customerName) : ''},`;
+    const address = data.shippingAddress;
+    const rows = [[copy.order, reference], [copy.deliveryAddress, address ? [address.name, address.street, `${address.postalCode} ${address.city}`, {de:'Österreich',en:'Austria',bs:'Austrija'}[language]].map(mailLine).join(' · ') : '']];
+    const subject = `${shippingCopy[0]} · ${reference}`;
+    const content = mailParagraph(mailEscape(greeting))+mailParagraph(mailEscape(shippingCopy[1]))+mailRows(rows)+mailParagraph(mailEscape(shippingCopy[2]))+mailButton(copy.button,url)+mailParagraph(mailEscape(shippingCopy[3]),true);
+    return {subject,html:mailShell(subject,shippingCopy[0],content,language),text:[greeting,'',shippingCopy[1],'',...rows.map(([label,value])=>`${label}: ${value}`),'',shippingCopy[2],'',`${copy.button}: ${url}`,'',shippingCopy[3],'',copy.signature,'Emina','',...mailFooterLinks.map(([label,link])=>`${label}: ${link}`)].join('\n')};
+  }
   const gift = data.kind === 'gift';
   const withdrawal = data.kind === 'withdrawal';
   const postal = data.deliveryMethod === 'post';

@@ -16,7 +16,7 @@ test('postal order separates face value, server-priced postage and payment total
   assert.equal(saved.amountCents,10000);assert.equal(saved.balanceCents,10000);assert.equal(saved.shippingCents,480);assert.equal(saved.totalCents,10480);assert.equal(saved.deliveryMethod,'post');assert.equal(saved.shippedAt,null);assert.equal(transfer.amountCents,10480);assert.deepEqual(saved.shippingAddress,address);assert.notEqual(saved.buyerAddress,address.street);
   assert.match(saved.contractText,/Postversand innerhalb Österreichs: (?:€\s*)?4,80/);assert.match(saved.contractText,/Gesamtbetrag: (?:€\s*)?104,80/);assert.match(saved.contractText,/14 Tage ab Erhalt/);assert.match(saved.contractText,/Standard-Versandkosten/);assert.ok(saved.contractText.includes(address.street));assert.doesNotMatch(saved.contractText,/Kein Versandentgelt/);
   const mail=h.mail.messages[0];assert.match(mail.text,/Gesamtbetrag: 104,80/);assert.match(mail.text,/Betrag: 104,80/);assert.match(mail.text,/Gutscheinwert: 100,00/);assert.ok(mail.text.includes(address.street));assert.ok(mail.html.includes(address.street));
-  const repeat=await order(h,body);assert.equal(repeat.status,200);assert.equal(repeat.data.order.id,saved.id);assert.equal(h.mail.messages.length,1);
+  const repeat=await order(h,body);assert.equal(repeat.status,200);assert.equal(repeat.data.order.id,saved.id);assert.equal(h.mail.messages.length,2);
   for(const changed of [{...body,shippingAddress:{...address,city:'Wien'}},{...body,deliveryMethod:'email'}])assert.equal((await order(h,changed)).status,409);
   assert.equal((await h.DB.prepare('SELECT COUNT(*) AS n FROM voucher_shipping').first()).n,1);
 }));
@@ -55,7 +55,8 @@ test('dispatch marking requires admin, CSRF, actual-send confirmation and a paid
   const mailCount=h.mail.messages.length;
   const concurrent=await Promise.all([action(h,id,actor,'shipped',{confirmed:true}),action(h,id,actor,'shipped',{confirmed:true})]);
   assert.deepEqual(concurrent.map(r=>r.status),[200,200]);const first=concurrent[0].data.voucher.shippedAt;assert.ok(first);assert.equal(concurrent[1].data.voucher.shippedAt,first);
-  assert.equal((await action(h,id,actor,'shipped',{confirmed:true})).data.voucher.shippedAt,first);assert.equal(h.mail.messages.length,mailCount);
+  assert.equal((await action(h,id,actor,'shipped',{confirmed:true})).data.voucher.shippedAt,first);assert.equal(h.mail.messages.length,mailCount+1);
+  const dispatch=h.mail.messages.at(-1);assert.match(dispatch.subject,/per Post unterwegs/);assert.ok(dispatch.text.includes(address.street));assert.match(dispatch.text,/zwei bis drei Werktagen/);assert.equal(dispatch.attachments,undefined);
   assert.equal((await h.DB.prepare("SELECT COUNT(*) AS n FROM audit_events WHERE action='voucher_shipped' AND target_id=?").bind(id).first()).n,1);
   const digital=await order(h,input({deliveryMethod:'email'})),digitalId=digital.data.order.id;await action(h,digitalId,actor,'paid');assert.equal((await action(h,digitalId,actor,'shipped',{confirmed:true})).status,409);
   await h.request(`/api/vouchers/orders/${id}/withdraw`,{method:'POST',body:{token:bought.data.accessToken,confirmed:true}});
@@ -85,7 +86,7 @@ test('postal deletion snapshots detect concurrent dispatch and cascade only the 
 
 test('concurrent retries of postal purchase create exactly one contract, address and confirmation',()=>setup(async h=>{
   const body=input();const responses=await Promise.all([order(h,body),order(h,body)]);assert.deepEqual(responses.map(r=>r.status).sort(),[200,201]);assert.equal(responses[0].data.order.id,responses[1].data.order.id);
-  assert.equal((await h.DB.prepare('SELECT COUNT(*) AS n FROM gift_vouchers').first()).n,1);assert.equal((await h.DB.prepare('SELECT COUNT(*) AS n FROM voucher_shipping').first()).n,1);assert.equal(h.mail.messages.length,1);
+  assert.equal((await h.DB.prepare('SELECT COUNT(*) AS n FROM gift_vouchers').first()).n,1);assert.equal((await h.DB.prepare('SELECT COUNT(*) AS n FROM voucher_shipping').first()).n,1);assert.equal(h.mail.messages.length,2);
 }));
 
 test('English and Bosnian postal contracts and emails disclose the fee, total and same-code delivery',()=>setup(async h=>{
@@ -96,4 +97,44 @@ test('English and Bosnian postal contracts and emails disclose the fee, total an
     assert.doesNotMatch(contract,/No delivery charge|Bez troškova dostave/);
     assert.match(contract,language==='en'?/receive the physical voucher/:/primitka fizičkog bona/);
   }
+}));
+
+test('dispatch email failure preserves dispatch and allows one safe retry without changing voucher dates or credit',()=>setup(async h=>{
+ const bought=await order(h),id=bought.data.order.id,actor=await admin(h);await action(h,id,actor,'paid');
+ const before=(await h.request('/api/admin/vouchers/'+id,actor)).data.voucher;
+ const send=h.env.__TEST_MAIL.send.bind(h.env.__TEST_MAIL);let reject=true;
+ h.env.__TEST_MAIL.send=async message=>{if(reject&&message.subject.includes('per Post unterwegs'))throw new Error('Mail offline');return send(message);};
+ const failed=await action(h,id,actor,'shipped',{confirmed:true});assert.equal(failed.status,200);assert.equal(failed.data.emailSent,false);assert.ok(failed.data.voucher.shippedAt);
+ reject=false;const retried=await action(h,id,actor,'shipped',{confirmed:true});assert.equal(retried.data.emailSent,true);assert.equal(retried.data.voucher.shippedAt,failed.data.voucher.shippedAt);assert.equal(retried.data.voucher.balanceCents,before.balanceCents);assert.equal(retried.data.voucher.firstGiftSentAt,before.firstGiftSentAt);assert.equal(retried.data.voucher.paidAt,before.paidAt);
+ assert.equal((await action(h,id,actor,'shipped',{confirmed:true})).data.emailSent,true);assert.equal(h.mail.messages.filter(m=>m.subject.includes('per Post unterwegs')).length,1);
+}));
+
+test('shipping confirmation shares the portal mail design in DE EN BS and never requests payment again',()=>setup(async h=>{
+ const actor=await admin(h);
+ for(const language of ['de','en','bs']){
+  const bought=await order(h,input({language})),id=bought.data.order.id;await action(h,id,actor,'paid');
+  const result=await action(h,id,actor,'shipped',{confirmed:true});assert.equal(result.data.emailSent,true);
+  const mail=h.mail.messages.at(-1);assert.match(mail.html,/LiZa/);assert.ok(mail.text.includes(address.street));assert.ok(mail.text.includes(bought.data.order.reference));assert.doesNotMatch(mail.html,/<script/);assert.equal(mail.attachments,undefined);
+  assert.match(mail.text,language==='de'?/zwei bis drei Werktagen/:language==='en'?/two to three working days/:/dva do tri radna dana/);
+  assert.doesNotMatch(mail.text,/Deine Überweisung|Your bank transfer|Tvoja uplata/);
+ }
+}));
+
+test('new voucher orders notify the configured studio once without sharing buyer access tokens',()=>setup(async h=>{
+ h.env.CONTACT_EMAIL='studio@example.test';
+ for(const deliveryMethod of ['email','post']){
+  const body=input({deliveryMethod}),responses=await Promise.all([order(h,body),order(h,body)]);assert.deepEqual(responses.map(r=>r.status).sort(),[200,201]);const purchase=responses[0].data;
+  await order(h,body);
+  const notices=h.mail.messages.filter(m=>m.to==='studio@example.test'&&m.subject.includes(purchase.order.reference));assert.equal(notices.length,1);const mail=notices[0];
+  assert.match(mail.subject,/Neue Gutscheinbestellung eingegangen/);assert.ok(mail.text.includes(body.buyerEmail));assert.ok(mail.html.includes('mail-action'));assert.ok(mail.html.includes('mail-logo'));assert.ok(mail.html.includes('mail-footer'));assert.equal(mail.attachments,undefined);assert.ok(!mail.html.includes(purchase.accessToken));assert.ok(!mail.text.includes(purchase.accessToken));
+  assert.match(mail.text,deliveryMethod==='post'?/104,80/:/100,00/);assert.match(mail.text,deliveryMethod==='post'?/mit Umschlag per Post/:/PDF per E-Mail/);
+ }
+}));
+
+test('failed studio notification does not lose the order or buyer confirmation and safely retries',()=>setup(async h=>{
+ const original=h.env.__TEST_MAIL.send.bind(h.env.__TEST_MAIL);let fail=true;
+ h.env.__TEST_MAIL.send=async mail=>{if(fail&&mail.subject.includes('Neue Gutscheinbestellung'))throw new Error('Studio mail unavailable');return original(mail);};
+ const body=input(),created=await order(h,body);assert.equal(created.status,201);assert.equal(created.data.emailSent,true);assert.equal(created.data.adminNotified,false);
+ fail=false;const retried=await order(h,body);assert.equal(retried.status,200);assert.equal(retried.data.adminNotified,true);assert.equal(retried.data.order.id,created.data.order.id);
+ await order(h,body);assert.equal(h.mail.messages.filter(m=>m.subject.includes('Neue Gutscheinbestellung')).length,1);assert.equal(h.mail.messages.filter(m=>m.to===body.buyerEmail).length,1);
 }));

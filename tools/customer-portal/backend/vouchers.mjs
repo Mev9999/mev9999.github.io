@@ -163,7 +163,8 @@ async function voucherPurchase(request,env,helpers) {
   }
   if (!helpers.safeEqual(row.purchase_hash,purchaseHash)) helpers.fail(409,'Diese Bestellung wurde bereits mit anderen Angaben gespeichert. Bitte starte eine neue Bestellung.','idempotency_conflict');
   const emailSent=await voucherSendMail(env,row,'confirmation',helpers);
-  return helpers.json({...await voucherEnvelope(env,await voucherFirst(env,'SELECT * FROM gift_vouchers WHERE id=?',row.id),helpers),accessToken:await voucherToken(row,env,helpers),emailSent},created?201:200);
+  const adminNotified=await voucherSendNoticeMail(env,row,helpers,true);
+  return helpers.json({...await voucherEnvelope(env,await voucherFirst(env,'SELECT * FROM gift_vouchers WHERE id=?',row.id),helpers),accessToken:await voucherToken(row,env,helpers),emailSent,adminNotified},created?201:200);
 }
 async function voucherBuyer(request,env,voucherId,token,helpers) {
   // Rate limit even unsuccessful token probes, without putting secret tokens in keys.
@@ -296,6 +297,28 @@ async function voucherDeleteTest(request,env,row,user,helpers) {
   }
   return helpers.json({ok:true,deleted:true});
 }
+async function voucherSendNoticeMail(env,row,helpers,adminOrder=false) {
+  const sentId=(adminOrder?'voucher-admin-order-mail:':'voucher-post-mail:')+row.id;
+  const sent=()=>voucherFirst(env,"SELECT id FROM audit_events WHERE id=?",sentId);
+  if(await sent())return true;
+  const now=Date.now();
+  // Share the existing mail lease so simultaneous retries and test deletion cannot race a send.
+  const eligibility=adminOrder?'1=1':"status='active' AND paid_at IS NOT NULL AND EXISTS(SELECT 1 FROM voucher_shipping WHERE voucher_id=gift_vouchers.id AND shipped_at IS NOT NULL)";
+  const claim=await voucherFirst(env,`UPDATE gift_vouchers SET gift_lease_at=? WHERE id=? AND ${eligibility} AND (gift_lease_at IS NULL OR gift_lease_at<?) AND NOT EXISTS(SELECT 1 FROM audit_events WHERE id=?) RETURNING id`,now,row.id,now-10*60000,sentId);
+  if(!claim)return Boolean(await sent());
+  try {
+    const message=renderVoucherEmail({kind:adminOrder?'adminOrder':'shipped',language:adminOrder?'de':row.language,customerName:row.buyer_name,customerEmail:row.buyer_email,reference:row.reference,amountCents:row.amount_cents,...await voucherDelivery(env,row),actionUrl:adminOrder?`${helpers.portalOrigin(env)}${helpers.portalPath(env)}`:await voucherStatusUrl(row,env,helpers)});
+    await helpers.mail(env,{to:adminOrder?helpers.businessContact(env).email:row.buyer_email,...message,idempotencyKey:(adminOrder?'voucher-admin-order/':'voucher-shipped/')+row.id});
+    await env.DB.batch([
+      voucherStatement(env,"INSERT OR IGNORE INTO audit_events(id,action,target_id,created_at) VALUES(?,?,?,?)",sentId,adminOrder?'voucher_admin_order_mail_sent':'voucher_shipping_mail_sent',row.id,Date.now()),
+      voucherStatement(env,'UPDATE gift_vouchers SET gift_lease_at=NULL WHERE id=? AND gift_lease_at=?',row.id,now)
+    ]);
+    return true;
+  } catch {
+    await voucherStatement(env,'UPDATE gift_vouchers SET gift_lease_at=NULL WHERE id=? AND gift_lease_at=?',row.id,now).run();
+    return false;
+  }
+}
 async function voucherMarkShipped(env,row,user,data,helpers) {
   if (data.confirmed!==true) helpers.fail(400,'Bitte bestätige, dass der physische Gutschein tatsächlich per Post versendet wurde.','confirmation_required');
   if (!await voucherShippingReady(env)) helpers.fail(503,'Der Postversand ist noch nicht eingerichtet.','voucher_post_not_configured');
@@ -308,7 +331,8 @@ async function voucherMarkShipped(env,row,user,data,helpers) {
   if (!updated) helpers.fail(404,'Der Gutschein wurde nicht gefunden.','voucher_not_found');
   const delivery=await voucherDelivery(env,updated);
   if (!updated.paid_at||updated.status!=='active'||!delivery.shippedAt) helpers.fail(409,'Nur ein bezahlter, freigegebener Gutschein mit Postversand kann als versendet markiert werden.','voucher_shipping_conflict');
-  return helpers.json({ok:true,voucher:await voucherObject(env,updated,true)});
+  const emailSent=await voucherSendNoticeMail(env,updated,helpers);
+  return helpers.json({ok:true,emailSent,voucher:await voucherObject(env,updated,true)});
 }
 async function voucherAdmin(request,env,path,helpers) {
   const mutate=!['GET','HEAD'].includes(request.method); const user=await helpers.requireUser(request,env,mutate,true);

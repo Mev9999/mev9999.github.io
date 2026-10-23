@@ -99,7 +99,7 @@ test('real voucher purchase, activation, resend and both withdrawal recipients u
     assert.deepEqual(beforeWithdrawal[1].attachments, beforeWithdrawal[2].attachments);
     const result = await h.request(`/api/vouchers/orders/${order.id}/withdraw`, { method: 'POST', body: { token: accessToken, confirmed: true } });
     assert.equal(result.data.emailSent, true);
-    assert.equal(h.mail.messages.length, 5);
+    assert.equal(h.mail.messages.length, 6);
     for (const message of h.mail.messages) {
       assert.ok(doc(message.html).querySelector('.mail-logo'));
       assert.ok(doc(message.html).querySelector('.mail-action'));

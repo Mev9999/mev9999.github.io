@@ -46,6 +46,7 @@
   document.querySelectorAll('[data-shipping-row]').forEach(n=>{n.hidden=!post;});
   document.querySelectorAll('[data-delivery]').forEach(n=>{n.textContent=post?t.postDelivery:t.pdfDelivery;});
   const address=document.getElementById('voucher-shipping-address');address.hidden=!post;
+  document.getElementById('voucher-post-preview').hidden=!post;
   address.querySelectorAll('input').forEach(field=>{field.disabled=!post;field.required=post;});
   input('shippingPostal').setCustomValidity(post&&input('shippingPostal').value&&!/^[1-9]\d{3}$/.test(input('shippingPostal').value.trim())?t.shippingPostalError:'');
   const previewAmount=cents===null?'—':new Intl.NumberFormat(lang==='en'?'en-IE':lang==='bs'?'bs-BA':'de-AT',{style:'currency',currency:'EUR',minimumFractionDigits:cents%100?2:0,maximumFractionDigits:2}).format(cents/100);

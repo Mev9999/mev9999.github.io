@@ -231,4 +231,6 @@ module.exports = {
   "shippingError": "Provjeri potpunu adresu za dostavu u Austriji.",
   "shippingNotReady": "Poštanska dostava trenutno nije dostupna. Odaberi PDF e-mailom ili pokušaj kasnije.",
   "shippingPricingError": "Ponovo učitaj narudžbu i provjeri vrijednost bona i troškove dostave."
+,
+  "postPreview": ["Tvoj bon u štampanom obliku", "Kvalitetan obostrano štampan bon veličine 21 × 9,5 cm, s odgovarajućom LiZa Memories kovertom veličine 22 × 11 cm. Lično popunjen i poslan na tvoju navedenu adresu.", "Nakon slanja dobijaš e-mail. Dostava unutar Austrije obično traje dva do tri radna dana.", "Bon · prednja strana", "Bon · poleđina", "Koverta · pošiljalac", "Koverta · primalac", "Prikaz dizajna: vrijednost, kod bona i lični podaci bit će dodani za tvoju narudžbu."]
 };

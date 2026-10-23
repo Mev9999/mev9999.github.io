@@ -231,4 +231,6 @@ module.exports = {
   "shippingError": "Bitte prüfe die vollständige Lieferadresse in Österreich.",
   "shippingNotReady": "Der Postversand ist gerade nicht verfügbar. Bitte wähle PDF per E-Mail oder versuche es später erneut.",
   "shippingPricingError": "Bitte lade die Bestellung neu und prüfe Gutscheinwert und Versandkosten."
+,
+  "postPreview": ["Dein Gutschein zum Anfassen", "Ein hochwertiger, beidseitig bedruckter Gutschein im Format 21 × 9,5 cm – mit passendem LiZa-Memories-Umschlag in 22 × 11 cm. Persönlich ausgefüllt und an deine angegebene Lieferadresse geschickt.", "Nach dem Versand erhältst du eine E-Mail. Die Zustellung innerhalb Österreichs dauert üblicherweise zwei bis drei Werktage.", "Gutschein · Vorderseite", "Gutschein · Rückseite", "Umschlag · Absenderseite", "Umschlag · Empfängerseite", "Designvorschau: Wert, Gutscheincode und persönliche Angaben werden für deine Bestellung ergänzt."]
 };

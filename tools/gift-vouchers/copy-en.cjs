@@ -231,4 +231,6 @@ module.exports = {
   "shippingError": "Please check the complete delivery address in Austria.",
   "shippingNotReady": "Postal delivery is currently unavailable. Please choose PDF by email or try again later.",
   "shippingPricingError": "Please reload the order and check the voucher value and delivery cost."
+,
+  "postPreview": ["Your voucher, beautifully printed", "A premium double-sided voucher measuring 21 × 9.5 cm, with a matching 22 × 11 cm LiZa Memories envelope. Personally completed and sent to your chosen shipping address.", "You will receive an email when it is dispatched. Delivery within Austria usually takes two to three working days.", "Voucher · front", "Voucher · back", "Envelope · sender side", "Envelope · recipient side", "Design preview: the value, voucher code and personal details will be added for your order."]
 };

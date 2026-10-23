@@ -15,7 +15,7 @@ test('anonymous purchase is server-priced, token protected, immutable and idempo
   const {order,accessToken,statusUrl,transfer}=created.data;
   assert.equal(order.amountCents,10000);assert.equal(order.status,'pending');assert.equal(order.code,null);assert.equal(created.data.voucher,null);assert.equal(transfer.reference,order.reference);assert.equal(transfer.amountCents,10000);assert.ok(statusUrl.includes('gutscheine-kaufen.html#order='));assert.ok(statusUrl.includes(accessToken));
   const row=await h.DB.prepare('SELECT * FROM gift_vouchers WHERE id=?').bind(order.id).first();assert.equal(row.access_hash.length,64);assert.notEqual(row.access_hash,accessToken);assert.equal(row.code,null);assert.ok(row.contract_text.includes('14 Tagen'));assert.ok(row.contract_text.includes('Wertgutschein'));
-  const retried=await h.request('/api/vouchers/orders',{method:'POST',body:input});assert.equal(retried.status,200);assert.equal(retried.data.order.id,order.id);assert.equal(retried.data.accessToken,accessToken);assert.equal(h.mail.messages.filter(m=>m.subject.includes(order.reference)).length,1);
+  const retried=await h.request('/api/vouchers/orders',{method:'POST',body:input});assert.equal(retried.status,200);assert.equal(retried.data.order.id,order.id);assert.equal(retried.data.accessToken,accessToken);assert.equal(h.mail.messages.filter(m=>m.subject.includes(order.reference)&&m.to===input.buyerEmail).length,1);
   const changed=await h.request('/api/vouchers/orders',{method:'POST',body:{...input,amountCents:20000}});assert.equal(changed.status,409);
   assert.equal((await h.request(`/api/vouchers/orders/${order.id}?token=${accessToken}`)).status,200);
   assert.equal((await h.request(`/api/vouchers/orders/${order.id}?token=${'0'.repeat(64)}`)).status,404);
