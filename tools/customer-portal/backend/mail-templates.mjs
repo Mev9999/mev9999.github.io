@@ -80,10 +80,12 @@ export function renderVoucherEmail(data) {
       giftNote: 'Zum Einlösen einfach den Gutscheincode bei einer Shootinganfrage angeben oder zum Termin mitbringen. Viel Freude beim Verschenken!',
       bankTitle: 'Deine Überweisung', recipient: 'Empfänger', iban: 'IBAN', bic: 'BIC', amount: 'Betrag', reference: 'Verwendungszweck',
       button: 'Bestellung ansehen', giftButton: 'Zum Gutschein', adminButton: 'Gutscheine verwalten',
-      bankNote: 'Über den Bestelllink findest du auch den Überweisungs-QR-Code und kannst die Bankdaten mit einem Klick kopieren.',
+      bankNote: 'Öffne „Bestellung ansehen“, um den Überweisungs-QR-Code und die Kopierfunktion für die Zahlungsdaten zu nutzen. Direkt in dieser E-Mail kannst du die Bankdaten oben markieren und kopieren.',
       attachmentNote: 'Deine vollständige Vertragsbestätigung mit den Gutscheinbedingungen und Rücktrittsinformationen findest du ebenfalls im Anhang. Bitte bewahre sie auf.',
       orderNote: 'Über deinen geschützten Bestelllink kannst du deine Bestellung aufrufen und einen Rücktritt mitteilen.',
       adminIntro: 'Für die folgende Gutscheinbestellung ist eine Rücktrittserklärung eingegangen. Bitte prüfe den Vorgang in der Verwaltung.',
+      postage: 'Postversand innerhalb Österreichs', total: 'Gesamtbetrag', deliveryAddress: 'Lieferadresse',
+      postNote: 'Du erhältst zusätzlich einen physischen Gutschein per Post. PDF und Druckgutschein verwenden denselben Code und dasselbe Guthaben. Den Versandstatus siehst du in deiner Bestellung.',
     },
     en: {
       hello: 'Hello', signature: 'Warm wishes,', order: 'Order', value: 'Voucher value', giftTo: 'For', code: 'Voucher code', customer: 'Customer', email: 'Email',
@@ -93,10 +95,12 @@ export function renderVoucherEmail(data) {
       giftNote: 'To redeem it, include the voucher code in your photo session enquiry or bring it to your appointment. Enjoy giving your gift!',
       bankTitle: 'Your bank transfer', recipient: 'Recipient', iban: 'IBAN', bic: 'BIC', amount: 'Amount', reference: 'Payment reference',
       button: 'View your order', giftButton: 'Open your voucher', adminButton: 'Manage vouchers',
-      bankNote: 'Your order link also includes the bank transfer QR code and lets you copy the bank details with one click.',
+      bankNote: 'Open “View your order” for the bank transfer QR code and the payment-details copy function. In this email, you can select and copy the bank details above.',
       attachmentNote: 'Your full contract confirmation, including voucher terms and withdrawal information, is also attached. Please keep it for your records.',
       orderNote: 'Use your private order link to view your order or submit a withdrawal request.',
       adminIntro: 'A withdrawal request has been received for the voucher order below. Please review it in the administration.',
+      postage: 'Postal delivery within Austria', total: 'Total amount', deliveryAddress: 'Shipping address',
+      postNote: 'You will also receive a physical voucher by post. The PDF and printed voucher share the same code and balance. You can check dispatch status in your order.',
     },
     bs: {
       hello: 'Zdravo', signature: 'Srdačan pozdrav,', order: 'Narudžba', value: 'Vrijednost bona', giftTo: 'Za', code: 'Kod bona', customer: 'Kupac', email: 'E-pošta',
@@ -106,10 +110,12 @@ export function renderVoucherEmail(data) {
       giftNote: 'Za korištenje bona navedi kod pri upitu za fotografisanje ili ga ponesi na termin. Uživaj u darivanju!',
       bankTitle: 'Tvoja uplata', recipient: 'Primalac', iban: 'IBAN', bic: 'BIC', amount: 'Iznos', reference: 'Poziv na broj',
       button: 'Pogledaj narudžbu', giftButton: 'Otvori poklon-bon', adminButton: 'Upravljaj bonovima',
-      bankNote: 'Preko linka narudžbe pronaći ćeš i QR kod za uplatu te možeš kopirati bankovne podatke jednim klikom.',
+      bankNote: 'Otvori „Pogledaj narudžbu“ za QR kod za uplatu i funkciju kopiranja podataka za plaćanje. U ovoj e-pošti možeš označiti i kopirati bankovne podatke iznad.',
       attachmentNote: 'Potpuna potvrda ugovora s uslovima poklon-bona i informacijama o odustanku također je u prilogu. Sačuvaj je za svoju evidenciju.',
       orderNote: 'Preko zaštićenog linka možeš pogledati narudžbu ili prijaviti odustanak.',
       adminIntro: 'Zaprimljena je izjava o odustanku za narudžbu bona u nastavku. Provjeri postupak u administraciji.',
+      postage: 'Dostava poštom unutar Austrije', total: 'Ukupan iznos', deliveryAddress: 'Adresa dostave',
+      postNote: 'Dodatno ćeš dobiti fizički bon poštom. PDF i štampani bon imaju isti kod i kredit. Status slanja možeš pogledati u narudžbi.',
     },
   }[language];
   const url = mailUrl(data.actionUrl, 'actionUrl');
@@ -117,6 +123,8 @@ export function renderVoucherEmail(data) {
   const reference = mailLine(data.reference);
   const gift = data.kind === 'gift';
   const withdrawal = data.kind === 'withdrawal';
+  const postal = data.deliveryMethod === 'post';
+  const totalCents = data.totalCents ?? data.amountCents;
   const admin = withdrawal && data.admin === true;
   const name = mailLine(admin ? 'Emina' : data.customerName);
   const greeting = `${copy.hello}${name ? ' ' + name : ''},`;
@@ -137,12 +145,17 @@ export function renderVoucherEmail(data) {
   } else {
     paragraph(gift ? copy.giftIntro : copy.pendingIntro);
     rows.push([copy.value, mailMoney(data.amountCents, 'EUR')], [copy.giftTo, mailLine(data.giftTo)]);
+    if (postal) {
+      const address=data.shippingAddress;
+      rows.push([copy.postage,mailMoney(data.shippingCents,'EUR')],[copy.total,mailMoney(totalCents,'EUR')]);
+      if(address) rows.push([copy.deliveryAddress,[address.name,address.street,`${address.postalCode} ${address.city}`,'Österreich (AT)'].map(mailLine).join(' · ')]);
+    }
     if (gift) rows.push([copy.code, mailLine(data.code)]);
   }
   content += mailRows(rows);
   textLines.push(...rows.filter(row => row[1]).map(([label, value]) => `${label}: ${value}`), '');
   if (!gift && !withdrawal && data.bank) {
-    const bank = [[copy.recipient, mailLine(data.bank.recipient)], [copy.iban, mailLine(data.bank.iban)], [copy.bic, mailLine(data.bank.bic)], [copy.amount, mailMoney(data.amountCents, 'EUR')], [copy.reference, reference]];
+    const bank = [[copy.recipient, mailLine(data.bank.recipient)], [copy.iban, mailLine(data.bank.iban)], [copy.bic, mailLine(data.bank.bic)], [copy.amount, mailMoney(totalCents, 'EUR')], [copy.reference, reference]];
     content += '<h2 style="margin:0 0 10px;color:#5b392c;font-family:Georgia,\'Times New Roman\',serif;font-size:22px;font-weight:normal;line-height:1.3">' + mailEscape(copy.bankTitle) + '</h2>' + mailRows(bank, true);
     textLines.push(copy.bankTitle, ...bank.filter(row => row[1]).map(([label, value]) => `${label}: ${value}`), '');
   }
@@ -150,6 +163,7 @@ export function renderVoucherEmail(data) {
   content += mailButton(buttonLabel, url);
   textLines.push(`${buttonLabel}:`, url, '');
   if (!withdrawal) {
+    if (postal) paragraph(copy.postNote,true);
     paragraph(gift ? copy.giftNote : copy.bankNote, true);
     paragraph(copy.attachmentNote, true);
     paragraph(data.withdrawalNotice || copy.orderNote, true);

@@ -30,6 +30,13 @@ const copy = {
   }
 };
 
+const voucherPostalTerms = {
+  "de": "Optional kannst du zusätzlich einen physischen Gutschein per Post an eine Lieferadresse innerhalb Österreichs bestellen. Dafür fallen 4,80 € zusätzlich zum Gutscheinwert an; diese Versandkosten sind kein Guthaben. PDF und Druckgutschein teilen denselben Code und dasselbe Guthaben. Beim Postversand beträgt die Rücktrittsfrist mindestens 14 Tage ab tatsächlichem Erhalt durch dich oder einen von dir benannten Empfänger, der nicht Beförderer ist. Die zuvor verschickte PDF verkürzt diese Frist nicht. Bei wirksamem Rücktritt werden auch die bezahlten Standard-Versandkosten erstattet; der ungültig gemachte physische Gutschein muss nicht zurückgesendet werden.",
+  "en": "You may additionally order a printed voucher by post to an address within Austria for €4.80 on top of the voucher value; this delivery fee is not credit. The PDF and printed voucher share the same code and credit. With postal delivery, the withdrawal period is at least 14 days from actual receipt by you or a nominated recipient other than the carrier. An earlier PDF email does not shorten this period. A valid withdrawal also refunds paid standard delivery costs; the invalidated physical voucher does not need to be returned.",
+  "bs": "Možeš dodatno naručiti štampani bon poštom na adresu unutar Austrije za 4,80 € uz vrijednost bona; dostava nije dio stanja bona. PDF i štampani bon koriste isti kod i isto stanje. Kod poštanske dostave rok za odustanak je najmanje 14 dana od stvarnog prijema kod tebe ili osobe koju odrediš, a koja nije prijevoznik. Raniji e-mail s PDF-om ne skraćuje taj rok. Kod važećeg odustanka vraćaju se i plaćeni troškovi standardne dostave; poništeni fizički bon nije potrebno vraćati."
+};
+for(const [language,text] of Object.entries(voucherPostalTerms))copy[language].paragraphs.push(text);
+
 export function integrateVoucherLegal(document, relative) {
   if (!/^agb(?:-(?:en|bs))?\.html$/.test(relative)) return;
   const language = relative.includes('-en') ? 'en' : relative.includes('-bs') ? 'bs' : 'de';

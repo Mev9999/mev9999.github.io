@@ -23,7 +23,7 @@ export async function initializeLocalPortalDatabase(DB) {
 // Local preview only: upgrade an existing SQLite fixture without deleting its data.
 // Production migrations remain explicit Cloudflare D1 operations.
 export async function applyLocalPortalUpgrades(DB) {
-  const sql = (await Promise.all(['2026-10-08-gallery-upgrades.sql', '2026-10-09-portal-studio.sql', '2026-10-09-gallery-design.sql', '2026-10-11-image-controls.sql', '2026-10-12-required-package.sql', '2026-10-12-gallery-deletion.sql', '2026-10-12-admin-management.sql', '2026-10-12-final-delivery.sql', '2026-10-22-school-retention.sql', '2026-10-23-vouchers.sql'].map(name => readFile(new URL(`../backend/migrations/${name}`, import.meta.url), 'utf8')))).join('\n');
+  const sql = (await Promise.all(['2026-10-08-gallery-upgrades.sql', '2026-10-09-portal-studio.sql', '2026-10-09-gallery-design.sql', '2026-10-11-image-controls.sql', '2026-10-12-required-package.sql', '2026-10-12-gallery-deletion.sql', '2026-10-12-admin-management.sql', '2026-10-12-final-delivery.sql', '2026-10-22-school-retention.sql', '2026-10-23-vouchers.sql', '2026-10-23-voucher-post.sql'].map(name => readFile(new URL(`../backend/migrations/${name}`, import.meta.url), 'utf8')))).join('\n');
   const statements = sqlStatements(sql);
   const pending = [];
   const packageOrderExists = (await DB.prepare('PRAGMA table_info(packages)').all()).results.some(column => column.name === 'position');

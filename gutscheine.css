@@ -122,6 +122,16 @@
 .gv .gv-secure-link input{font:12px "Manrope",sans-serif;color:#695243;background:transparent;width:100%;border:0;padding:8px 0}
 .gv .gv-code{font:700 24px "Manrope",sans-serif;letter-spacing:.12em;overflow-wrap:anywhere;background:#efe0d1;padding:22px;border-radius:14px;display:inline-block;margin:20px 0}
 .gv .gv-status-actions{display:flex;align-items:center;flex-wrap:wrap;gap:16px;margin:24px 0}
+.gv .gv-bank-details{min-width:0}
+.gv .gv-copy-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:15px}
+.gv .gv-copy-actions .gv-button{font-size:12px;min-height:42px;padding:10px 17px}
+.gv .gv-copy-selection{display:block;width:100%;margin-top:12px;padding:12px;border:1px solid var(--gift-line);border-radius:9px;background:var(--gift-paper);color:var(--gift-ink);font-size:13px;line-height:1.6;resize:vertical}
+.gv .gv-copy-feedback{margin:8px 0 0}
+.gv .gv-copy-feedback:empty{display:none}
+.gv .gv-contact-fallback{margin:0 0 25px;padding-top:3px}
+.gv .gv-contact-fallback>p{margin-bottom:8px}
+.gv .gv-contact-fallback .gv-copy-actions{margin-top:0}
+.gv .gv-contact-address{font-size:13px;overflow-wrap:anywhere}
 .gv .gv-withdrawal{border-top:1px solid var(--gift-line);margin-top:45px;padding-top:24px}
 .gv .gv-withdrawal summary{cursor:pointer;font-size:14px;font-weight:700}
 .gv .gv-withdrawal p{font-size:13px;margin-top:15px;color:var(--gift-muted)}
@@ -190,3 +200,5 @@
 .gv-home-gift h2{font-size:31px}.gv-home-gift a{justify-self:center}
 }
 @media(prefers-reduced-motion:reduce){.gift-page html{scroll-behavior:auto}}
+
+.gv .gv-post-option{align-items:center;border:1px solid #d7b8a8;border-radius:18px;background:#f5e8df;padding:20px;margin-block:14px}.gv .gv-post-option>span{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%}.gv .gv-post-option b{white-space:nowrap;color:#8b5e4b}.gv .gv-shipping-fields{padding-top:15px}.gv .gv-shipping-fields h3,.gv .gv-shipping-status h2{font-size:27px;margin:0 0 20px}.gv .gv-shipping-status{border:1px solid #e7d4c9;border-radius:20px;background:#fbf6f1;padding:25px;margin-block:24px}.gv .gv-shipping-status address{font-style:normal;line-height:1.65;overflow-wrap:anywhere}.gv [hidden]{display:none!important}@media(max-width:520px){.gv .gv-post-option{padding:17px}.gv .gv-post-option>span{display:block}.gv .gv-post-option b{display:block;margin-top:5px}}

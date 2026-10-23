@@ -63,7 +63,7 @@ target.write_text(
 )
 print(f'{target.name}: {target.stat().st_size} bytes')
 
-logo = Image.open(ROOT / 'logo-liza.webp').convert('RGBA')
+logo = Image.open(ROOT / 'logo-liza.png').convert('RGBA')
 logo_target = ROOT / 'tools/customer-portal/backend/voucher-brand.mjs'
 logo_target.write_text(
     '// Generated from the transparent website logo by build-pdf-fonts.py.\n'

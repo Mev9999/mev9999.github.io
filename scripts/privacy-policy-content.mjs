@@ -56,6 +56,12 @@ const enquiryCodeNotice = {
  en:['location, benefit code, message','location, benefit code, gift voucher code, message'],
  bs:['lokaciju, kod pogodnosti, poruku','lokaciju, kod pogodnosti, kod poklon-bona, poruku']
 };
+const voucherPostalPrivacy = {
+  "de": "Bei gewähltem Postversand verarbeiten wir zusätzlich Empfängername, Lieferadresse, Versandzuschlag und Versandstatus. Die Lieferadresse wird vom Käufer angegeben und kann eine beschenkte Person betreffen. Name und Anschrift werden dem beauftragten Postdienst ausschließlich für die Zustellung übermittelt. Dies dient der gewünschten Lieferung (Art. 6 Abs. 1 lit. b DSGVO); Angaben zu einem abweichenden Empfänger verarbeiten wir aufgrund unseres berechtigten Interesses an der vom Käufer beauftragten Geschenkzustellung (lit. f). Bitte informiere den Empfänger über diese Datenverarbeitung. Die Lieferadresse erscheint nicht auf dem Gutschein.",
+  "en": "If postal delivery is selected, we also process the recipient’s name, delivery address, delivery fee and dispatch status. The buyer provides the address, which may belong to the gift recipient. The name and address are shared with the postal carrier only for delivery. This fulfils the requested delivery (Article 6(1)(b) GDPR); details of a different recipient are processed based on our legitimate interest in providing the gift delivery requested by the buyer (f). Please inform the recipient about this processing. The delivery address is not printed on the voucher.",
+  "bs": "Ako odabereš poštansku dostavu, obrađujemo i ime primaoca, adresu za dostavu, trošak dostave i status slanja. Adresu unosi kupac i ona može pripadati osobi kojoj je poklon namijenjen. Ime i adresa prosljeđuju se poštanskoj službi isključivo radi dostave. Obrada služi zatraženoj dostavi (član 6. stav 1. tačka b GDPR-a); podatke drugog primaoca obrađujemo na osnovu legitimnog interesa za realizaciju poklona koju je kupac zatražio (tačka f). Obavijesti primaoca o ovoj obradi. Adresa za dostavu ne štampa se na bonu."
+};
+for(const [language,text] of Object.entries(voucherPostalPrivacy))voucherPrivacySections[language][1]+='<p>'+text+'</p>';
 for (const language of ['de','en','bs']) {
  privacySections[language][2][1] = privacySections[language][2][1].replace(...storageNotice[language]);
  privacySections[language][4][1] = privacySections[language][4][1].replace(...enquiryCodeNotice[language]);
