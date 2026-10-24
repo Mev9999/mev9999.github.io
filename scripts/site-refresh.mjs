@@ -215,7 +215,7 @@ export function refreshSite(d,file){
   mobileSource.dataset.fullSrc='galerie-portrait-dsc04184.webp';
   let mobilePreload=d.getElementById('portrait-mobile-hero-preload');
   if(!mobilePreload){mobilePreload=el('link');mobilePreload.id='portrait-mobile-hero-preload';d.head.append(mobilePreload);}
-  mobilePreload.rel='preload';mobilePreload.as='image';mobilePreload.href=mobileSource.dataset.fullSrc;mobilePreload.media=mobileSource.media;
+  mobilePreload.rel='preload';mobilePreload.setAttribute('as','image');mobilePreload.href=mobileSource.dataset.fullSrc;mobilePreload.media=mobileSource.media;
   mobilePreload.setAttribute('imagesrcset',mobileSource.getAttribute('srcset'));mobilePreload.setAttribute('imagesizes',mobileSource.getAttribute('sizes'));mobilePreload.setAttribute('fetchpriority','high');
   const desktopPreload=d.querySelector('link[rel="preload"][as="image"]:not(#portrait-mobile-hero-preload)');
   if(desktopPreload)desktopPreload.media='(min-width: 901px)';

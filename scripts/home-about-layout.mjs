@@ -41,7 +41,19 @@ export function updateHomeAboutLayout(d,file){
   const img=d.querySelector('.hero-visual img');
   let picture=img.closest('picture');if(!picture){picture=d.createElement('picture');img.before(picture);picture.append(img);}
   picture.querySelectorAll('source[data-desktop-hero]').forEach(e=>e.remove());
-  const source=d.createElement('source');source.dataset.desktopHero='';source.media='(min-width: 901px)';source.type='image/webp';source.srcset=base==='babybauch-shooting-graz.html'?'galerie-babybauch-dsc01322.webp':'portfolio-familie-18-20260906.webp';picture.prepend(source);
+  const maternity=base==='babybauch-shooting-graz.html';
+  const desktopImage=maternity?'galerie-babybauch-dsc01322.webp':'portfolio-familie-18-20260906.webp';
+  const desktopWidth=maternity?1267:1600;
+  const source=d.createElement('source');source.dataset.desktopHero='';source.media='(min-width: 901px)';source.type='image/webp';
+  source.setAttribute('srcset',[320,480,640,800,960,1200].map(w=>`responsive/${desktopImage.replace('.webp',`-${w}w.webp`)} ${w}w`).concat(`${desktopImage} ${desktopWidth}w`).join(', '));
+  // Cover cropping needs more pixels than the visible width: measured maxima across
+  // DE/EN/BS desktop layouts are 542px (maternity) and 749px (family).
+  source.setAttribute('sizes',maternity?'560px':'800px');picture.prepend(source);
+  let preload=d.getElementById('service-desktop-hero-preload');
+  if(!preload){preload=d.createElement('link');preload.id='service-desktop-hero-preload';d.head.append(preload);}
+  preload.setAttribute('rel','preload');preload.setAttribute('as','image');preload.setAttribute('href',desktopImage);
+  preload.setAttribute('media',source.media);preload.setAttribute('imagesrcset',source.getAttribute('srcset'));
+  preload.setAttribute('imagesizes',source.getAttribute('sizes'));preload.setAttribute('fetchpriority','high');
  }
 
  if(base==='preise.html'){const p=d.querySelector('.price-note p');if(p){const text=p.textContent,cut=text.indexOf('. ');if(cut>=0){const first=['Zusatzbild: 15 € pro Bild.','Extra photo: €15 per image.','Dodatna fotografija: 15 €.'][i],rest=text.slice(cut+2);p.replaceChildren(el('span','extra-image-sentence',first),el('span','extra-image-bundles',rest));}}}
